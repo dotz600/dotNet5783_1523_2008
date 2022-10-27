@@ -4,6 +4,7 @@ namespace Targil0
 {
     partial class Program
     {
+
         static void Main(string[] args)
         {
             welcome2008();
@@ -21,4 +22,6 @@ namespace Targil0
 
 
     }
+
+ 
 }
