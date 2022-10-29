@@ -14,7 +14,7 @@ namespace Stage0
         }
         private static void welcome2008()
         {
-            Console.WriteLine("hi");
+            Console.WriteLine("Bye Bye");
         }
 
     }
