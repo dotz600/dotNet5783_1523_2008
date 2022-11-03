@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\dotNet5783_1523_2008\\Stage0"
+    "\\dotNet5783_1523_2008",
+    "\\dotNet5783_1523_2008\\Stage0",
+    "\\dotz600"
   ],
-  "SelectedNode": "\\README.md",
+  "SelectedNode": "\\dotNet5783_1523_2008\\Stage0\\Program2008.cs",
   "PreviewInSolutionExplorer": false
 }
