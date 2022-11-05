@@ -1,7 +1,6 @@
 ﻿
 namespace DO;
 
-enum Category
+public struct Enums
 {
-    
 }
