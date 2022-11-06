@@ -1,2 +1,1 @@
-﻿// תוכנית ראשית See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿//תכנית ראשית
