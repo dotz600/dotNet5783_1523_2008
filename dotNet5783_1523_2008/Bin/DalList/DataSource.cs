@@ -8,7 +8,7 @@ internal static class DataSource
 {
     static DataSource() { s_Initialize(); }
     
-    static readonly int RandomNum;
+    static readonly int RandomNum = 100000;
 
     internal static Product[] productsArr = new Product[50];
     internal static Order[] ordersArr = new Order[100];
@@ -51,7 +51,20 @@ internal static class DataSource
 
 
         //  TO DO --- adding 20 orders. 
-
+        for (int i = 97; i < 117; i++)
+        {
+            addOrder(new Order
+            {
+                ID = Config.IdRunNum,
+                CustomerName = "Avi" + (char)i,
+                CustomerEmail = "Avi"+(char)i + "@gmail.com",
+                CustomerAdress = "jerusalem" + (char)i,
+                OrderDate = DateTime.MinValue,
+                ShipDate = DateTime.MinValue,
+                DeliveryDate = DateTime.MinValue
+            });
+        }
+        //TO DO --- for loop 20% dates without dateTime
 
         for(int i = 0; i < 40; i++)
         {
@@ -59,9 +72,17 @@ internal static class DataSource
         }
 
     }
+
     internal class Config
     {
-        static internal int IdRunNum = 1000;
+
+        static internal int IdRunNum;
+        public int GetIdRunNum
+        {
+            get { return ++IdRunNum; }
+        }
+
+
         static internal Random rand = new Random(DateTime.Now.Millisecond);
 
         //indexs for the next clear space in the array

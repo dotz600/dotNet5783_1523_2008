@@ -2,6 +2,6 @@
 
 namespace Dal;
 
-public class DALOredrItem
+public class DalOredrItem
 {
 }

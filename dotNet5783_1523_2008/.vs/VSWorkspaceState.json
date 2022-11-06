@@ -1,10 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Bin",
-    "\\Bin\\DalFacade",
-    "\\Bin\\DalFacade\\DO"
+    ""
   ],
-  "SelectedNode": "\\Bin\\DalFacade\\DO\\Product.cs",
+  "SelectedNode": "\\DalFacade.sln",
   "PreviewInSolutionExplorer": false
 }

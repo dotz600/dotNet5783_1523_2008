@@ -2,7 +2,7 @@
 
 namespace Dal;
 
-public class DALOrder
+public class DalOrder
 {
     
 }
