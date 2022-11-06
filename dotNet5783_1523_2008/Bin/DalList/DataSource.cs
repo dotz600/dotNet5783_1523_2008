@@ -20,14 +20,17 @@ internal static class DataSource
         ordersArr[Config.ordersSize++] = o1;
     }
 
-    private static void addOrderItem()
+    private static void addOrderItem(int index = 0)
     {
-        ordersItemArr[Config.ordersItemSize].OrderID = Config.rand.Next(Config.ordersSize);
-        ordersItemArr[Config.ordersItemSize].Amount = Config.rand.Next(5);
-        int random = Config.rand.Next(Config.productsSize);//this random num needed for the 2 next line
-        ordersItemArr[Config.ordersItemSize].ProductID = productsArr[random].ID;
-        ordersItemArr[Config.ordersItemSize].Price = productsArr[random].Price * ordersItemArr[Config.ordersItemSize].Amount;
-        Config.ordersItemSize++;
+        for (int i = 0; i < 4 * index; i++)
+        {
+            ordersItemArr[Config.ordersItemSize].ProductID = productsArr[i % Config.productsSize].ID;
+            ordersItemArr[Config.ordersItemSize].OrderID = ordersArr[i % Config.ordersSize].ID;
+            ordersItemArr[Config.ordersItemSize].Amount = Config.rand.Next(5);
+            ordersItemArr[Config.ordersItemSize].Price = productsArr[i].Price * ordersItemArr[i].Amount;
+            Config.ordersItemSize++;
+        }
+
     }
 
     private static void addProduct(Product p1)
