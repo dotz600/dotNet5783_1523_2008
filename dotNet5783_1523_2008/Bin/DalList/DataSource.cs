@@ -1,6 +1,7 @@
 ﻿
 using DO;
 using System.Xml.Linq;
+using static Dal.DataSource;
 
 namespace Dal;
 
@@ -68,6 +69,15 @@ internal static class DataSource
             });
         }
         //TO DO --- for loop 20% dates without dateTime
+        for(int i = 0; i <Config.ordersSize; i++)
+        {
+            ordersArr[i].OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//nedd to check the range date its return 
+            ordersArr[i].ShipDate = ordersArr[i].OrderDate + new TimeSpan(0, 0, Config.rand.Next(30));//ship date can be between 0 -30 from the order day 
+            if(ordersArr[i].ShipDate < DateTime.Now)
+            {
+                ordersArr[i].DeliveryDate = ordersArr[i].ShipDate + new TimeSpan(0, 0, Config.rand.Next(30));
+            }
+        }
 
         for(int i = 0; i < 40; i++)
         {
