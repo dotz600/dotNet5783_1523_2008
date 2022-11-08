@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\אוראל צ'אמה\\Desktop\\Solution\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj": {}
+    "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj": {}
   },
   "projects": {
-    "C:\\Users\\אוראל צ'אמה\\Desktop\\Solution\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj": {
+    "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\אוראל צ'אמה\\Desktop\\Solution\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj",
+        "projectUniqueName": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj",
         "projectName": "Stage0",
-        "projectPath": "C:\\Users\\אוראל צ'אמה\\Desktop\\Solution\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj",
-        "packagesPath": "C:\\Users\\אוראל צ'אמה\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\אוראל צ'אמה\\Desktop\\Solution\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\obj\\",
+        "projectPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj",
+        "packagesPath": "C:\\Users\\ohevd\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Stage0\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\אוראל צ'אמה\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ohevd\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

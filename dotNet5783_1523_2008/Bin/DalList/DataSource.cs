@@ -31,7 +31,6 @@ internal static class DataSource
             ordersItemArr[Config.ordersItemSize].Price = productsArr[i].Price * ordersItemArr[i].Amount;
             Config.ordersItemSize++;
         }
-
     }
 
     private static void addProduct(Product p1)
