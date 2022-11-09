@@ -14,7 +14,7 @@ public class DalProduct : ICrud<Product>
             if (myPro.ID == p1.ID)//if the ID exist in the array make new ID and check agian
                 throw new Exception("product already exist");
         }
-        DataSource.productsArr[DataSource.Config.productsSize] = p1;
+        DataSource.productsArr[DataSource.Config.productsSize++] = p1;
         return p1.ID;
    }
 
@@ -25,7 +25,7 @@ public class DalProduct : ICrud<Product>
             if (myPro.ID == id)
                 return myPro;
         }
-        throw new Exception("Product dont found");
+        throw new Exception("Product doesn't found");
     }
     
     public Product[] ReadAll()
@@ -40,17 +40,30 @@ public class DalProduct : ICrud<Product>
 
     public void Delete(int id)
     {
-        DataSource.productsArr = DataSource.productsArr.Where(p => p.ID != id).ToArray();
-        //throw new Exception("Product dont found");
+        if(DataSource.productsArr.Where(p => p.ID == id) == null)
+            throw new Exception("Product doesn't found");
+        
+        DataSource.productsArr = DataSource.productsArr.Where(p => p.ID != id).ToArray();//put in the new array all the product that dont equal to p.id
+        DataSource.Config.productsSize--;
     }
     public void Update(Product p1)
     {
+        bool flag = false;
         for (int i = 0; i < DataSource.Config.productsSize; i++)
         {
             if (DataSource.productsArr[i].ID == p1.ID)
+            {
                 DataSource.productsArr[i] = p1;
+                flag = true;
+            }
         }
-        throw new Exception("Product dont found");
+        if(flag == false)
+            throw new Exception("Product doesn't found");
+    }
+
+    public void Print(Product p1)
+    {
+        Console.WriteLine(p1.ToString());
     }
 
 }

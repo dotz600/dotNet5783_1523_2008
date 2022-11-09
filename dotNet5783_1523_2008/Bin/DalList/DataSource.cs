@@ -18,16 +18,24 @@ internal static class DataSource
    
     private static void addOrder(Order o1)
     {
-        ordersArr[Config.ordersSize++] = o1;
+        ordersArr[Config.ordersSize] = o1;
+        //update the dates
+        ordersArr[Config.ordersSize].OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//nedd to check the range date its return 
+        ordersArr[Config.ordersSize].ShipDate = ordersArr[Config.ordersSize].OrderDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//ship date can be between 0 -30 from the order day 
+        if (ordersArr[Config.ordersSize].ShipDate < DateTime.Now)
+        {
+            ordersArr[Config.ordersSize].DeliveryDate = ordersArr[Config.ordersSize].ShipDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
+        }
+        Config.ordersSize++;
     }
 
     private static void addOrderItem(int index = 0)
     {
-        for (int i = 0; i < 4 * index; i++)
+        for (int i = index; i <= 4 + index; i++)
         {
             ordersItemArr[Config.ordersItemSize].ProductID = productsArr[i % Config.productsSize].ID;
             ordersItemArr[Config.ordersItemSize].OrderID = ordersArr[i % Config.ordersSize].ID;
-            ordersItemArr[Config.ordersItemSize].Amount = Config.rand.Next(5);
+            ordersItemArr[Config.ordersItemSize].Amount = Config.rand.Next(1,5);
             ordersItemArr[Config.ordersItemSize].Price = productsArr[i].Price * ordersItemArr[i].Amount;
             Config.ordersItemSize++;
         }
@@ -53,12 +61,12 @@ internal static class DataSource
 
 
 
-        //  TO DO --- adding 20 orders. 
+        //adding 20 orders. 
         for (int i = 97; i < 117; i++)
         {
             addOrder(new Order
             {
-                ID = Config.IdRunNum,
+                ID = Config.IdRunNum++,
                 CustomerName = "Avi" + (char)i,
                 CustomerEmail = "Avi"+(char)i + "@gmail.com",
                 CustomerAdress = "jerusalem" + (char)i,
@@ -67,20 +75,11 @@ internal static class DataSource
                 DeliveryDate = DateTime.MinValue
             });
         }
-        //TO DO --- for loop 20% dates without dateTime
-        for(int i = 0; i <Config.ordersSize; i++)
-        {
-            ordersArr[i].OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//nedd to check the range date its return 
-            ordersArr[i].ShipDate = ordersArr[i].OrderDate + new TimeSpan(0, 0, Config.rand.Next(30));//ship date can be between 0 -30 from the order day 
-            if(ordersArr[i].ShipDate < DateTime.Now)
-            {
-                ordersArr[i].DeliveryDate = ordersArr[i].ShipDate + new TimeSpan(0, 0, Config.rand.Next(30));
-            }
-        }
+       
 
-        for(int i = 0; i < 40; i++)
+        for(int i = 0; i < 10; i++)
         {
-            addOrderItem();
+            addOrderItem(i);
         }
 
     }
@@ -88,11 +87,8 @@ internal static class DataSource
     internal class Config
     {
 
-        static internal int IdRunNum;
-        public int GetIdRunNum
-        {
-            get { return ++IdRunNum; }
-        }
+        internal static int IdRunNum = 1000;
+     
 
 
         static internal Random rand = new Random(DateTime.Now.Millisecond);

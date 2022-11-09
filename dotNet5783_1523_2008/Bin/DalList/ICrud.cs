@@ -7,5 +7,7 @@
         void Delete(int id);
         T Read(int id);
         T[] ReadAll();
+
+        void Print(T t1);
     }
 }
