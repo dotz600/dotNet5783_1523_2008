@@ -16,6 +16,7 @@ class MyMain
     public static void Main(string[] args)
     {
         int X = -1, classType = 0;
+        
         Console.WriteLine("Hello!");
         do
         {
@@ -153,10 +154,16 @@ class MyMain
         bool checkInput;
         Console.WriteLine("For Product enter 1\n" +
                                       "For Order enter 2\n" +
-                                      "For OrderItem enter 3");
+                                     "For OrderItem enter 3");
         checkInput = int.TryParse(Console.ReadLine(), out classType);
         if (classType > 3 || classType < 1 || !checkInput)
+           {
+            if (checkInput)
+                X = 0;
+            else 
             Console.WriteLine("Try again...");
+            }
+             
         else
         {
             Console.WriteLine("Select the desired test:\n" +

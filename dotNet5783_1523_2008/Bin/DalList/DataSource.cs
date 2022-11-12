@@ -33,10 +33,14 @@ internal static class DataSource
     {
         for (int i = index; i <= 4 + index; i++)
         {
+            int amount = Config.rand.Next(1,5);
             ordersItemArr[Config.ordersItemSize].ProductID = productsArr[i % Config.productsSize].ID;
             ordersItemArr[Config.ordersItemSize].OrderID = ordersArr[i % Config.ordersSize].ID;
-            ordersItemArr[Config.ordersItemSize].Amount = Config.rand.Next(1,5);
-            ordersItemArr[Config.ordersItemSize].Price = productsArr[i].Price * ordersItemArr[i].Amount;
+            ordersItemArr[Config.ordersItemSize].Amount = amount;
+            Console.WriteLine(ordersItemArr[Config.ordersItemSize].Amount);
+            Console.WriteLine(ordersItemArr[Config.ordersItemSize].Price);
+            if (Config.productsSize != 0)//just for safety
+                ordersItemArr[Config.ordersItemSize].Price = productsArr[i% Config.productsSize].Price * amount;
             Config.ordersItemSize++;
         }
     }
