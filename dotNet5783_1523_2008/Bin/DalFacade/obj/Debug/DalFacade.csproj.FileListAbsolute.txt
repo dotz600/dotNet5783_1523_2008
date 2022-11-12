@@ -18,3 +18,15 @@ C:\Users\אוראל צ'אמה\Desktop\Solution\dotz600\dotNet5783_1523_2008\dotN
 C:\Users\אוראל צ'אמה\Desktop\Solution\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\DalFacade.dll
 C:\Users\אוראל צ'אמה\Desktop\Solution\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\refint\DalFacade.dll
 C:\Users\אוראל צ'אמה\Desktop\Solution\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\DalFacade.pdb
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\bin\DalFacade.deps.json
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\bin\DalFacade.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\bin\DalFacade.pdb
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\DalFacade.csproj.AssemblyReference.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\DalFacade.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\DalFacade.AssemblyInfoInputs.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\DalFacade.AssemblyInfo.cs
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\DalFacade.csproj.CoreCompileInputs.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\DalFacade.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\refint\DalFacade.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\DalFacade.pdb
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\obj\Debug\ref\DalFacade.dll

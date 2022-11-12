@@ -13,6 +13,10 @@ public class DalOredrItem :ICrud<OrderItem>
                 throw new Exception("Order Item already exist");
         }
         DataSource.ordersItemArr[DataSource.Config.ordersItemSize++] = Ot;
+        DalProduct p = new DalProduct();
+        Product product = p.Read(Ot.ProductID);
+        product.InStock = product.InStock - Ot.Amount;
+        p.Update(product);
         return Ot.OrderID;
     }
 

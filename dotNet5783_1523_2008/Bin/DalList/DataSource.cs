@@ -4,7 +4,9 @@ using System.Xml.Linq;
 using static Dal.DataSource;
 
 namespace Dal;
-
+//Data source class,
+//Initializes the arrays with random data
+//10 products, 20 orders, 40 order items
 internal static class DataSource
 {
     static DataSource() { s_Initialize(); }
@@ -20,13 +22,13 @@ internal static class DataSource
     {
         ordersArr[Config.ordersSize] = o1;
         //update the dates
-        ordersArr[Config.ordersSize].OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//nedd to check the range date its return 
-        ordersArr[Config.ordersSize].ShipDate = ordersArr[Config.ordersSize].OrderDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//ship date can be between 0 -30 from the order day 
-        if (ordersArr[Config.ordersSize].ShipDate < DateTime.Now)
+        ordersArr[Config.ordersSize].OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
+        ordersArr[Config.ordersSize].ShipDate = ordersArr[Config.ordersSize].OrderDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
+        if (ordersArr[Config.ordersSize].ShipDate < DateTime.Now)//if true - the order has been sent
         {
             ordersArr[Config.ordersSize].DeliveryDate = ordersArr[Config.ordersSize].ShipDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
         }
-        Config.ordersSize++;
+        Config.ordersSize++;//orders counter, from config class
     }
 
     private static void addOrderItem(int index = 0)
@@ -37,8 +39,6 @@ internal static class DataSource
             ordersItemArr[Config.ordersItemSize].ProductID = productsArr[i % Config.productsSize].ID;
             ordersItemArr[Config.ordersItemSize].OrderID = ordersArr[i % Config.ordersSize].ID;
             ordersItemArr[Config.ordersItemSize].Amount = amount;
-            Console.WriteLine(ordersItemArr[Config.ordersItemSize].Amount);
-            Console.WriteLine(ordersItemArr[Config.ordersItemSize].Price);
             if (Config.productsSize != 0)//just for safety
                 ordersItemArr[Config.ordersItemSize].Price = productsArr[i% Config.productsSize].Price * amount;
             Config.ordersItemSize++;
@@ -52,6 +52,7 @@ internal static class DataSource
 
     private static void s_Initialize()
     {
+        //adding 10 products.
         addProduct(new Product { ID = Config.rand.Next(100000, 1000000) ,Name = "doughnut", category = Categories.Bakery, InStock = 15  ,Price = 5} );
         addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "chicken", category = Categories.Meat, InStock = 25, Price = 30 });
         addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "Yellow cheese", category = Categories.Deli, InStock = 12, Price = 33 });
@@ -66,14 +67,14 @@ internal static class DataSource
 
 
         //adding 20 orders. 
-        for (int i = 97; i < 117; i++)
+        for (char i = 'a'; i <= 'a' + 20; i++)
         {
             addOrder(new Order
             {
                 ID = Config.IdRunNum++,
-                CustomerName = "Avi" + (char)i,
-                CustomerEmail = "Avi"+(char)i + "@gmail.com",
-                CustomerAdress = "jerusalem" + (char)i,
+                CustomerName = "Avi" + i,
+                CustomerEmail = "Avi"+ i + "@gmail.com",
+                CustomerAdress = "jerusalem" + i,
                 OrderDate = DateTime.MinValue,
                 ShipDate = DateTime.MinValue,
                 DeliveryDate = DateTime.MinValue
@@ -81,7 +82,7 @@ internal static class DataSource
         }
        
 
-        for(int i = 0; i < 10; i++)
+        for(int i = 1; i < 11; i++)
         {
             addOrderItem(i);
         }
@@ -93,7 +94,6 @@ internal static class DataSource
 
         internal static int IdRunNum = 1000;
         static internal Random rand = new Random(DateTime.Now.Millisecond);
-
         //indexs for the next clear space in the array
         internal static int productsSize = 0;
         internal static int ordersSize = 0;
