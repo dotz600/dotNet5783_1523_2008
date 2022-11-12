@@ -65,5 +65,9 @@ public class DalProduct : ICrud<Product>
     {
         Console.WriteLine(p1.ToString());
     }
+    public void restart()
+    {
+        int n = DataSource.RandomNum;
+    }
 
 }

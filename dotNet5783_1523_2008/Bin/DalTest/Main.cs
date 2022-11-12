@@ -15,8 +15,9 @@ class MyMain
     }
     public static void Main(string[] args)
     {
+        DalProduct res = new DalProduct();
+        res.restart();
         int X = -1, classType = 0;
-        
         Console.WriteLine("Hello!");
         do
         {

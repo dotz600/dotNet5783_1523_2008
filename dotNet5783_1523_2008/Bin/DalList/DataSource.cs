@@ -9,7 +9,7 @@ internal static class DataSource
 {
     static DataSource() { s_Initialize(); }
     
-    static readonly int RandomNum = 100000;
+    internal static readonly int RandomNum = 100000;
 
     internal static Product[] productsArr = new Product[50];
     internal static Order[] ordersArr = new Order[100];
@@ -92,9 +92,6 @@ internal static class DataSource
     {
 
         internal static int IdRunNum = 1000;
-     
-
-
         static internal Random rand = new Random(DateTime.Now.Millisecond);
 
         //indexs for the next clear space in the array
