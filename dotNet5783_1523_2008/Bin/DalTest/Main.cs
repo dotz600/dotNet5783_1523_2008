@@ -1,5 +1,7 @@
 ﻿
-
+//markus tzama 320411523
+//david ohev tzion 206672008
+//super market store stage 1
 using DO;
 using Dal;
 using System;
@@ -9,21 +11,17 @@ using System.Xml.Linq;
 
 class MyMain
 {
-    public static void test()
-    {
-
-    }
     public static void Main(string[] args)
     {
         DalProduct res = new DalProduct();
-        res.restart();
+        res.restart();//restart randomnum from DataSource and restart all DataSource class
         int X = -1, classType = 0;
         Console.WriteLine("Hello!");
         do
         {
             try
             {
-                 classType = mainInput(ref X);
+                 classType = mainInput(ref X);//get input from the user
                  mainSwitch(X, classType);
             }
             catch(InvalidCastException e)
@@ -54,7 +52,7 @@ class MyMain
                 if (classType == 1)
                 {
                     inputProduct(ref product);
-                    dalProduct.Create(product);
+                    dalProduct.Create(product);//create new product in the data base array
                 }
                 if (classType == 2)
                 {
@@ -72,7 +70,7 @@ class MyMain
                 id = Convert.ToInt32(Console.ReadLine());
                 if (classType == 1)
                 {
-                    dalProduct.Print(dalProduct.Read(id));
+                    dalProduct.Print(dalProduct.Read(id));//read the product from DataSource and print it
                 }
                 if (classType == 2)
                 {
@@ -83,10 +81,10 @@ class MyMain
                     dalOrderItem.Print(dalOrderItem.Read(id));
                 }
                 break;
-            case 3:                                                   //read obj list
+            case 3:                                                   //read obj list an print it all
                 if (classType == 1)
                 {
-                    Product[] pr = dalProduct.ReadAll();
+                    Product[] pr = dalProduct.ReadAll();//copy all the productArray and then print it
                     for (int i = 0; i < dalProduct.ReadAll().Length; i++)
                     {
                         dalProduct.Print(pr[i]);
@@ -97,7 +95,6 @@ class MyMain
                     foreach (Order or in dalOrder.ReadAll())
                     {
                         dalOrder.Print(or);
-                        Console.WriteLine(' ');
                     }
                 }
                 if (classType == 3)
@@ -113,8 +110,8 @@ class MyMain
                 Console.WriteLine("Enter the object details you wish to update");
                 if (classType == 1)
                 {
-                    inputProduct(ref product);
-                    dalProduct.Update(product);
+                    inputProduct(ref product);//get the obj data
+                    dalProduct.Update(product);//update the object, except from the ID
                 }
                 if (classType == 2)
                 {
@@ -159,13 +156,12 @@ class MyMain
         checkInput = int.TryParse(Console.ReadLine(), out classType);
         if (classType > 3 || classType < 1 || !checkInput)
            {
-            if (checkInput)
+            if (checkInput)//that mean we get good int but not in the range 1 - 3
                 X = 0;
-            else 
+            else //its just error input
             Console.WriteLine("Try again...");
             }
-             
-        else
+        else//we got correct input in range 1-3
         {
             Console.WriteLine("Select the desired test:\n" +
                 "To add object enter 1\n" +
@@ -177,21 +173,21 @@ class MyMain
             if (!checkInput) X = -1;
         }
 
-        return classType;
+        return classType;//and return X by refrence
     }
 
 
-    public static void inputOrderItem(ref OrderItem o)
+    public static void inputOrderItem(ref OrderItem o)//get input for all OrderItem details 
     {
         var line = Console.ReadLine();
-        var data = line.Split(' ');
+        var data = line.Split(' ');// add all the input data to array, split each elemnt by space
         o.ProductID = int.Parse(data[0]);
         o.OrderID = int.Parse(data[1]);
         o.Price = double.Parse(data[2]);
         o.Amount = int.Parse(data[3]);
     }
 
-    public static void inputOrder(ref Order o)
+    public static void inputOrder(ref Order o)//get input for all Order details
     {
         var line = Console.ReadLine();
         var data = line.Split(' ');
@@ -204,7 +200,7 @@ class MyMain
         o.ShipDate = DateTime.Parse(data[6]);
 
     }
-    public static void inputProduct(ref Product p)
+    public static void inputProduct(ref Product p)//get input for all Product details
     {
         var line = Console.ReadLine();
         var data = line.Split(' ');
