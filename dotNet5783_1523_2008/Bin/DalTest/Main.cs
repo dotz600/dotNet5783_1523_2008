@@ -176,7 +176,7 @@ class MyMain
         return classType;//and return X by refrence
     }
 
-    public static void correctInput(int x)
+    public static void correctInput(int x)//print the order of input for each obj
     {
         if(x == 1)
             Console.WriteLine("Product: ProductID, Name, Price, Category, InStock");
