@@ -1,7 +1,5 @@
 ﻿
 using DO;
-using System.Xml.Linq;
-using static Dal.DataSource;
 
 namespace Dal;
 //Data source class,
@@ -10,39 +8,38 @@ namespace Dal;
 internal static class DataSource
 {
     static DataSource() { s_Initialize(); }
-    
+
     internal static readonly int RandomNum = 100000;
 
     internal static Product[] productsArr = new Product[50];
     internal static Order[] ordersArr = new Order[100];
     internal static OrderItem[] ordersItemArr = new OrderItem[200];
 
-   
+
     private static void addOrder(Order o1)
     {
         ordersArr[Config.ordersSize] = o1;
         //update the dates
-        ordersArr[Config.ordersSize].OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
+        ordersArr[Config.ordersSize].OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//time now - random time
         ordersArr[Config.ordersSize].ShipDate = ordersArr[Config.ordersSize].OrderDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
-        if (ordersArr[Config.ordersSize].ShipDate < DateTime.Now)//if true - the order has been sent
+        if (ordersArr[Config.ordersSize].ShipDate < DateTime.Now)//if true - the order has been sent and need to update delivery date
         {
             ordersArr[Config.ordersSize].DeliveryDate = ordersArr[Config.ordersSize].ShipDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
         }
         Config.ordersSize++;//orders counter, from config class
     }
 
-    private static void addOrderItem(int index = 0)
+    private static void addOrderItem(int i = 0)//add one orderItem
     {
-        for (int i = index; i <= 4 + index; i++)
-        {
-            int amount = Config.rand.Next(1,5);
-            ordersItemArr[Config.ordersItemSize].ProductID = productsArr[i % Config.productsSize].ID;
-            ordersItemArr[Config.ordersItemSize].OrderID = ordersArr[i % Config.ordersSize].ID;
-            ordersItemArr[Config.ordersItemSize].Amount = amount;
-            if (Config.productsSize != 0)//just for safety
-                ordersItemArr[Config.ordersItemSize].Price = productsArr[i% Config.productsSize].Price * amount;
-            Config.ordersItemSize++;
-        }
+
+        int amount = Config.rand.Next(1, 5);
+        ordersItemArr[Config.ordersItemSize].ProductID = productsArr[i % Config.productsSize].ID;//take product id from product arr
+        ordersItemArr[Config.ordersItemSize].OrderID = ordersArr[i % Config.ordersSize].ID; //take order id from order arr
+        ordersItemArr[Config.ordersItemSize].Amount = amount;//amount is random number
+        if (Config.productsSize != 0)//just for safety
+            ordersItemArr[Config.ordersItemSize].Price = productsArr[i % Config.productsSize].Price * amount;
+        Config.ordersItemSize++;
+
     }
 
     private static void addProduct(Product p1)
@@ -53,7 +50,7 @@ internal static class DataSource
     private static void s_Initialize()
     {
         //adding 10 products.
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000) ,Name = "doughnut", category = Categories.Bakery, InStock = 15  ,Price = 5} );
+        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "doughnut", category = Categories.Bakery, InStock = 15, Price = 5 });
         addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "chicken", category = Categories.Meat, InStock = 25, Price = 30 });
         addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "Yellow cheese", category = Categories.Deli, InStock = 12, Price = 33 });
         addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "bean", category = Categories.Frozen, InStock = 7, Price = 16 });
@@ -71,28 +68,32 @@ internal static class DataSource
         {
             addOrder(new Order
             {
-                ID = Config.IdRunNum++,
+                ID = Config.getIdRunNum(),
                 CustomerName = "Avi" + i,
-                CustomerEmail = "Avi"+ i + "@gmail.com",
+                CustomerEmail = "Avi" + i + "@gmail.com",
                 CustomerAdress = "jerusalem" + i,
                 OrderDate = DateTime.MinValue,
                 ShipDate = DateTime.MinValue,
                 DeliveryDate = DateTime.MinValue
             });
         }
-       
 
-        for(int i = 1; i < 11; i++)
+        //adding 40 orderItem
+        for (int i = 1; i < 41; i++)
         {
             addOrderItem(i);
         }
 
     }
 
-    internal class Config
+    internal class Config//inner calss
     {
 
         internal static int IdRunNum = 1000;
+        internal static int getIdRunNum()
+        {
+            return ++IdRunNum;
+        }
         static internal Random rand = new Random(DateTime.Now.Millisecond);
         //indexs for the next clear space in the array
         internal static int productsSize = 0;

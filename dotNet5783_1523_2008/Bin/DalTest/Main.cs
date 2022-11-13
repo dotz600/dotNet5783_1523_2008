@@ -14,7 +14,7 @@ class MyMain
     public static void Main(string[] args)
     {
         DalProduct res = new DalProduct();
-        res.restart();//restart randomnum from DataSource and restart all DataSource class
+        res.restart();//restart RandomNum from DataSource and restart all DataSource class
         int X = -1, classType = 0;
         Console.WriteLine("Hello!");
         do
@@ -42,7 +42,7 @@ class MyMain
         Order order = new Order();
         DalOredrItem dalOrderItem = new DalOredrItem();
         OrderItem orderItem = new OrderItem();
-       
+        correctInput(X);
         switch (X)
         {
             case 0:                                                //exit
@@ -176,7 +176,15 @@ class MyMain
         return classType;//and return X by refrence
     }
 
-
+    public static void correctInput(int x)
+    {
+        if(x == 1)
+            Console.WriteLine("Product: ProductID, Name, Price, Category, InStock");
+        if(x == 2)
+            Console.WriteLine("Order: OrderID, CustomerAdress, CustomerEmail, CustomerName, DeliveryDate, OrderDate, ShipDate");
+        if (x == 3)
+            Console.WriteLine("OrderItem: ProductID, OrderID, Price, Amount");
+    }
     public static void inputOrderItem(ref OrderItem o)//get input for all OrderItem details 
     {
         var line = Console.ReadLine();
