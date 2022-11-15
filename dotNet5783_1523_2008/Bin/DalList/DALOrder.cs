@@ -1,62 +1,45 @@
-﻿using DalList;
+﻿using DalApi;
 using DO;
 
 namespace Dal;
 
-public class DalOrder : ICrud<Order>
+internal class DalOrder : IOrder
 {
     public void Update(Order o1)//ovveride the exist obj with the new one
     {
-        bool flag = false;
-        for(int i = 0; i < DataSource.Config.ordersSize; i++)
-        {
-            if (o1.ID == DataSource.ordersArr[i].ID)
-            {
-                DataSource.ordersArr[i] = o1;
-                flag = true;
-            }
-        }
-        if(flag == false)//the obj dont found
-            throw new Exception("order doesn't found");
+        var y = DataSource.s_ordersArr.FirstOrDefault(x => x.ID == o1.ID);
+        if(y.ID == 0)//------------------------check again if working!!-------------------------
+            throw new ObjNotFound();
+        y = o1;
     }
     public int Create(Order o1)//add the new obj to the array, return order ID
     {
-        for(int i = 0; i < DataSource.Config.ordersSize; i++)
-        {
-            if (o1.ID == DataSource.ordersArr[i].ID)
-                throw new Exception("order already exist");
-        }
-        DataSource.ordersArr[DataSource.Config.ordersSize] = o1;
-        DataSource.ordersArr[DataSource.Config.ordersSize++].ID = DataSource.Config.getIdRunNum();
-        return DataSource.ordersArr[DataSource.Config.ordersSize++].ID;
+        var y = DataSource.s_ordersArr.Find(x => x.ID == o1.ID);//search if the obj allready in data base
+        if (y.ID != 0)
+            throw new ObjExist();
+        
+        o1.ID = DataSource.Config.getIdRunNum();
+        DataSource.s_ordersArr.Add(o1);
+        return o1.ID;
     }
     public void Delete(int id)//delete the obj from the array
     {
-        if (DataSource.ordersArr.Where(o => o.ID == id) == null)
-            throw new Exception("order doesn't found");
-
-        DataSource.ordersArr = DataSource.ordersArr.Where(o => o.ID != id).ToArray();
-        DataSource.Config.ordersSize--;
+        if (DataSource.s_ordersArr.Where(x => x.ID == id) == null)
+            throw new ObjNotFound();
+        DataSource.s_ordersArr.RemoveAll(x => x.ID == id);
     }
+
     public Order Read(int id)//return the obj
     {
-        for (int i = 0; i < DataSource.Config.ordersSize; i++)
-        {
-            if (id == DataSource.ordersArr[i].ID)
-            {
-                return DataSource.ordersArr[i];
-            }
-        }
-        throw new Exception("order doesn't found");
-    }
-    public Order[] ReadAll()//return all the obj array
-    {
-        Order[] res = new Order[DataSource.Config.ordersSize];
-        for(int i = 0; i < DataSource.Config.ordersSize; i++)
-        {
-            res[i] = DataSource.ordersArr[i];
-        }
+
+        var res = DataSource.s_ordersArr.Find(x => x.ID == id);
+        if(res.ID == 0)
+            throw new ObjNotFound();
         return res;
+    }
+    public IEnumerable<Order> ReadAll()//return all the obj array
+    {
+        return DataSource.s_ordersArr.FindAll(x => true);
     }
 
     public void Print(Order o1)

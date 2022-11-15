@@ -1,50 +1,45 @@
-﻿
-using DO;
-
-namespace Dal;
-//Data source class,
+﻿//Data source class,
 //Initializes the arrays with random data
 //10 products, 20 orders, 40 order items
+using DO;
+namespace Dal;
+
 internal static class DataSource
 {
+    internal static readonly int s_randomNum = 100000;
+    internal static List<Product> s_productsArr;
+    internal static List<Order> s_ordersArr;
+    internal static List<OrderItem> s_ordersItemArr;
     static DataSource() { s_Initialize(); }
-
-    internal static readonly int RandomNum = 100000;
-
-    internal static Product[] productsArr = new Product[50];
-    internal static Order[] ordersArr = new Order[100];
-    internal static OrderItem[] ordersItemArr = new OrderItem[200];
-
 
     private static void addOrder(Order o1)
     {
-        ordersArr[Config.ordersSize] = o1;
         //update the dates
-        ordersArr[Config.ordersSize].OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//time now - random time
-        ordersArr[Config.ordersSize].ShipDate = ordersArr[Config.ordersSize].OrderDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
-        if (ordersArr[Config.ordersSize].ShipDate < DateTime.Now)//if true - the order has been sent and need to update delivery date
-        {
-            ordersArr[Config.ordersSize].DeliveryDate = ordersArr[Config.ordersSize].ShipDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
-        }
-        Config.ordersSize++;//orders counter, from config class
+        o1.OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//time now - random time
+        o1.ShipDate = o1.OrderDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
+        if (o1.ShipDate < DateTime.Now)//if true - the order has been sent and need to update delivery date
+            o1.DeliveryDate = o1.ShipDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
+
+        s_ordersArr.Add(o1);
     }
 
-    private static void addOrderItem(int i = 0)//add one orderItem
+    private static void addOrderItem(int i = 1)//add one orderItem
     {
 
         int amount = Config.rand.Next(1, 5);
-        ordersItemArr[Config.ordersItemSize].ProductID = productsArr[i % Config.productsSize].ID;//take product id from product arr
-        ordersItemArr[Config.ordersItemSize].OrderID = ordersArr[i % Config.ordersSize].ID; //take order id from order arr
-        ordersItemArr[Config.ordersItemSize].Amount = amount;//amount is random number
-        if (Config.productsSize != 0)//just for safety
-            ordersItemArr[Config.ordersItemSize].Price = productsArr[i % Config.productsSize].Price * amount;
-        Config.ordersItemSize++;
+         
+        OrderItem ot1 = new OrderItem();
+        ot1.ProductID = s_productsArr.ElementAt(i % 10).ID;//alreday added 10 product to the list 
+        ot1.OrderID = s_ordersArr.ElementAt(i % 20).ID; // allready added 20 orders to the list
+        ot1.Amount = amount;//amount is random number
+        ot1.Price = s_productsArr.ElementAt(i % 10).Price * amount;
+        s_ordersItemArr.Add(ot1);
 
     }
 
     private static void addProduct(Product p1)
     {
-        productsArr[Config.productsSize++] = p1;
+        s_productsArr.Add(p1);
     }
 
     private static void s_Initialize()
@@ -89,15 +84,12 @@ internal static class DataSource
     internal class Config//inner calss
     {
 
-        internal static int IdRunNum = 1000;
+        internal static int s_idRunNum = 1000;
         internal static int getIdRunNum()
         {
-            return ++IdRunNum;
+            return ++s_idRunNum;
         }
         static internal Random rand = new Random(DateTime.Now.Millisecond);
-        //indexs for the next clear space in the array
-        internal static int productsSize = 0;
-        internal static int ordersSize = 0;
-        internal static int ordersItemSize = 0;
+        
     }
 }

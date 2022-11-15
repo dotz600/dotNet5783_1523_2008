@@ -8,13 +8,17 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Linq;
+using DalApi;
+using System.Diagnostics.Metrics;
 
 class MyMain
 {
     public static void Main(string[] args)
     {
-        DalProduct res = new DalProduct();
-        res.restart();//restart RandomNum from DataSource and restart all DataSource class
+        IDal reset = new DalList();
+        reset.Product.reset(); //restart RandomNum from DataSource and restart all DataSource class
+        
+        
         int X = -1, classType = 0;
         Console.WriteLine("Hello!");
         do
@@ -36,108 +40,100 @@ class MyMain
     private static void mainSwitch(int X, int classType)
     {
         int id;
-        DalProduct dalProduct = new DalProduct();
+        IDal Obj = new DalList();
+        ///variable for input data from user
         Product product = new Product();
-        DalOrder dalOrder = new DalOrder();
         Order order = new Order();
-        DalOredrItem dalOrderItem = new DalOredrItem();
         OrderItem orderItem = new OrderItem();
+
         correctInput(X);
         switch (X)
         {
-            case 0:                                                //exit
+            case 0:                                                ///exit
                 Console.WriteLine("Bye!");
                 break;
-            case 1:                                                //add obj to list
+            case 1:                                                ///add obj to list
                 if (classType == 1)
                 {
                     inputProduct(ref product);
-                    dalProduct.Create(product);//create new product in the data base array
+                    Obj.Product.Create(product);///create new product in the data base 
                 }
                 if (classType == 2)
                 {
                     inputOrder(ref order);
-                    dalOrder.Create(order);
+                    Obj.Order.Create(order);
                 }
                 if (classType == 3)
                 {
                     inputOrderItem(ref orderItem);
-                    dalOrderItem.Create(orderItem);
+                    Obj.OrderItem.Create(orderItem);
                 }
                 break;
-            case 2:                                                  //read obj by ID
+            case 2:                                                  ///read obj by ID
                 Console.WriteLine("Enter the object ID number");
                 id = Convert.ToInt32(Console.ReadLine());
                 if (classType == 1)
                 {
-                    dalProduct.Print(dalProduct.Read(id));//read the product from DataSource and print it
+                    Obj.Product.Print(Obj.Product.Read(id));///read the product from DataSource and print it
                 }
                 if (classType == 2)
                 {
-                    dalOrder.Print(dalOrder.Read(id));
+                    Obj.Order.Print(Obj.Order.Read(id));
                 }
                 if (classType == 3)
                 {
-                    dalOrderItem.Print(dalOrderItem.Read(id));
+                    Obj.OrderItem.Print(Obj.OrderItem.Read(id));
                 }
                 break;
             case 3:                                                   //read obj list an print it all
                 if (classType == 1)
                 {
-                    Product[] pr = dalProduct.ReadAll();//copy all the productArray and then print it
-                    for (int i = 0; i < dalProduct.ReadAll().Length; i++)
-                    {
-                        dalProduct.Print(pr[i]);
-                    }
+                    foreach (Product p in Obj.Product.ReadAll())
+                        Obj.Product.Print(p);
                 }
                 if (classType == 2)
                 {
-                    foreach (Order or in dalOrder.ReadAll())
-                    {
-                        dalOrder.Print(or);
-                    }
+                    foreach (Order or in Obj.Order.ReadAll())
+                        Obj.Order.Print(or);
                 }
                 if (classType == 3)
                 {
-                    OrderItem[] allOrderItems = dalOrderItem.ReadAll();
-                    for (int i = 0; i < dalOrderItem.ReadAll().Length; i++)
-                    {
-                        dalOrderItem.Print(allOrderItems[i]);
-                    }
+                    foreach (OrderItem it in Obj.OrderItem.ReadAll())
+                        Obj.OrderItem.Print(it);             
                 }
                 break;
-            case 4:                                                    //update obj
+            case 4:                                                    ///update obj
                 Console.WriteLine("Enter the object details you wish to update");
                 if (classType == 1)
                 {
-                    inputProduct(ref product);//get the obj data
-                    dalProduct.Update(product);//update the object, except from the ID
+                    inputProduct(ref product);///get the obj data
+                    Obj.Product.Update(product);///update the object, except from the ID
                 }
                 if (classType == 2)
                 {
                     inputOrder(ref order);
-                    dalOrder.Update(order);
+                    Obj.Order.Update(order);
                 }
                 if (classType == 3)
                 {
                     inputOrderItem(ref orderItem);
-                    dalOrderItem.Update(orderItem);
+                    Obj.OrderItem.Update(orderItem);
                 }
                 break;
-            case 5:                                                    //delete from list
+            case 5:                                                    ///delete from list
                 Console.WriteLine("Enter the object ID number");
                 id = Convert.ToInt32(Console.ReadLine());
                 if (classType == 1)
                 {
-                    dalProduct.Delete(id);
+                    Obj.Product.Delete(id);
                 }
                 if (classType == 2)
                 {
-                    dalOrder.Delete(id);
+                    Obj.Order.Delete(id);
                 }
                 if (classType == 3)
                 {
-                    dalOrderItem.Delete(id);
+                    Obj.OrderItem.Delete(id);
                 }
                 break;
 
@@ -156,12 +152,12 @@ class MyMain
         checkInput = int.TryParse(Console.ReadLine(), out classType);
         if (classType > 3 || classType < 1 || !checkInput)
            {
-            if (checkInput)//that mean we get good int but not in the range 1 - 3
+            if (checkInput)///that mean we get good int but not in the range 1 - 3
                 X = 0;
-            else //its just error input
+            else ///its just error input
             Console.WriteLine("Try again...");
             }
-        else//we got correct input in range 1-3
+        else///we got correct input in range 1-3
         {
             Console.WriteLine("Select the desired test:\n" +
                 "To add object enter 1\n" +
@@ -173,10 +169,10 @@ class MyMain
             if (!checkInput) X = -1;
         }
 
-        return classType;//and return X by refrence
+        return classType;///and return X by refrence
     }
 
-    public static void correctInput(int x)//print the order of input for each obj
+    public static void correctInput(int x)///print the order of input for each obj
     {
         if(x == 1)
             Console.WriteLine("Product: ProductID, Name, Price, Category, InStock");
@@ -185,17 +181,17 @@ class MyMain
         if (x == 3)
             Console.WriteLine("OrderItem: ProductID, OrderID, Price, Amount");
     }
-    public static void inputOrderItem(ref OrderItem o)//get input for all OrderItem details 
+    public static void inputOrderItem(ref OrderItem o)///get input for all OrderItem details 
     {
         var line = Console.ReadLine();
-        var data = line.Split(' ');// add all the input data to array, split each elemnt by space
+        var data = line.Split(' ');/// add all the input data to array, split each elemnt by space
         o.ProductID = int.Parse(data[0]);
         o.OrderID = int.Parse(data[1]);
         o.Price = double.Parse(data[2]);
         o.Amount = int.Parse(data[3]);
     }
 
-    public static void inputOrder(ref Order o)//get input for all Order details
+    public static void inputOrder(ref Order o)///get input for all Order details
     {
         var line = Console.ReadLine();
         var data = line.Split(' ');
@@ -208,7 +204,7 @@ class MyMain
         o.ShipDate = DateTime.Parse(data[6]);
 
     }
-    public static void inputProduct(ref Product p)//get input for all Product details
+    public static void inputProduct(ref Product p)///get input for all Product details
     {
         var line = Console.ReadLine();
         var data = line.Split(' ');
