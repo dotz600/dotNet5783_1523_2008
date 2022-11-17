@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalFacade.csproj": {}
+    "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalFacade.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalFacade.csproj": {
+    "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalFacade.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalFacade.csproj",
+        "projectUniqueName": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalFacade.csproj",
         "projectName": "DalFacade",
-        "projectPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalFacade.csproj",
-        "packagesPath": "C:\\Users\\ohevd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\obj\\",
+        "projectPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalFacade.csproj",
+        "packagesPath": "C:\\Users\\Mordechay\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\DalFacade\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ohevd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mordechay\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

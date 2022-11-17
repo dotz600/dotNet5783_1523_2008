@@ -2,9 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\dotNet5783_1523_2008",
-    "\\dotNet5783_1523_2008\\Stage0",
-    "\\dotz600"
+    "\\dotNet5783_1523_2008\\Bin",
+    "\\dotNet5783_1523_2008\\Bin\\DalFacade",
+    "\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalApi",
+    "\\dotNet5783_1523_2008\\Bin\\DalFacade\\DO",
+    "\\dotNet5783_1523_2008\\Bin\\DalList",
+    "\\dotNet5783_1523_2008\\Bin\\DalTest",
+    "\\dotNet5783_1523_2008\\Stage0"
   ],
-  "SelectedNode": "\\dotNet5783_1523_2008\\Stage0\\Program2008.cs",
+  "SelectedNode": "\\dotNet5783_1523_2008\\Bin\\DalFacade\\DalFacade.sln",
   "PreviewInSolutionExplorer": false
 }
