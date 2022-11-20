@@ -19,7 +19,7 @@ public enum Categories
     Beauty
 }
 
-public enum OrderState
+public enum OrderStatus
 {
     ConfirmedOrder,
     Sent,

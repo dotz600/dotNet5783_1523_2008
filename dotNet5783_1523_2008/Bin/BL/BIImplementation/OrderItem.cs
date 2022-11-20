@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BIApi;
+using BIApi;
+namespace BIImplementation;
 
-public interface IBI
+internal class OrderItem : IOrderItem
 {
+
 }

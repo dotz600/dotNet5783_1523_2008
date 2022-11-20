@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-///for list item in screen cart and in screen order details
+/// for catalog screen - with list of products that the buyer can see
 namespace BO;
 
-public class OrderItem
+public class ProductItem
 {
     public int ID { get; set; }
     public string? Name { get; set; }
-    public int ProductID { get; set; }
     public double Price { get; set; }
+    public Categories Category { get; set; }
     public int Amount { get; set; }
-    public double TotalPrice { get; set; }
+    public bool InStock { get; set; }
 
     public override string ToString() => $@"
-    BO.OrderItem,
+    BO.ProductItem,
     ID : {ID},
-    ProductID : {ProductID},
-    Name : {Name}, Price : {Price} , Amount : {Amount} , TotalPrice : {TotalPrice} , 
+    Name : {Name}, Price : {Price} , Category : {Category}, InStock : {InStock}, Amount {Amount}. 
     ";
 }
