@@ -1,0 +1,16 @@
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\bin\BITest.exe
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\bin\BITest.deps.json
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\bin\BITest.runtimeconfig.json
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\bin\BITest.dll
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\DalFacade\bin\BITest.pdb
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.csproj.AssemblyReference.cache
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.AssemblyInfoInputs.cache
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.AssemblyInfo.cs
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.csproj.CoreCompileInputs.cache
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.csproj.CopyComplete
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.dll
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\refint\BITest.dll
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.pdb
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.genruntimeconfig.cache
+C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\ref\BITest.dll

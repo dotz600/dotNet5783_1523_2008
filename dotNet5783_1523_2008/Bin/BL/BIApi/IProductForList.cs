@@ -11,4 +11,6 @@ namespace BIApi;
 /// </summary>
 public interface IProductForList
 {
+    public BO.ProductForList DOproductToBOproductForList(DO.Product DOproduct);//get DoProduct and convert it to product for list
+
 }

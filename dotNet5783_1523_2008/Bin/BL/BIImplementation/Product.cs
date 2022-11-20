@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 using BIApi;
+
 namespace BIImplementation;
 
 internal class Product : IProduct
@@ -12,31 +14,120 @@ internal class Product : IProduct
     private DalApi.IDal dal => new Dal.DalList();
     public void Create(BO.Product p)
     {
+        CheckNameIdPriceStock(p);
+
+        try
+        {
+            dal.Product.Create(new DO.Product { ID = p.ID, Name = p.Name, InStock = p.InStock, Price = p.Price, category = (DO.Categories)p.Category });
+        }
+        catch (Exception ex)
+        {
+        }
         throw new NotImplementedException();
     }
+
+
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        if (id < 0)
+            throw new Exception("negetive id");
+        try
+        {
+            DO.Product p = dal.Product.Read(id);
+        }
+        catch(Exception e)
+        {
+            throw new Exception("product dont exist");
+        }
+        try
+        {
+            DO.OrderItem ot = dal.OrderItem.ReadProductId(id);//if product dont found wiil throw exp and wiil catch it next, 
+            throw new Exception("product found and cant be deleted");
+        }
+        catch(Exception e)//that mean product not found in order item and we can delete it
+        {
+           dal.Product.Delete(id);
+        }
     }
 
-    public BO.Product Read(int id)
+    public BO.Product Read(int id) //for manger screen
     {
-        throw new NotImplementedException();
+        if(id < 0)
+            throw new Exception("negetive id"); 
+
+        try
+        {
+            BO.Product BOpro = new BO.Product();
+            DO.Product DOpro = dal.Product.Read(id);
+            BOpro.Name = DOpro.Name;
+            BOpro.ID = id;
+            BOpro.Price = DOpro.Price;
+            BOpro.InStock = DOpro.InStock;
+
+            //convert the category from DO to BO
+            BOpro.Category = (BO.Categories)DOpro.category;
+            return BOpro;
+        }
+        catch(Exception ex)
+        {
+            throw new Exception("cant read product");
+        }
+        
     }
 
-    public BO.Product Read(int id, BO.Cart myCart)
+    public BO.ProductItem Read(int id, BO.Cart myCart) //for buyer screen
     {
-        throw new NotImplementedException();
+        if (id < 0)
+            throw new Exception("negetive id");
+        try
+        {
+            DO.Product DOproduct = dal.Product.Read(id);
+            BO.ProductItem BOproductItem = new BO.ProductItem { Name = DOproduct.Name , Price = DOproduct.Price ,Amount = DOproduct.InStock, 
+                Category = (BO.Categories)DOproduct.category, InStock = false, ID = DOproduct.ID };
+
+            if (DOproduct.InStock > 0)
+                BOproductItem.InStock = true;
+
+            return BOproductItem;
+        }
+        catch (Exception ex)
+        {
+            throw new Exception("cant read product");
+        }
+       
     }
 
-    public IEnumerable<BO.Product> ReadAll()
+    public IEnumerable<BO.ProductForList> ReadAll()
     {
-        throw new NotImplementedException();
+        List<BO.ProductForList> res = new List<BO.ProductForList>();
+        IBl bl = new Bl();//for operait the convertion function from ProductForList 
+
+        foreach(var DOproduct in dal.Product.ReadAll())
+            res.Add(bl.ProductForList.DOproductToBOproductForList(DOproduct));//convert the DOproduct to BoProduct, then add it to list
+
+        return res;
     }
 
     public void Update(BO.Product p)
     {
+        CheckNameIdPriceStock(p);
+        try
+        {
+            dal.Product.Create(new DO.Product { ID = p.ID, InStock = p.InStock, Name = p.Name, Price = p.Price, category = (DO.Categories)p.Category });
+        }
+        catch (Exception ex)
+        {
+
+        }
         throw new NotImplementedException();
+    }
+
+    private static void CheckNameIdPriceStock(BO.Product p)
+    {
+        if (p.ID < 0) throw new Exception();
+        if (p.Name.Length == 0) throw new Exception();
+        if (p.Price <= 0) throw new Exception();
+        if (p.InStock < 0) throw new Exception();
     }
 }

@@ -13,10 +13,10 @@ namespace BIApi;
 /// </summary>
 public interface IProduct 
 {
-    IEnumerable<Product> ReadAll();
+    IEnumerable<ProductForList> ReadAll();
     Product Read(int id); //for manger screen
 
-    Product Read(int id, Cart myCart); //for buyer screen
+    ProductItem Read(int id, Cart myCart); //for buyer screen
 
     void Create(Product p);
     void Delete(int id);

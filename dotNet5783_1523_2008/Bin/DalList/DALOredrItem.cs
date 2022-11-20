@@ -10,14 +10,8 @@ internal class DalOredrItem :IOrderItem
     {
         var y = DataSource.s_ordersItemArr.Find(obj => obj.OrderID == Ot.OrderID);//search if the obj allready in data base
         if (y.OrderID != 0)
-            throw new ObjExist();
+            throw new ObjExistException("Order item allready found");
 
-        //substruct thr amount of the order from the product, and then update the product 
-        DalProduct p = new DalProduct();
-        Product product = p.Read(Ot.ProductID);
-        product.InStock = product.InStock - Ot.Amount;
-        p.Update(product);
-        
         // add the new orderItem in the data base
         DataSource.s_ordersItemArr.Add(Ot);
         return Ot.OrderID;
@@ -27,7 +21,14 @@ internal class DalOredrItem :IOrderItem
     {
         var res = DataSource.s_ordersItemArr.Find(obj => obj.OrderID == orderId);
         if (res.OrderID == 0)
-            throw new ObjNotFound();
+            throw new ObjNotFoundException("Order item doesn't found");
+        return res;
+    }
+    public OrderItem ReadProductId(int productId)//serch the order by product id and return it
+    {
+        var res = DataSource.s_ordersItemArr.Find(obj => obj.ProductID == productId);
+        if (res.ProductID == 0)
+            throw new ObjNotFoundException("Order item doesn't found");
         return res;
     }
 
@@ -39,7 +40,7 @@ internal class DalOredrItem :IOrderItem
     public void Delete(int id)//search the obj and delete it from the array
     {
         if (DataSource.s_ordersItemArr.Where(obj => obj.OrderID == id) == null)
-            throw new ObjNotFound();
+            throw new ObjNotFoundException("Order item doesn't found");
 
         DataSource.s_ordersItemArr.RemoveAll(obj => obj.OrderID == id);
     }
@@ -48,7 +49,7 @@ internal class DalOredrItem :IOrderItem
     {
         var y = DataSource.s_ordersItemArr.FirstOrDefault(obj => obj.OrderID == ot.OrderID);
         if (y.OrderID == 0)//------------------------check again if working!!-------------------------
-            throw new ObjNotFound();
+            throw new ObjNotFoundException("Order item doesn't found");
         y = ot;
     }
 
