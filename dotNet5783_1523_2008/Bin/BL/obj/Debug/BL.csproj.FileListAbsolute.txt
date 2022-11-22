@@ -19,3 +19,6 @@ C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bi
 C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\BL.pdb
 C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\ref\BL.dll
 >>>>>>> 360f8fe4e27de3f16e0e698195df8fd46626bd25
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\BL.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\refint\BL.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\BL.pdb

@@ -23,7 +23,4 @@ sealed public class Bl : IBl
     public IProductForList ProductForList => new ProductForList();
 
     public IProductItem productItem => new ProductItem();
-
-    
-
 }

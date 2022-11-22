@@ -14,7 +14,9 @@ public class Order
     public string? CustomerEmail { get; set; }
     public string? CustomerAdress { get; set; }
 
+
     public OrderStatus Status { get; set; }
+    public DateTime? OrderDate { get; set; }
     public DateTime? PaymentDate { get; set; }//
     public DateTime? ShipDate { get; set; }//when the order was sent
     public DateTime? DeliveryrDate { get; set; }//when the order is recived

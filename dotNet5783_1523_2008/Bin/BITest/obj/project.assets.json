@@ -64,19 +64,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Mordechay\\.nuget\\packages\\": {}
+    "C:\\Users\\ohevd\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BITest\\BITest.csproj",
+      "projectUniqueName": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BITest\\BITest.csproj",
       "projectName": "BITest",
-      "projectPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BITest\\BITest.csproj",
-      "packagesPath": "C:\\Users\\Mordechay\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BITest\\obj\\",
+      "projectPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BITest\\BITest.csproj",
+      "packagesPath": "C:\\Users\\ohevd\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BITest\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Mordechay\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ohevd\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -90,8 +90,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BL\\BL.csproj": {
-              "projectPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BL\\BL.csproj"
+            "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BL\\BL.csproj": {
+              "projectPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\dotNet5783_1523_2008\\Bin\\BL\\BL.csproj"
             }
           }
         }
@@ -121,7 +121,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
