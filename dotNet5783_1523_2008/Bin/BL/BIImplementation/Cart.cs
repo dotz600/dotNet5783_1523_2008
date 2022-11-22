@@ -14,7 +14,7 @@ internal class Cart : ICart
         if(p.InStock <= 0)
             throw new Exception("the product not in stock");
 
-        if (ot.ID != 0 ) ///the product found in the cart
+        if (ot.ProductID != 0 ) ///the product found in the cart then adding one to amnout
         {
             ot.Amount++;
             ot.TotalPrice += ot.Price;
@@ -23,11 +23,8 @@ internal class Cart : ICart
         }
         else//not found in cart - will careate new one and add it to cart
         {
-            ot.Price = p.Price;
-            ot.TotalPrice = p.Price;
-            ot.ProductID = productId;
-            ot.Amount = 1;
-            cart.Items.Add(ot);
+            cart.Items.Add(new BO.OrderItem { Amount = 1, Name = p.Name, Price = p.Price,
+                ProductID = productId, TotalPrice = p.Price});
             return cart;
         }
     }
@@ -87,22 +84,16 @@ internal class Cart : ICart
         }
         if(flag == false) throw new Exception("ERROR");
 
-        //create new order and add it to data base
-        DO.Order res= new DO.Order();
-        res.OrderDate = DateTime.Now;
-        int orderId = dal.Order.Create(res);
+        //create new order and add it to data base, and get the order id
+        int orderId = dal.Order.Create(new DO.Order { CustomerName = name, CustomerAdress = adress, CustomerEmail = email
+        , OrderDate = DateTime.Now });
 
         foreach(var ot in cart.Items) 
         {
             try///make DO - orderItem, and try to add it to data base 
             {
-                DO.OrderItem DOot = new DO.OrderItem();
-                DOot.OrderID = orderId;
-                DOot.ProductID = ot.ProductID;
-                DOot.Amount = ot.Amount;
-                DOot.Price = ot.TotalPrice;
-                dal.OrderItem.Create(DOot);
-                
+                dal.OrderItem.Create(new DO.OrderItem { ProductID = ot.ProductID , 
+                    Amount = ot.Amount, OrderID = orderId, Price = ot.TotalPrice});
             }
             catch(Exception ex) 
             {
@@ -125,9 +116,8 @@ internal class Cart : ICart
     {
         BO.OrderItem res = cart.Items.Find(ot => ot.ProductID == productId);
         if(res == null)
-        {
             return res = new BO.OrderItem();
-        }
+
         return res;
     }
 }
