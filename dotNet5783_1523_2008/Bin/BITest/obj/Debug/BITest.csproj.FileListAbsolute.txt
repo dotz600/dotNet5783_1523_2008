@@ -1,0 +1,5 @@
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.csproj.AssemblyReference.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.AssemblyInfoInputs.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.AssemblyInfo.cs
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BITest\obj\Debug\BITest.csproj.CoreCompileInputs.cache

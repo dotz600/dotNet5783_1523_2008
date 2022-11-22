@@ -1,0 +1,5 @@
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\BL.csproj.AssemblyReference.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\BL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\BL.AssemblyInfoInputs.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\BL.AssemblyInfo.cs
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\dotNet5783_1523_2008\Bin\BL\obj\Debug\BL.csproj.CoreCompileInputs.cache

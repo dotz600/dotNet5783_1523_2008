@@ -10,7 +10,7 @@ internal class Cart : ICart
     {
         BO.OrderItem ot = searchInCart(cart, productId);
         DO.Product p = dal.Product.Read(productId);
-
+        
         if(p.InStock <= 0)
             throw new Exception("the product not in stock");
 
