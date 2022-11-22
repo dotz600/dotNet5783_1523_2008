@@ -14,7 +14,6 @@ public interface IOrder
 {
     IEnumerable<Order> ReadAll();
 
-    
     Order Read(int orderId); //for manger screen
 
     void Create(Order p);

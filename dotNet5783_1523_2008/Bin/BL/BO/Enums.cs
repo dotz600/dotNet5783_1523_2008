@@ -21,8 +21,8 @@ public enum Categories
 
 public enum OrderStatus
 {
-    ConfirmedOrder,
-    Sent,
-    Provided
+    ConfirmedOrder, //when the costumer paied for the order
+    Sent, //
+    Provided //when the costumer recived the order
 }
 
