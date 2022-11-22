@@ -15,10 +15,7 @@ class MyMain
 {
     public static void Main(string[] args)
     {
-        IDal reset = new DalList();
-        reset.Product.reset(); //restart RandomNum from DataSource and restart all DataSource class
-        
-        
+      
         int X = -1, classType = 0;
         Console.WriteLine("Hello!");
         do

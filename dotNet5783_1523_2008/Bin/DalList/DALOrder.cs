@@ -9,15 +9,15 @@ internal class DalOrder : IOrder
     {
         var y = DataSource.s_ordersArr.FirstOrDefault(x => x.ID == o1.ID);
         if(y.ID == 0)//------------------------check again if working!!-------------------------
-            throw new ObjNotFound();
+            throw new ObjNotFoundException("Order doesn't found");
         y = o1;
     }
     public int Create(Order o1)//add the new obj to the array, return order ID
     {
         var y = DataSource.s_ordersArr.Find(x => x.ID == o1.ID);//search if the obj allready in data base
         if (y.ID != 0)
-            throw new ObjExist();
-        
+            throw new ObjExistException("Order allready found");
+
         o1.ID = DataSource.Config.getIdRunNum();
         DataSource.s_ordersArr.Add(o1);
         return o1.ID;
@@ -25,7 +25,8 @@ internal class DalOrder : IOrder
     public void Delete(int id)//delete the obj from the array
     {
         if (DataSource.s_ordersArr.Where(x => x.ID == id) == null)
-            throw new ObjNotFound();
+            throw new ObjNotFoundException("Order doesn't found");
+
         DataSource.s_ordersArr.RemoveAll(x => x.ID == id);
     }
 
@@ -34,7 +35,8 @@ internal class DalOrder : IOrder
 
         var res = DataSource.s_ordersArr.Find(x => x.ID == id);
         if(res.ID == 0)
-            throw new ObjNotFound();
+            throw new ObjNotFoundException("Order doesn't found");
+
         return res;
     }
     public IEnumerable<Order> ReadAll()//return all the obj array
