@@ -37,13 +37,11 @@ internal class Order : IOrder
         return new BO.Order()
         {
             ID = o.ID,
-            CustomerAdress = o.CustomerAdress
-        ,
+            CustomerAdress = o.CustomerAdress,
             OrderDate = o.OrderDate,
             CustomerEmail = o.CustomerEmail,
-            CustomerName = o.CustomerName
-        ,
-            DeliveryDate = o.DeliveryrDate,
+            CustomerName = o.CustomerName,
+            DeliveryDate = o.DeliveryDate,
             ShipDate = o.ShipDate
         };
     }
@@ -66,7 +64,7 @@ internal class Order : IOrder
             CustomerEmail = o.CustomerEmail,
             CustomerName = o.CustomerName
         ,
-            DeliveryDate = o.DeliveryrDate,
+            DeliveryDate = o.DeliveryDate,
             ShipDate = o.ShipDate
         };
     }
