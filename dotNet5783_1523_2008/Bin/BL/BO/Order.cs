@@ -19,7 +19,7 @@ public class Order
     public DateTime? OrderDate { get; set; }
     public DateTime? PaymentDate { get; set; }//
     public DateTime? ShipDate { get; set; }//when the order was sent
-    public DateTime? DeliveryrDate { get; set; }//when the order is recived
+    public DateTime? DeliveryDate { get; set; }//when the order is recived
     public List<OrderItem>?  Items { get; set; }
     public double TotalPrice { get; set; }
     public override string ToString() => $@"
@@ -27,7 +27,7 @@ public class Order
     ID : {ID}, 
     Customer Name, Email, Adress : {CustomerName} : {CustomerEmail} : {CustomerAdress},
     Order Date & status : {OrderDate} {Status}, Payment Date : {PaymentDate}, ShipDate : {ShipDate},
-    DeliveryrDate : {DeliveryrDate}, 
+    DeliveryrDate : {DeliveryDate}, 
     Items : {Items},
     TotalPrice {TotalPrice}
     ";
