@@ -10,7 +10,7 @@ namespace BO;
 
 
 [Serializable]
-internal class NegativeIDException : Exception
+public class NegativeIDException : Exception
 {
     public NegativeIDException() : base() { }
     public NegativeIDException(string message) : base(message) { }
@@ -25,7 +25,7 @@ internal class NegativeIDException : Exception
 
 
 [Serializable]
-internal class EmptyNameException : Exception
+public class EmptyNameException : Exception
 {
     public EmptyNameException() : base() { }
     public EmptyNameException(string message) : base(message) { }
@@ -40,7 +40,7 @@ internal class EmptyNameException : Exception
 
 
 [Serializable]
-internal class NegativePriceException : Exception
+public class NegativePriceException : Exception
 {
     public NegativePriceException() : base() { }
     public NegativePriceException(string message) : base(message) { }
@@ -54,7 +54,7 @@ internal class NegativePriceException : Exception
 
 
 [Serializable]
-internal class NegativeAmountException : Exception
+public class NegativeAmountException : Exception
 {
     public NegativeAmountException() : base() { }
     public NegativeAmountException(string message) : base(message) { }
@@ -68,7 +68,7 @@ internal class NegativeAmountException : Exception
 
 
 [Serializable]
-internal class ReadObjectFailedException : Exception
+public class ReadObjectFailedException : Exception
 {
     public ReadObjectFailedException() : base() { }
     public ReadObjectFailedException(string message) : base(message) { }
@@ -82,7 +82,7 @@ internal class ReadObjectFailedException : Exception
 
 
 [Serializable]
-internal class CreateObjectFailedException : Exception
+public class CreateObjectFailedException : Exception
 {
     public CreateObjectFailedException() : base() { }
     public CreateObjectFailedException(string message) : base(message) { }
@@ -95,7 +95,7 @@ internal class CreateObjectFailedException : Exception
 
 
 [Serializable]
-internal class UpdateObjectFailedException : Exception
+public class UpdateObjectFailedException : Exception
 {
     public UpdateObjectFailedException() : base() { }
     public UpdateObjectFailedException(string message) : base(message) { }
@@ -108,7 +108,7 @@ internal class UpdateObjectFailedException : Exception
 
 
 [Serializable]
-internal class ObjectNotExistException : Exception
+public class ObjectNotExistException : Exception
 {
     public ObjectNotExistException() : base() { }
     public ObjectNotExistException(string message) : base(message) { }
@@ -123,7 +123,7 @@ internal class ObjectNotExistException : Exception
 
 
 [Serializable]
-internal class ProductFoundInOrderException : Exception
+public class ProductFoundInOrderException : Exception
 {
     public ProductFoundInOrderException() : base() { }
     public ProductFoundInOrderException(string message) : base(message) { }

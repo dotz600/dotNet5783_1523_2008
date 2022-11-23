@@ -6,6 +6,7 @@ namespace BIImplementation;
 internal class Cart : ICart
 {
     private DalApi.IDal dal => new Dal.DalList();
+
     public BO.Cart Add(BO.Cart cart, int productId)
     {
         BO.OrderItem ot = searchInCart(cart, productId);
@@ -123,9 +124,8 @@ internal class Cart : ICart
     {
         BO.OrderItem res = cart.Items.Find(ot => ot.ProductID == productId);
         if(res == null)
-        {
             return res = new BO.OrderItem();
-        }
+
         return res;
     }
 }
