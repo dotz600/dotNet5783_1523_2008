@@ -13,23 +13,68 @@ internal class Program
         Console.WriteLine("Hello!");
         do
         {
-
-            classType = getObjType(ref X);
-            switch (classType)
+            try
             {
-                case 0:                                                ///exit
-                    Console.WriteLine("Bye!");
-                    break;
-                case 1:
-                    productFunctions(ref c);                                  ///product Obj
-                    break;
-                case 2:
-                    orderFunctions();                                    ///order Obj
-                    break;
-                case 3:
-                    cartFunctions(ref c);                             //cart Obj
-                    break;
+                classType = getObjType(ref X);
+                switch (classType)
+                {
+                    case 0:                                                ///exit
+                        Console.WriteLine("Bye!");
+                        break;
+                    case 1:
+                        productFunctions(ref c);                                  ///product Obj
+                        break;
+                    case 2:
+                        orderFunctions();                                    ///order Obj
+                        break;
+                    case 3:
+                        cartFunctions(ref c);                             //cart Obj
+                        break;
+                }
             }
+            catch(NegativeIDException ex) 
+            {
+                Console.WriteLine(ex);
+            }
+            catch (EmptyNameException ex)
+            {
+                Console.WriteLine(ex);
+
+            }
+            catch (NegativePriceException ex)
+            {
+                Console.WriteLine(ex);
+
+            }
+            catch (NegativeAmountException ex)
+            {
+                Console.WriteLine(ex);
+
+            }
+            catch (ReadObjectFailedException ex)
+            {
+                Console.WriteLine(ex);
+
+            }
+            catch (CreateObjectFailedException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (UpdateObjectFailedException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (ObjectNotExistException ex)
+            {
+                Console.WriteLine(ex);
+            }
+            catch (ProductFoundInOrderException ex)
+            {
+                Console.WriteLine(ex);
+            }
+      
+
+
 
         }
         while (X != 0);
