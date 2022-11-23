@@ -7,10 +7,17 @@ namespace Dal;
 internal static class DataSource
 {
     internal static readonly int s_randomNum = 100000;
+
     internal static List<Product> s_productsArr;
     internal static List<Order> s_ordersArr;
     internal static List<OrderItem> s_ordersItemArr;
-    static DataSource() { s_Initialize(); }
+    static DataSource()//cnsrt
+    {
+        s_productsArr = new List<Product>();
+        s_ordersArr = new List<Order>();
+        s_ordersItemArr = new List<OrderItem>();
+        s_Initialize(); 
+    }
 
     private static void addOrder(Order o1)
     {
@@ -23,7 +30,7 @@ internal static class DataSource
         s_ordersArr.Add(o1);
     }
 
-    private static void addOrderItem(int i = 1)//add one orderItem
+    private static void AddOrderItem(int i = 1)//add one orderItem
     {
 
         int amount = Config.rand.Next(1, 5);
@@ -37,7 +44,7 @@ internal static class DataSource
 
     }
 
-    private static void addProduct(Product p1)
+    private static void AddProduct(Product p1)
     {
         s_productsArr.Add(p1);
     }
@@ -45,16 +52,16 @@ internal static class DataSource
     private static void s_Initialize()
     {
         //adding 10 products.
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "doughnut", category = Categories.Bakery, InStock = 15, Price = 5 });
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "chicken", category = Categories.Meat, InStock = 25, Price = 30 });
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "Yellow cheese", category = Categories.Deli, InStock = 12, Price = 33 });
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "bean", category = Categories.Frozen, InStock = 7, Price = 16 });
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "mop", category = Categories.Cleaning, InStock = 3, Price = 22 });
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "cows milk", category = Categories.Dairy, InStock = 45, Price = 4.99 });
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "gum", category = Categories.Sweets, InStock = 75, Price = 0.99 });
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "makeup", category = Categories.Beauty, InStock = 15, Price = 7 });
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "bread", category = Categories.Bakery, InStock = 50, Price = 5.99 });
-        addProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "mince", category = Categories.Meat, InStock = 0, Price = 42.5 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "doughnut", category = Categories.Bakery, InStock = 15, Price = 5 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "chicken", category = Categories.Meat, InStock = 25, Price = 30 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "Yellow cheese", category = Categories.Deli, InStock = 12, Price = 33 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "bean", category = Categories.Frozen, InStock = 7, Price = 16 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "mop", category = Categories.Cleaning, InStock = 3, Price = 22 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "cows milk", category = Categories.Dairy, InStock = 45, Price = 4.99 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "gum", category = Categories.Sweets, InStock = 75, Price = 0.99 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "makeup", category = Categories.Beauty, InStock = 15, Price = 7 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "bread", category = Categories.Bakery, InStock = 50, Price = 5.99 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "mince", category = Categories.Meat, InStock = 0, Price = 42.5 });
 
 
 
@@ -76,7 +83,7 @@ internal static class DataSource
         //adding 40 orderItem
         for (int i = 1; i < 41; i++)
         {
-            addOrderItem(i);
+            AddOrderItem(i);
         }
 
     }

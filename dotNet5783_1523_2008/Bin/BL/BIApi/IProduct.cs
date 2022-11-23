@@ -13,6 +13,7 @@ namespace BIApi;
 /// </summary>
 public interface IProduct 
 {
+    
     IEnumerable<ProductForList> ReadAll();
     Product Read(int id); //for manger screen
 

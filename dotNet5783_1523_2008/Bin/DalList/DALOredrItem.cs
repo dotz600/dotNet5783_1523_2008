@@ -8,7 +8,7 @@ internal class DalOredrItem :IOrderItem
 {
     public int Create(OrderItem Ot)//add new obj to the data base
     {
-        var y = DataSource.s_ordersItemArr.Find(obj => obj.OrderID == Ot.OrderID);//search if the obj allready in data base
+        var y = DataSource.s_ordersItemArr.Find(obj => obj.OrderID == Ot.OrderID && obj.ProductID == Ot.ProductID);//search if the obj allready in data base
         if (y.OrderID != 0)
             throw new ObjExistException("Order item allready found");
 
@@ -34,7 +34,7 @@ internal class DalOredrItem :IOrderItem
 
     public IEnumerable<OrderItem> ReadAll()//return all the array
     {
-        return DataSource.s_ordersItemArr.ToArray();
+        return DataSource.s_ordersItemArr.ToList();
     }
 
     public void Delete(int id)//search the obj and delete it from the array

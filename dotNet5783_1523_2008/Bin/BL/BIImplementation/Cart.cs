@@ -6,7 +6,7 @@ namespace BIImplementation;
 internal class Cart : ICart
 {
     private DalApi.IDal dal => new Dal.DalList();
-    public BO.Cart Create(BO.Cart cart, int productId)
+    public BO.Cart Add(BO.Cart cart, int productId)
     {
         BO.OrderItem ot = searchInCart(cart, productId);
         DO.Product p = dal.Product.Read(productId);
@@ -88,21 +88,15 @@ internal class Cart : ICart
         if(flag == false) throw new Exception("ERROR");
 
         //create new order and add it to data base
-        DO.Order res= new DO.Order();
-        res.OrderDate = DateTime.Now;
-        int orderId = dal.Order.Create(res);
+        int orderId = dal.Order.Create(new DO.Order {ShipDate = DateTime.Now, CustomerAdress = adress,
+            CustomerEmail = email, CustomerName = name});
 
         foreach(var ot in cart.Items) 
         {
             try///make DO - orderItem, and try to add it to data base 
             {
-                DO.OrderItem DOot = new DO.OrderItem();
-                DOot.OrderID = orderId;
-                DOot.ProductID = ot.ProductID;
-                DOot.Amount = ot.Amount;
-                DOot.Price = ot.TotalPrice;
-                dal.OrderItem.Create(DOot);
-                
+                dal.OrderItem.Create(new DO.OrderItem { Amount = ot.Amount, OrderID = orderId,
+                    Price = ot.Price, ProductID = ot.ProductID});
             }
             catch(Exception ex) 
             {
@@ -112,9 +106,13 @@ internal class Cart : ICart
             {
                 DO.Product p = dal.Product.Read(ot.ProductID);
                 p.InStock -= ot.Amount;
+
+                if (p.InStock < 0)//just for safety
+                    p.InStock = 0;
                 dal.Product.Update(p);
             }catch(Exception ex)
             {
+
             }
         }
     }

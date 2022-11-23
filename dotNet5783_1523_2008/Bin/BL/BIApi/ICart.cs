@@ -12,7 +12,7 @@ namespace BIApi;
 /// </summary>
 public interface ICart 
 {
-    Cart Create(Cart cart, int productId);
+    Cart Add(Cart cart, int productId);
     void CartConfirmation(Cart cart, string name, string email, string adress);
 
     Cart Update(Cart cart, int productId, int amount);

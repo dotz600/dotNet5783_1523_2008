@@ -43,7 +43,6 @@ class MyMain
         Order order = new Order();
         OrderItem orderItem = new OrderItem();
 
-        correctInput(X);
         switch (X)
         {
             case 0:                                                ///exit
@@ -169,17 +168,9 @@ class MyMain
         return classType;///and return X by refrence
     }
 
-    public static void correctInput(int x)///print the order of input for each obj
-    {
-        if(x == 1)
-            Console.WriteLine("Product: ProductID, Name, Price, Category, InStock");
-        if(x == 2)
-            Console.WriteLine("Order: OrderID, CustomerAdress, CustomerEmail, CustomerName, DeliveryDate, OrderDate, ShipDate");
-        if (x == 3)
-            Console.WriteLine("OrderItem: ProductID, OrderID, Price, Amount");
-    }
     public static void inputOrderItem(ref OrderItem o)///get input for all OrderItem details 
     {
+        Console.WriteLine("OrderItem: ProductID, OrderID, Price, Amount");
         var line = Console.ReadLine();
         var data = line.Split(' ');/// add all the input data to array, split each elemnt by space
         o.ProductID = int.Parse(data[0]);
@@ -190,6 +181,7 @@ class MyMain
 
     public static void inputOrder(ref Order o)///get input for all Order details
     {
+        Console.WriteLine("Order: OrderID, CustomerAdress, CustomerEmail, CustomerName, DeliveryDate, OrderDate, ShipDate");
         var line = Console.ReadLine();
         var data = line.Split(' ');
         o.ID = int.Parse(data[0]);
@@ -203,6 +195,7 @@ class MyMain
     }
     public static void inputProduct(ref Product p)///get input for all Product details
     {
+        Console.WriteLine("Product: ProductID, Name, Price, Category, InStock");
         var line = Console.ReadLine();
         var data = line.Split(' ');
         p.ID = int.Parse(data[0]);

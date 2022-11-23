@@ -10,94 +10,112 @@ namespace BO;
 
 
 [Serializable]
-internal class NegativeID : Exception
+internal class NegativeIDException : Exception
 {
-    public NegativeID() : base() { }
-    public NegativeID(string message) : base(message) { }
-    public NegativeID(string message, Exception inner) : base(message, inner) { }
-    protected NegativeID(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public NegativeIDException() : base() { }
+    public NegativeIDException(string message) : base(message) { }
+    public NegativeIDException(string message, Exception inner) : base(message, inner) { }
+    protected NegativeIDException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+    override public string ToString() =>
+    "Negative ID Exception:" + " overloaded\n" + Message;
 }
 
 
 
 
 [Serializable]
-internal class EmptyName : Exception
+internal class EmptyNameException : Exception
 {
-    public EmptyName() : base() { }
-    public EmptyName(string message) : base(message) { }
-    public EmptyName(string message, Exception inner) : base(message, inner) { }
-    protected EmptyName(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public EmptyNameException() : base() { }
+    public EmptyNameException(string message) : base(message) { }
+    public EmptyNameException(string message, Exception inner) : base(message, inner) { }
+    protected EmptyNameException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+   
+    override public string ToString() =>
+    "EmptyName Exception:"  + " overloaded\n" + Message;
 }
 
 
 
 
 [Serializable]
-internal class NegativePrice : Exception
+internal class NegativePriceException : Exception
 {
-    public NegativePrice() : base() { }
-    public NegativePrice(string message) : base(message) { }
-    public NegativePrice(string message, Exception inner) : base(message, inner) { }
-    protected NegativePrice(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public NegativePriceException() : base() { }
+    public NegativePriceException(string message) : base(message) { }
+    public NegativePriceException(string message, Exception inner) : base(message, inner) { }
+    protected NegativePriceException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    override public string ToString() =>
+    "Negative Price Exception:" + " overloaded\n" + Message;
 }
 
 
 
 
 [Serializable]
-internal class NegativeAmount : Exception
+internal class NegativeAmountException : Exception
 {
-    public NegativeAmount() : base() { }
-    public NegativeAmount(string message) : base(message) { }
-    public NegativeAmount(string message, Exception inner) : base(message, inner) { }
-    protected NegativeAmount(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public NegativeAmountException() : base() { }
+    public NegativeAmountException(string message) : base(message) { }
+    public NegativeAmountException(string message, Exception inner) : base(message, inner) { }
+    protected NegativeAmountException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    override public string ToString() =>
+    "Negative Amount Exception:" + " overloaded\n" + Message;
 }
 
 
 
 
 [Serializable]
-internal class ReadObjectFailed : Exception
+internal class ReadObjectFailedException : Exception
 {
-    public ReadObjectFailed() : base() { }
-    public ReadObjectFailed(string message) : base(message) { }
-    public ReadObjectFailed(string message, Exception inner) : base(message, inner) { }
-    protected ReadObjectFailed(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public ReadObjectFailedException() : base() { }
+    public ReadObjectFailedException(string message) : base(message) { }
+    public ReadObjectFailedException(string message, Exception inner) : base(message, inner) { }
+    protected ReadObjectFailedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    override public string ToString() =>
+    "Read Object Failed Exception:" + " overloaded\n" + Message;
 }
 
 
 
 
 [Serializable]
-internal class CreateObjectFailed : Exception
+internal class CreateObjectFailedException : Exception
 {
-    public CreateObjectFailed() : base() { }
-    public CreateObjectFailed(string message) : base(message) { }
-    public CreateObjectFailed(string message, Exception inner) : base(message, inner) { }
-    protected CreateObjectFailed(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public CreateObjectFailedException() : base() { }
+    public CreateObjectFailedException(string message) : base(message) { }
+    public CreateObjectFailedException(string message, Exception inner) : base(message, inner) { }
+    protected CreateObjectFailedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    override public string ToString() =>
+    "Create Object Failed Exception:" + " overloaded\n" + Message;
 }
 
 
 
 [Serializable]
-internal class UpdateObjectFailed : Exception
+internal class UpdateObjectFailedException : Exception
 {
-    public UpdateObjectFailed() : base() { }
-    public UpdateObjectFailed(string message) : base(message) { }
-    public UpdateObjectFailed(string message, Exception inner) : base(message, inner) { }
-    protected UpdateObjectFailed(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public UpdateObjectFailedException() : base() { }
+    public UpdateObjectFailedException(string message) : base(message) { }
+    public UpdateObjectFailedException(string message, Exception inner) : base(message, inner) { }
+    protected UpdateObjectFailedException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    override public string ToString() =>
+    "Update Object Failed Exception:" + " overloaded\n" + Message;
 }
 
 
 
 [Serializable]
-internal class ObjectNotExist : Exception
+internal class ObjectNotExistException : Exception
 {
-    public ObjectNotExist() : base() { }
-    public ObjectNotExist(string message) : base(message) { }
-    public ObjectNotExist(string message, Exception inner) : base(message, inner) { }
-    protected ObjectNotExist(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public ObjectNotExistException() : base() { }
+    public ObjectNotExistException(string message) : base(message) { }
+    public ObjectNotExistException(string message, Exception inner) : base(message, inner) { }
+    protected ObjectNotExistException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    override public string ToString() =>
+    "Object Not Exist Exception:" + " overloaded\n" + Message;
 }
 
 
@@ -105,10 +123,12 @@ internal class ObjectNotExist : Exception
 
 
 [Serializable]
-internal class ProductFoundInOrder : Exception
+internal class ProductFoundInOrderException : Exception
 {
-    public ProductFoundInOrder() : base() { }
-    public ProductFoundInOrder(string message) : base(message) { }
-    public ProductFoundInOrder(string message, Exception inner) : base(message, inner) { }
-    protected ProductFoundInOrder(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    public ProductFoundInOrderException() : base() { }
+    public ProductFoundInOrderException(string message) : base(message) { }
+    public ProductFoundInOrderException(string message, Exception inner) : base(message, inner) { }
+    protected ProductFoundInOrderException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+    override public string ToString() =>
+    "Product Found In Order Exception:" + " overloaded\n" + Message;
 }

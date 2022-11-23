@@ -31,7 +31,8 @@ public class DalProduct : IProduct
     
     public IEnumerable<Product> ReadAll()
     {
-        return DataSource.s_productsArr.ToArray();
+        return DataSource.s_productsArr.ToList();
+        List<Product> products = new List<Product>();
     }
 
     public void Delete(int id)

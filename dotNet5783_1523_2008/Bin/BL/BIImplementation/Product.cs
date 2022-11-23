@@ -11,6 +11,7 @@ namespace BIImplementation;
 
 internal class Product : IProduct
 {
+  
     private DalApi.IDal dal => new Dal.DalList();
     public void Create(BO.Product p)
     {
@@ -18,12 +19,12 @@ internal class Product : IProduct
 
         try
         {
-            dal.Product.Create(new DO.Product { ID = p.ID, Name = p.Name, InStock = p.InStock, Price = p.Price, category = (DO.Categories)p.Category });
+            dal.Product.Create(new DO.Product { ID = p.ID, Name = p.Name, InStock = p.InStock,
+                Price = p.Price, category = (DO.Categories)p.Category });
         }
         catch (Exception ex)
         {
         }
-        throw new NotImplementedException();
     }
 
 
@@ -58,15 +59,10 @@ internal class Product : IProduct
 
         try
         {
-            BO.Product BOpro = new BO.Product();
-            DO.Product DOpro = dal.Product.Read(id);
-            BOpro.Name = DOpro.Name;
-            BOpro.ID = id;
-            BOpro.Price = DOpro.Price;
-            BOpro.InStock = DOpro.InStock;
 
-            //convert the category from DO to BO
-            BOpro.Category = (BO.Categories)DOpro.category;
+            DO.Product DOpro = dal.Product.Read(id);
+            BO.Product BOpro = new BO.Product { Name = DOpro.Name , ID = id, InStock = DOpro.InStock ,
+                Price = DOpro.Price, Category = (BO.Categories)DOpro.category };
             return BOpro;
         }
         catch(Exception ex)
@@ -83,8 +79,8 @@ internal class Product : IProduct
         try
         {
             DO.Product DOproduct = dal.Product.Read(id);
-            BO.ProductItem BOproductItem = new BO.ProductItem { Name = DOproduct.Name , Price = DOproduct.Price ,Amount = DOproduct.InStock, 
-                Category = (BO.Categories)DOproduct.category, InStock = false, ID = DOproduct.ID };
+            BO.ProductItem BOproductItem = new BO.ProductItem { Name = DOproduct.Name , Price = DOproduct.Price ,
+                Amount = DOproduct.InStock, Category = (BO.Categories)DOproduct.category, InStock = false, ID = DOproduct.ID };
 
             if (DOproduct.InStock > 0)
                 BOproductItem.InStock = true;
