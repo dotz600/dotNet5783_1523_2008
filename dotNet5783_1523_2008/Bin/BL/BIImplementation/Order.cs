@@ -176,12 +176,17 @@ internal class Order : IOrder
                 BO.OrderItem boi = new BO.OrderItem
                 {
                     ID = doi.OrderID
-                    , Amount = doi.Amount   
-                    , Name = dal.Product.Read(doi.ProductID).Name
-                    , Price = doi.Price
-                    , ProductID = doi.ProductID
-                    , TotalPrice =  doi.Price*doi.Amount
-                }
+                    ,
+                    Amount = doi.Amount
+                    ,
+                    Name = dal.Product.Read(doi.ProductID).Name
+                    ,
+                    Price = doi.Price
+                    ,
+                    ProductID = doi.ProductID
+                    ,
+                    TotalPrice = doi.Price * doi.Amount
+                };
             }
 
         }
