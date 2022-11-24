@@ -132,10 +132,6 @@ internal class Cart : ICart
                 DOot.Amount = ot.Amount;
                 DOot.Price = ot.TotalPrice;
                 dal.OrderItem.Create(DOot);
-                
-            }
-            catch(Exception ex) 
-            {
 
                 DO.Product p = dal.Product.Read(ot.ProductID);
                 p.InStock -= ot.Amount;
@@ -144,6 +140,8 @@ internal class Cart : ICart
                     p.InStock = 0;
                 dal.Product.Update(p);
             }
+              
+            
         }
         catch (EmptyNameException ex)
         {
@@ -159,11 +157,11 @@ internal class Cart : ICart
         }
         catch(ObjNotFoundException ex)
         {
-            throw new ObjectNotExistException(ex.Message, ex)
+            throw new ObjectNotExistException(ex.Message, ex);
         }
         catch(ObjExistException ex)
         {
-            throw new CreateObjectFailedException(ex.Message, ex)
+            throw new CreateObjectFailedException(ex.Message, ex);
         }
 
     }
