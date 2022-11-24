@@ -1,5 +1,7 @@
 ﻿using BIApi;
-
+using BO;
+using DalApi;
+using System.Data;
 
 namespace BIImplementation;
 
@@ -10,27 +12,40 @@ internal class Cart : ICart
     public BO.Cart Add(BO.Cart cart, int productId)
     {
         BO.OrderItem ot = searchInCart(cart, productId);
-        DO.Product p = dal.Product.Read(productId);
-        
-        if(p.InStock <= 0)
-            throw new Exception("the product not in stock");
+        try
+        {
+            DO.Product p = dal.Product.Read(productId);
 
-        if (ot.ID != 0 ) ///the product found in the cart
-        {
-            ot.Amount++;
-            ot.TotalPrice += ot.Price;
-            cart.TotalPrice += ot.Price;
-            return cart;
+            if (p.InStock <= 0)
+                throw new NegativeAmountException("the product not in stock");
+
+            if (ot.ID != 0) ///the product found in the cart
+            {
+                ot.Amount++;
+                ot.TotalPrice += ot.Price;
+                cart.TotalPrice += ot.Price;
+                return cart;
+            }
+            else//not found in cart - will careate new one and add it to cart
+            {
+                ot.Price = p.Price;
+                ot.TotalPrice = p.Price;
+                ot.ProductID = productId;
+                ot.Amount = 1;
+                cart.Items.Add(ot);
+                return cart;
+            }
         }
-        else//not found in cart - will careate new one and add it to cart
+        catch (ObjExistException ex)
         {
-            ot.Price = p.Price;
-            ot.TotalPrice = p.Price;
-            ot.ProductID = productId;
-            ot.Amount = 1;
-            cart.Items.Add(ot);
-            return cart;
+            throw new ReadObjectFailedException("cant read product from data source, product not exist", ex);
         }
+        catch (NegativeAmountException ex)
+        {
+            throw new NegativeAmountException("the product not in stock");
+        }
+
+
     }
 
     public BO.Cart Update(BO.Cart cart, int productId, int amount)
@@ -38,92 +53,129 @@ internal class Cart : ICart
         BO.OrderItem ot = searchInCart(cart, productId);
         if (ot.ID == 0)
         {
-            throw new Exception("the product not in cart");
+            throw new ObjectNotExistException("the product not in cart, can't update");
         }
         else
         {
-            DO.Product p = dal.Product.Read(productId);
-            if (ot.Amount < amount)                         //if want to increase the amount
+            try
             {
-                if (p.InStock >= ot.Amount)
+                DO.Product p = dal.Product.Read(productId);
+                if (ot.Amount < amount)                         //if want to increase the amount
+                {
+                    if (p.InStock >= ot.Amount)
+                    {
+                        ot.Amount = amount;
+                        cart.TotalPrice -= ot.TotalPrice;
+                        ot.TotalPrice = ot.Price * amount;
+                        cart.TotalPrice += ot.TotalPrice;
+                        return cart;
+                    }
+                    else
+                    {
+                        throw new Exception("not enough in stock");
+                    }
+                }
+                else if (amount == 0)                        //if want to not order at all
+                {
+                    cart.TotalPrice -= ot.TotalPrice;
+                    cart.Items.Remove(ot);
+                }
+                else if (ot.Amount > amount)                //if want to decrease the amount
                 {
                     ot.Amount = amount;
                     cart.TotalPrice -= ot.TotalPrice;
                     ot.TotalPrice = ot.Price * amount;
                     cart.TotalPrice += ot.TotalPrice;
-                    return cart;
                 }
-                else
-                {
-                    throw new Exception("not enough in stock");
-                }
+                return cart;
             }
-            else if( amount == 0)                        //if want to not order at all
+            catch (ObjExistException ex)
             {
-                cart.TotalPrice -= ot.TotalPrice;
-                cart.Items.Remove(ot);
+                throw new ReadObjectFailedException("cant read product from data source, product not exist", ex);
             }
-            else if (ot.Amount > amount)                //if want to decrease the amount
-            {
-                ot.Amount = amount;
-                cart.TotalPrice -= ot.TotalPrice;
-                ot.TotalPrice = ot.Price * amount;
-                cart.TotalPrice += ot.TotalPrice;
-            }
-            return cart;
+
         }
-        
+
     }
 
     public void CartConfirmation(BO.Cart cart, string name, string email, string adress)
     {
         //check all the data is good
-        bool flag = true;
-        if (!email.Contains("@") || name.Length == 0 || adress.Length == 0)
-            flag = false;
-        foreach(var ot in cart.Items) 
+        try
         {
-            if (dal.Product.Read(ot.ProductID).InStock < ot.Amount)
-                flag = false;
-        }
-        if(flag == false) throw new Exception("ERROR");
+            if (!email.Contains("@"))
+                throw new EmptyNameException("email dont contain @");
+            if (name.Length == 0)
+                throw new EmptyNameException("coustomer name is empty");
+            if (adress.Length == 0)
+                throw new EmptyNameException("addres is empty");
 
-        //create new order and add it to data base
-        int orderId = dal.Order.Create(new DO.Order {ShipDate = DateTime.Now, CustomerAdress = adress,
-            CustomerEmail = email, CustomerName = name});
-
-        foreach(var ot in cart.Items) 
-        {
-            try///make DO - orderItem, and try to add it to data base 
+            foreach (var ot in cart.Items)
             {
-                dal.OrderItem.Create(new DO.OrderItem { Amount = ot.Amount, OrderID = orderId,
-                    Price = ot.Price, ProductID = ot.ProductID});
+                if (dal.Product.Read(ot.ProductID).InStock < ot.Amount)
+                    throw new NegativeAmountException("product in cart dont have enough in stock");
             }
-            catch(Exception ex) 
+            //create new order and add it to data base
+            int orderId = dal.Order.Create(new DO.Order
             {
+                ShipDate = DateTime.Now,
+                CustomerAdress = adress,
+                CustomerEmail = email,
+                CustomerName = name
+            });
 
-            }
-            try//subtruct the amount of order from DO - product, and update product in data base
+            foreach (var ot in cart.Items)
             {
+                ///make DO - orderItem, and try to add it to data base 
+
+                dal.OrderItem.Create(new DO.OrderItem
+                {
+                    Amount = ot.Amount,
+                    OrderID = orderId,
+                    Price = ot.Price,
+                    ProductID = ot.ProductID
+                });
+
+
+                //subtruct the amount of order from DO - product, and update product in data base
+
                 DO.Product p = dal.Product.Read(ot.ProductID);
                 p.InStock -= ot.Amount;
 
                 if (p.InStock < 0)//just for safety
                     p.InStock = 0;
                 dal.Product.Update(p);
-            }catch(Exception ex)
-            {
-
             }
         }
+        catch (EmptyNameException ex)
+        {
+            throw new EmptyNameException(ex.Message);
+        }
+        catch (ObjectNotExistException ex)
+        {
+            throw new ObjectNotExistException("cant read product from cart", ex);
+        }
+        catch (NegativeAmountException ex)
+        {
+            throw new NegativeAmountException(ex.Message);
+        }
+        catch(ObjNotFoundException ex)
+        {
+            throw new ObjectNotExistException(ex.Message, ex)
+        }
+        catch(ObjExistException ex)
+        {
+            throw new CreateObjectFailedException(ex.Message, ex)
+        }
+
     }
 
 
 
-    public BO.OrderItem searchInCart(BO.Cart cart , int productId)//help function
+    public BO.OrderItem searchInCart(BO.Cart cart, int productId)//help function
     {
         BO.OrderItem res = cart.Items.Find(ot => ot.ProductID == productId);
-        if(res == null)
+        if (res == null)
             return res = new BO.OrderItem();
 
         return res;
