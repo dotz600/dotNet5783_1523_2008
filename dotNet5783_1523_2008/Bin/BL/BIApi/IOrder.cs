@@ -20,12 +20,9 @@ public interface IOrder
     BO.Order UpdateDelivery(int orderId);//update status, and returns BO.Order
     BO.Order UpdateShipping(int orderId);//update status, and returns BO.Order
     BO.OrderTracking TrackingOrder(int orderId);//returns current status, and list of events that were occurred in these order
-<<<<<<< HEAD
-    void buildItemsList(ref List<BO.OrderItem> l, int id);//Building Items list according to a given ID
+
+    List<BO.OrderItem> buildItemsList( int id);//Building Items list according to a given ID
     void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int id);//calculates price and amount of items according to a given ID
 
-=======
-    //void buildItemsList(ref List<BO.OrderItem> l, int id);//Building Items list according to a given ID
-    //void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int id);//calculates price and amount of items according to a given ID
->>>>>>> d1785bc30cc6a7196d12015e1a78c184817276ca
+
 }

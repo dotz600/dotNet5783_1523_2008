@@ -209,7 +209,7 @@ internal class Order :IOrder
         }
         return listReturn;
     }
-    void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int id)
+    public void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int id)
     {
         foreach (DO.OrderItem orderItem in dal.OrderItem.ReadAll())
         {
