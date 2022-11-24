@@ -85,7 +85,6 @@ internal class Order :IOrder
         try
         {
             DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
-<<<<<<< HEAD
             order.DeliveryDate = DateTime.Now;
             BO.Order orderReturn = new BO.Order()
             {
@@ -108,27 +107,13 @@ internal class Order :IOrder
                 PaymentDate = order.OrderDate
             };
             orderReturn.Items = buildItemsList(orderReturn.ID);//buils items list
-=======
-           order.DeliveryDate = DateTime.Now;
-           BO.Order orderReturn = new BO.Order()
-           { CustomerAdress = order.CustomerAdress
-           , CustomerName = order.CustomerName
-           , CustomerEmail = order.CustomerEmail
-           , DeliveryDate = order.DeliveryDate
-           , ID = order.ID
-           , OrderDate = order.OrderDate 
-           , ShipDate = order.ShipDate
-           , Status = OrderStatus.Sent
-           , PaymentDate = order.OrderDate
-           };
-          orderReturn.Items =  buildItemsList(orderReturn.ID);//buils items list
             int temp = 0;
-            double price=0;
-            calcAmountAndPrice(ref temp ,ref price, orderReturn.ID);//update the total price
+            double price = 0;
+            calcAmountAndPrice(ref temp, ref price, orderReturn.ID);//update the total price
             orderReturn.TotalPrice = price;
             return orderReturn;
         }
-        catch(Exception ex) { }
+        catch (Exception ex) { }
         throw new Exception("IOrder.UpdateDelivery");
     }
     public BO.Order UpdateShipping(int orderId)//update status, and returns BO.Order
@@ -148,43 +133,6 @@ internal class Order :IOrder
            , PaymentDate = order.OrderDate
            };
           orderReturn.Items = buildItemsList(orderReturn.ID);//buils items list
->>>>>>> aeee344f18b206a1745caed5cb8e120bda803f48
-            int temp = 0;
-            double price = 0;
-            calcAmountAndPrice(ref temp, ref price, orderReturn.ID);//update the total price
-            orderReturn.TotalPrice = price;
-            return orderReturn;
-        }
-        catch (Exception ex) { }
-        throw new Exception("IOrder.UpdateDelivery");
-    }
-    public BO.Order UpdateShipping(int orderId)//update status, and returns BO.Order
-    {
-        try
-        {
-            DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
-            order.DeliveryDate = DateTime.Now;
-            BO.Order orderReturn = new BO.Order()
-            {
-                CustomerAdress = order.CustomerAdress
-            ,
-                CustomerName = order.CustomerName
-            ,
-                CustomerEmail = order.CustomerEmail
-            ,
-                DeliveryDate = order.DeliveryDate
-            ,
-                ID = order.ID
-            ,
-                OrderDate = order.OrderDate
-            ,
-                ShipDate = order.ShipDate
-            ,
-                Status = OrderStatus.Provided
-            ,
-                PaymentDate = order.OrderDate
-            };
-            orderReturn.Items = buildItemsList(orderReturn.ID);//buils items list
             int temp = 0;
             double price = 0;
             calcAmountAndPrice(ref temp, ref price, orderReturn.ID);//update the total price
@@ -194,10 +142,9 @@ internal class Order :IOrder
         catch (Exception ex) { }
         throw new Exception("IOrder.UpdateShipping");
     }
-    public BO.OrderTracking TrackingOrder(int orderId)//returns current status, and list of events that were occurred in these order
+    BO.OrderTracking IOrder.TrackingOrder(int orderId)//returns current status, and list of events that were occurred in these order
     {
-        try
-        {
+      try{
             DO.Order o = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
             OrderStatus orderStatus = OrderStatus.ConfirmedOrder;
 
