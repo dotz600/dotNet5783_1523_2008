@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 using BIApi;
 using BO;
-using Dal;
 
 namespace BIImplementation;
 
@@ -16,7 +15,7 @@ internal class Order : IOrder
     
     private DalApi.IDal dal => new Dal.DalList();
 
-    IEnumerable<BO.OrderForList> IOrder.ReadAll()//returns list of BO.Order
+    public IEnumerable<BO.OrderForList> ReadAll()//returns list of BO.Order
     {
         List<BO.OrderForList> list = new List<BO.OrderForList>();//create list to return
 
@@ -42,7 +41,7 @@ internal class Order : IOrder
         }
         return list;
     }
-    BO.Order IOrder.Read(int orderId)//returns single BO.Order
+    public BO.Order Read(int orderId)//returns single BO.Order
     {
         if (orderId > 0)//check input
         { 
@@ -80,7 +79,7 @@ internal class Order : IOrder
         else
             throw new Exception("invalid input");
     }
-    BO.Order IOrder.UpdateDelivery(int orderId)//update status, and returns BO.Order
+    public BO.Order UpdateDelivery(int orderId)//update status, and returns BO.Order
     {
      try{  
             DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
@@ -106,7 +105,7 @@ internal class Order : IOrder
         catch(Exception ex) { }
         throw new Exception("IOrder.UpdateDelivery");
     }
-    BO.Order IOrder.UpdateShipping(int orderId)//update status, and returns BO.Order
+    public BO.Order UpdateShipping(int orderId)//update status, and returns BO.Order
     {
        try{ 
            DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
@@ -132,7 +131,7 @@ internal class Order : IOrder
         catch(Exception ex) { }
         throw new Exception("IOrder.UpdateShipping");
     }
-    BO.OrderTracking IOrder.TrackingOrder(int orderId)//returns current status, and list of events that were occurred in these order
+    public BO.OrderTracking TrackingOrder(int orderId)//returns current status, and list of events that were occurred in these order
     {
       try{
             DO.Order o = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
