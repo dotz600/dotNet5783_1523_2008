@@ -168,7 +168,7 @@ internal class Cart : ICart
 
 
 
-    public BO.OrderItem searchInCart(BO.Cart cart, int productId)//help function
+    private BO.OrderItem searchInCart(BO.Cart cart, int productId)//help function
     {
         BO.OrderItem res = cart.Items.Find(ot => ot.ProductID == productId);
         if (res == null)

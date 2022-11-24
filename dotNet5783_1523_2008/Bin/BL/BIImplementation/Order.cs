@@ -13,13 +13,13 @@ namespace BIImplementation;
 
 internal class Order : IOrder
 {
-    
+
     private DalApi.IDal dal => new Dal.DalList();
 
-    IEnumerable<BO.OrderForList> IOrder.ReadAll()//returns list of BO.Order
+    public IEnumerable<BO.OrderForList> ReadAll()//returns list of BO.Order
     {
         List<BO.OrderForList> list = new List<BO.OrderForList>();//create list to return
-
+        
         foreach (DO.Order order in dal.Order.ReadAll())//build and push elements to the list
         {
             int countAmountOfItems = 0;
@@ -27,48 +27,48 @@ internal class Order : IOrder
             ///////////////*************TODO --- update status!! This line is uncorrect*****************///////////////////////
 
             OrderStatus status = order.OrderDate > order.DeliveryDate ? OrderStatus.Sent : OrderStatus.Provided;
-         
-            calcAmountAndPrice(ref countAmountOfItems,ref sumPrice, order.ID);
-      
+
+            calcAmountAndPrice(ref countAmountOfItems, ref sumPrice, order.ID);
+
             BO.OrderForList o = new BO.OrderForList() //build single element
             {
-              ID = order.ID ,
-              AmountOfItems = countAmountOfItems ,
-              CustomerName = order.CustomerName ,
-              TotalPrice = sumPrice ,
-              Status = status
+                ID = order.ID,
+                AmountOfItems = countAmountOfItems,
+                CustomerName = order.CustomerName,
+                TotalPrice = sumPrice,
+                Status = status
             };
             list.Add(o);//push the element to the list
         }
         return list;
     }
-    BO.Order IOrder.Read(int orderId)//returns single BO.Order
+    public BO.Order Read(int orderId)//returns single BO.Order
     {
+        
         if (orderId > 0)//check input
-        { 
+        {
             DO.Order o;
-            try{o = dal.Order.Read(orderId);}//check if the order exist in DL
-            catch(Exception ex) { }
+            try { o = dal.Order.Read(orderId); }//check if the order exist in DL
+            catch (Exception ex) { }
 
 
-        BO.Order orderReturn = new BO.Order()//build order to return
+            BO.Order orderReturn = new BO.Order   //build order to return
             {
-            ID = o.ID ,
-            CustomerAdress = o.CustomerAdress ,
-            CustomerName = o.CustomerName ,
-            CustomerEmail = o.CustomerEmail ,
-            CustomerAdress = o.CustomerAdress,
-            ShipDate = o.ShipDate ,
-            DeliveryDate = o.DeliveryDate ,
-            OrderDate = o.OrderDate
-            }
+                ID = o.ID,
+                CustomerAdress = o.CustomerAdress,
+                CustomerName = o.CustomerName,
+                CustomerEmail = o.CustomerEmail,
+                ShipDate = o.ShipDate,
+                DeliveryDate = o.DeliveryDate,
+                OrderDate = o.OrderDate
+            };
+
 
             //calc price and amount
             int amount = 0;
             double price = 0;
-            calcAmountAndPrice(ref orderReturn., ref price, o.ID);
+            calcAmountAndPrice(ref orderReturn, ref price, o.ID);
             //update the results
-            orderReturn.amount = amount;
             orderReturn.TotalPrice = price;
             ///////////////*************TODO --- update status!!*****************///////////////////////
             return orderReturn;
@@ -76,57 +76,60 @@ internal class Order : IOrder
         else
             throw new Exception("invalid input");
     }
-    BO.Order IOrder.UpdateDelivery(int orderId)//update status, and returns BO.Order
+    public BO.Order UpdateDelivery(int orderId)//update status, and returns BO.Order
     {
-     try{  
+        
+        try
+        {
             DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
-           order.DeliveryDate = DateTime.Now;
-           BO.Order orderReturn = new BO.Order()
-           { CustomerAdress = order.CustomerAdress
-           , CustomerName = order.CustomerName
-           , CustomerEmail = order.CustomerEmail
-           , DeliveryDate = order.DeliveryDate
-           , ID = order.ID
-           , OrderDate = order.OrderDate 
-           , ShipDate = order.ShipDate
-           , Status = OrderStatus.Sent
-           , PaymentDate = order.OrderDate
-           };
-           buildItemsList(ref orderReturn.Items, orderReturn.ID);//buils items list
+            order.DeliveryDate = DateTime.Now;
+            BO.Order orderReturn = new BO.Order()
+            { CustomerAdress = order.CustomerAdress
+            , CustomerName = order.CustomerName
+            , CustomerEmail = order.CustomerEmail
+            , DeliveryDate = order.DeliveryDate
+            , ID = order.ID
+            , OrderDate = order.OrderDate
+            , ShipDate = order.ShipDate
+            , Status = OrderStatus.Sent
+            , PaymentDate = order.OrderDate
+            };
+            buildItemsList(ref orderReturn.Items, orderReturn.ID);//buils items list
             int temp = 0;
-            calcAmountAndPrice(ref temp , orderReturn.TotalPrice, orderReturn.ID);//update the total price
+            calcAmountAndPrice(ref temp, orderReturn.TotalPrice, orderReturn.ID);//update the total price
             return orderReturn;
         }
-        catch(Exception ex) { }
+        catch (Exception ex) { }
 
     }
-    BO.Order IOrder.UpdateShipping(int orderId)//update status, and returns BO.Order
+    public BO.Order UpdateShipping(int orderId)//update status, and returns BO.Order
     {
-       try{ 
-           DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
-           order.DeliveryDate = DateTime.Now;
-           BO.Order orderReturn = new BO.Order()
-           { CustomerAdress = order.CustomerAdress
-           , CustomerName = order.CustomerName
-           , CustomerEmail = order.CustomerEmail
-           , DeliveryDate = order.DeliveryDate
-           , ID = order.ID
-           , OrderDate = order.OrderDate 
-           , ShipDate = order.ShipDate
-           , Status = OrderStatus.Provided
-           , PaymentDate = order.OrderDate
-           };
-           buildItemsList(ref orderReturn.Items, orderReturn.ID);//buils items list
+        try {
+            
+            DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
+            order.DeliveryDate = DateTime.Now;
+            BO.Order orderReturn = new BO.Order()
+            { CustomerAdress = order.CustomerAdress
+            , CustomerName = order.CustomerName
+            , CustomerEmail = order.CustomerEmail
+            , DeliveryDate = order.DeliveryDate
+            , ID = order.ID
+            , OrderDate = order.OrderDate
+            , ShipDate = order.ShipDate
+            , Status = OrderStatus.Provided
+            , PaymentDate = order.OrderDate
+            };
+            buildItemsList(ref orderReturn.Items, orderReturn.ID);//buils items list
             int temp = 0;
-            calcAmountAndPrice(ref temp , orderReturn.TotalPrice, orderReturn.ID);//update the total price
+            calcAmountAndPrice(ref temp, orderReturn.TotalPrice, orderReturn.ID);//update the total price
             return orderReturn;
         }
-        catch(Exception ex) { }
+        catch (Exception ex) { }
 
     }
-    BO.OrderTracking IOrder.TrackingOrder(int orderId)//returns current status, and list of events that were occurred in these order
+    public BO.OrderTracking TrackingOrder(int orderId)//returns current status, and list of events that were occurred in these order
     {
-      try{
+        try {
             DO.Order o = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
             OrderStatus orderStatus = OrderStatus.ConfirmedOrder;
 
@@ -134,15 +137,15 @@ internal class Order : IOrder
                 orderStatus = OrderStatus.Sent;
             if (o.DeliveryDate < DateTime.Now)
                 orderStatus = OrderStatus.Provided;
-
+            
             OrderTracking orderTrackingToReturn = new OrderTracking();
             OrderTracking.DateAndStatus dateAndStatus1;
             OrderTracking.DateAndStatus dateAndStatus2;
             OrderTracking.DateAndStatus dateAndStatus3;
-           
-                dateAndStatus1.dt = o.OrderDate;
-                dateAndStatus1.os = OrderStatus.ConfirmedOrder;
-                orderTrackingToReturn.Events.Add(dateAndStatus1);
+
+            dateAndStatus1.dt = o.OrderDate;
+            dateAndStatus1.os = OrderStatus.ConfirmedOrder;
+            orderTrackingToReturn.Events.Add(dateAndStatus1);
 
             if (o.ShipDate < DateTime.Now)
             {
@@ -157,38 +160,40 @@ internal class Order : IOrder
                 orderTrackingToReturn.Events.Add(dateAndStatus3);
             }
 
-        return orderTrackingToReturn;
-            }
+            return orderTrackingToReturn;
+        }
         catch (Exception ex) { }
 
-}
+    }
 
-    private static void buildItemsList(ref List<BO.OrderItem> l, int id)
+    private void buildItemsList(ref List<BO.OrderItem> l, int id)
     {
         foreach (DO.OrderItem doi in dal.OrderItem.ReadAll())
         {
             if (doi.OrderID == id)//if true, build an BO.OrderItem object, and push to the list
             {
-                BO.OrderItem boi = new BO.OrderItem()
+                BO.OrderItem boi = new BO.OrderItem
                 {
-                    ID = doi.OrderID
-                    , Amount = doi.Amount   
-                    , Name = dal.Product.Read(doi.ProductID).Name
-                    , Price = doi.Price
-                    , ProductID = doi.ProductID
-                    , TotalPrice =  doi.Price*doi.Amount
-                }
+                    ID = doi.OrderID,
+                    Amount = doi.Amount,
+                    Name = dal.Product.Read(doi.ProductID).Name,
+                    Price = doi.Price,
+                    ProductID = doi.ProductID,
+                    TotalPrice = doi.Price * doi.Amount
+                };
             }
         }
     }
-    private static void calcAmountAndPrice(ref int countAmountOfItems, ref int price, int id)
+    private void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int id)
     {
-         foreach (DO.OrderItem orderItem in dal.OrderItem.ReadAll())
+        
+        foreach (DO.OrderItem orderItem in dal.OrderItem.ReadAll())
+        {
+            if (orderItem.OrderID == id)
             {
-                if (orderItem.OrderID == id )
-                {
-                    countAmountOfItems++;
-                    price += orderItem.Price;
-                }
+                countAmountOfItems++;
+                price += orderItem.Price;
             }
+        }
     }
+}
