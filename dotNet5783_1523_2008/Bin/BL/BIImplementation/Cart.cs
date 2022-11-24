@@ -126,18 +126,16 @@ internal class Cart : ICart
 
             foreach (var ot in cart.Items)
             {
-                ///make DO - orderItem, and try to add it to data base 
-
-                dal.OrderItem.Create(new DO.OrderItem
-                {
-                    Amount = ot.Amount,
-                    OrderID = orderId,
-                    Price = ot.Price,
-                    ProductID = ot.ProductID
-                });
-
-
-                //subtruct the amount of order from DO - product, and update product in data base
+                DO.OrderItem DOot = new DO.OrderItem();
+                DOot.OrderID = orderId;
+                DOot.ProductID = ot.ProductID;
+                DOot.Amount = ot.Amount;
+                DOot.Price = ot.TotalPrice;
+                dal.OrderItem.Create(DOot);
+                
+            }
+            catch(Exception ex) 
+            {
 
                 DO.Product p = dal.Product.Read(ot.ProductID);
                 p.InStock -= ot.Amount;
