@@ -166,7 +166,7 @@ internal class Order : IOrder
 
     }
 
-    private static void buildItemsList(ref List<BO.OrderItem> l, int id)
+    List<BO.OrderItem> buildItemsList( int id)
     {
         List<BO.OrderItem> listReturn = new List<BO.OrderItem>();
         foreach (DO.OrderItem doi in dal.OrderItem.ReadAll())
