@@ -28,7 +28,7 @@ internal class Order : IOrder
 
             OrderStatus status = order.OrderDate > order.DeliveryDate ? OrderStatus.Sent : OrderStatus.Provided;
          
-            calcAmountAndPrice(ref countAmountOfItems,ref sumPrice, order.ID);
+            calcAmountAndPrice(ref countAmountOfItems ,ref sumPrice, order.ID);
       
             BO.OrderForList o = new BO.OrderForList() //build single element
             {
@@ -46,32 +46,36 @@ internal class Order : IOrder
     {
         if (orderId > 0)//check input
         { 
-            DO.Order o;
-            try{o = dal.Order.Read(orderId);}//check if the order exist in DL
-            catch(Exception ex) { }
-
-
-        BO.Order orderReturn = new BO.Order()//build order to return
-            {
-            ID = o.ID ,
-            CustomerAdress = o.CustomerAdress ,
-            CustomerName = o.CustomerName ,
-            CustomerEmail = o.CustomerEmail ,
-            CustomerAdress = o.CustomerAdress,
-            ShipDate = o.ShipDate ,
-            DeliveryDate = o.DeliveryDate ,
-            OrderDate = o.OrderDate
-            }
+            
+            try{
+                DO.Order o;
+                o = dal.Order.Read(orderId);
+                    BO.Order orderReturn = new BO.Order()//build order to return
+                {
+                ID = o.ID ,
+                CustomerAdress = o.CustomerAdress ,
+                CustomerName = o.CustomerName ,
+                CustomerEmail = o.CustomerEmail ,
+                ShipDate = o.ShipDate ,
+                DeliveryDate = o.DeliveryDate ,
+                OrderDate = o.OrderDate
+            };
+            
+            
+       
 
             //calc price and amount
             int amount = 0;
             double price = 0;
-            calcAmountAndPrice(ref orderReturn., ref price, o.ID);
+            calcAmountAndPrice(ref amount, ref price, o.ID);
             //update the results
-            orderReturn.amount = amount;
             orderReturn.TotalPrice = price;
             ///////////////*************TODO --- update status!!*****************///////////////////////
             return orderReturn;
+            }//check if the order exist in DL
+            catch(Exception ex) { }
+            throw new Exception("BO.Order.Read");
+
         }
         else
             throw new Exception("invalid input");
@@ -92,13 +96,15 @@ internal class Order : IOrder
            , Status = OrderStatus.Sent
            , PaymentDate = order.OrderDate
            };
-           buildItemsList(ref orderReturn.Items, orderReturn.ID);//buils items list
+          orderReturn.Items =  buildItemsList(orderReturn.ID);//buils items list
             int temp = 0;
-            calcAmountAndPrice(ref temp , orderReturn.TotalPrice, orderReturn.ID);//update the total price
+            double price=0;
+            calcAmountAndPrice(ref temp ,ref price, orderReturn.ID);//update the total price
+            orderReturn.TotalPrice = price;
             return orderReturn;
         }
         catch(Exception ex) { }
-
+        throw new Exception("IOrder.UpdateDelivery");
     }
     BO.Order IOrder.UpdateShipping(int orderId)//update status, and returns BO.Order
     {
@@ -116,13 +122,15 @@ internal class Order : IOrder
            , Status = OrderStatus.Provided
            , PaymentDate = order.OrderDate
            };
-           buildItemsList(ref orderReturn.Items, orderReturn.ID);//buils items list
+          orderReturn.Items = buildItemsList(orderReturn.ID);//buils items list
             int temp = 0;
-            calcAmountAndPrice(ref temp , orderReturn.TotalPrice, orderReturn.ID);//update the total price
+            double price = 0;
+           calcAmountAndPrice(ref temp , ref price, orderReturn.ID);//update the total price
+            orderReturn.TotalPrice = price;
             return orderReturn;
         }
         catch(Exception ex) { }
-
+        throw new Exception("IOrder.UpdateShipping");
     }
     BO.OrderTracking IOrder.TrackingOrder(int orderId)//returns current status, and list of events that were occurred in these order
     {
@@ -160,11 +168,13 @@ internal class Order : IOrder
         return orderTrackingToReturn;
             }
         catch (Exception ex) { }
+        throw new Exception("BO.Order.TrackingOrder");
 
 }
 
-    private static void buildItemsList(ref List<BO.OrderItem> l, int id)
+    List<BO.OrderItem> buildItemsList(int id)
     {
+        List<BO.OrderItem> listReturn = new List<BO.OrderItem>();
         foreach (DO.OrderItem doi in dal.OrderItem.ReadAll())
         {
             if (doi.OrderID == id)//if true, build an BO.OrderItem object, and push to the list
@@ -177,11 +187,14 @@ internal class Order : IOrder
                     , Price = doi.Price
                     , ProductID = doi.ProductID
                     , TotalPrice =  doi.Price*doi.Amount
-                }
+                };
+                listReturn.Add(boi);
             }
+
         }
+        return listReturn;
     }
-    private static void calcAmountAndPrice(ref int countAmountOfItems, ref int price, int id)
+    void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int id)
     {
          foreach (DO.OrderItem orderItem in dal.OrderItem.ReadAll())
             {
@@ -192,3 +205,4 @@ internal class Order : IOrder
                 }
             }
     }
+}
