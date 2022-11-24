@@ -8,7 +8,7 @@ namespace BO;
 
 public class OrderTracking
 {
-    public struct DateAndStatus{ public DateTime dt; public OrderStatus os;};
+    public struct DateAndStatus{ public DateTime? dt; public OrderStatus os;};
     public int ID { get; set; }
     public OrderStatus Status { get; set; }
     public List<DateAndStatus> Events { get; set;}

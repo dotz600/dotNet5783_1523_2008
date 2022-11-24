@@ -1,6 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\dotNet5783_1523_2008",
+    "\\dotNet5783_1523_2008\\Bin",
+    "\\dotNet5783_1523_2008\\Bin\\BL",
+    "\\dotNet5783_1523_2008\\Bin\\BL\\BIApi",
+    "\\dotNet5783_1523_2008\\Bin\\BL\\BIImplementation",
+    "\\dotNet5783_1523_2008\\Bin\\BL\\BO",
+    "\\dotNet5783_1523_2008\\Bin\\DalFacade",
+    "\\dotNet5783_1523_2008\\Bin\\DalFacade\\DO",
+    "\\dotNet5783_1523_2008\\Bin\\DalList"
   ],
+  "SelectedNode": "\\dotNet5783_1523_2008\\Bin\\BL\\BIImplementation\\Order.cs",
   "PreviewInSolutionExplorer": false
 }
