@@ -91,7 +91,6 @@ internal class Cart : ICart
         DO.Order res= new DO.Order();
         res.OrderDate = DateTime.Now;
         int orderId = dal.Order.Create(res);
-
         foreach(var ot in cart.Items) 
         {
             try///make DO - orderItem, and try to add it to data base 
@@ -117,6 +116,7 @@ internal class Cart : ICart
             {
             }
         }
+
     }
 
 
