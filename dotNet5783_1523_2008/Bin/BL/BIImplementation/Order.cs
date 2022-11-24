@@ -58,7 +58,6 @@ internal class Order : IOrder
             CustomerAdress = o.CustomerAdress ,
             CustomerName = o.CustomerName ,
             CustomerEmail = o.CustomerEmail ,
-            CustomerAdress = o.CustomerAdress,
             ShipDate = o.ShipDate ,
             DeliveryDate = o.DeliveryDate ,
             OrderDate = o.OrderDate
