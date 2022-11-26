@@ -43,9 +43,12 @@ public class DalProduct : IProduct
     }
     public void Update(Product p1)
     {
-        var x = DataSource.s_productsArr.FirstOrDefault(p => p.ID == p1.ID);
-        if(x.ID == 0)
-            throw new ObjNotFoundException("Product doesn't found");
+
+        int t = DataSource.s_productsArr.FindIndex(p => p.ID == p1.ID);
+        if(t != -1)
+            DataSource.s_productsArr[t] = p1;
+
+        
 
         x = p1;
     }
