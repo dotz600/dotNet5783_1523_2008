@@ -30,6 +30,10 @@ internal class Program
                     case 3:
                         cartFunctions(ref c);                             //cart Obj
                         break;
+                    default:
+                        Console.WriteLine("Try agian");
+                        X= -1;
+                        break;
                 }
             }
             catch(NegativeIDException ex) 
@@ -72,10 +76,6 @@ internal class Program
             {
                 Console.WriteLine(ex);
             }
-      
-
-
-
         }
         while (X != 0);
     }
@@ -90,7 +90,10 @@ internal class Program
             if (checkInput)///that mean we get good int but not in the range 1 - 3
                 X = 0;
             else ///its just error input
+            {
                 Console.WriteLine("Try again...");
+                X = -1;
+            }
         }
         return classType;
     }

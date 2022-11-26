@@ -42,7 +42,7 @@ internal class Cart : ICart
         }
         catch (NegativeAmountException ex)
         {
-            throw new NegativeAmountException("the product not in stock");
+            throw new NegativeAmountException("the product not in stock", ex);
         }
 
 
@@ -170,10 +170,21 @@ internal class Cart : ICart
 
     private BO.OrderItem searchInCart(BO.Cart cart, int productId)//help function
     {
-        BO.OrderItem res = cart.Items.Find(ot => ot.ProductID == productId);
-        if (res == null)
-            return res = new BO.OrderItem();
+        try
+        {
+            BO.OrderItem res = new BO.OrderItem();
+            if (cart.Items.Count != 0 )//for the first tome we search, this condition will not serch in empty list
+                res = cart.Items.Find(ot => ot.ProductID == productId);
+            if (res == null)
+                return res = new BO.OrderItem();
 
-        return res;
+            return res;
+        }
+        catch(Exception e)
+        {
+            throw new Exception();
+        }
+        
+        
     }
 }

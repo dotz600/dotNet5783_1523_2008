@@ -41,7 +41,7 @@ public class DalProduct : IProduct
 
         DataSource.s_productsArr.Remove(Read(id));
     }
-    public void Update(Product p1)
+    public void Update(Product p1)///////------------------problem
     {
 
         int t = DataSource.s_productsArr.FindIndex(p => p.ID == p1.ID);
@@ -50,7 +50,6 @@ public class DalProduct : IProduct
 
         
 
-        x = p1;
     }
 
     public void Print(Product p1)
