@@ -46,8 +46,9 @@ public class DalProduct : IProduct
         var x = DataSource.s_productsArr.FirstOrDefault(p => p.ID == p1.ID);
         if(x.ID == 0)
             throw new ObjNotFoundException("Product doesn't found");
-
-        x = p1;
+        Delete(x.ID);
+        Create(p1);
+       
     }
 
     public void Print(Product p1)

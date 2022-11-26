@@ -29,6 +29,6 @@ public class Order
     Order Date & status : {OrderDate} {Status}, Payment Date : {PaymentDate}, ShipDate : {ShipDate},
     DeliveryrDate : {DeliveryDate}, 
     Items : {Items},
-    TotalPrice {TotalPrice}
+    TotalPrice {TotalPrice} .
     ";
 }

@@ -1,6 +1,7 @@
 ﻿using BIApi;
 using BO;
 using DalApi;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 
 namespace BIImplementation;
@@ -11,6 +12,9 @@ internal class Cart : ICart
 
     public BO.Cart Add(BO.Cart cart, int productId)
     {
+        if (cart.Items == null)
+            cart.Items = new List<BO.OrderItem>();
+
         BO.OrderItem ot = searchInCart(cart, productId);
         try
         {
@@ -51,7 +55,7 @@ internal class Cart : ICart
     public BO.Cart Update(BO.Cart cart, int productId, int amount)
     {
         BO.OrderItem ot = searchInCart(cart, productId);
-        if (ot.ID == 0)
+        if (ot.ProductID == 0)
         {
             throw new ObjectNotExistException("the product not in cart, can't update");
         }
@@ -62,7 +66,7 @@ internal class Cart : ICart
                 DO.Product p = dal.Product.Read(productId);
                 if (ot.Amount < amount)                         //if want to increase the amount
                 {
-                    if (p.InStock >= ot.Amount)
+                    if (p.InStock >= amount)
                     {
                         ot.Amount = amount;
                         cart.TotalPrice -= ot.TotalPrice;
@@ -170,10 +174,15 @@ internal class Cart : ICart
 
     private BO.OrderItem searchInCart(BO.Cart cart, int productId)//help function
     {
-        BO.OrderItem res = cart.Items.Find(ot => ot.ProductID == productId);
-        if (res == null)
-            return res = new BO.OrderItem();
-
-        return res;
-    }
+        if (cart.Items != null)
+        {
+            BO.OrderItem res = cart.Items.Find(ot => ot.ProductID == productId);
+            if (res == null)
+                return res = new BO.OrderItem();
+            else
+                return res;
+        }
+       
+        return new BO.OrderItem();
+      }
 }
