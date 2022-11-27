@@ -14,10 +14,9 @@ public class ProductForList
     public Categories Category { get; set; } 
 
     public override string ToString() => $@"
-    BO.ProductForList,
-    ID : {ID},
+  - BO.ProductForList
+    ID : {ID}
     Name : {Name}
     Price : {Price}
-    Category : {Category}
-    ";
+    Category : {Category}";
 }

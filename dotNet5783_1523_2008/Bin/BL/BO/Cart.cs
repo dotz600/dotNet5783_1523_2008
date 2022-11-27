@@ -15,9 +15,8 @@ public class Cart
     public double TotalPrice { get; set; }
 
     public override string ToString() => $@"
-    BO.Cart,
+    BO.Cart
     CustomerName, Email, Address : {CustomerName}, {CustomerEmail}, {CustomerAddress}
-    Items : {Items}, 
-    Total price : {TotalPrice}
-    ";
+    Items : {Items}
+    Total price : {TotalPrice:f}";
 }

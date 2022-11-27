@@ -16,12 +16,11 @@ public class ProductItem
     public bool InStock { get; set; }
 
     public override string ToString() => $@"
-    BO.ProductItem,
+  - BO.ProductItem
     ID : {ID},
     Name : {Name},
-    Price : {Price} ,
+    Price : {Price:f} ,
     Category : {Category},
     InStock : {InStock},
-    Amount {Amount} 
-    ";
+    Amount {Amount}";
 }

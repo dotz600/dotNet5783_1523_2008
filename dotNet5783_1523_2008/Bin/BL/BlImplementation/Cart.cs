@@ -13,7 +13,6 @@ internal class Cart : ICart
     {
         if (cart.Items == null)
             cart.Items = new List<BO.OrderItem>();
-
         BO.OrderItem ot = searchInCart(cart, productId);
         try
         {
@@ -112,19 +111,25 @@ internal class Cart : ICart
                 throw new EmptyNameException("coustomer name is empty");
             if (adress.Length == 0)
                 throw new EmptyNameException("addres is empty");
-
-            foreach (var ot in cart.Items)
+            if (cart.Items != null)
             {
-                if (dal.Product.Read(ot.ProductID).InStock < ot.Amount)
-                    throw new NegativeAmountException("product in cart dont have enough in stock");
+                foreach (var ot in cart.Items)
+                {
+                    if (dal.Product.Read(ot.ProductID).InStock < ot.Amount)
+                        throw new NegativeAmountException("product in cart dont have enough in stock");
+                }
             }
+            else
+                throw new ObjectNotExistException("Cart is empty, try again...");
             //create new order and add it to data base
             int orderId = dal.Order.Create(new DO.Order
             {
-                ShipDate = DateTime.Now,
+                ShipDate = null,
                 CustomerAdress = adress,
                 CustomerEmail = email,
-                CustomerName = name
+                CustomerName = name,
+                 DeliveryDate = null,
+                 OrderDate = DateTime.Now
             });
 
             foreach (var ot in cart.Items)

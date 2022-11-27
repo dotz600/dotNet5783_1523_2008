@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BO;
+using System.Data;
 
 namespace BlImplementation;
 
@@ -16,11 +17,13 @@ internal class Order : IOrder
         {
             int countAmountOfItems = 0;
             double sumPrice = 0;
-            ///////////////*************TODO --- update status!! This line is uncorrect*****************///////////////////////
-            ///maybe we need to check if all the amount in order item is exist in stock and only after that order is confim
-            /// the problem is that, the truth is all the order we have in data base should be confirmd,  
-            OrderStatus status = OrderStatus.ConfirmedOrder;//evrey order in the data base allready confirm
-            if (order.ShipDate < DateTime.Now && order.ShipDate != DateTime.MinValue)
+
+            ///maybe we need to check if all the amount in order item is exist in stock and only after that order is confirm
+            /// the problem is that, the truth is all the order we have in data base should be confirmed,  
+            
+            OrderStatus status = OrderStatus.ConfirmedOrder;//every order in the data base allready confirm
+
+            if (order.ShipDate < DateTime.Now && order.ShipDate != DateTime.MinValue)//status update(provide or sent)
                 status = OrderStatus.Sent;
             if (order.DeliveryDate < DateTime.Now && order.DeliveryDate != DateTime.MinValue)
                 status = OrderStatus.Provided;
@@ -68,8 +71,6 @@ internal class Order : IOrder
                 calcAmountAndPrice(ref amount, ref price, o.ID);
                 //update the results
                 orderReturn.TotalPrice = price;
-
-                ///////////////*************TODO --- update status!!*****************///////////////////////
                 OrderStatus status = OrderStatus.ConfirmedOrder;//evrey order in the data base allready confirm
                 if (orderReturn.ShipDate < DateTime.Now && orderReturn.ShipDate != DateTime.MinValue)
                     status = OrderStatus.Sent;
@@ -92,6 +93,8 @@ internal class Order : IOrder
         try
         {
             DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
+            if (order.ShipDate == DateTime.MinValue)
+                throw new UpdateObjectFailedException("Send order before!");
             order.DeliveryDate = DateTime.Now;
             dal.Order.Update(order);
 
@@ -133,6 +136,8 @@ internal class Order : IOrder
         try
         {
             DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
+            if (order.DeliveryDate > order.ShipDate)
+                throw new UpdateObjectFailedException("Order was provided!");
             order.ShipDate = DateTime.Now;
             dal.Order.Update(order);//update the order in data source
             BO.Order orderReturn = new BO.Order()
@@ -165,6 +170,10 @@ internal class Order : IOrder
         catch (DalApi.ObjNotFoundException ex)
         {
             throw new ObjectNotExistException("BO.Order.UpdateShipping", ex);
+        }
+        catch (UpdateObjectFailedException ex)
+        {
+            throw ex;
         }
     }
     public BO.OrderTracking TrackingOrder(int orderId)//returns current status, and list of events that were occurred in these order
@@ -242,7 +251,7 @@ internal class Order : IOrder
             if (orderItem.OrderID == id)
             {
                 countAmountOfItems += orderItem.Amount;
-                price += orderItem.Price;
+                price += orderItem.Price * orderItem.Amount;
             }
         }
     }

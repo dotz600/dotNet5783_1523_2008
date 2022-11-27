@@ -23,14 +23,12 @@ public class Order
     public List<OrderItem>?  Items { get; set; }
     public double TotalPrice { get; set; }
     public override string ToString() => $@"
-    BO.Order: ,
-    ID : {ID}, 
-    Customer Name, Email, Adress : {CustomerName} : {CustomerEmail} : {CustomerAdress},
-    Order Date & status : {OrderDate} {Status},
-    Payment Date : {PaymentDate},
-    ShipDate : {ShipDate},
-    DeliveryrDate : {DeliveryDate}, 
-    TotalPrice {TotalPrice}
-    Items : 
-    ";
+  - BO.Order
+    ID : {ID}
+    Customer Name, Email, Adress : {CustomerName} : {CustomerEmail} : {CustomerAdress}
+    Order Date & status : {OrderDate} {Status}
+    Payment Date : {PaymentDate}
+    ShipDate : {ShipDate}
+    DeliveryDate : {DeliveryDate}
+    TotalPrice {TotalPrice:f}";
 }

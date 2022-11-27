@@ -16,12 +16,11 @@ public class OrderItem
     public double TotalPrice { get; set; }
 
     public override string ToString() => $@"
-    BO.OrderItem,
-    ID : {ID},
-    ProductID : {ProductID},
-    Name : {Name},
+  - BO.OrderItem
+    ID : {ID}
+    ProductID : {ProductID}
+    Name : {Name}
     Price : {Price} 
     Amount : {Amount}
-    TotalPrice : {TotalPrice} 
-    ";
+    TotalPrice : {TotalPrice:f}";
 }

@@ -14,13 +14,12 @@ public class Product
     public Categories Category { get; set; }
     public int InStock { get; set; }
     public override string ToString() => $@"
-    BO.Product,
-    ID : {ID},
-    Name : {Name},
-    Price : {Price} 
+  - BO.Product
+    ID : {ID}
+    Name : {Name}
+    Price : {Price:f} 
     Category : {Category}
-    InStock : {InStock}
-    ";
+    InStock : {InStock}";
 }
 
 

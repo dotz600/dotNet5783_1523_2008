@@ -15,7 +15,7 @@ public class OrderTracking
         public OrderStatus os;
         public override string ToString() => $@"
         Date & Time : {dt}
-        ORder status: {os}";
+        Order status: {os}";
     };
 
 
@@ -25,9 +25,7 @@ public class OrderTracking
 
     
     public override string ToString() => $@"
-    ID :  {ID},
-    OrderStatus : {Status}
-    Events:
-    ";
+    ID :  {ID}
+    OrderStatus : {Status}";
 
 }
