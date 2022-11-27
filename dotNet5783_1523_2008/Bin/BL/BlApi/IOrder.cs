@@ -8,10 +8,24 @@ using BO;
 namespace BlApi;
 
 /// <summary>
-/// BIApi.IOrder 
+/// Order 
 /// Handles orders, implements broad functionality
 /// such as returning a list of orders and updating orders.
 /// Sends requests to the data layer and returns to the user interface.
+/// Functions:
+/// * Read all orders from DL
+/// * Read one order details according to ID
+/// * Update delivery date of one order according to ID
+/// * Update shipping date of one order according to ID
+/// * Track on one order according to ID
+/// Fields:
+///* ID
+///* Customer Name, Email, Adress 
+///* Order Date & status 
+///* Payment Date 
+///* ShipDate
+///* DeliveryDate
+///* TotalPrice
 /// </summary>
 public interface IOrder
 {

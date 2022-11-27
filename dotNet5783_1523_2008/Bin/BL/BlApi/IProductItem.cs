@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace BlApi;
 /// <summary>
-/// if needed any function to this obj, declare then=m in here and inmplent them in nlimpemntion, else delete this interface
+/// Fields:
+/// * ID
+///* Name 
+///* Price
+///* Category
+///* InStock
+///* Amount
 /// </summary>
 public interface IProductItem
 {

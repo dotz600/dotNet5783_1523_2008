@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +8,13 @@ using System.Threading.Tasks;
 using BlApi;
 namespace BlApi;
 /// <summary>
-/// if needed any function to this obj, declare then=m in here and inmplent them in nlimpemntion, else delete this interface
+/// Fields:
+///* ID 
+///* ProductID 
+///* Name
+///* Price
+///* Amount
+///* TotalPrice
 /// </summary>
 public interface IOrderItem
 {

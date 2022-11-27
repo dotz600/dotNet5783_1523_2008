@@ -93,7 +93,7 @@ internal class Order : IOrder
         try
         {
             DO.Order order = dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
-            if (order.ShipDate == DateTime.MinValue)
+            if (order.ShipDate == null)
                 throw new UpdateObjectFailedException("Send order before!");
             order.DeliveryDate = DateTime.Now;
             dal.Order.Update(order);
