@@ -2,7 +2,7 @@
 using BlImplementation;
 using BO;
 
-namespace BITest;
+namespace BlTest;
 
 internal class Program
 {
@@ -15,20 +15,20 @@ internal class Program
         {
             try
             {
-                classType = getObjType(ref X);
+                classType = GetObjType(ref X);
                 switch (classType)
                 {
                     case 0:                                                ///exit
                         Console.WriteLine("Bye!");
                         break;
                     case 1:
-                        productFunctions(ref c);                                  ///product Obj
+                        ProductFunctions(ref c);                                  ///product Obj
                         break;
                     case 2:
-                        orderFunctions();                                    ///order Obj
+                        OrderFunctions();                                    ///order Obj
                         break;
                     case 3:
-                        cartFunctions(ref c);                             //cart Obj
+                        CartFunctions(ref c);                             //cart Obj
                         break;
                     default:
                         Console.WriteLine("Try agian");
@@ -80,7 +80,7 @@ internal class Program
         while (X != 0);
     }
 
-    public static int getObjType(ref int X)//done
+    public static int GetObjType(ref int X) //get input from user and determeines which Obj user want to check, and return this type
     {
         Console.WriteLine("For Product enter 1\n" + "For Order enter 2\n" + "For Cart enter 3\nPress 0 to exit...");
         bool checkInput = int.TryParse(Console.ReadLine(), out int classType);
@@ -97,7 +97,7 @@ internal class Program
         return classType;
     }
 
-    public static void productFunctions(ref BO.Cart c)
+    public static void ProductFunctions(ref BO.Cart c)
     {
         IBl bl = new Bl();
         Console.WriteLine("Select the desired test:\n" +
@@ -116,7 +116,7 @@ internal class Program
         {
             case 1://add product
                 BO.Product p = new BO.Product();
-                inputProduct(ref p);
+                InputProduct(ref p);
                 bl.Product.Create(p);
                 Console.WriteLine("Operation succeeded.");
                 break;
@@ -142,14 +142,14 @@ internal class Program
                 break;
             case 6:
                 BO.Product p1 = new BO.Product();
-                inputProduct(ref p1);
+                InputProduct(ref p1);
                 bl.Product.Update(p1);
                 Console.WriteLine(bl.Product.Read(p1.ID));
                 Console.WriteLine("Operation succeeded.");
                 break;
         }
     }
-    public static void orderFunctions()
+    public static void OrderFunctions()
     {
         IBl bl = new Bl();
         Console.WriteLine("Select the desired test:\n" +
@@ -207,7 +207,7 @@ internal class Program
         }
 
     }
-    public static void cartFunctions(ref BO.Cart c)
+    public static void CartFunctions(ref BO.Cart c)
     {
         IBl bl = new Bl();
         int productId, amount;
@@ -237,6 +237,9 @@ internal class Program
                 email = data1[1];
                 adress = data1[2];
                 bl.Cart.CartConfirmation(c, name, email, adress);
+                Console.WriteLine(c);
+                foreach (var ot in c.Items)
+                    Console.WriteLine(ot);
                 Console.WriteLine("Operation succeeded.");
                 break;
             case 3://update item in cart
@@ -247,6 +250,8 @@ internal class Program
                 amount = int.Parse(data[1]);
                 bl.Cart.Update(c, productId, amount);
                 Console.WriteLine(c);
+                foreach(var ot in c.Items)
+                    Console.WriteLine(ot);
                 break;
         }
     }
@@ -254,7 +259,7 @@ internal class Program
 
     // input fuctions 
 
-    public static void inputCart(ref BO.Cart c1)///get input for all OrderItem details 
+    public static void InputCart(ref BO.Cart c1)///get input for all OrderItem details 
     {
         Console.WriteLine("Please Enter Cart details: \n" +
             "CustomerName, CustomerEmail, CustomerAdress, Total Price");
@@ -266,28 +271,7 @@ internal class Program
         c1.TotalPrice = double.Parse(data[3]);
     }
 
-    static void InputOrder(ref BO.Order o1)///get input for all Order details
-    {
-        Console.WriteLine("Please Enter Order details: \n" +
-            "OrderID, CustomerName, CustomerEmail, CustomerAdress" +
-            " , OrderDate, PaymentDate, ShipDate, DeliveryDate, Order Status,  TotalPrice");
-
-        var line = Console.ReadLine();
-        var data = line.Split(' ');
-        o1.ID = int.Parse(data[0]);
-        o1.CustomerName = data[1];
-        o1.CustomerEmail = data[2];
-        o1.CustomerAdress = data[3];
-        o1.OrderDate = DateTime.Parse(data[4]);
-        o1.PaymentDate = DateTime.Parse(data[5]);
-        o1.ShipDate = DateTime.Parse(data[6]);
-        o1.DeliveryDate = DateTime.Parse(data[7]);
-        OrderStatus stat;
-        Enum.TryParse(data[8], out stat);
-        o1.Status = stat;
-        o1.TotalPrice = int.Parse(data[9]);
-    }
-    public static void inputProduct(ref BO.Product p)///get input for all Product details
+    public static void InputProduct(ref BO.Product p)///get input for all Product details
     {
         Console.WriteLine("Please Enter Product details:\n" +
             "ProductID, Name, Price, Category, InStock");
