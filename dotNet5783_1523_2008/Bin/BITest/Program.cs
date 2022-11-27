@@ -92,8 +92,6 @@ internal class Program
             else ///its just error input
             {
                 Console.WriteLine("Try again...");
-                X = -1;
-            }
         }
         return classType;
     }
@@ -107,7 +105,7 @@ internal class Program
            "To read a one object as a manger enter 3\n" +
            "To read a one object as a buyer enter 4\n" +
             "To read all list of object 5\n" +
-           "To update object enter 6\n");
+           "To update object enter 6");
 
         bool checkInput = int.TryParse(Console.ReadLine(), out int x);
         if (!checkInput)
@@ -155,7 +153,7 @@ internal class Program
         "To read a one object enter 2\n" +
         "To update shipping date enter 3\n" +
          "To update delivery date enter 4\n" +
-           "To track an order enter 5\n");
+           "To track an order enter 5");
 
         bool checkInput = int.TryParse(Console.ReadLine(), out int x);
         if (!checkInput)
@@ -199,7 +197,7 @@ internal class Program
         Console.WriteLine("Select the desired test:\n" +
          "To add object enter 1\n" +
         "To confirm cart enter 2\n" +
-         "To update object enter 3\n");
+         "To update object enter 3");
 
         bool checkInput = int.TryParse(Console.ReadLine(), out int x);
         if (!checkInput)
