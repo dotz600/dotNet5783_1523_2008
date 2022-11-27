@@ -26,9 +26,11 @@ public class Order
     BO.Order: ,
     ID : {ID}, 
     Customer Name, Email, Adress : {CustomerName} : {CustomerEmail} : {CustomerAdress},
-    Order Date & status : {OrderDate} {Status}, Payment Date : {PaymentDate}, ShipDate : {ShipDate},
+    Order Date & status : {OrderDate} {Status},
+    Payment Date : {PaymentDate},
+    ShipDate : {ShipDate},
     DeliveryrDate : {DeliveryDate}, 
-    Items : {Items},
     TotalPrice {TotalPrice}
+    Items : 
     ";
 }

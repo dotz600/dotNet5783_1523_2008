@@ -47,10 +47,13 @@ internal class DalOredrItem :IOrderItem
 
     public void Update(OrderItem ot)//ovveride the exist obj with the new one
     {
-        var y = DataSource.s_ordersItemArr.FirstOrDefault(obj => obj.OrderID == ot.OrderID);
-        if (y.OrderID == 0)//------------------------check again if working!!-------------------------
-            throw new ObjNotFoundException("Order item doesn't found");
-        y = ot;
+        int t = DataSource.s_ordersItemArr.FindIndex(x => x.OrderID == ot.OrderID);
+        if (t != -1)
+            DataSource.s_ordersItemArr[t] = ot;
+        else
+            throw new ObjNotFoundException("cant update order item");
+
+
     }
 
     public void Print(OrderItem ot1)

@@ -1,5 +1,5 @@
-﻿using BIApi;
-using BIImplementation;
+﻿using BlApi;
+using BlImplementation;
 using BO;
 
 namespace BITest;
@@ -80,7 +80,7 @@ internal class Program
         while (X != 0);
     }
 
-    static int getObjType(ref int X)//done
+    public static int getObjType(ref int X)//done
     {
         Console.WriteLine("For Product enter 1\n" + "For Order enter 2\n" + "For Cart enter 3");
         bool checkInput = int.TryParse(Console.ReadLine(), out int classType);
@@ -92,6 +92,7 @@ internal class Program
             else ///its just error input
             {
                 Console.WriteLine("Try again...");
+            }
         }
         return classType;
     }
@@ -126,21 +127,22 @@ internal class Program
             case 3:
                 Console.WriteLine("please enter a product id to read");
                 int Id = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine(bl.Product.Read(Id).ToString()); //as a manger
+                Console.WriteLine(bl.Product.Read(Id)); //as a manger
                 break;
             case 4:
                 Console.WriteLine("please enter a product id to read from cart");
                 int id = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine(bl.Product.Read(id, c).ToString()); //as a buyer
+                Console.WriteLine(bl.Product.Read(id, c)); //as a buyer
                 break;
             case 5://print all product as product for list
                 foreach (var pl in bl.Product.ReadAll())
-                    Console.WriteLine(pl.ToString());
+                    Console.WriteLine(pl);
                 break;
             case 6:
                 BO.Product p1 = new BO.Product();
                 inputProduct(ref p1);
                 bl.Product.Update(p1);
+                Console.WriteLine(bl.Product.Read(p1.ID));
                 break;
 
         }
@@ -163,27 +165,33 @@ internal class Program
         {
             case 1: //for manger screen
                 foreach (var ol in bl.Order.ReadAll())
-                    Console.WriteLine(ol.ToString());
+                    Console.WriteLine(ol);
                 break;
             case 2: //for buyer and manger
                 Console.WriteLine("please enter a order id to read");
                 int id = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine(bl.Order.Read(id).ToString());
+                var t = bl.Order.Read(id);
+                Console.WriteLine(t);
+                foreach(var t1 in t.Items)
+                    Console.WriteLine(t1);
                 break;
             case 3:
                 Console.WriteLine("please enter a order id to update shipping");
                 int orderId = Convert.ToInt32(Console.ReadLine());
-                //Console.WriteLine(bl.Order.UpdateShipping(orderId).ToString());
+                Console.WriteLine(bl.Order.UpdateShipping(orderId));
                 break;
             case 4:
                 Console.WriteLine("please enter a order id to update delivery");
                 int orId = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine(bl.Order.UpdateDelivery(orId).ToString());
+                Console.WriteLine(bl.Order.UpdateDelivery(orId));
                 break;
             case 5:
-                Console.WriteLine("please enter a order id to update delivery");
+                Console.WriteLine("please enter a order id track your order");
                 int idO = Convert.ToInt32(Console.ReadLine());
-                Console.WriteLine(bl.Order.TrackingOrder(idO).ToString());
+                var to = bl.Order.TrackingOrder(idO);
+                Console.WriteLine(to);
+                foreach(var t1 in to.Events)
+                    Console.WriteLine(t1);
                 break;
 
         }
@@ -226,6 +234,7 @@ internal class Program
                 productId = int.Parse(data[0]);
                 amount = int.Parse(data[1]);
                 bl.Cart.Update(c, productId, amount);
+                Console.WriteLine(c);
                 break;
 
         }

@@ -1,10 +1,9 @@
-﻿using BIApi;
+﻿using BlApi;
 using BO;
-using DalApi;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 
-namespace BIImplementation;
+namespace BlImplementation;
 
 internal class Cart : ICart
 {
@@ -40,7 +39,7 @@ internal class Cart : ICart
                 return cart;
             }
         }
-        catch (ObjExistException ex)
+        catch (DalApi.ObjNotFoundException ex)
         {
             throw new ReadObjectFailedException("cant read product from data source, product not exist", ex);
         }
@@ -66,7 +65,7 @@ internal class Cart : ICart
                 DO.Product p = dal.Product.Read(productId);
                 if (ot.Amount < amount)                         //if want to increase the amount
                 {
-                    if (p.InStock >= ot.Amount)
+                    if (p.InStock >= amount)
                     {
                         ot.Amount = amount;
                         cart.TotalPrice -= ot.TotalPrice;
@@ -76,7 +75,7 @@ internal class Cart : ICart
                     }
                     else
                     {
-                        throw new Exception("not enough in stock");
+                        throw new NegativeAmountException("not enough in stock");
                     }
                 }
                 else if (amount == 0)                        //if want to not order at all
@@ -93,7 +92,7 @@ internal class Cart : ICart
                 }
                 return cart;
             }
-            catch (ObjExistException ex)
+            catch (DalApi.ObjNotFoundException ex)
             {
                 throw new ReadObjectFailedException("cant read product from data source, product not exist", ex);
             }
@@ -159,11 +158,11 @@ internal class Cart : ICart
         {
             throw new NegativeAmountException(ex.Message);
         }
-        catch(ObjNotFoundException ex)
+        catch(DalApi.ObjNotFoundException ex)
         {
             throw new ObjectNotExistException(ex.Message, ex);
         }
-        catch(ObjExistException ex)
+        catch(DalApi.ObjExistException ex)
         {
             throw new CreateObjectFailedException(ex.Message, ex);
         }
@@ -177,12 +176,9 @@ internal class Cart : ICart
         if (cart.Items != null)
         {
             BO.OrderItem res = cart.Items.Find(ot => ot.ProductID == productId);
-            if (res == null)
-                return res = new BO.OrderItem();
-            else
+            if (res != null)
                 return res;
         }
-       
         return new BO.OrderItem();
-      }
+     }
 }

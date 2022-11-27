@@ -1,7 +1,8 @@
-﻿using BIApi;
+﻿using BlApi;
+using BlImplementation;
 using BO;
 
-namespace BIImplementation;
+namespace BlImplementation;
 
 internal class Product : IProduct
 {
@@ -137,7 +138,7 @@ internal class Product : IProduct
         try
         {
             List<BO.ProductForList> res = new List<BO.ProductForList>();
-            IBl bl = new Bl();//for operait the convertion function from ProductForList 
+            IBl bl = new Bl(); //for operait the convertion function from ProductForList 
 
             foreach (var DOproduct in dal.Product.ReadAll())
                 res.Add(bl.ProductForList.DOproductToBOproductForList(DOproduct));//convert the DOproduct to BoProduct, then add it to list

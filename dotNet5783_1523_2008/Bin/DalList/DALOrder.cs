@@ -7,10 +7,11 @@ internal class DalOrder : IOrder
 {
     public void Update(Order o1)//ovveride the exist obj with the new one
     {
-        var y = DataSource.s_ordersArr.FirstOrDefault(x => x.ID == o1.ID);
-        if(y.ID == 0)//------------------------check again if working!!-------------------------
-            throw new ObjNotFoundException("Order doesn't found");
-        y = o1;
+        int t = DataSource.s_ordersArr.FindIndex(o => o.ID == o1.ID);
+        if (t != -1)
+            DataSource.s_ordersArr[t] = o1;
+        else
+            throw new ObjNotFoundException("cant update order");
     }
     public int Create(Order o1)//add the new obj to the array, return order ID
     {

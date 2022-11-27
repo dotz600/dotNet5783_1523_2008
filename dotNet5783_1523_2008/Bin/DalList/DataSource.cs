@@ -36,8 +36,8 @@ internal static class DataSource
         int amount = Config.rand.Next(1, 5);
          
         OrderItem ot1 = new OrderItem();
-        ot1.ProductID = s_productsArr.ElementAt(i % 10).ID;//alreday added 10 product to the list 
-        ot1.OrderID = s_ordersArr.ElementAt(i % 20).ID; // allready added 20 orders to the list
+        ot1.ProductID = s_productsArr[i % 10].ID;//alreday added 10 product to the list 
+        ot1.OrderID = s_ordersArr[i % 20].ID; // allready added 20 orders to the list
         ot1.Amount = amount;//amount is random number
         ot1.Price = s_productsArr.ElementAt(i % 10).Price * amount;
         s_ordersItemArr.Add(ot1);
@@ -66,7 +66,7 @@ internal static class DataSource
 
 
         //adding 20 orders. 
-        for (char i = 'a'; i <= 'a' + 20; i++)
+        for (char i = 'a'; i < 'a' + 20; i++)
         {
             addOrder(new Order
             {

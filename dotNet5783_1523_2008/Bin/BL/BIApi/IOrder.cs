@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BO;
-namespace BIApi;
+namespace BlApi;
 
 /// <summary>
 /// BIApi.IOrder 

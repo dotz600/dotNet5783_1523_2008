@@ -19,6 +19,9 @@ public class OrderItem
     BO.OrderItem,
     ID : {ID},
     ProductID : {ProductID},
-    Name : {Name}, Price : {Price} , Amount : {Amount} , TotalPrice : {TotalPrice} , 
+    Name : {Name},
+    Price : {Price} 
+    Amount : {Amount}
+    TotalPrice : {TotalPrice} 
     ";
 }

@@ -1,6 +1,6 @@
-﻿using BIApi;
+﻿using BlApi;
 
-namespace BIImplementation;
+namespace BlImplementation;
 
 internal class ProductForList : IProductForList
 {

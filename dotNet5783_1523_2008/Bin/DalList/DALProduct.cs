@@ -45,11 +45,10 @@ public class DalProduct : IProduct
     {
 
         int t = DataSource.s_productsArr.FindIndex(p => p.ID == p1.ID);
-        if(t != -1)
+        if (t != -1)
             DataSource.s_productsArr[t] = p1;
-
-        
-
+        else
+            throw new ObjNotFoundException("cant update product"); 
     }
 
     public void Print(Product p1)

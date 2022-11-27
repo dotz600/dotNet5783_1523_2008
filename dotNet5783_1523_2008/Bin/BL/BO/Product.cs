@@ -16,7 +16,10 @@ public class Product
     public override string ToString() => $@"
     BO.Product,
     ID : {ID},
-    Name : {Name}, Price : {Price} , Category : {Category}, InStock : {InStock}. 
+    Name : {Name},
+    Price : {Price} 
+    Category : {Category}
+    InStock : {InStock}
     ";
 }
 

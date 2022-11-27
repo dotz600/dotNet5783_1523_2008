@@ -19,7 +19,9 @@ public class OrderForList
     public override string ToString() => $@"
     BO.OrderForList,
     ID : {ID},
-    Customer Name : 
-    {CustomerName}, OrderStatus : {Status} , Amount Of Items : {AmountOfItems}, Total Price : {TotalPrice}. 
+    Customer Name : {CustomerName},
+    OrderStatus : {Status} 
+    Amount Of Items : {AmountOfItems},
+    Total Price : {TotalPrice} 
     ";
 }
