@@ -3,7 +3,7 @@ using BlImplementation;
 using BO;
 
 namespace BlTest;
-//its posiblle// we can do it !!!onr last check all very hard
+//its posiblle// we can do it !!!onr last check all very good
 internal class Program
 {
     static void Main(string[] args)
