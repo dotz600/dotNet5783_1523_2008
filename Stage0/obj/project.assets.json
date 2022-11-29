@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Mordechay\\.nuget\\packages\\": {}
+    "C:\\Users\\ohevd\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj",
+      "projectUniqueName": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj",
       "projectName": "Stage0",
-      "projectPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj",
-      "packagesPath": "C:\\Users\\Mordechay\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\Stage0\\obj\\",
+      "projectPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\Stage0\\Stage0.csproj",
+      "packagesPath": "C:\\Users\\ohevd\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\Stage0\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Mordechay\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ohevd\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

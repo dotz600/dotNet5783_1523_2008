@@ -39,25 +39,23 @@ public class DalProduct : IProduct
 
     public void Delete(int id)
     {
-        if(DataSource.s_productsArr.Where(p => p.ID == id) == null)
+        if(DataSource.s_productsArr.Where(p => p?.ID == id) == null)
             throw new ObjNotFoundException("Product doesn't found");
 
         DataSource.s_productsArr.Remove(Read(id));
     }
-    public void Update(Product p1)///////------------------problem
+    public void Update(Product p1)
     {
 
-        int t = DataSource.s_productsArr.FindIndex(p => p.ID == p1.ID);
+        int t = DataSource.s_productsArr.FindIndex(p => p?.ID == p1.ID);
         if (t != -1)
             DataSource.s_productsArr[t] = p1;
         else
             throw new ObjNotFoundException("cant update product"); 
     }
 
-    public void Print(Product p1)
-    {
-        Console.WriteLine(p1.ToString());
-    }
+
+    
     public Product ReadIf(Func<Product?, bool> predicate)
     {
         Product? product = DataSource.s_productsArr.FindLast(x => predicate(x));
@@ -65,6 +63,5 @@ public class DalProduct : IProduct
             return (Product)product;
         else
             throw new ObjNotFoundException();
-
     }
 }
