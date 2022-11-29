@@ -29,9 +29,12 @@ public class DalProduct : IProduct
         throw new ObjNotFoundException("Product doesn't found");
     }
     
-    public IEnumerable<Product> ReadAll()
+    public IEnumerable<Product?> ReadAll(Func<Product?, bool>? predicate = null)
     {
-        return DataSource.s_productsArr.ToList();
+        if (predicate == null)
+            return DataSource.s_productsArr.ToList();
+        else
+            return DataSource.s_productsArr.FindAll(x => predicate(x));
     }
 
     public void Delete(int id)
@@ -55,5 +58,13 @@ public class DalProduct : IProduct
     {
         Console.WriteLine(p1.ToString());
     }
- 
+    public Product ReadIf(Func<Product?, bool> predicate)
+    {
+        Product? product = DataSource.s_productsArr.FindLast(x => predicate(x));
+        if (product != null)
+            return (Product)product;
+        else
+            throw new ObjNotFoundException();
+
+    }
 }

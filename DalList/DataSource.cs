@@ -8,14 +8,14 @@ internal static class DataSource
 {
     internal static readonly int s_randomNum = 100000;
 
-    internal static List<Product> s_productsArr;
-    internal static List<Order> s_ordersArr;
-    internal static List<OrderItem> s_ordersItemArr;
+    internal static List<Product?> s_productsArr;
+    internal static List<Order?> s_ordersArr;
+    internal static List<OrderItem?> s_ordersItemArr;
     static DataSource()//cnsrt
     {
-        s_productsArr = new List<Product>();
-        s_ordersArr = new List<Order>();
-        s_ordersItemArr = new List<OrderItem>();
+        s_productsArr = new List<Product?>();
+        s_ordersArr = new List<Order?>();
+        s_ordersItemArr = new List<OrderItem?>();
         s_Initialize(); 
     }
 

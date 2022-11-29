@@ -32,9 +32,12 @@ internal class DalOredrItem :IOrderItem
         return res;
     }
 
-    public IEnumerable<OrderItem> ReadAll()//return all the array
+    public IEnumerable<OrderItem?> ReadAll(Func<OrderItem?, bool>? predicate = null)//return all the array
     {
-        return DataSource.s_ordersItemArr.ToList();
+        if (predicate == null)
+            return DataSource.s_ordersItemArr.ToList();
+        else
+        return DataSource.s_ordersItemArr.FindAll(x => predicate(x));
     }
 
     public void Delete(int id)//search the obj and delete it from the array
@@ -59,5 +62,15 @@ internal class DalOredrItem :IOrderItem
     public void Print(OrderItem ot1)
     {
         Console.WriteLine(ot1.ToString());
+    }
+
+    public OrderItem ReadIf(Func<OrderItem?, bool> predicate)
+    {
+        OrderItem? orderItem = DataSource.s_ordersItemArr.FindLast(x => predicate(x));
+        if (orderItem != null)
+            return (OrderItem)orderItem;
+        else
+            throw new ObjNotFoundException();
+
     }
 }

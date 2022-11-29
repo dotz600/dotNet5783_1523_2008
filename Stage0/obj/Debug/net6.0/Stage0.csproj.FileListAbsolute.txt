@@ -13,3 +13,11 @@ C:\Users\אוראל צ'אמה\Desktop\Solution\dotNet5783_1523_2008\Stage0\obj\D
 C:\Users\אוראל צ'אמה\Desktop\Solution\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.pdb
 C:\Users\אוראל צ'אמה\Desktop\Solution\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.genruntimeconfig.cache
 C:\Users\אוראל צ'אמה\Desktop\Solution\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\ref\Stage0.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.csproj.AssemblyReference.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.AssemblyInfoInputs.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.AssemblyInfo.cs
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.csproj.CoreCompileInputs.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\refint\Stage0.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.pdb

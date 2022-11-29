@@ -37,3 +37,16 @@ C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalLi
 C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\refint\DalList.dll
 C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalList.pdb
 C:\Users\ohevd\source\repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\ref\DalList.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\bin\DalList.deps.json
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\bin\DalList.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\bin\DalList.pdb
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalList.csproj.AssemblyReference.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalList.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalList.AssemblyInfoInputs.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalList.AssemblyInfo.cs
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalList.csproj.CoreCompileInputs.cache
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalList.csproj.CopyComplete
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalList.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\refint\DalList.dll
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\DalList.pdb
+C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\DalList\obj\Debug\ref\DalList.dll

@@ -1,5 +1,6 @@
 ﻿using DalApi;
 using DO;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Dal;
 
@@ -7,7 +8,7 @@ internal class DalOrder : IOrder
 {
     public void Update(Order o1)//ovveride the exist obj with the new one
     {
-        int t = DataSource.s_ordersArr.FindIndex(o => o.ID == o1.ID);
+        int t = DataSource.s_ordersArr.FindIndex(o => o?.ID == o1.ID);
         if (t != -1)
             DataSource.s_ordersArr[t] = o1;
         else
@@ -15,8 +16,8 @@ internal class DalOrder : IOrder
     }
     public int Create(Order o1)//add the new obj to the array, return order ID
     {
-        var y = DataSource.s_ordersArr.Find(x => x.ID == o1.ID);//search if the obj allready in data base
-        if (y.ID != 0)
+        var y = DataSource.s_ordersArr.Find(x => x?.ID == o1.ID);//search if the obj allready in data base
+        if (y?.ID != 0)
             throw new ObjExistException("Order allready found");
 
         o1.ID = DataSource.Config.getIdRunNum();
@@ -25,28 +26,41 @@ internal class DalOrder : IOrder
     }
     public void Delete(int id)//delete the obj from the array
     {
-        if (DataSource.s_ordersArr.Where(x => x.ID == id) == null)
+        if (DataSource.s_ordersArr.Where(x => x?.ID == id) == null)
             throw new ObjNotFoundException("Order doesn't found");
 
-        DataSource.s_ordersArr.RemoveAll(x => x.ID == id);
+        DataSource.s_ordersArr.RemoveAll(x => x?.ID == id);
     }
 
     public Order Read(int id)//return the obj
     {
 
-        var res = DataSource.s_ordersArr.Find(x => x.ID == id);
-        if(res.ID == 0)
+        var res = DataSource.s_ordersArr.Find(x => x?.ID == id);
+        if(res?.ID == 0)
             throw new ObjNotFoundException("Order doesn't found");
 
         return res;
     }
-    public IEnumerable<Order> ReadAll()//return all the obj array
+    public IEnumerable<Order?> ReadAll(Func<Order?, bool>? predicate = null)//return all the obj array
     {
-        return DataSource.s_ordersArr.FindAll(x => true);
+        if (predicate == null)
+            return DataSource.s_ordersArr.ToList();
+        else
+            return DataSource.s_ordersArr.FindAll(x => predicate(x));
     }
 
     public void Print(Order o1)
     {
         Console.WriteLine(o1.ToString());
     }
+    public Order ReadIf(Func<Order?,bool> predicate)
+    {
+       Order? order= DataSource.s_ordersArr.FindLast(x => predicate(x));
+        if (order != null)
+            return (Order)order;
+        else
+            throw new ObjNotFoundException();
+
+    }
+
 }

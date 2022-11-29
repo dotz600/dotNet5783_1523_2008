@@ -12,7 +12,7 @@ public class OrderTracking
     public struct DateAndStatus
     {
         public DateTime? dt; 
-        public OrderStatus os;
+        public OrderStatus? os;
         public override string ToString() => $@"
         Date & Time : {dt}
         Order status: {os}";
