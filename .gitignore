@@ -356,3 +356,15 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/BL/obj/Release/BL.csproj.AssemblyReference.cache
+/BL/obj/Release/BL.assets.cache
+/BL/obj/Debug/BL.csproj.AssemblyReference.cache
+/BITest/obj/Debug/BlTest.csproj.AssemblyReference.cache
+/Stage0/obj/Release/net6.0/Stage0.assets.cache
+/Stage0/obj/Release/net6.0/Stage0.csproj.AssemblyReference.cache
+/Stage0/obj/Release/net6.0/Stage0.GeneratedMSBuildEditorConfig.editorconfig
+/DalList/obj/Debug/DalList.csproj.AssemblyReference.cache
+/DalTest/obj/Debug/DalTest.csproj.AssemblyReference.cache
+/DalTest/obj/Release/DalTest.csproj.AssemblyReference.cache
+/DalTest/obj/Release/DalTest.assets.cache
+/DalList/obj/Release/DalList.csproj.AssemblyReference.cache
