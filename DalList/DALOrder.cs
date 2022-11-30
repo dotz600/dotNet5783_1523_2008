@@ -17,7 +17,7 @@ internal class DalOrder : IOrder
     public int Create(Order o1)//add the new obj to the array, return order ID
     {
         var y = DataSource.s_ordersArr.Find(x => x?.ID == o1.ID);//search if the obj allready in data base
-        if (y?.ID != 0)
+        if (y != null)
             throw new ObjExistException("Order allready found");
 
         o1.ID = DataSource.Config.getIdRunNum();
@@ -36,10 +36,10 @@ internal class DalOrder : IOrder
     {
 
         var res = DataSource.s_ordersArr.Find(x => x?.ID == id);
-        if(res?.ID == 0)
+        if(res == null)
             throw new ObjNotFoundException("Order doesn't found");
 
-        return res;
+        return (Order)res;
     }
     public IEnumerable<Order?> ReadAll(Func<Order?, bool>? predicate = null)//return all the obj array
     {
@@ -49,10 +49,7 @@ internal class DalOrder : IOrder
             return DataSource.s_ordersArr.FindAll(x => predicate(x));
     }
 
-    public void Print(Order o1)
-    {
-        Console.WriteLine(o1.ToString());
-    }
+  
     public Order ReadIf(Func<Order?,bool> predicate)
     {
        Order? order= DataSource.s_ordersArr.FindLast(x => predicate(x));

@@ -36,10 +36,10 @@ internal static class DataSource
         int amount = Config.rand.Next(1, 5);
          
         OrderItem ot1 = new OrderItem();
-        ot1.ProductID = s_productsArr[i % 10].ID;//alreday added 10 product to the list 
-        ot1.OrderID = s_ordersArr[i % 20].ID; // allready added 20 orders to the list
+        ot1.ProductID = s_productsArr[i % 10].Value.ID;//alreday added 10 product to the list 
+        ot1.OrderID = s_ordersArr[i % 20].Value.ID; // allready added 20 orders to the list
         ot1.Amount = amount;//amount is random number
-        ot1.Price = s_productsArr.ElementAt(i % 10).Price * amount;
+        ot1.Price = s_productsArr[i % 10].Value.Price * amount;
         s_ordersItemArr.Add(ot1);
 
     }
@@ -52,16 +52,16 @@ internal static class DataSource
     private static void s_Initialize()
     {
         //adding 10 products.
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "doughnut", category = Categories.Bakery, InStock = 15, Price = 5 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "chicken", category = Categories.Meat, InStock = 25, Price = 30 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "Yellow cheese", category = Categories.Deli, InStock = 12, Price = 33 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "bean", category = Categories.Frozen, InStock = 7, Price = 16 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "mop", category = Categories.Cleaning, InStock = 3, Price = 22 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "cows milk", category = Categories.Dairy, InStock = 45, Price = 4.99 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "gum", category = Categories.Sweets, InStock = 75, Price = 0.99 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "makeup", category = Categories.Beauty, InStock = 15, Price = 7 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "bread", category = Categories.Bakery, InStock = 50, Price = 5.99 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "mince", category = Categories.Meat, InStock = 0, Price = 42.5 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "doughnut", Category = Categories.Bakery, InStock = 15, Price = 5 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "chicken", Category = Categories.Meat, InStock = 25, Price = 30 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "Yellow cheese", Category = Categories.Deli, InStock = 12, Price = 33 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "bean", Category = Categories.Frozen, InStock = 7, Price = 16 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "mop", Category = Categories.Cleaning, InStock = 3, Price = 22 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "cows milk", Category = Categories.Dairy, InStock = 45, Price = 4.99 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "gum", Category = Categories.Sweets, InStock = 75, Price = 0.99 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "makeup", Category = Categories.Beauty, InStock = 15, Price = 7 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "bread", Category = Categories.Bakery, InStock = 50, Price = 5.99 });
+        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "mince", Category = Categories.Meat, InStock = 0, Price = 42.5 });
 
 
 

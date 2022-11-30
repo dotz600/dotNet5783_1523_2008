@@ -378,3 +378,8 @@ MigrationBackup/
 /DalTest/obj/Debug/DalTest.GeneratedMSBuildEditorConfig.editorconfig
 /Stage0/obj/Debug/net6.0/Stage0.assets.cache
 /Stage0/obj/Debug/net6.0/Stage0.GeneratedMSBuildEditorConfig.editorconfig
+/Bin/DalFacade.dll
+/Bin/DalFacade.pdb
+/DalList/obj/Debug/refint/DalList.dll
+/DalList/obj/Debug/ref/DalList.dll
+/DalFacade/DalApi/ICrud.cs

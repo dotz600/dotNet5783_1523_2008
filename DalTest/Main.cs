@@ -25,9 +25,9 @@ class MyMain
                  classType = mainInput(ref X);//get input from the user
                  mainSwitch(X, classType);
             }
-            catch(InvalidCastException e)
+            catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine(e);
             }
         }
         while (X != 0);
@@ -57,7 +57,7 @@ class MyMain
                 if (classType == 2)
                 {
                     inputOrder(ref order);
-                    Obj.Order.Create(order);
+                    Console.WriteLine("your new order ID is: " + Obj.Order.Create(order));
                 }
                 if (classType == 3)
                 {
@@ -70,32 +70,32 @@ class MyMain
                 id = Convert.ToInt32(Console.ReadLine());
                 if (classType == 1)
                 {
-                    Obj.Product.Print(Obj.Product.Read(id));///read the product from DataSource and print it
+                    Console.WriteLine(Obj.Product.Read(id));///read the product from DataSource and print it
                 }
                 if (classType == 2)
                 {
-                    Obj.Order.Print(Obj.Order.Read(id));
+                    Console.WriteLine(Obj.Order.Read(id));
                 }
                 if (classType == 3)
                 {
-                    Obj.OrderItem.Print(Obj.OrderItem.Read(id));
+                    Console.WriteLine(Obj.OrderItem.Read(id));
                 }
                 break;
             case 3:                                                   //read obj list an print it all
                 if (classType == 1)
                 {
                     foreach (Product p in Obj.Product.ReadAll())
-                        Obj.Product.Print(p);
+                        Console.WriteLine(p);
                 }
                 if (classType == 2)
                 {
                     foreach (Order or in Obj.Order.ReadAll())
-                        Obj.Order.Print(or);
+                        Console.WriteLine(or);
                 }
                 if (classType == 3)
                 {
                     foreach (OrderItem it in Obj.OrderItem.ReadAll())
-                        Obj.OrderItem.Print(it);             
+                        Console.WriteLine(it);             
                 }
                 break;
             case 4:                                                    ///update obj
@@ -203,7 +203,7 @@ class MyMain
         p.Price = double.Parse(data[2]);
         Categories category;
         Enum.TryParse(data[3], out category);
-        p.category = category;
+        p.Category = category;
         p.InStock = int.Parse(data[4]);
     }
 
