@@ -125,7 +125,7 @@ internal class Product : IProduct
             IBl bl = new Bl(); //for operait the convertion function from ProductForList 
 
             foreach (var DOproduct in Dal.Product.ReadAll())
-                res.Add(bl.ProductForList.DOproductToBOproductForList(DOproduct));//convert the DOproduct to BoProduct, then add it to list
+                res.Add(bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct));//convert the DOproduct to BoProduct, then add it to list
 
             return res;
         }

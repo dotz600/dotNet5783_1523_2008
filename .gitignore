@@ -383,3 +383,4 @@ MigrationBackup/
 /DalList/obj/Debug/refint/DalList.dll
 /DalList/obj/Debug/ref/DalList.dll
 /DalFacade/DalApi/ICrud.cs
+/BL/obj/Debug/ref/BL.dll
