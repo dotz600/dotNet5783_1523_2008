@@ -1,7 +1,7 @@
 ﻿using BlApi;
 using BlImplementation;
 using BO;
-
+//hello reset :)
 namespace BlTest;
 //its posiblle// we can do it !!!onr last check all very nice
 internal class Program
