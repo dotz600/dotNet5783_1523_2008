@@ -368,3 +368,13 @@ MigrationBackup/
 /DalTest/obj/Release/DalTest.csproj.AssemblyReference.cache
 /DalTest/obj/Release/DalTest.assets.cache
 /DalList/obj/Release/DalList.csproj.AssemblyReference.cache
+/BITest/obj/Debug/BlTest.assets.cache
+/BITest/obj/Debug/BlTest.GeneratedMSBuildEditorConfig.editorconfig
+/BL/obj/Debug/BL.assets.cache
+/BL/obj/Debug/BL.GeneratedMSBuildEditorConfig.editorconfig
+/DalFacade/obj/Debug/DalFacade.GeneratedMSBuildEditorConfig.editorconfig
+/DalFacade/obj/Debug/DalFacade.assets.cache
+/DalTest/obj/Debug/DalTest.assets.cache
+/DalTest/obj/Debug/DalTest.GeneratedMSBuildEditorConfig.editorconfig
+/Stage0/obj/Debug/net6.0/Stage0.assets.cache
+/Stage0/obj/Debug/net6.0/Stage0.GeneratedMSBuildEditorConfig.editorconfig

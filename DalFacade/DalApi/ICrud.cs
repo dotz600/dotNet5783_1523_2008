@@ -9,5 +9,5 @@ public interface ICrud<T>
     int Create(T obj);
     void Delete(int id);
     T Read(int id);
-   
+    T ReadIf(Func<T?, bool> predicate);
 }

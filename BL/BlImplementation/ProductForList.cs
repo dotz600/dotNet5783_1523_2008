@@ -11,7 +11,7 @@ internal class ProductForList : IProductForList
         {
             Price = DOproduct.Price, 
             ID = DOproduct.ID, Name = DOproduct.Name, 
-            Category = (BO.Categories)DOproduct.Category 
+            Category = (BO.Categories)DOproduct.category 
         };
     }
 }

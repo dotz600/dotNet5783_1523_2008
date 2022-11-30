@@ -20,7 +20,7 @@ internal class Product : IProduct
                 Name = p.Name,
                 InStock = p.InStock,
                 Price = p.Price,
-                Category = (DO.Categories)p.Category
+                category = (DO.Categories)p.Category
             });
         }
         catch (DalApi.ObjExistException ex)
@@ -78,7 +78,7 @@ internal class Product : IProduct
                 ID = id,
                 InStock = DOpro.InStock,
                 Price = DOpro.Price,
-                Category = (BO.Categories)DOpro.Category
+                Category = (BO.Categories)DOpro.category
             };
             return BOpro;
         }
@@ -100,7 +100,7 @@ internal class Product : IProduct
                 Name = DOproduct.Name,
                 Price = DOproduct.Price,
                 Amount = DOproduct.InStock,
-                Category = (BO.Categories)DOproduct.Category,
+                Category = (BO.Categories)DOproduct.category,
                 InStock = false,
                 ID = DOproduct.ID
             };
@@ -146,7 +146,7 @@ internal class Product : IProduct
                 InStock = p.InStock,
                 Name = p.Name,
                 Price = p.Price,
-                Category = (DO.Categories)p.Category
+                category = (DO.Categories)p.Category
             });
         }
         catch (DalApi.ObjNotFoundException ex)

@@ -2,13 +2,11 @@
 using DO;
 namespace DalApi;
 
-public interface IOrderItem : ICrud<OrderItem>
+public interface IOrderItem : ICrud<OrderItem?>
 {
+    void Print(OrderItem ot1);
 
     IEnumerable<OrderItem?> ReadAll(Func<OrderItem?, bool>? predicate = null);
 
-    OrderItem ReadProductId(int productId); //read with product id
-
-    OrderItem ReadIf(Func<OrderItem?, bool> predicate);
-
+    public OrderItem ReadProductId(int productId); //read with product id
 }

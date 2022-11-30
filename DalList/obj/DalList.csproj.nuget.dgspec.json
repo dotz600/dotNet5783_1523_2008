@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalList\\DalList.csproj": {}
+    "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalList\\DalList.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj": {
+    "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj",
+        "projectUniqueName": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj",
         "projectName": "DalFacade",
-        "projectPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj",
-        "packagesPath": "C:\\Users\\ohevd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\obj\\",
+        "projectPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj",
+        "packagesPath": "C:\\Users\\Mordechay\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ohevd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mordechay\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,21 +55,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalList\\DalList.csproj": {
+    "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalList\\DalList.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalList\\DalList.csproj",
+        "projectUniqueName": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalList\\DalList.csproj",
         "projectName": "DalList",
-        "projectPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalList\\DalList.csproj",
-        "packagesPath": "C:\\Users\\ohevd\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalList\\obj\\",
+        "projectPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalList\\DalList.csproj",
+        "packagesPath": "C:\\Users\\Mordechay\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalList\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ohevd\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Mordechay\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -83,8 +83,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj": {
-                "projectPath": "C:\\Users\\ohevd\\source\\repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj"
+              "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj": {
+                "projectPath": "C:\\Users\\Mordechay\\Source\\Repos\\dotz600\\dotNet5783_1523_2008\\DalFacade\\DalFacade.csproj"
               }
             }
           }
@@ -114,7 +114,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }
