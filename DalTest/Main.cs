@@ -84,18 +84,21 @@ class MyMain
             case 3:                                                   //read obj list an print it all
                 if (classType == 1)
                 {
-                    foreach (Product p in Obj.Product.ReadAll())
-                        Console.WriteLine(p);
+                    foreach (Product? p in Obj.Product.ReadAll())
+                        if (p != null)
+                            Console.WriteLine(p);
                 }
                 if (classType == 2)
                 {
-                    foreach (Order or in Obj.Order.ReadAll())
-                        Console.WriteLine(or);
+                    foreach (Order? or in Obj.Order.ReadAll())
+                        if (or != null)
+                            Console.WriteLine(or);
                 }
                 if (classType == 3)
                 {
-                    foreach (OrderItem it in Obj.OrderItem.ReadAll())
-                        Console.WriteLine(it);             
+                    foreach (OrderItem? it in Obj.OrderItem.ReadAll())
+                        if (it != null)
+                            Console.WriteLine(it);             
                 }
                 break;
             case 4:                                                    ///update obj

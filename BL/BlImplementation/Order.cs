@@ -9,11 +9,11 @@ internal class Order : IOrder
 
     private static DalApi.IDal Dal => new Dal.DalList();
 
-    public IEnumerable<BO.OrderForList> ReadAll()//returns list of BO.Order
+    public IEnumerable<BO.OrderForList?> ReadAll()//returns list of BO.Order
     {
-        List<BO.OrderForList> list = new();//create list to return
+        List<BO.OrderForList?> list = new();//create list to return
 
-        foreach (DO.Order order in Dal.Order.ReadAll())//build and push elements to the list
+        foreach (DO.Order? order in Dal.Order.ReadAll())//build and push elements to the list
         {
             int countAmountOfItems = 0;
             double sumPrice = 0;
@@ -23,18 +23,18 @@ internal class Order : IOrder
             
             BO.OrderStatus status = BO.OrderStatus.ConfirmedOrder;//every order in the data base allready confirm
 
-            if (order.ShipDate < DateTime.Now && order.ShipDate != DateTime.MinValue)//status update(provide or sent)
+            if (order?.ShipDate < DateTime.Now && order?.ShipDate != null)//status update(provide or sent)
                 status = BO.OrderStatus.Sent;
-            if (order.DeliveryDate < DateTime.Now && order.DeliveryDate != DateTime.MinValue)
+            if (order?.DeliveryDate < DateTime.Now && order?.DeliveryDate != null)
                 status = BO.OrderStatus.Provided;
 
-            calcAmountAndPrice(ref countAmountOfItems, ref sumPrice, order.ID);
+            calcAmountAndPrice(ref countAmountOfItems, ref sumPrice, order?.ID);
 
-            BO.OrderForList o = new BO.OrderForList() //build single element
+            BO.OrderForList? o = new BO.OrderForList() //build single element
             {
-                ID = order.ID,
+                ID = order?.ID ?? 0,
                 AmountOfItems = countAmountOfItems,
-                CustomerName = order.CustomerName,
+                CustomerName = order?.CustomerName,
                 TotalPrice = sumPrice,
                 Status = status,
             };
@@ -71,9 +71,9 @@ internal class Order : IOrder
                 orderReturn.TotalPrice = price;
 
                 BO.OrderStatus status = BO.OrderStatus.ConfirmedOrder;//evrey order in the data base allready confirm
-                if (orderReturn.ShipDate < DateTime.Now && orderReturn.ShipDate != DateTime.MinValue)
+                if (orderReturn.ShipDate < DateTime.Now && orderReturn.ShipDate != null)
                     status = BO.OrderStatus.Sent;
-                if (orderReturn.DeliveryDate < DateTime.Now && orderReturn.DeliveryDate != DateTime.MinValue)
+                if (orderReturn.DeliveryDate < DateTime.Now && orderReturn.DeliveryDate != null)
                     status = BO.OrderStatus.Provided;
                 orderReturn.Status = status;
 
@@ -220,35 +220,35 @@ internal class Order : IOrder
 
     }
 
-    public List<BO.OrderItem> buildItemsList(int id)//return a list of all the orderItems that related to a one order
+    public List<BO.OrderItem?> buildItemsList(int id)//return a list of all the orderItems that related to a one order
     {
-        List<BO.OrderItem> listReturn = new List<BO.OrderItem>();
-        foreach (DO.OrderItem doi in Dal.OrderItem.ReadAll())
+        List<BO.OrderItem?> listReturn = new List<BO.OrderItem?>();
+        foreach (DO.OrderItem? doi in Dal.OrderItem.ReadAll())
         {
-            if (doi.OrderID == id)//if true, build an BO.OrderItem object, and push to the list
+            if (doi?.OrderID == id)//if true, build an BO.OrderItem object, and push to the list
             {
                 BO.OrderItem boi = new BO.OrderItem()
                 {
-                    ID = doi.OrderID,
-                    Amount = doi.Amount,
-                    Name = Dal.Product.Read(doi.ProductID).Name,
-                    Price = doi.Price,
-                    ProductID = doi.ProductID,
-                    TotalPrice = doi.Price * doi.Amount
+                    ID = (int)doi?.OrderID,
+                    Amount = (int)doi?.Amount,
+                    Name = Dal.Product.Read(doi?.ProductID ?? 0).Name,
+                    Price = (double)doi?.Price,
+                    ProductID = (int)doi?.ProductID,
+                    TotalPrice = (double)doi?.Price * (int)doi?.Amount
                 };
                 listReturn.Add(boi);
             }
         }
         return listReturn;
     }
-    public void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int id)//search for all the products for the same order and return the price and the sum amount
+    public void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int? id)//search for all the products for the same order and return the price and the sum amount
     {
-        foreach (DO.OrderItem orderItem in Dal.OrderItem.ReadAll())
+        foreach (DO.OrderItem? orderItem in Dal.OrderItem.ReadAll())
         {
-            if (orderItem.OrderID == id)
+            if (orderItem?.OrderID == id)
             {
-                countAmountOfItems += orderItem.Amount;
-                price += orderItem.Price * orderItem.Amount;
+                countAmountOfItems += orderItem?.Amount ?? 0;
+                price += (orderItem?.Price ?? 0) * (orderItem?.Amount ?? 0);
             }
         }
     }

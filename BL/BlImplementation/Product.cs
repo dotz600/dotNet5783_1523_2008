@@ -48,7 +48,7 @@ internal class Product : IProduct
             //and then in the catch delete the product
             DO.OrderItem ot = Dal.OrderItem.ReadProductId(id);
             
-            throw new Exception("product found and cant be deleted");//if reachd here that mean product found in order
+            throw new DalApi.ObjExistException();//if reachd here that mean product found in order
         }
         
         catch (DalApi.ObjNotFoundException)//that mean product not found in order item and we can delete it
@@ -61,6 +61,10 @@ internal class Product : IProduct
             { 
                 throw new BO.ObjectNotExistException("cant delete product", ex); 
             }
+        }
+        catch (DalApi.ObjExistException ex)
+        {
+            throw new BO.ProductFoundInOrderException("product found and cant be deleted", ex);
         }
     }
 
@@ -117,15 +121,16 @@ internal class Product : IProduct
 
     }
 
-    public IEnumerable<BO.ProductForList> ReadAll()
+    public IEnumerable<BO.ProductForList?> ReadAll()
     {
         try
         {
-            List<BO.ProductForList> res = new();
+            List<BO.ProductForList?> res = new List<BO.ProductForList?>();
             IBl bl = new Bl(); //for operait the convertion function from ProductForList 
 
             foreach (var DOproduct in Dal.Product.ReadAll())
-                res.Add(bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct));//convert the DOproduct to BoProduct, then add it to list
+                if (DOproduct != null)
+                     res.Add(bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct));//convert the DOproduct to BoProduct, then add it to list
 
             return res;
         }

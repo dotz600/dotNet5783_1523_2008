@@ -16,7 +16,6 @@ public class Cart
 
     public override string ToString() => $@"
     BO.Cart
-    CustomerName, Email, Address : {CustomerName}, {CustomerEmail}, {CustomerAddress}
-    Total price : {TotalPrice:f}
-    Items : ";
+    CustomerName, Email, Address : {CustomerName} {CustomerEmail} {CustomerAddress}
+    Total price : {TotalPrice:f}";
 }
