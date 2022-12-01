@@ -36,7 +36,7 @@ public interface IOrder
     BO.OrderTracking TrackingOrder(int orderId);//returns current status, and list of events that were occurred in these order
 
     List<BO.OrderItem?> buildItemsList( int id);//Building Items list according to a given ID
-    void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int id);//calculates price and amount of items according to a given ID
+    void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int? id);//calculates price and amount of items according to a given ID
 
 
 }

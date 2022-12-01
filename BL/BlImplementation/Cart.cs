@@ -79,7 +79,7 @@ internal class Cart : ICart
                 else if (amount == 0)                        //if want to not order at all
                 {
                     cart.TotalPrice -= ot.TotalPrice;
-                    cart.Items.Remove(ot);
+                    cart.Items?.Remove(ot);
                 }
                 else if (ot.Amount > amount)                //if want to decrease the amount
                 {
@@ -114,6 +114,7 @@ internal class Cart : ICart
             {
                 foreach (var ot in cart.Items)
                 {
+                    if (ot != null)
                     if (Dal.Product.Read(ot.ProductID).InStock < ot.Amount)
                         throw new BO.NegativeAmountException("product in cart dont have enough in stock");
                 }
@@ -133,20 +134,23 @@ internal class Cart : ICart
 
             foreach (var ot in cart.Items)
             {
-                DO.OrderItem DOot = new()
+                if (ot != null)
                 {
-                    OrderID = orderId,
-                    ProductID = ot.ProductID,
-                    Amount = ot.Amount,
-                    Price = ot.TotalPrice
-                };
-                Dal.OrderItem.Create(DOot); //make new order item and push it to date source
+                    DO.OrderItem DOot = new()
+                    {
+                        OrderID = orderId,
+                        ProductID = ot.ProductID,
+                        Amount = ot.Amount,
+                        Price = ot.TotalPrice
+                    };
+                    Dal.OrderItem.Create(DOot);
+                } //make new order item and push it to date source
 
                 DO.Product p = Dal.Product.Read(ot.ProductID);
                 p.InStock -= ot.Amount;
 
                 if (p.InStock < 0)//just for safety
-                    p.InStock = 0;
+                    p.InStock = 0;  
                 Dal.Product.Update(p);
 
                 ot.ID = orderId;
@@ -179,9 +183,9 @@ internal class Cart : ICart
     {
         if (cart.Items != null)
         {
-            BO.OrderItem res = cart.Items.Find(ot => ot.ProductID == productId);
+            BO.OrderItem? res = cart.Items.Find(ot => ot?.ProductID == productId);
             if (res != null)
-                return res;
+                return (BO.OrderItem)res;
         }
         return new BO.OrderItem();
      }
