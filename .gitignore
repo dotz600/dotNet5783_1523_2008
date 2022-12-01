@@ -384,3 +384,10 @@ MigrationBackup/
 /DalList/obj/Debug/ref/DalList.dll
 /DalFacade/DalApi/ICrud.cs
 /BL/obj/Debug/ref/BL.dll
+/BL/obj/Release/BL.GeneratedMSBuildEditorConfig.editorconfig
+/DalFacade/obj/Release/DalFacade.assets.cache
+/DalFacade/obj/Release/DalFacade.GeneratedMSBuildEditorConfig.editorconfig
+/DalFacade/obj/Release/DalFacade.csproj.AssemblyReference.cache
+/DalList/obj/Release/DalList.GeneratedMSBuildEditorConfig.editorconfig
+/DalList/obj/Release/DalList.assets.cache
+/DalTest/obj/Release/DalTest.GeneratedMSBuildEditorConfig.editorconfig
