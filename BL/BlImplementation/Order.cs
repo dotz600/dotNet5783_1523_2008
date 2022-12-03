@@ -229,12 +229,12 @@ internal class Order : IOrder
             {
                 BO.OrderItem boi = new BO.OrderItem()
                 {
-                    ID = (int)doi?.OrderID,
-                    Amount = (int)doi?.Amount,
+                    ID = (int)doi?.OrderID!,
+                    Amount = (int)doi?.Amount!,
                     Name = Dal.Product.Read(doi?.ProductID ?? 0).Name,
-                    Price = (double)doi?.Price,
-                    ProductID = (int)doi?.ProductID,
-                    TotalPrice = (double)doi?.Price * (int)doi?.Amount
+                    Price = (double)doi?.Price!,
+                    ProductID = (int)doi?.ProductID!,
+                    TotalPrice = (double)doi?.Price! * (int)doi?.Amount!
                 };
                 listReturn.Add(boi);
             }

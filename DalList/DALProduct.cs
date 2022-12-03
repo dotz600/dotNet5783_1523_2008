@@ -21,10 +21,10 @@ public class DalProduct : IProduct
 
     public Product Read(int id)
     {
-        foreach(Product myPro in DataSource.s_productsArr)
+        foreach(Product? myPro in DataSource.s_productsArr)
         {
-            if (myPro.ID == id)
-                return myPro;
+            if (myPro?.ID == id)
+                return (Product)myPro;
         }
         throw new ObjNotFoundException("Product doesn't found");
     }
