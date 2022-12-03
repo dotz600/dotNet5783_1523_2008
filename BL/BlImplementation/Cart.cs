@@ -10,7 +10,7 @@ internal class Cart : ICart
 
     public BO.Cart Add(BO.Cart cart, int productId)
     {
-        cart.Items ??= new List<BO.OrderItem>();//if the list is null make new one
+        cart.Items ??= new List<BO.OrderItem?>();//if the list is null make new one
 
         BO.OrderItem ot = SearchInCart(cart, productId);
         try
@@ -34,6 +34,7 @@ internal class Cart : ICart
                 ot.ProductID = productId;
                 ot.Amount = 1;
                 cart.Items.Add(ot);
+                cart.TotalPrice = p.Price;
                 return cart;
             }
         }
@@ -128,8 +129,8 @@ internal class Cart : ICart
                 CustomerAdress = adress,
                 CustomerEmail = email,
                 CustomerName = name,
-                 DeliveryDate = null,
-                 OrderDate = DateTime.Now
+                DeliveryDate = null,
+                OrderDate = DateTime.Now
             });
 
             foreach (var ot in cart.Items)
@@ -173,13 +174,11 @@ internal class Cart : ICart
         {
             throw new BO.CreateObjectFailedException(ex.Message, ex);
         }
-      
-
     }
 
 
 
-    private static BO.OrderItem SearchInCart(BO.Cart cart, int productId)//help function
+    private BO.OrderItem SearchInCart(BO.Cart cart, int productId)//help function
     {
         if (cart.Items != null)
         {
@@ -188,5 +187,5 @@ internal class Cart : ICart
                 return (BO.OrderItem)res;
         }
         return new BO.OrderItem();
-     }
+    }
 }

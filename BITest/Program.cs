@@ -238,6 +238,7 @@ internal class Program
                 adress = data1[2];
                 bl.Cart.CartConfirmation(c, name, email, adress);
                 Console.WriteLine(c);
+
                 foreach (var ot in c.Items)
                     Console.WriteLine(ot);
                 Console.WriteLine("Operation succeeded.");
@@ -250,6 +251,7 @@ internal class Program
                 amount = int.Parse(data[1]);
                 bl.Cart.Update(c, productId, amount);
                 Console.WriteLine(c);
+                Console.WriteLine("Items: ");
                 foreach(var ot in c.Items)
                     Console.WriteLine(ot);
                 break;
