@@ -21,8 +21,9 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
         </Grid>
-        <ComboBox Name="CategorySelector" Margin="464,0,0,0"/>
-        <Label Content="Category:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
+        <Button x:Name="AddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5"/>
+        <ComboBox Name="ProductSelector" Margin="464,0,0,0" Height="46" VerticalAlignment="Top"  />
+        <Label Content="Products:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
                Grid.Column="0"/>
         <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewProductForList">
             <ListView.View>
@@ -31,5 +32,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
+       
+
     </Grid>
 </Window>

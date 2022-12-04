@@ -61,7 +61,7 @@ internal class Order : IOrder
                     PaymentDate = o.OrderDate,
                     DeliveryDate = o.DeliveryDate,
                     OrderDate = o.OrderDate,
-                    Items = buildItemsList(orderId)
+                    Items = buildItemsList(orderId)!
                 };
                 //calc price and amount
                 int amount = 0;
@@ -117,7 +117,7 @@ internal class Order : IOrder
             ,
                 PaymentDate = order.OrderDate
             };
-            orderReturn.Items = buildItemsList(orderReturn.ID);//buils items list
+            orderReturn.Items = buildItemsList(orderReturn.ID)!;//buils items list
             int temp = 0;
             double price = 0;
             calcAmountAndPrice(ref temp, ref price, orderReturn.ID);//update the total price
@@ -159,7 +159,7 @@ internal class Order : IOrder
             ,
                 PaymentDate = order.OrderDate
             };
-            orderReturn.Items = buildItemsList(orderReturn.ID);//buils items list
+            orderReturn.Items = buildItemsList(orderReturn.ID)!;//buils items list
             int temp = 0;
             double price = 0;
             calcAmountAndPrice(ref temp, ref price, orderReturn.ID);//update the total price

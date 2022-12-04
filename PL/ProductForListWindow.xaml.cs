@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PL.BoEntityWindows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,13 @@ namespace PL
         public ProducrForListWindow()
         {
             InitializeComponent();
+            BlApi.IBl bl = new BlImplementation.Bl();
+            ListViewProductForList.ItemsSource = bl.Product.ReadAll();
+           
         }
+       
+       
+
+
     }
 }
