@@ -146,15 +146,18 @@ internal class Cart : ICart
                     };
                     Dal.OrderItem.Create(DOot);
                 } //make new order item and push it to date source
+                if (ot != null)
+                {
+                    DO.Product p = Dal.Product.Read(ot.ProductID);
+                    p.InStock -= ot.Amount;
 
-                DO.Product p = Dal.Product.Read(ot.ProductID);
-                p.InStock -= ot.Amount;
 
-                if (p.InStock < 0)//just for safety
-                    p.InStock = 0;  
-                Dal.Product.Update(p);
+                    if (p.InStock < 0)//just for safety
+                        p.InStock = 0;
+                    Dal.Product.Update(p);
 
-                ot.ID = orderId;
+                    ot.ID = orderId;
+                }
             }
             //update cart, just for the comfterbule to debug
             cart.CustomerEmail = email;
