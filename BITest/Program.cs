@@ -9,6 +9,9 @@ internal class Program
     static void Main()
     {
         BO.Cart c = new();//the cart is the same for the buyer from start to end 
+        //IBl bl = new Bl();
+        //foreach(var v in bl.Product.ReadAll(x => x.Category == Categories.Meat))
+        //    Console.WriteLine(  v);
         int X = -1, classType;
         Console.WriteLine("Hello!");
         do

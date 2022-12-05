@@ -120,8 +120,7 @@ internal class Product : IProduct
         }
 
     }
-
-    public IEnumerable<BO.ProductForList?> ReadAll()
+    public IEnumerable<BO.ProductForList?> ReadAll(Func<BO.ProductForList?, bool>? predicate = null)
     {
         try
         {
@@ -130,15 +129,19 @@ internal class Product : IProduct
 
             foreach (var DOproduct in Dal.Product.ReadAll())
                 if (DOproduct != null)
-                     res.Add(bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct));//convert the DOproduct to BoProduct, then add it to list
+                    res.Add(bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct));//convert the DOproduct to BoProduct, then add it to list
+            
+            if (predicate != null)//if the user ask to read with predicate, will remove from res all the !predcate 
+                res.RemoveAll(x => !predicate(x));
 
             return res;
         }
-        catch(Exception ex)
-        { 
-            throw new BO.ReadObjectFailedException("unkenow problom...", ex); 
+        catch (Exception ex)
+        {
+            throw new BO.ReadObjectFailedException("unkenow problom...", ex);
         }
     }
+
 
     public void Update(BO.Product p)
     {
@@ -172,4 +175,6 @@ internal class Product : IProduct
         if (p.InStock < 0)
             throw new BO.NegativeAmountException("in stock is negative");
     }
+
+ 
 }

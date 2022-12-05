@@ -26,7 +26,7 @@ namespace BlApi;
 public interface IProduct 
 {
     
-    IEnumerable<ProductForList?> ReadAll();//Returns list of ProductForList objects with all of the products from the DL
+    IEnumerable<ProductForList?> ReadAll(Func<ProductForList?, bool>? predicate = null);//Returns list of ProductForList objects with all of the products from the DL
     Product Read(int id); //for manager screen, read one product according to ID
     ProductItem Read(int id, Cart myCart); //for buyer screen, read one product according to ID
     void Create(Product p);//for manager screen, create new product in the DL
