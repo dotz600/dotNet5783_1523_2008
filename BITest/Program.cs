@@ -6,10 +6,10 @@ namespace BlTest;
 //its posiblle// we can do it !!!onr last check all very nice
 internal class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        BO.Cart c = new BO.Cart();//the cart is the same for the buyer from start to end 
-        int X = -1, classType = 0;
+        BO.Cart c = new();//the cart is the same for the buyer from start to end 
+        int X = -1, classType;
         Console.WriteLine("Hello!");
         do
         {
@@ -115,7 +115,7 @@ internal class Program
         switch (x)
         {
             case 1://add product
-                BO.Product p = new BO.Product();
+                BO.Product p = new ();
                 InputProduct(ref p);
                 bl.Product.Create(p);
                 Console.WriteLine("Operation succeeded.");
@@ -141,7 +141,7 @@ internal class Program
                     Console.WriteLine(pl);
                 break;
             case 6:
-                BO.Product p1 = new BO.Product();
+                BO.Product p1 = new();
                 InputProduct(ref p1);
                 bl.Product.Update(p1);
                 Console.WriteLine(bl.Product.Read(p1.ID));
@@ -282,8 +282,7 @@ internal class Program
         p.ID = int.Parse(data[0]);
         p.Name = data[1];
         p.Price = double.Parse(data[2]);
-        BO.Categories category;
-        Enum.TryParse(data[3], out category);
+        _ = Enum.TryParse(data[3], out BO.Categories category);
         p.Category = category;
         p.InStock = int.Parse(data[4]);
     }

@@ -20,6 +20,7 @@ namespace PL
     /// </summary>
     public partial class ProducrForListWindow : Window
     {
+
         public ProducrForListWindow()
         {
             InitializeComponent();
