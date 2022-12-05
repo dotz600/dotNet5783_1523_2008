@@ -19,9 +19,15 @@ namespace PL.BoEntityWindows
     /// </summary>
     public partial class ProductWindow : Window
     {
+       
         public ProductWindow()
         {
             InitializeComponent();
         }
+
+       
+       
+    
+    
     }
 }

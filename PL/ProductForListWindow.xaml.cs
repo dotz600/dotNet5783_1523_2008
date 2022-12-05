@@ -18,19 +18,33 @@ namespace PL
     /// <summary>
     /// Interaction logic for ProducrForListWindow.xaml
     /// </summary>
-    public partial class ProducrForListWindow : Window
+    public partial class ProductForListWindow : Window
     {
-
-        public ProducrForListWindow()
+        BlApi.IBl bl = new BlImplementation.Bl();
+        public ProductForListWindow()
         {
             InitializeComponent();
-            BlApi.IBl bl = new BlImplementation.Bl();
             ListViewProductForList.ItemsSource = bl.Product.ReadAll();
-           
+            ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
         }
-       
-       
 
+        private void AddProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddProductWindow addProductWindow = new AddProductWindow();
+            addProductWindow.Bl = bl;//pass the data
+            addProductWindow.Show();
+        }
 
+        private void UpdateProductButton_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateProductWindow updateProductWindow = new UpdateProductWindow();
+            updateProductWindow.Bl = bl;
+            updateProductWindow.Show();
+        }
+
+        private void ProductSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ListViewProductForList.ItemsSource = bl.Product.ReadAll();//--TO DO -- finish!!
+        }
     }
 }

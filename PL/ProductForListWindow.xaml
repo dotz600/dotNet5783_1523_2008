@@ -1,11 +1,11 @@
-﻿<Window x:Class="PL.ProducrForListWindow"
+﻿<Window x:Class="PL.ProductForListWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="ProducrForListWindow" Height="640" Width="800">
+        Title="ProductForListWindow" Height="640" Width="800">
 
 
     <Grid Name="MainGrid">
@@ -21,12 +21,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
         </Grid>
-        <Button x:Name="AddProduct" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5"/>
-        <ComboBox Name="ProductSelector" Margin="464,0,0,0" Height="46" VerticalAlignment="Top"  />
-        <Label Content="Products:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
+        <Button x:Name="AddProductButton" Content="Add new Product" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="AddProductButton_Click"/>
+        <Button x:Name="UpdateProductButton" Content="Update Product" Grid.Row="2" HorizontalAlignment="Left" Margin="5" Padding="5" Click="UpdateProductButton_Click"/>
+        <ComboBox Name="ProductSelector" Margin="464,0,0,0" Height="46" VerticalAlignment="Top" SelectionChanged="ProductSelector_SelectionChanged"/>
+        <Label Content="Categories:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
                Grid.Column="0"/>
         <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewProductForList">
-            <ListView.View>
+           
+                <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>
