@@ -7,6 +7,42 @@
         mc:Ignorable="d"
         Title="ProductWindow" Height="450" Width="800">
     <Grid>
-        
+        <TabControl>
+            <TabControl.Items>
+                <TabItem Header="Add product">
+                    <TabItem.Content>
+                        <StackPanel>
+                            <TextBox x:Name="textBoxAddProductID" Width="500" Text="Enter Product ID"/>
+                            <TextBox x:Name="textBoxAddProductName" Width="500" Text="Enter name of product"/>
+                            <TextBox x:Name="textBoxAddProductCategory" Width="500" Text="Enter category"/>
+                            <TextBox x:Name="textBoxAddProductAmount" Width="500" Text="Enter amount"/>
+                            <TextBox x:Name="textBoxAddProductPrice" Width="500" Text="Enter price"/>
+                            <Button Content="Confirm" Width="194" Click="Add_Product_Confirmation_Click"/>
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Header="Delete Product">
+                    <TabItem.Content>
+                        <StackPanel>
+                            <Button Content="this button is part of tab 2" />
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Header="Search Product">
+                    <TabItem.Content>
+                        <StackPanel>
+                            <Button Content="this button is part of tab 3" />
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Header="Read All Products">
+                    <TabItem.Content>
+                        <StackPanel>
+                            <Button Content="this button is part of tab 3" />
+                        </StackPanel>
+                    </TabItem.Content>
+                </TabItem>
+            </TabControl.Items>
+        </TabControl>
     </Grid>
 </Window>

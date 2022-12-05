@@ -25,7 +25,7 @@ namespace PL
             InitializeComponent();
             BlApi.IBl bl = new BlImplementation.Bl();
             ListViewProductForList.ItemsSource = bl.Product.ReadAll();
-           
+           ProductSelector.ItemsSource = bl.Product.ReadAll();
         }
        
        

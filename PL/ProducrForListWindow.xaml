@@ -26,7 +26,8 @@
         <Label Content="Products:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
                Grid.Column="0"/>
         <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewProductForList">
-            <ListView.View>
+           
+                <ListView.View>
                 <GridView>
                     <GridViewColumn/>
                 </GridView>

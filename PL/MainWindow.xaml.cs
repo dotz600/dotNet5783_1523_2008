@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using PL.BoEntityWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,14 @@ namespace PL
     public partial class MainWindow : Window
     {
         private IBl bl => new BlImplementation.Bl();
-        private void ShowListProductForList_Click(object sender, RoutedEventArgs e) => new ProducrForListWindow().Show();
+        
         public MainWindow()
         {
             
             InitializeComponent();
-         
+           
         }
+
+        private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();
     }
 }
