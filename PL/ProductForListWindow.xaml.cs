@@ -44,7 +44,7 @@ namespace PL
 
         private void ProductSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListViewProductForList.ItemsSource = bl.Product.ReadAll( x => x.)
+            ListViewProductForList.ItemsSource = bl.Product.ReadAll();//--TO DO -- finish!!
         }
     }
 }
