@@ -31,6 +31,6 @@ namespace PL
            
         }
 
-        private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductWindow().Show();
+        private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
     }
 }
