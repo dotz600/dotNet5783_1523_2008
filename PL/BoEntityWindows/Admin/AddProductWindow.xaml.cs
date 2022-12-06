@@ -24,6 +24,7 @@ namespace PL.BoEntityWindows
         {
             InitializeComponent();
             CategoryComboBoxAdd.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            
         }
         public BlApi.IBl? Bl;
         private void Add_Product_Confirmation_Click(object sender, RoutedEventArgs e)
@@ -36,7 +37,8 @@ namespace PL.BoEntityWindows
                 new ProductForListWindow().Show();
             }
             catch (Exception ex)
-            { MessageBox.Show("Exception!"); }
+            {MessageBox.Show("חריגה לא ידועה", "חריגה", MessageBoxButton.OK , MessageBoxImage.Hand
+                , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading); }
         }
 
         private BO.Product create_product_Add()
