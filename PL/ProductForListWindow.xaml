@@ -29,10 +29,14 @@
         <ListView Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewProductForList">
            
                 <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
+                    <GridView>
+                        <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ID}"/>
+                        <GridViewColumn Header= "Name" DisplayMemberBinding="{Binding Path = Name}"/>
+                        <GridViewColumn Header= "Category" DisplayMemberBinding="{Binding Path = Category}"/>
+                        <GridViewColumn Header= "Price" DisplayMemberBinding="{Binding Path = Price}"/>
+                    </GridView>
+                    
+                </ListView.View>
         </ListView>
        
 

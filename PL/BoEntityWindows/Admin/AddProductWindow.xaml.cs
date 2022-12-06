@@ -32,7 +32,7 @@ namespace PL.BoEntityWindows
 
             try
             {
-                BO.Product p = create_product_Add();
+                BO.Product p = Create_product_Add();
                 Bl!.Product.Create(p);
                 new ProductForListWindow().Show();
             }
@@ -41,7 +41,7 @@ namespace PL.BoEntityWindows
                 , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading); }
         }
 
-        private BO.Product create_product_Add()
+        private BO.Product Create_product_Add()
         {
             BO.Product p = new();
             string s = textBoxAddProductID.Text;

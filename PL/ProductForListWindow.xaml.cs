@@ -1,4 +1,6 @@
-﻿using PL.BoEntityWindows;
+﻿using BlImplementation;
+using BO;
+using PL.BoEntityWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace PL
@@ -24,8 +27,12 @@ namespace PL
         public ProductForListWindow()
         {
             InitializeComponent();
-            ListViewProductForList.ItemsSource = bl.Product.ReadAll();
             ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            EventArgs args = new EventArgs();
+
+          
+            ListViewProductForList.ItemsSource = bl.Product.ReadAll();
+
         }
 
         private void AddProductButton_Click(object sender, RoutedEventArgs e)
@@ -44,7 +51,7 @@ namespace PL
 
         private void ProductSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListViewProductForList.ItemsSource = bl.Product.ReadAll();//--TO DO -- finish!!
+            ListViewProductForList.ItemsSource = bl.Product.ReadAll(x => x.Category.ToString() == ProductSelector.SelectedItem.ToString() );//--TO DO -- finish!!
         }
     }
 }
