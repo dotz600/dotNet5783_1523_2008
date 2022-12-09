@@ -30,9 +30,7 @@ namespace PL
             InitializeComponent();
            
         }
-
         private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
-
 
     }
 }

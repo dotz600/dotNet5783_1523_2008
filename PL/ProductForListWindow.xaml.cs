@@ -27,11 +27,12 @@ namespace PL
         public ProductForListWindow()
         {
             InitializeComponent();
-            ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
             EventArgs args = new EventArgs();
+            ProductSelector.SelectedIndex = 9;//choose default value(None)
 
-          
-            ListViewProductForList.ItemsSource = bl.Product.ReadAll();
+
+            ListViewProductForList.ItemsSource = bl.Product.ReadAll();//set list of products
 
         }
 
@@ -42,16 +43,25 @@ namespace PL
             addProductWindow.Show();
         }
 
-        private void UpdateProductButton_Click(object sender, RoutedEventArgs e)
-        {
-            UpdateProductWindow updateProductWindow = new UpdateProductWindow();
-            updateProductWindow.Bl = bl;
-            updateProductWindow.Show();
-        }
+      
 
         private void ProductSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            //filter products by category
         {
-            ListViewProductForList.ItemsSource = bl.Product.ReadAll(x => x.Category.ToString() == ProductSelector.SelectedItem.ToString() );//--TO DO -- finish!!
+            ListViewProductForList.ItemsSource = bl.Product.ReadAll(x => x?.Category.ToString() != ProductSelector.SelectedItem.ToString() );
+        }
+
+        private void ListViewProductForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+            //double click on product takes to update win
+        {
+            if (ListViewProductForList.SelectedItem != null)
+            {
+                BO.ProductForList p = (BO.ProductForList)ListViewProductForList.SelectedItem;
+                UpdateProductWindow updateProductWindow = new UpdateProductWindow(p);
+                updateProductWindow.Bl = bl;
+                updateProductWindow.ShowDialog();
+
+            }
         }
     }
 }

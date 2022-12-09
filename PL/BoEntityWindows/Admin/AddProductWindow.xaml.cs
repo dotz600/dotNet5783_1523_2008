@@ -23,11 +23,12 @@ namespace PL.BoEntityWindows
         public AddProductWindow()
         {
             InitializeComponent();
-            CategoryComboBoxAdd.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            CategoryComboBoxAdd.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
+            CategoryComboBoxAdd.SelectedIndex = 9;//choose default value(None)
             
         }
         public BlApi.IBl? Bl;
-        private void Add_Product_Confirmation_Click(object sender, RoutedEventArgs e)
+        private void Add_Product_Confirmation_Click(object sender, RoutedEventArgs e)//creates a product, and open PFL win
         {
 
             try
@@ -36,12 +37,14 @@ namespace PL.BoEntityWindows
                 Bl!.Product.Create(p);
                 new ProductForListWindow().Show();
             }
-            catch (Exception ex)
-            {MessageBox.Show("חריגה לא ידועה", "חריגה", MessageBoxButton.OK , MessageBoxImage.Hand
-                , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading); }
+            catch (Exception)
+            {
+                MessageBox.Show("חריגה לא ידועה", "חריגה", MessageBoxButton.OK , MessageBoxImage.Hand
+              , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading); 
+            }
         }
 
-        private BO.Product Create_product_Add()
+        private BO.Product Create_product_Add()//take data from fields, and returns new product
         {
             BO.Product p = new();
             string s = textBoxAddProductID.Text;
@@ -56,5 +59,6 @@ namespace PL.BoEntityWindows
             return p;
         }
 
+        
     }
 }

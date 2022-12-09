@@ -16,7 +16,8 @@ public enum Categories
     Dairy,
     Grocery,
     Sweets,
-    Beauty
+    Beauty,
+    None
 }
 
 public enum OrderStatus

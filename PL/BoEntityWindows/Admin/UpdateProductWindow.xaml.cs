@@ -20,13 +20,23 @@ namespace PL.BoEntityWindows
     /// </summary>
     public partial class UpdateProductWindow : Window
     {
-        public UpdateProductWindow()
+        public UpdateProductWindow(BO.ProductForList? data = null)
         {
             InitializeComponent();
-            CategoryComboBoxUpdate.ItemsSource = Enum.GetValues(typeof(BO.Categories));
+            CategoryComboBoxUpdate.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
+            CategoryComboBoxUpdate.SelectedIndex = 9;//choose default value(None)
+            if (data != null)//if there is product to update, set unchangeable values, ID name and category
+            {
+                textBoxUpdateProductID.Text = data.ID.ToString();
+                textBoxUpdateProductID.IsReadOnly = true;
+                textBoxUpdateProductName.Text = data.Name;
+                textBoxUpdateProductName.IsReadOnly = true;
+                CategoryComboBoxUpdate.SelectedItem = data.Category;
+                CategoryComboBoxUpdate.IsEnabled = false;
+            }
         }
         public BlApi.IBl? Bl;//pass data
-        private void Update_Product_Confirmation_Click(object sender, RoutedEventArgs e)
+        private void Update_Product_Confirmation_Click(object sender, RoutedEventArgs e)//Update product and open PFL win
         {
             try
             {
@@ -34,12 +44,15 @@ namespace PL.BoEntityWindows
                 Bl!.Product.Update(p);
                 new ProductForListWindow().Show();
             }
-            catch (Exception ex)
-            { MessageBox.Show("Exception!"); }
+            catch (Exception)
+            {
+                MessageBox.Show("חריגה לא ידועה", "חריגה", MessageBoxButton.OK, MessageBoxImage.Hand
+                , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
+            }
         }
         
 
-        private BO.Product Update_product()
+        private BO.Product Update_product()//take data from fields, and returns new product
         {
             BO.Product p = new();
             string s = textBoxUpdateProductID.Text;

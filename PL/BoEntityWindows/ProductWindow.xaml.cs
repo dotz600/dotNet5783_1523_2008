@@ -24,10 +24,6 @@ namespace PL.BoEntityWindows
         {
             InitializeComponent();
         }
-
-       
-       
-    
     
     }
 }

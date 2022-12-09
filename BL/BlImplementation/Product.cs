@@ -132,7 +132,7 @@ internal class Product : IProduct
                     res.Add(bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct));//convert the DOproduct to BoProduct, then add it to list
             
             if (predicate != null)//if the user ask to read with predicate, will remove from res all the !predcate 
-                res.RemoveAll(x => !predicate(x));
+                res.RemoveAll(x => predicate(x));
 
             return res;
         }
