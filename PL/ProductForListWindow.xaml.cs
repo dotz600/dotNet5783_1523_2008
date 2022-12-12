@@ -46,9 +46,12 @@ namespace PL
       
 
         private void ProductSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            //filter products by category
+            //filter products by category, if category = None, will show all products
         {
-            ListViewProductForList.ItemsSource = bl.Product.ReadAll(x => x?.Category.ToString() != ProductSelector.SelectedItem.ToString() );
+            if (ProductSelector.SelectedItem.ToString() == BO.Categories.None.ToString())
+                ListViewProductForList.ItemsSource = bl.Product.ReadAll();
+            else
+                ListViewProductForList.ItemsSource = bl.Product.ReadAll(x => x?.Category.ToString() != ProductSelector.SelectedItem.ToString() );
         }
 
         private void ListViewProductForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
