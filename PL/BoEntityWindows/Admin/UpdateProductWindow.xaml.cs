@@ -44,9 +44,9 @@ namespace PL.BoEntityWindows
                 Bl!.Product.Update(p);
                 new ProductForListWindow().Show();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("חריגה לא ידועה", "חריגה", MessageBoxButton.OK, MessageBoxImage.Hand
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
                 , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
             }
         }
