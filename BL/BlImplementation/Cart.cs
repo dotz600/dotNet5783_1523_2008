@@ -6,7 +6,8 @@ namespace BlImplementation;
 
 internal class Cart : ICart
 {
-    private static DalApi.IDal Dal => new Dal.DalList();
+    private readonly DalApi.IDal? Dal = DalApi.Factory.Get();
+
 
     public BO.Cart Add(BO.Cart cart, int productId)
     {
@@ -15,7 +16,7 @@ internal class Cart : ICart
         BO.OrderItem ot = SearchInCart(cart, productId);
         try
         {
-            DO.Product p = Dal.Product.Read(productId);
+            DO.Product p = Dal?.Product.Read(productId) ?? throw new NullReferenceException();
 
             if (p.InStock <= 0)
                 throw new BO.NegativeAmountException("the product not in stock");
@@ -61,7 +62,7 @@ internal class Cart : ICart
         {
             try
             {
-                DO.Product p = Dal.Product.Read(productId);
+                DO.Product p = Dal?.Product.Read(productId) ?? throw new NullReferenceException();
                 if (ot.Amount < amount)                         //if want to increase the amount
                 {
                     if (p.InStock >= amount)
@@ -116,14 +117,14 @@ internal class Cart : ICart
                 foreach (var ot in cart.Items)
                 {
                     if (ot != null)
-                    if (Dal.Product.Read(ot.ProductID).InStock < ot.Amount)
+                    if (Dal?.Product.Read(ot.ProductID).InStock < ot.Amount)
                         throw new BO.NegativeAmountException("product in cart dont have enough in stock");
                 }
             }
             else
                 throw new BO.ObjectNotExistException("Cart is empty, try again...");
             //create new order and add it to data base
-            int orderId = Dal.Order.Create(new DO.Order
+            int orderId = Dal?.Order.Create(new DO.Order
             {
                 ShipDate = null,
                 CustomerAdress = adress,
@@ -131,7 +132,7 @@ internal class Cart : ICart
                 CustomerName = name,
                 DeliveryDate = null,
                 OrderDate = DateTime.Now
-            });
+            }) ?? throw new NullReferenceException();
 
             foreach (var ot in cart.Items)
             {
@@ -144,17 +145,17 @@ internal class Cart : ICart
                         Amount = ot.Amount,
                         Price = ot.TotalPrice
                     };
-                    Dal.OrderItem.Create(DOot);
+                    Dal?.OrderItem.Create(DOot);
                 } //make new order item and push it to date source
                 if (ot != null)
                 {
-                    DO.Product p = Dal.Product.Read(ot.ProductID);
+                    DO.Product p = Dal?.Product.Read(ot.ProductID) ?? throw new NullReferenceException();
                     p.InStock -= ot.Amount;
 
 
                     if (p.InStock < 0)//just for safety
                         p.InStock = 0;
-                    Dal.Product.Update(p);
+                    Dal?.Product.Update(p);
 
                     ot.ID = orderId;
                 }
@@ -180,8 +181,7 @@ internal class Cart : ICart
     }
 
 
-
-    private BO.OrderItem SearchInCart(BO.Cart cart, int productId)//help function
+    private static BO.OrderItem SearchInCart(BO.Cart cart, int productId)//help function
     {
         if (cart.Items != null)
         {

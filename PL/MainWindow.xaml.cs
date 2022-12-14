@@ -1,4 +1,4 @@
-﻿using BlApi;
+﻿
 using PL.BoEntityWindows;
 using System;
 using System.Collections.Generic;
@@ -15,22 +15,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PL
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        private IBl bl => new BlImplementation.Bl();
-        
-        public MainWindow()
-        {
-            
-            InitializeComponent();
-           
-        }
-        private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
+namespace PL;
 
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
+{
+    readonly BlApi.IBl? bl = BlApi.Factory.Get();
+
+    public MainWindow()
+    {
+        
+        InitializeComponent();
+       
     }
+    private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
+
 }

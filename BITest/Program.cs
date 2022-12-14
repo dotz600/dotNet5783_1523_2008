@@ -102,7 +102,7 @@ internal class Program
 
     public static void ProductFunctions(ref BO.Cart c)
     {
-        IBl bl = new Bl();
+        IBl bl = Factory.Get();
         Console.WriteLine("Select the desired test:\n" +
             "* To add object enter 1\n" +
            "* To delete one object enter 2\n" +
@@ -154,7 +154,7 @@ internal class Program
     }
     public static void OrderFunctions()
     {
-        IBl bl = new Bl();
+        IBl bl = Factory.Get();
         Console.WriteLine("Select the desired test:\n" +
          "* To read all list of (for manger) object enter 1\n" +
         "* To read a one object enter 2\n" +
@@ -212,7 +212,7 @@ internal class Program
     }
     public static void CartFunctions(ref BO.Cart c)
     {
-        IBl bl = new Bl();
+        IBl bl = Factory.Get();
         int productId, amount;
         string name, email, adress;
         Console.WriteLine("Select the desired test:\n" +
@@ -234,8 +234,8 @@ internal class Program
                 break;
             case 2://confirm order
                 Console.WriteLine("Please enter a your -\n name, email, adress");
-                var line1 = Console.ReadLine();
-                var data1 = line1.Split(' ');/// add all the input data to array, split each elemnt by space
+                var line1 = Console.ReadLine(); 
+                var data1 = line1?.Split(' ');/// add all the input data to array, split each elemnt by space
                 name = data1[0];
                 email = data1[1];
                 adress = data1[2];

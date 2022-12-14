@@ -23,3 +23,10 @@ public class ObjExistException : Exception
     public ObjExistException(string message, Exception inner) : base(message, inner) { }
     protected ObjExistException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
+
+[Serializable]
+public class DalConfigException : Exception
+{
+    public DalConfigException(string msg) : base(msg) { }
+    public DalConfigException(string msg, Exception ex) : base(msg, ex) { }
+}

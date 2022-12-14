@@ -7,13 +7,14 @@ namespace BlImplementation;
 internal class Order : IOrder
 {
 
-    private static DalApi.IDal Dal => new Dal.DalList();
+    private readonly DalApi.IDal? Dal = DalApi.Factory.Get();
+
 
     public IEnumerable<BO.OrderForList?> ReadAll()//returns list of BO.Order
     {
         List<BO.OrderForList?> list = new();//create list to return
 
-        foreach (DO.Order? order in Dal.Order.ReadAll())//build and push elements to the list
+        foreach (DO.Order? order in Dal?.Order.ReadAll()!)//build and push elements to the list
         {
             int countAmountOfItems = 0;
             double sumPrice = 0;
@@ -28,9 +29,9 @@ internal class Order : IOrder
             if (order?.DeliveryDate < DateTime.Now && order?.DeliveryDate != null)
                 status = BO.OrderStatus.Provided;
 
-            calcAmountAndPrice(ref countAmountOfItems, ref sumPrice, order?.ID);
+            CalcAmountAndPrice(ref countAmountOfItems, ref sumPrice, order?.ID);
 
-            BO.OrderForList? o = new BO.OrderForList() //build single element
+            BO.OrderForList? o = new() //build single element
             {
                 ID = order?.ID ?? 0,
                 AmountOfItems = countAmountOfItems,
@@ -49,8 +50,7 @@ internal class Order : IOrder
 
             try
             {
-                DO.Order o;
-                o = Dal.Order.Read(orderId);
+                DO.Order o = Dal?.Order.Read(orderId) ?? throw new NullReferenceException();
                 BO.Order orderReturn = new()//build order to return
                 {
                     ID = o.ID,
@@ -61,12 +61,12 @@ internal class Order : IOrder
                     PaymentDate = o.OrderDate,
                     DeliveryDate = o.DeliveryDate,
                     OrderDate = o.OrderDate,
-                    Items = buildItemsList(orderId)!
+                    Items = BuildItemsList(orderId)!
                 };
                 //calc price and amount
                 int amount = 0;
                 double price = 0;
-                calcAmountAndPrice(ref amount, ref price, o.ID);
+                CalcAmountAndPrice(ref amount, ref price, o.ID);
                 //update the results
                 orderReturn.TotalPrice = price;
 
@@ -91,36 +91,28 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order order = Dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
+            DO.Order order = Dal?.Order.Read(orderId) ?? throw new NullReferenceException();//if doesn't exist, throw from DALOrder
             if (order.ShipDate == null || order.ShipDate > DateTime.Now)
                 throw new BO.UpdateObjectFailedException("Send order before!");
             order.DeliveryDate = DateTime.Now;
-            Dal.Order.Update(order);
+            Dal?.Order.Update(order);
 
-            BO.Order orderReturn = new BO.Order()
+            BO.Order orderReturn = new()
             {
-                CustomerAdress = order.CustomerAdress
-            ,
-                CustomerName = order.CustomerName
-            ,
-                CustomerEmail = order.CustomerEmail
-            ,
-                DeliveryDate = order.DeliveryDate
-            ,
-                ID = order.ID
-            ,
-                OrderDate = order.OrderDate
-            ,
-                ShipDate = order.ShipDate
-            ,
-                Status = BO.OrderStatus.Provided
-            ,
+                CustomerAdress = order.CustomerAdress,
+                CustomerName = order.CustomerName,
+                CustomerEmail = order.CustomerEmail,
+                DeliveryDate = order.DeliveryDate,
+                ID = order.ID,
+                OrderDate = order.OrderDate,
+                ShipDate = order.ShipDate,
+                Status = BO.OrderStatus.Provided,
                 PaymentDate = order.OrderDate
             };
-            orderReturn.Items = buildItemsList(orderReturn.ID)!;//buils items list
+            orderReturn.Items = BuildItemsList(orderReturn.ID)!;//buils items list
             int temp = 0;
             double price = 0;
-            calcAmountAndPrice(ref temp, ref price, orderReturn.ID);//update the total price
+            CalcAmountAndPrice(ref temp, ref price, orderReturn.ID);//update the total price
             orderReturn.TotalPrice = price;
             return orderReturn;
         }
@@ -134,35 +126,27 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order order = Dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
+            DO.Order order = Dal?.Order.Read(orderId) ?? throw new NullReferenceException();//if doesn't exist, throw from DALOrder
             if (order.DeliveryDate > order.ShipDate)
                 throw new BO.UpdateObjectFailedException("Order was provided!");
             order.ShipDate = DateTime.Now;
-            Dal.Order.Update(order);//update the order in data source
-            BO.Order orderReturn = new BO.Order()
+            Dal?.Order.Update(order);//update the order in data source
+            BO.Order orderReturn = new()
             {
-                CustomerAdress = order.CustomerAdress
-            ,
-                CustomerName = order.CustomerName
-            ,
-                CustomerEmail = order.CustomerEmail
-            ,
-                DeliveryDate = order.DeliveryDate
-            ,
-                ID = order.ID
-            ,
-                OrderDate = order.OrderDate
-            ,
-                ShipDate = order.ShipDate
-            ,
-                Status = BO.OrderStatus.Sent
-            ,
+                CustomerAdress = order.CustomerAdress,
+                CustomerName = order.CustomerName,
+                CustomerEmail = order.CustomerEmail,
+                DeliveryDate = order.DeliveryDate,
+                ID = order.ID,
+                OrderDate = order.OrderDate,
+                ShipDate = order.ShipDate,
+                Status = BO.OrderStatus.Sent,
                 PaymentDate = order.OrderDate
             };
-            orderReturn.Items = buildItemsList(orderReturn.ID)!;//buils items list
+            orderReturn.Items = BuildItemsList(orderReturn.ID)!;//buils items list
             int temp = 0;
             double price = 0;
-            calcAmountAndPrice(ref temp, ref price, orderReturn.ID);//update the total price
+            CalcAmountAndPrice(ref temp, ref price, orderReturn.ID);//update the total price
             orderReturn.TotalPrice = price;
             return orderReturn;
         }
@@ -176,7 +160,7 @@ internal class Order : IOrder
     {
         try
         {
-            DO.Order o = Dal.Order.Read(orderId);//if doesn't exist, throw from DALOrder
+            DO.Order o = Dal?.Order.Read(orderId) ?? throw new NullReferenceException();//if doesn't exist, throw from DALOrder
             BO.OrderStatus orderStatus = BO.OrderStatus.ConfirmedOrder;
 
             if (o.ShipDate < DateTime.Now && o.ShipDate != DateTime.MinValue)//if true - the order has been sent and need to update orderStatus
@@ -191,8 +175,7 @@ internal class Order : IOrder
             dateAndStatus1.dt = o.OrderDate;
             dateAndStatus1.os = BO.OrderStatus.ConfirmedOrder;
 
-            if (orderTrackingToReturn.Events == null)
-                orderTrackingToReturn.Events = new List<BO.OrderTracking.DateAndStatus>();//make new list
+            orderTrackingToReturn.Events ??= new List<BO.OrderTracking.DateAndStatus>();//make new list
 
             orderTrackingToReturn.Events.Add(dateAndStatus1);
 
@@ -216,22 +199,21 @@ internal class Order : IOrder
         {
             throw new BO.ObjectNotExistException("BO.Order.TrackingOrder", ex);
         }
-    
-
+   
     }
 
-    public List<BO.OrderItem?> buildItemsList(int id)//return a list of all the orderItems that related to a one order
+    public List<BO.OrderItem?> BuildItemsList(int id)//return a list of all the orderItems that related to a one order
     {
-        List<BO.OrderItem?> listReturn = new List<BO.OrderItem?>();
-        foreach (DO.OrderItem? doi in Dal.OrderItem.ReadAll())
+        List<BO.OrderItem?> listReturn = new();
+        foreach (DO.OrderItem? doi in Dal?.OrderItem.ReadAll()!)
         {
             if (doi?.OrderID == id)//if true, build an BO.OrderItem object, and push to the list
             {
-                BO.OrderItem boi = new BO.OrderItem()
+                BO.OrderItem boi = new()
                 {
                     ID = (int)doi?.OrderID!,
                     Amount = (int)doi?.Amount!,
-                    Name = Dal.Product.Read(doi?.ProductID ?? 0).Name,
+                    Name = Dal?.Product.Read(doi?.ProductID ?? 0).Name,
                     Price = (double)doi?.Price!,
                     ProductID = (int)doi?.ProductID!,
                     TotalPrice = (double)doi?.Price! * (int)doi?.Amount!
@@ -241,9 +223,9 @@ internal class Order : IOrder
         }
         return listReturn;
     }
-    public void calcAmountAndPrice(ref int countAmountOfItems, ref double price, int? id)//search for all the products for the same order and return the price and the sum amount
+    public void CalcAmountAndPrice(ref int countAmountOfItems, ref double price, int? id)//search for all the products for the same order and return the price and the sum amount
     {
-        foreach (DO.OrderItem? orderItem in Dal.OrderItem.ReadAll())
+        foreach (DO.OrderItem? orderItem in Dal?.OrderItem.ReadAll()!)
         {
             if (orderItem?.OrderID == id)
             {

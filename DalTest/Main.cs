@@ -13,17 +13,17 @@ using System.Diagnostics.Metrics;
 
 class MyMain
 {
-    public static void Main(string[] args)
+    public static void Main()
     {
       
-        int X = -1, classType = 0;
+        int X = -1, classType;
         Console.WriteLine("Hello!");
         do
         {
             try
             {
-                 classType = mainInput(ref X);//get input from the user
-                 mainSwitch(X, classType);
+                 classType = MainInput(ref X);//get input from the user
+                 MainSwitch(X, classType);
             }
             catch(Exception e)
             {
@@ -34,14 +34,14 @@ class MyMain
 
     }
 
-    private static void mainSwitch(int X, int classType)
+    private static void MainSwitch(int X, int classType)
     {
         int id;
-        IDal Obj = new DalList();
+        IDal? Obj = Factory.Get(); 
         ///variable for input data from user
-        Product product = new Product();
-        Order order = new Order();
-        OrderItem orderItem = new OrderItem();
+        Product product = new();
+        Order order = new();
+        OrderItem orderItem = new();
 
         switch (X)
         {
@@ -51,18 +51,18 @@ class MyMain
             case 1:                                                ///add obj to list
                 if (classType == 1)
                 {
-                    inputProduct(ref product);
-                    Obj.Product.Create(product);///create new product in the data base 
+                    InputProduct(ref product);
+                    Obj?.Product.Create(product);///create new product in the data base 
                 }
                 if (classType == 2)
                 {
-                    inputOrder(ref order);
-                    Console.WriteLine("your new order ID is: " + Obj.Order.Create(order));
+                    InputOrder(ref order);
+                    Console.WriteLine("your new order ID is: " + Obj?.Order.Create(order));
                 }
                 if (classType == 3)
                 {
-                    inputOrderItem(ref orderItem);
-                    Obj.OrderItem.Create(orderItem);
+                    InputOrderItem(ref orderItem);
+                    Obj?.OrderItem.Create(orderItem);
                 }
                 break;
             case 2:                                                  ///read obj by ID
@@ -70,33 +70,33 @@ class MyMain
                 id = Convert.ToInt32(Console.ReadLine());
                 if (classType == 1)
                 {
-                    Console.WriteLine(Obj.Product.Read(id));///read the product from DataSource and print it
+                    Console.WriteLine(Obj?.Product.Read(id));///read the product from DataSource and print it
                 }
                 if (classType == 2)
                 {
-                    Console.WriteLine(Obj.Order.Read(id));
+                    Console.WriteLine(Obj?.Order.Read(id));
                 }
                 if (classType == 3)
                 {
-                    Console.WriteLine(Obj.OrderItem.Read(id));
+                    Console.WriteLine(Obj?.OrderItem.Read(id));
                 }
                 break;
             case 3:                                                   //read obj list an print it all
                 if (classType == 1)
                 {
-                    foreach (Product? p in Obj.Product.ReadAll())
+                    foreach (Product? p in Obj?.Product.ReadAll()!)
                         if (p != null)
                             Console.WriteLine(p);
                 }
                 if (classType == 2)
                 {
-                    foreach (Order? or in Obj.Order.ReadAll())
+                    foreach (Order? or in Obj?.Order.ReadAll()!)
                         if (or != null)
                             Console.WriteLine(or);
                 }
                 if (classType == 3)
                 {
-                    foreach (OrderItem? it in Obj.OrderItem.ReadAll())
+                    foreach (OrderItem? it in Obj?.OrderItem.ReadAll()!)
                         if (it != null)
                             Console.WriteLine(it);             
                 }
@@ -105,18 +105,18 @@ class MyMain
                 Console.WriteLine("Enter the object details you wish to update");
                 if (classType == 1)
                 {
-                    inputProduct(ref product);///get the obj data
-                    Obj.Product.Update(product);///update the object, except from the ID
+                    InputProduct(ref product);///get the obj data
+                    Obj?.Product.Update(product);///update the object, except from the ID
                 }
                 if (classType == 2)
                 {
-                    inputOrder(ref order);
-                    Obj.Order.Update(order);
+                    InputOrder(ref order);
+                    Obj?.Order.Update(order);
                 }
                 if (classType == 3)
                 {
-                    inputOrderItem(ref orderItem);
-                    Obj.OrderItem.Update(orderItem);
+                    InputOrderItem(ref orderItem);
+                    Obj?.OrderItem.Update(orderItem);
                 }
                 break;
             case 5:                                                    ///delete from list
@@ -124,15 +124,15 @@ class MyMain
                 id = Convert.ToInt32(Console.ReadLine());
                 if (classType == 1)
                 {
-                    Obj.Product.Delete(id);
+                    Obj?.Product.Delete(id);
                 }
                 if (classType == 2)
                 {
-                    Obj.Order.Delete(id);
+                    Obj?.Order.Delete(id);
                 }
                 if (classType == 3)
                 {
-                    Obj.OrderItem.Delete(id);
+                    Obj?.OrderItem.Delete(id);
                 }
                 break;
 
@@ -141,14 +141,13 @@ class MyMain
 
 
 
-    private static int mainInput(ref int X)
+    private static int MainInput(ref int X)
     {
-        int classType;
         bool checkInput;
         Console.WriteLine("For Product enter 1\n" +
                                       "For Order enter 2\n" +
                                      "For OrderItem enter 3");
-        checkInput = int.TryParse(Console.ReadLine(), out classType);
+        checkInput = int.TryParse(Console.ReadLine(), out int classType);
         if (classType > 3 || classType < 1 || !checkInput)
            {
             if (checkInput)///that mean we get good int but not in the range 1 - 3
@@ -171,22 +170,22 @@ class MyMain
         return classType;///and return X by refrence
     }
 
-    public static void inputOrderItem(ref OrderItem o)///get input for all OrderItem details 
+    public static void InputOrderItem(ref OrderItem o)///get input for all OrderItem details 
     {
         Console.WriteLine("OrderItem: ProductID, OrderID, Price, Amount");
         var line = Console.ReadLine();
-        var data = line.Split(' ');/// add all the input data to array, split each elemnt by space
+        var data = line?.Split(' ');/// add all the input data to array, split each elemnt by space
         o.ProductID = int.Parse(data[0]);
         o.OrderID = int.Parse(data[1]);
         o.Price = double.Parse(data[2]);
         o.Amount = int.Parse(data[3]);
     }
 
-    public static void inputOrder(ref Order o)///get input for all Order details
+    public static void InputOrder(ref Order o)///get input for all Order details
     {
         Console.WriteLine("Order: OrderID, CustomerAdress, CustomerEmail, CustomerName, DeliveryDate, OrderDate, ShipDate");
         var line = Console.ReadLine();
-        var data = line.Split(' ');
+        var data = line?.Split(' ');
         o.ID = int.Parse(data[0]);
         o.CustomerAdress = data[1];
         o.CustomerEmail = data[2];
@@ -196,16 +195,16 @@ class MyMain
         o.ShipDate = DateTime.Parse(data[6]);
 
     }
-    public static void inputProduct(ref Product p)///get input for all Product details
+    public static void InputProduct(ref Product p)///get input for all Product details
     {
         Console.WriteLine("Product: ProductID, Name, Price, Category, InStock");
         var line = Console.ReadLine();
-        var data = line.Split(' ');
+        var data = line?.Split(' ');
         p.ID = int.Parse(data[0]);
         p.Name = data[1];
         p.Price = double.Parse(data[2]);
-        Categories category;
-        Enum.TryParse(data[3], out category);
+        if(!Enum.TryParse(data[3], out Categories category))
+            throw new NullReferenceException();
         p.Category = category;
         p.InStock = int.Parse(data[4]);
     }

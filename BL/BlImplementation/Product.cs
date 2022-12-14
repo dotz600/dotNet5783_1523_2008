@@ -1,26 +1,25 @@
 ﻿using BlApi;
 using BlImplementation;
 
-
 namespace BlImplementation;
 
 internal class Product : IProduct
 {
 
-    private static DalApi.IDal Dal => new Dal.DalList();
+    private readonly DalApi.IDal? Dal = DalApi.Factory.Get();
     public void Create(BO.Product p)
     {
 
         try
         {
             CheckNameIdPriceStock(p);
-            Dal.Product.Create(new DO.Product
+            Dal?.Product.Create(new DO.Product
             {
                 ID = p.ID,
                 Name = p.Name,
                 InStock = p.InStock,
                 Price = p.Price,
-                Category = (DO.Categories)p.Category
+                Category = (DO.Categories)p.Category!
             });
         }
         catch (DalApi.ObjExistException ex)
@@ -38,7 +37,7 @@ internal class Product : IProduct
         {
             if (id < 0)
                 throw new BO.NegativeIDException("negetive id");
-            DO.Product p = Dal.Product.Read(id);
+            DO.Product p = Dal?.Product.Read(id) ?? throw new NullReferenceException();
         }
         catch(BO.NegativeIDException ex) { throw ex; }
         catch(DalApi.ObjNotFoundException ex) { throw new BO.ReadObjectFailedException("there is no product to delete", ex); }
@@ -46,7 +45,7 @@ internal class Product : IProduct
         {
             //search the product id in all order item, if product dont found wiil throw exp and will catch it next,
             //and then in the catch delete the product
-            DO.OrderItem ot = Dal.OrderItem.ReadProductId(id);
+            DO.OrderItem ot = Dal?.OrderItem.ReadProductId(id) ?? throw new NullReferenceException();
             
             throw new DalApi.ObjExistException();//if reachd here that mean product found in order
         }
@@ -55,7 +54,7 @@ internal class Product : IProduct
         {
             try//just for safety// by now we now the product found and can be delete, but just for safety
             {
-                Dal.Product.Delete(id);
+                Dal?.Product.Delete(id);
             }
             catch(DalApi.ObjNotFoundException ex) 
             { 
@@ -75,7 +74,7 @@ internal class Product : IProduct
 
         try
         {
-            DO.Product DOpro = Dal.Product.Read(id);
+            DO.Product DOpro = Dal?.Product.Read(id) ?? throw new NullReferenceException();
             BO.Product BOpro = new()
             {
                 Name = DOpro.Name,
@@ -98,7 +97,7 @@ internal class Product : IProduct
             throw new Exception("negetive id");
         try
         {
-            DO.Product DOproduct = Dal.Product.Read(id);
+            DO.Product DOproduct = Dal?.Product.Read(id) ?? throw new NullReferenceException();
             BO.ProductItem BOproductItem = new()
             {
                 Name = DOproduct.Name,
@@ -124,10 +123,10 @@ internal class Product : IProduct
     {
         try
         {
-            List<BO.ProductForList?> res = new List<BO.ProductForList?>();
+            List<BO.ProductForList?> res = new();
             IBl bl = new Bl(); //for operait the convertion function from ProductForList 
 
-            foreach (var DOproduct in Dal.Product.ReadAll())
+            foreach (var DOproduct in Dal?.Product.ReadAll()!)
                 if (DOproduct != null)
                     res.Add(bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct));//convert the DOproduct to BoProduct, then add it to list
             
@@ -148,13 +147,13 @@ internal class Product : IProduct
         try
         {
             CheckNameIdPriceStock(p);
-            Dal.Product.Update(new DO.Product
+            Dal?.Product.Update(new DO.Product
             {
                 ID = p.ID,
                 InStock = p.InStock,
                 Name = p.Name,
                 Price = p.Price,
-                Category = (DO.Categories)p.Category
+                Category = (DO.Categories)p.Category!
             });
         }
         catch (DalApi.ObjNotFoundException ex)
