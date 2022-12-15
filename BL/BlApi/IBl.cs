@@ -14,6 +14,6 @@ public interface IBl
     public IOrderForList OrderForList { get;}
     public IOrderItem OrderItem { get;}
     public IProductForList ProductForList { get;}
-    public IProductItem productItem { get;}
+    public IProductItem ProductItem { get;}
 
 }

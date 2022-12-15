@@ -10,17 +10,27 @@ namespace BlImplementation;
 
 sealed internal class Bl : IBl
 {
-    public IProduct Product => new Product();
+    internal Bl()//cnsrt
+    {
+        Product = new Product();
+        Cart = new Cart();
+        Order = new Order();
+        OrderForList = new OrderForList();
+        OrderItem= new OrderItem();
+        ProductForList= new ProductForList();
+        ProductItem = new ProductItem();
+    }
+    public IProduct Product { get; }
 
-    public ICart Cart => new Cart();
+    public ICart Cart { get; }
 
-    public IOrder Order => new Order();
+    public IOrder Order { get; }
 
-    public IOrderForList OrderForList => new OrderForList();
+    public IOrderForList OrderForList { get; }
 
-    public IOrderItem OrderItem => new OrderItem();
+    public IOrderItem OrderItem { get; }
 
-    public IProductForList ProductForList => new ProductForList();
+    public IProductForList ProductForList { get; }
 
-    public IProductItem productItem => new ProductItem();
+    public IProductItem ProductItem { get; }
 }
