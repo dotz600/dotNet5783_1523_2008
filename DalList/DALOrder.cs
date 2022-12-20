@@ -1,5 +1,6 @@
 ﻿using DalApi;
 using DO;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
 namespace Dal;
@@ -26,10 +27,14 @@ internal class DalOrder : IOrder
     }
     public void Delete(int id)//delete the obj from the array
     {
-        if (DataSource.s_ordersArr.Where(x => x?.ID == id) == null)
+        var res = from x in DataSource.s_ordersArr 
+                  where x?.ID == id 
+                  select x;
+
+        if (!res.Any())
             throw new ObjNotFoundException("Order doesn't found");
 
-        DataSource.s_ordersArr.RemoveAll(x => x?.ID == id);
+        DataSource.s_ordersArr?.Remove(res.First());
     }
 
     public Order Read(int id)//return the obj

@@ -2,6 +2,8 @@
 //Initializes the arrays with random data
 //10 products, 20 orders, 40 order items
 using DO;
+using System.Security.Cryptography;
+
 namespace Dal;
 
 internal static class DataSource
@@ -11,12 +13,15 @@ internal static class DataSource
     internal static List<Product?> s_productsArr;
     internal static List<Order?> s_ordersArr;
     internal static List<OrderItem?> s_ordersItemArr;
+
+    
     static DataSource()//cnsrt
     {
         s_productsArr = new List<Product?>();
         s_ordersArr = new List<Order?>();
         s_ordersItemArr = new List<OrderItem?>();
         s_Initialize(); 
+        
     }
 
     private static void addOrder(Order o1)
