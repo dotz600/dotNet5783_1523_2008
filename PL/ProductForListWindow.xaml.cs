@@ -51,7 +51,7 @@ public partial class ProductForListWindow : Window
         if (ProductSelector.SelectedItem.ToString() == BO.Categories.None.ToString())
             ListViewProductForList.ItemsSource = bl?.Product.ReadAll();
         else
-            ListViewProductForList.ItemsSource = bl?.Product.ReadAll(x => x?.Category.ToString() != ProductSelector.SelectedItem.ToString() );
+            ListViewProductForList.ItemsSource = bl?.Product.ReadAll(x => x?.Category.ToString() == ProductSelector.SelectedItem.ToString() );
     }
 
     private void ListViewProductForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)

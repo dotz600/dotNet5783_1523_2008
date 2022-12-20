@@ -23,12 +23,10 @@ public class DalProduct : IProduct
 
     public Product Read(int id)
     {
-        foreach(Product? myPro in DataSource.s_productsArr)
-        {
-            if (myPro?.ID == id)
-                return (Product)myPro;
-        }
-        throw new ObjNotFoundException("Product doesn't found");
+        var res = DataSource.s_productsArr.Find(x => x?.ID == id);
+        if (res == null)
+            throw new ObjNotFoundException("Product doesn't found");
+        return (Product)res;
     }
     
     public IEnumerable<Product?> ReadAll(Func<Product?, bool>? predicate = null)

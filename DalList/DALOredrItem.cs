@@ -8,8 +8,8 @@ internal class DalOredrItem :IOrderItem
 {
     public int Create(OrderItem Ot)//add new obj to the data base
     {
-        var y = DataSource.s_ordersItemArr.Find(obj => obj?.OrderID == Ot.OrderID && obj?.ProductID == Ot.ProductID);//search if the obj allready in data base
-        if (y != null)
+        var res = DataSource.s_ordersItemArr.Find(obj => obj?.OrderID == Ot.OrderID && obj?.ProductID == Ot.ProductID);//search if the obj allready in data base
+        if (res != null)
             throw new ObjExistException("Order item allready found");
 
         // add the new orderItem in the data base

@@ -39,8 +39,14 @@ internal class Product : IProduct
                 throw new BO.NegativeIDException("negetive id");
             DO.Product p = Dal?.Product.Read(id) ?? throw new NullReferenceException();
         }
-        catch(BO.NegativeIDException ex) { throw ex; }
-        catch(DalApi.ObjNotFoundException ex) { throw new BO.ReadObjectFailedException("there is no product to delete", ex); }
+        catch(BO.NegativeIDException ex) 
+        { 
+            throw ex;
+        }
+        catch(DalApi.ObjNotFoundException ex) 
+        { 
+            throw new BO.ReadObjectFailedException("there is no product to delete", ex); 
+        }
         try
         {
             //search the product id in all order item, if product dont found wiil throw exp and will catch it next,
@@ -126,14 +132,19 @@ internal class Product : IProduct
             List<BO.ProductForList?> res = new();
             IBl bl = new Bl(); //for operait the convertion function from ProductForList 
 
-            foreach (var DOproduct in Dal?.Product.ReadAll()!)
-                if (DOproduct != null)
-                    res.Add(bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct));//convert the DOproduct to BoProduct, then add it to list
-            
+            var listReturn = from DOproduct in Dal?.Product.ReadAll()
+                             where (DOproduct != null)
+                             select bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct);
+           
             if (predicate != null)//if the user ask to read with predicate, will remove from res all the !predcate 
-                res.RemoveAll(x => predicate(x));
+            {
+               listReturn = from x in listReturn
+                            where predicate(x)
+                            select x;
+            }
 
-            return res;
+            return listReturn.ToList();
+
         }
         catch (Exception ex)
         {
