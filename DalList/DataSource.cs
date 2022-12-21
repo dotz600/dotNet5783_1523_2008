@@ -79,9 +79,9 @@ internal static class DataSource
                 CustomerName = "Avi" + i,
                 CustomerEmail = "Avi" + i + "@gmail.com",
                 CustomerAdress = "jerusalem" + i,
-                OrderDate = DateTime.MinValue,
-                ShipDate = DateTime.MinValue,
-                DeliveryDate = DateTime.MinValue
+                OrderDate = null,
+                ShipDate = null,
+                DeliveryDate = null
             });
         }
 

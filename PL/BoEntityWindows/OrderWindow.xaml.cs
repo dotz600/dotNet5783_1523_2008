@@ -26,15 +26,22 @@ namespace PL.BoEntityWindows
         {
             InitializeComponent();
             orderStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));//set list of statuses
-            orderStatusSelector.SelectedIndex = 4;//choose default value(None)
+            orderStatusSelector.SelectedIndex = 3;//choose default value(None)
             ListViewOrders.ItemsSource = bl.Order.ReadAll();//set list of Orders
         }
         private void orderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //filter products by category, if category = None, will show all products
+        //filter Orders by status, if status = None, will show all orders
         {
-            if (orderStatusSelector.SelectedItem.ToString() == BO.Categories.None.ToString())
+            if (orderStatusSelector.SelectedItem.ToString() == BO.OrderStatus.None.ToString())
                 ListViewOrders.ItemsSource = bl?.Order.ReadAll();
-            
+            else
+            {
+                ListViewOrders.ItemsSource = from order in bl?.Order.ReadAll()
+                                             where (order.Status == (BO.OrderStatus)orderStatusSelector.SelectedItem)
+                                             select order;
+            }
+
+
         }
         private void ListViewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
