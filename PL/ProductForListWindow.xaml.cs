@@ -30,8 +30,6 @@ public partial class ProductForListWindow : Window
         ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
         EventArgs args = new();
         ProductSelector.SelectedIndex = 9;//choose default value(None)
-
-
         ListViewProductForList.ItemsSource = bl.Product.ReadAll();//set list of products
 
     }
@@ -63,5 +61,11 @@ public partial class ProductForListWindow : Window
             UpdateProductWindow updateProductWindow = new(p){ bl = bl};
             updateProductWindow.ShowDialog();
         }
+    }
+
+    private void Order_page_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+        new OrderWindow().Show();
     }
 }

@@ -146,7 +146,7 @@ internal class Cart : ICart
                         Price = ot.TotalPrice
                     };
                     Dal?.OrderItem.Create(DOot);
-                } //make new order item and push it to date source
+                } //make new order item and push it to data source
                 if (ot != null)
                 {
                     DO.Product p = Dal?.Product.Read(ot.ProductID) ?? throw new NullReferenceException();

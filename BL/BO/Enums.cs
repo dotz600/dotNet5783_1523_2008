@@ -24,6 +24,7 @@ public enum OrderStatus
 {
     ConfirmedOrder, //when the costumer paied for the order
     Sent, //when the order was sent
-    Provided //when the costumer recived the order
+    Provided, //when the costumer recived the order
+    None
 }
 

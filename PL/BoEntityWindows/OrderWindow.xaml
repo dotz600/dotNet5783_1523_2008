@@ -6,7 +6,39 @@
         xmlns:local="clr-namespace:PL.BoEntityWindows"
         mc:Ignorable="d"
         Title="OrderWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Name="OrderGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="430*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="0"
+            VerticalAlignment="Stretch" Width="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+        </Grid>
+        <Button x:Name="Product_page" Content="Product Window" Grid.Row="2" HorizontalAlignment="Left" Margin="5" Padding="5" Click="Product_page_Click"/>
+        <ComboBox Name="orderStatusSelector" Margin="464,0,0,0" Height="46" VerticalAlignment="Top" SelectionChanged="orderStatusSelector_SelectionChanged"/>
+        <Label Content="Status:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
+               Grid.Column="0"/>
+        <ListView  MouseDoubleClick="ListViewOrders_MouseDoubleClick" 
+                   Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewOrders">
+
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ID}"/>
+                    <GridViewColumn Header= "Costumer Name" DisplayMemberBinding="{Binding Path = CustomerName}"/>
+                    <GridViewColumn Header= "Status" DisplayMemberBinding="{Binding Path = Status}"/>
+                    <GridViewColumn Header= "Items" DisplayMemberBinding="{Binding Path = AmountOfItems}"/>
+                    <GridViewColumn Header= "Price" DisplayMemberBinding="{Binding Path = TotalPrice}"/>
+                </GridView>
+
+            </ListView.View>
+
+        </ListView>
+
+
     </Grid>
 </Window>

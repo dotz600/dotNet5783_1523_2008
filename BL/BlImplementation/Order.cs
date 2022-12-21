@@ -205,24 +205,19 @@ internal class Order : IOrder
 
     public List<BO.OrderItem?> BuildItemsList(int id)//return a list of all the orderItems that related to a one order
     {
-        List<BO.OrderItem?> listReturn = new();
-        foreach (DO.OrderItem? doi in Dal?.OrderItem.ReadAll()!)
-        {
-            if (doi?.OrderID == id)//if true, build an BO.OrderItem object, and push to the list
-            {
-                BO.OrderItem boi = new()
-                {
-                    ID = (int)doi?.OrderID!,
-                    Amount = (int)doi?.Amount!,
-                    Name = Dal?.Product.Read(doi?.ProductID ?? 0).Name,
-                    Price = (double)doi?.Price!,
-                    ProductID = (int)doi?.ProductID!,
-                    TotalPrice = (double)doi?.Price! * (int)doi?.Amount!
-                };
-                listReturn.Add(boi);
-            }
-        }
-        return listReturn;
+        var listReturn = from doi in Dal?.OrderItem.ReadAll()
+                         where (doi?.OrderID == id)
+                         select (new BO.OrderItem
+                         {
+                             ID = (int)doi?.OrderID!,
+                             Amount = (int)doi?.Amount!,
+                             Name = Dal?.Product.Read(doi?.ProductID ?? 0).Name,
+                             Price = (double)doi?.Price!,
+                             ProductID = (int)doi?.ProductID!,
+                             TotalPrice = (double)doi?.Price! * (int)doi?.Amount!
+                         });
+
+        return listReturn.ToList();
     }
     public void CalcAmountAndPrice(ref int countAmountOfItems, ref double price, int? id)//search for all the products for the same order and return the price and the sum amount
     {

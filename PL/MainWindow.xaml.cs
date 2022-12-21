@@ -1,5 +1,6 @@
 ﻿
 using PL.BoEntityWindows;
+using PL.BoEntityWindows.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,9 +27,7 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
-        
         InitializeComponent();
-       
     }
     private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
 
