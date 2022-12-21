@@ -43,6 +43,7 @@ namespace PL.BoEntityWindows.Admin
                 MessageBox.Show(ex.Message, ex.Message , MessageBoxButton.OK, MessageBoxImage.Hand
                                 , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
             }
+                this.Close();
         }
         private void InitializeFields(int id)
         {
