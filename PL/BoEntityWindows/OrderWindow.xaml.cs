@@ -29,7 +29,7 @@ namespace PL.BoEntityWindows
             orderStatusSelector.SelectedIndex = 3;//choose default value(None)
             ListViewOrders.ItemsSource = bl.Order.ReadAll();//set list of Orders
         }
-        private void orderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void OrderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //filter Orders by status, if status = None, will show all orders
         {
             if (orderStatusSelector.SelectedItem.ToString() == BO.OrderStatus.None.ToString())

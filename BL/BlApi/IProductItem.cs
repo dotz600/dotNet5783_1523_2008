@@ -17,5 +17,5 @@ namespace BlApi;
 /// </summary>
 public interface IProductItem
 {
-
+    IEnumerable<BO.ProductItem> ReadAll(Func<BO.ProductItem, bool>? predicate = null);
 }
