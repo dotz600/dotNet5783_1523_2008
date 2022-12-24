@@ -7,10 +7,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/dotzImage.jpg"/>
+        </Grid.Background>
 
-        <Button Content="Admin" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontStyle ="Italic" FontWeight="Bold" Click="Show_Admin_Screen_Click" Width="177"/>
-        <Button Content="New Order" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontStyle ="Italic" FontWeight="Bold"  Margin="0,247,0,0" Click="Show_New_Order_Screen_Click" Width="177"/>
-        <Button Content="Track Your Order" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontStyle ="Italic" FontWeight="Bold"  Margin="0,302,0,0" Click="Show_New_Track_Screen_Click" Width="177"/>
+        <Button Content="Admin" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontStyle ="Italic" FontWeight="Bold" Click="Show_Admin_Screen_Click" Width="177" Margin="0,10,0,80" BorderBrush="Black"/>
+        <Button Content="New Order" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontStyle ="Italic" FontWeight="Bold"  Margin="0,215,0,80" Click="Show_New_Order_Screen_Click" Width="177"/>
+        <Button Content="Track Your Order" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontStyle ="Italic" FontWeight="Bold"  Margin="0,265,0,0" Click="Show_New_Track_Screen_Click" Width="177"/>
 
         <TabPanel>
 

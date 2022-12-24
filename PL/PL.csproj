@@ -15,6 +15,14 @@
 	  </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="dotzImage.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="dotzImage.jpg" />
   </ItemGroup>  
 </Project>

@@ -79,7 +79,7 @@ namespace PL.New_order
         private void WatchCartButton_Click(object sender, RoutedEventArgs e)
         {
             new CartView(cart).Show();
-            
+            this.Close();
         }
     }
 }

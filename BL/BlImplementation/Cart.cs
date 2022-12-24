@@ -13,7 +13,7 @@ internal class Cart : ICart
     {
         cart.Items ??= new List<BO.OrderItem?>();//if the list is null make new one
 
-        BO.OrderItem ot = SearchInCart(cart, productId);
+        BO.OrderItem ot = SearchInCart(cart, productId);//return the order item if found or an empty one
         try
         {
             DO.Product p = Dal?.Product.Read(productId) ?? throw new NullReferenceException();
@@ -21,7 +21,7 @@ internal class Cart : ICart
             if (p.InStock <= 0)
                 throw new BO.NegativeAmountException("the product not in stock");
 
-            if (ot.ID != 0) ///the product found in the cart
+            if (ot.ProductID != 0) ///the product found in the cart
             {
                 ot.Amount++;
                 ot.TotalPrice += ot.Price;

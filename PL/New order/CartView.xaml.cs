@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,5 +36,13 @@ public partial class CartView : Window
         this.Close();
         new Payment(tmpCart).Show();
 
+    }
+
+    private void Cart_list_view_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var slected = (BO.OrderItem)Cart_list_view.SelectedItem;
+        this.Close();
+        new UpdateAmount(tmpCart, slected.ProductID).Show();
+        
     }
 }
