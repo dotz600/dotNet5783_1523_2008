@@ -21,10 +21,28 @@ namespace PL.BoEntityWindows
     public partial class trackOrderWindow : Window
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        public trackOrderWindow(int id)
+        public trackOrderWindow(int id = 0)
         {
             InitializeComponent();
-           var x = (bl.Order.TrackingOrder(id));
+            if(id != 0)
+            {
+                var x = (bl.Order.TrackingOrder(id));
+                ID.Content = "ID : " + x.ID.ToString();
+                Status.Content = "Status : " + x.Status.ToString();
+                confirmed.Content = x.Events[0].os.ToString() + ": " + x.Events[0].dt.ToString();
+                if (x.Events.Count > 1)
+                    sent.Content = x.Events[1].os.ToString() + ": " + x.Events[1].dt.ToString();
+                if (x.Events.Count > 2)
+                    provided.Content = x.Events[2].os.ToString() + ": " + x.Events[2].dt.ToString();
+            }
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string tmp = IdToTrack.Text;
+            int id = int.Parse(tmp);
+            var x = (bl.Order.TrackingOrder(id));
             ID.Content = "ID : " + x.ID.ToString();
             Status.Content = "Status : " + x.Status.ToString();
             confirmed.Content = x.Events[0].os.ToString() + ": " + x.Events[0].dt.ToString();

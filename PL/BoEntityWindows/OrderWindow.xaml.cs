@@ -61,9 +61,9 @@ namespace PL.BoEntityWindows
         private void TrackOrder_Click(object sender, RoutedEventArgs e)
         {
             if (ListViewOrders.SelectedItem != null)
-            {
                 new trackOrderWindow(((BO.OrderForList)ListViewOrders.SelectedItem).ID).Show();
-            }
+            else
+                new trackOrderWindow().Show();
         }
     }
 }
