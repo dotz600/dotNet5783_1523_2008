@@ -9,7 +9,8 @@
     <Grid Name="UpGrid" HorizontalAlignment="Stretch" Height="auto" Grid.Row="1"
 VerticalAlignment="Stretch" Width="auto">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="191*"/>
+            <ColumnDefinition Width="147*"/>
+            <ColumnDefinition Width="44*"/>
             <ColumnDefinition Width="133*"/>
             <ColumnDefinition Width="76*"/>
         </Grid.ColumnDefinitions >
@@ -17,22 +18,25 @@ VerticalAlignment="Stretch" Width="auto">
             <RowDefinition Height="600*"/>
             <RowDefinition Height="40*"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="Product_item_list_view" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="3" SelectionChanged="Product_item_list_view_SelectionChanged" MouseDoubleClick="Product_item_list_MouseDoubleClick" >
+        <ListView x:Name="Product_item_list_view" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="4" MouseDoubleClick="Product_item_list_MouseDoubleClick" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ID}"/>
                     <GridViewColumn Header= "Name" DisplayMemberBinding="{Binding Path = Name}"/>
                     <GridViewColumn Header= "Price" DisplayMemberBinding="{Binding Path = Price}"/>
                     <GridViewColumn Header= "Amount" DisplayMemberBinding="{Binding Path = Amount}"/>
-                    <GridViewColumn Header= "Category" DisplayMemberBinding="{Binding Path = Category}"/>
+                    <GridViewColumn x:Name="CategoryColumn" Header= "Category"  DisplayMemberBinding="{Binding Path = Category}"/>
                     <GridViewColumn Header= "In Stock" DisplayMemberBinding="{Binding Path = InStock}"/>
+
                 </GridView>
 
             </ListView.View>
+
         </ListView>
-        <ComboBox x:Name="CategorySort" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="152" SelectionChanged="CategorySort_SelectionChanged" ></ComboBox>
-        <Label Content="Category" HorizontalAlignment="Left" Margin="208,-2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.75,0.292" Width="69" Height="28" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Button x:Name="WatchCartButton" Grid.Column="2" Content="Watch Cart" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="38" Width="152" Click="WatchCartButton_Click"/>
+        <ComboBox x:Name="CategorySort" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top" Width="152" SelectionChanged="CategorySort_SelectionChanged" ></ComboBox>
+        <Label Content="Category" HorizontalAlignment="Left" Margin="192,-3,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.75,0.292" Width="74" Height="28" Grid.Column="2"/>
+        <Button x:Name="WatchCartButton" Grid.Column="3" Content="Watch Cart" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="38" Width="152" Click="WatchCartButton_Click"/>
+        <CheckBox Grid.Column="2" Content="Group By Catagory" HorizontalAlignment="Left" Margin="0,4,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
 
     </Grid>
 </Window>

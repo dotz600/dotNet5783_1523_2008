@@ -55,13 +55,7 @@ namespace PL.New_order
             }
 
         }
-
-        private void Product_item_list_view_SelectionChanged(object sender, SelectionChangedEventArgs e)//need to do - sort by category
-        {
-
-
-            //Product_item_list_view.ItemsSource = from x in bl?.ProductItem.ReadAll() group x by x.Category;
-        }
+        
         private void Product_item_list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var tmp = (BO.ProductItem)Product_item_list_view.SelectedItem;
@@ -80,6 +74,26 @@ namespace PL.New_order
         {
             new CartView(cart).Show();
             this.Close();
+        }
+
+
+        private void CategoryColumn_Selected(object sender, RoutedEventArgs e)
+        {
+            Product_item_list_view.ItemsSource = from x in bl?.ProductItem.ReadAll() group x by x.Category;
+            
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            Product_item_list_view.ItemsSource = from x in bl?.ProductItem.ReadAll()
+                                                 orderby x.Category 
+                                                 select x;
+
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            Product_item_list_view.ItemsSource = bl?.ProductItem.ReadAll();
         }
     }
 }

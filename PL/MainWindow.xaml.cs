@@ -26,15 +26,12 @@ public partial class MainWindow : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-    public MainWindow()
-    {
-        InitializeComponent();
-    }
+    public MainWindow() => InitializeComponent();
     private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
 
     private void Show_New_Order_Screen_Click(object sender, RoutedEventArgs e) => new Catalog().Show();
 
     private void Show_New_Track_Screen_Click(object sender, RoutedEventArgs e) => new trackOrderWindow().Show();
-
+    
     
 }

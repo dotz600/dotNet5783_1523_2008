@@ -36,8 +36,9 @@ public partial class Payment : Window
         try
         {
             bl?.Cart.CartConfirmation(cart, name, email, addres);
-            this.Close();
             cart = new BO.Cart();
+            Page page = new ThankYouPage();
+            this.Content = page;
         }
         catch(Exception ex) 
         {
