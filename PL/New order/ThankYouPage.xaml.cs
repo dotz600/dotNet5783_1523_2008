@@ -13,16 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace PL.New_order
+namespace PL.New_order;
+
+/// <summary>
+/// Interaction logic for ThankYouPage.xaml
+/// </summary>
+public partial class ThankYouPage : Page
 {
-    /// <summary>
-    /// Interaction logic for ThankYouPage.xaml
-    /// </summary>
-    public partial class ThankYouPage : Page
-    {
-        public ThankYouPage()
-        {
-            InitializeComponent();
-        }
-    }
+    public ThankYouPage() => InitializeComponent();
 }

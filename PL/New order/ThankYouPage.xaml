@@ -10,12 +10,18 @@
 
     <Grid HorizontalAlignment="Right" Width="300">
 
+
+
         <Grid.RowDefinitions>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="10*" ></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Thank You For Your Order! See You Next Time" VerticalAlignment="Center" Height="112" Width="230" FontWeight="Bold" FontFamily="Segoe Print" TextAlignment="Center" FontSize="18"/>
-        <Image HorizontalAlignment="Center" Height="114" Margin="0,86,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" Source="/waving-hand.jpg"/>
+        <Image HorizontalAlignment="Center" Height="240" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="270" Source="/New order/waving-hand.png">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="/New order/waving-hand.png"/>
+            </Image.OpacityMask>
+        </Image>
 
     </Grid>
 </Page>

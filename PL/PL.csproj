@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <None Remove="dotzImage.jpg" />
+    <None Remove="New order\waving-hand.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,5 +25,6 @@
 
   <ItemGroup>
     <Resource Include="dotzImage.jpg" />
+    <Resource Include="New order\waving-hand.png" />
   </ItemGroup>  
 </Project>
