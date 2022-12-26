@@ -28,11 +28,8 @@ public partial class UpdateProductWindow : Window
         if (data != null)//if there is product to update, set unchangeable values, ID name and category
         {
             textBoxUpdateProductID.Text = data.ID.ToString();
-            textBoxUpdateProductID.IsReadOnly = true;
             textBoxUpdateProductName.Text = data.Name;
-            textBoxUpdateProductName.IsReadOnly = true;
             CategoryComboBoxUpdate.SelectedItem = data.Category;
-            CategoryComboBoxUpdate.IsEnabled = false;
         }
     }
     public BlApi.IBl? bl = BlApi.Factory.Get();//pass data

@@ -42,14 +42,22 @@ namespace PL.BoEntityWindows
         {
             string tmp = IdToTrack.Text;
             int id = int.Parse(tmp);
-            var x = (bl.Order.TrackingOrder(id));
-            ID.Content = "ID : " + x.ID.ToString();
-            Status.Content = "Status : " + x.Status.ToString();
-            confirmed.Content = x.Events[0].os.ToString() + ": " + x.Events[0].dt.ToString();
-            if (x.Events.Count > 1)
-                sent.Content = x.Events[1].os.ToString() + ": " + x.Events[1].dt.ToString();
-            if (x.Events.Count > 2)
-                provided.Content = x.Events[2].os.ToString() + ": " + x.Events[2].dt.ToString();
+            try
+            {
+                var x = (bl?.Order.TrackingOrder(id));
+                ID.Content = "ID : " + x?.ID.ToString();
+                Status.Content = "Status : " + x?.Status.ToString();
+                confirmed.Content = x?.Events[0].os.ToString() + ": " + x?.Events[0].dt.ToString();
+                if (x?.Events.Count > 1)
+                    sent.Content = x?.Events[1].os.ToString() + ": " + x?.Events[1].dt.ToString();
+                if (x?.Events.Count > 2)
+                    provided.Content = x?.Events[2].os.ToString() + ": " + x?.Events[2].dt.ToString();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Order does not exist, please try again!", "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
+         , MessageBoxResult.Cancel);
+            }
         }
     }
 }

@@ -42,7 +42,7 @@ namespace PL.New_order
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
-              , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
+              , MessageBoxResult.Cancel);
             }
             this.Close();
             new CartView(Cart).Show();

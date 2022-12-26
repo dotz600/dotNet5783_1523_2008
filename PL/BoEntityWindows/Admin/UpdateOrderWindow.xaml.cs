@@ -40,8 +40,8 @@ namespace PL.BoEntityWindows.Admin
             }
             catch(UpdateObjectFailedException ex)
             {
-                MessageBox.Show(ex.Message, ex.Message , MessageBoxButton.OK, MessageBoxImage.Hand
-                                , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
+                MessageBox.Show(ex.Message, "Exception" , MessageBoxButton.OK, MessageBoxImage.Hand
+                                , MessageBoxResult.Cancel);
             }
                 this.Close();
         }

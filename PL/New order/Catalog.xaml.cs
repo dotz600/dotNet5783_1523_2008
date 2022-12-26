@@ -33,7 +33,7 @@ namespace PL.New_order
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
-                , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
+                , MessageBoxResult.Cancel);
             }
             CategorySort.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
             CategorySort.SelectedIndex = 9;//choose default value(None)
@@ -51,7 +51,7 @@ namespace PL.New_order
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
-                , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
+                , MessageBoxResult.Cancel);
             }
 
         }
@@ -66,7 +66,7 @@ namespace PL.New_order
             catch (Exception ex) 
             {
                 MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
-                , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
+                , MessageBoxResult.Cancel);
             }
         }
 

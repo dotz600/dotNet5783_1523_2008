@@ -41,7 +41,7 @@ public partial class AddProductWindow : Window
         catch (Exception ex)
         {
             MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK , MessageBoxImage.Hand
-          , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading); 
+          , MessageBoxResult.Cancel); 
         }
     }
 

@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.New_order"
         mc:Ignorable="d"
-        Title="CartView" Height="460" Width="808">
-    <Grid Margin="0,0,0,-6" RenderTransformOrigin="0.493,0.33">
+        Title="CartView" Height="450" Width="800">
+    <Grid>
+     
+        <Grid.RowDefinitions>
+            <RowDefinition Height="370"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
 
-
-        <ListView x:Name="Cart_list_view" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="Cart_list_view_SelectionChanged" RenderTransformOrigin="0.498,0.546">
+        <ListView x:Name="Cart_list_view" Grid.Row="0" Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="Cart_list_view_SelectionChanged" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ProductID}"/>
@@ -21,8 +25,8 @@
 
             </ListView.View>
         </ListView>
-
-        <Button x:Name="confirmCartButton" Content="Confirm Cart" HorizontalAlignment="Left" VerticalAlignment="Top" Height="42" Width="132" Click="confirmCartButton_Click" Margin="658,388,0,0"/>
-
+        
+            <Button x:Name="confirmCartButton" VerticalAlignment="Center"  HorizontalAlignment="Right" Content="Confirm Cart" Grid.Column="1" Grid.Row="1" Height="35" Width="150" Click="confirmCartButton_Click"/>
+       
     </Grid>
 </Window>
