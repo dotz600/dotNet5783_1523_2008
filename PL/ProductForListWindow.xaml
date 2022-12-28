@@ -30,11 +30,12 @@
                    Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewProductForList">
            
                 <ListView.View>
+                    
                     <GridView>
                         <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ID}"/>
                         <GridViewColumn Header= "Name" DisplayMemberBinding="{Binding Path = Name}"/>
                         <GridViewColumn Header= "Category" DisplayMemberBinding="{Binding Path = Category}"/>
-                        <GridViewColumn Header= "Price" DisplayMemberBinding="{Binding Path = Price}"/>
+                        <GridViewColumn Header= "Price" DisplayMemberBinding="{Binding Path = Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </GridView>
                     
                 </ListView.View>

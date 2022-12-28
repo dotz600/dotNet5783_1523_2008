@@ -4,6 +4,26 @@
              xmlns:local="clr-namespace:PL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <LinearGradientBrush x:Key="buttonBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+            <GradientStop Color ="#FFFFC934" Offset="0"/>
+            <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
+        </LinearGradientBrush>
+
+        <Style TargetType="Button">
+            <Setter Property="FontFamily" Value="Harrington"></Setter>
+            <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
+            <Setter Property="FontFamily" Value="Harrington"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+        <Style TargetType="Grid">
+            <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
+        </Style>
     </Application.Resources>
 </Application>

@@ -58,8 +58,8 @@ public partial class ProductForListWindow : Window
         if (ListViewProductForList.SelectedItem != null)
         {
             BO.ProductForList p = (BO.ProductForList)ListViewProductForList.SelectedItem;
-            UpdateProductWindow updateProductWindow = new(p){ bl = bl};
-            updateProductWindow.ShowDialog();
+            UpdateProductWindow updateProductWindow = new(p){ bl = bl, prevWin = this};
+            updateProductWindow.Show();
         }
     }
 

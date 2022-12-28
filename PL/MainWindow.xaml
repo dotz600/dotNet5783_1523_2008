@@ -11,12 +11,12 @@
             <ImageBrush ImageSource="/dotzImage.jpg"/>
         </Grid.Background>
 
-        <Button Content="Admin" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontStyle ="Italic" FontWeight="Bold" Click="Show_Admin_Screen_Click" Width="177" Margin="0,10,0,80" BorderBrush="Black"/>
-        <Button Content="New Order" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontStyle ="Italic" FontWeight="Bold"  Margin="0,215,0,80" Click="Show_New_Order_Screen_Click" Width="177"/>
-        <Button Content="Track Your Order" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontStyle ="Italic" FontWeight="Bold"  Margin="0,265,0,0" Click="Show_New_Track_Screen_Click" Width="177"/>
+        <Button Background="{StaticResource buttonBackground}" Content="Admin" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontStyle ="Italic" Click="Show_Admin_Screen_Click" Width="177" Margin="0,10,0,80" BorderBrush="Black" FontFamily="Harrington" FontWeight="Bold"/>
+        <Button Background="{StaticResource buttonBackground}" Content="New Order" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontStyle ="Italic" FontWeight="Bold"  Margin="0,215,0,80" Click="Show_New_Order_Screen_Click" Width="177"/>
+        <Button Background="{StaticResource buttonBackground}" Content="Track Your Order" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontStyle ="Italic" FontWeight="Bold"  Margin="0,265,0,0" Click="Show_New_Track_Screen_Click" Width="177"/>
 
         <TabPanel>
-
+        
         </TabPanel>
     </Grid>
 </Window>

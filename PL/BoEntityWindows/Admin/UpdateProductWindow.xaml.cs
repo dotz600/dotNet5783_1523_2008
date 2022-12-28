@@ -33,13 +33,17 @@ public partial class UpdateProductWindow : Window
         }
     }
     public BlApi.IBl? bl = BlApi.Factory.Get();//pass data
+    public ProductForListWindow prevWin;//preview window
     private void Update_Product_Confirmation_Click(object sender, RoutedEventArgs e)//Update product and open PFL win
     {
         try
         {
             BO.Product p = Update_product();
             bl!.Product.Update(p);
-            new ProductForListWindow().Show();
+            //if (prevWin != null)
+            this.Close();
+                prevWin.ListViewProductForList.Items.Refresh();
+           // new ProductForListWindow().Show();
         }
         catch (Exception ex)
         {

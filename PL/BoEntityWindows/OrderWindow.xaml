@@ -31,7 +31,7 @@
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ID}"/>
-                    <GridViewColumn Header= "Costumer Name" DisplayMemberBinding="{Binding Path = CustomerName}"/>
+                    <GridViewColumn Header= "Costumer Name" DisplayMemberBinding="{Binding Path = CustomerName, Mode=OneWay}"/>
                     <GridViewColumn Header= "Status" DisplayMemberBinding="{Binding Path = Status}"/>
                     <GridViewColumn Header= "Items" DisplayMemberBinding="{Binding Path = AmountOfItems}"/>
                     <GridViewColumn Header= "Price" DisplayMemberBinding="{Binding Path = TotalPrice}"/>
