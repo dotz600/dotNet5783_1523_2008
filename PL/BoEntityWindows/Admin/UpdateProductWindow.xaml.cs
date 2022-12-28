@@ -40,10 +40,10 @@ public partial class UpdateProductWindow : Window
         {
             BO.Product p = Update_product();
             bl!.Product.Update(p);
-            //if (prevWin != null)
+            prevWin.refresh();
             this.Close();
-                prevWin.ListViewProductForList.Items.Refresh();
-           // new ProductForListWindow().Show();
+             
+           
         }
         catch (Exception ex)
         {

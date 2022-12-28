@@ -3,6 +3,7 @@ using BO;
 using PL.BoEntityWindows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,14 +25,15 @@ namespace PL;
 public partial class ProductForListWindow : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
+    ObservableCollection<ProductForList> productForLists = new ObservableCollection<ProductForList>();
     public ProductForListWindow()
     {
         InitializeComponent();
-        ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
+        foreach (var x in bl.Product.ReadAll()) productForLists.Add(x);
         EventArgs args = new();
         ProductSelector.SelectedIndex = 9;//choose default value(None)
-        ListViewProductForList.ItemsSource = bl.Product.ReadAll();//set list of products
-
+        ListViewProductForList.ItemsSource = productForLists;//set list of products
+        ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
     }
 
     private void AddProductButton_Click(object sender, RoutedEventArgs e)
@@ -41,15 +43,22 @@ public partial class ProductForListWindow : Window
         addProductWindow.Show();
     }
 
-  
+
 
     private void ProductSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //filter products by category, if category = None, will show all products
+    //filter products by category, if category = None, will show all products
     {
         if (ProductSelector.SelectedItem.ToString() == BO.Categories.None.ToString())
-            ListViewProductForList.ItemsSource = bl?.Product.ReadAll();
+        {
+            productForLists.Clear();
+            foreach (var x in bl.Product.ReadAll()) productForLists.Add(x);
+        }
         else
-            ListViewProductForList.ItemsSource = bl?.Product.ReadAll(x => x?.Category.ToString() == ProductSelector.SelectedItem.ToString() );
+        {
+            productForLists.Clear();
+            foreach (var x in (bl?.Product.ReadAll(x => x?.Category.ToString() == ProductSelector.SelectedItem.ToString())) ) productForLists.Add(x);
+        }
+       
     }
 
     private void ListViewProductForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -67,5 +76,12 @@ public partial class ProductForListWindow : Window
     {
         this.Close();
         new OrderWindow().Show();
+       
+    }
+    public void refresh()
+    {
+        productForLists.Clear();
+        foreach (var x in bl.Product.ReadAll()) productForLists.Add(x);
+        ProductSelector.SelectedIndex = 9;
     }
 }

@@ -26,7 +26,7 @@
         <ComboBox Name="ProductSelector" Margin="464,0,0,0" Height="46" VerticalAlignment="Top" SelectionChanged="ProductSelector_SelectionChanged"/>
         <Label Content="Categories:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
                Grid.Column="0"/>
-        <ListView  MouseDoubleClick="ListViewProductForList_MouseDoubleClick" 
+        <ListView  MouseDoubleClick="ListViewProductForList_MouseDoubleClick" ItemsSource="{Binding}"
                    Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewProductForList">
            
                 <ListView.View>

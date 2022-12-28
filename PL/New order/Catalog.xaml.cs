@@ -28,7 +28,7 @@ namespace PL.New_order
             InitializeComponent();
             try
             {
-                Product_item_list_view.ItemsSource = bl.ProductItem.ReadAll();
+                this.DataContext = bl.ProductItem.ReadAll();
             }
             catch (Exception ex)
             {

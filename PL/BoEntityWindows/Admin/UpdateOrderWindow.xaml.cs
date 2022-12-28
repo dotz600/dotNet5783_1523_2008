@@ -26,7 +26,7 @@ namespace PL.BoEntityWindows.Admin
             InitializeComponent();
             InitializeFields(id);
         }
-
+        public OrderWindow prevWin;
         private void Update_Order_Confirmation_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -37,6 +37,7 @@ namespace PL.BoEntityWindows.Admin
                     bl!.Order.UpdateShipping(int.Parse(textBoxUpdateOrderID.Text));
                 if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.Provided)
                     bl!.Order.UpdateDelivery(int.Parse(textBoxUpdateOrderID.Text));
+                prevWin.refresh();
             }
             catch(UpdateObjectFailedException ex)
             {
@@ -61,7 +62,6 @@ namespace PL.BoEntityWindows.Admin
             foreach (BO.OrderStatus status in x)
                 orderStatuses.Add(status);
             StatusComboBoxUpdateOrder.ItemsSource = from y in orderStatuses where y != OrderStatus.None select y;
-
             StatusComboBoxUpdateOrder.SelectedItem = order?.Status;
             ItemsComboBoxUpdateOrder.ItemsSource = order?.Items;
         }
