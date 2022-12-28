@@ -32,7 +32,7 @@ namespace PL.BoEntityWindows.Admin
             try
             {
                 if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.ConfirmedOrder)
-                    throw new BO.UpdateObjectFailedException("Order allredy sent");
+                    throw new BO.UpdateObjectFailedException("Order allredy Confirm");
                 if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.Sent)
                     bl!.Order.UpdateShipping(int.Parse(textBoxUpdateOrderID.Text));
                 if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.Provided)

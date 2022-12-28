@@ -41,9 +41,19 @@ namespace PL.BoEntityWindows
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string tmp = IdToTrack.Text;
-            int id = int.Parse(tmp);
+       
             try
             {
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Invalid Input! Try Agian", "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
+         , MessageBoxResult.Cancel);
+            }
+            try
+            {
+                int id = int.Parse(tmp);
+
                 var x = (bl?.Order.TrackingOrder(id));
                 ID.Content = "ID : " + x?.ID.ToString();
                 Status.Content = "Status : " + x?.Status.ToString();
@@ -55,7 +65,7 @@ namespace PL.BoEntityWindows
             }
             catch(Exception ex)
             {
-                MessageBox.Show("Order does not exist, please try again!", "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
+                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
          , MessageBoxResult.Cancel);
             }
         }

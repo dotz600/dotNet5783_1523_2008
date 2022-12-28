@@ -198,7 +198,7 @@ internal class Order : IOrder
         }
         catch (DalApi.ObjNotFoundException ex)
         {
-            throw new BO.ObjectNotExistException("BO.Order.TrackingOrder", ex);
+            throw new BO.ObjectNotExistException("Order does not exist, please try again!", ex);
         }
    
     }
