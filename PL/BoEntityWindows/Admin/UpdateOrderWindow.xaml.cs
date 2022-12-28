@@ -56,7 +56,12 @@ namespace PL.BoEntityWindows.Admin
             textBoxUpdateShipDate.Text = order.ShipDate != null ? order.ShipDate.ToString() : null;
             textBoxUpdateDeliveryDate.Text = order?.DeliveryDate != null ? order.DeliveryDate.ToString() : null;
             textBoxUpdateOrderPrice.Text = order?.TotalPrice != null ? order.TotalPrice.ToString() : null;
-            StatusComboBoxUpdateOrder.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));
+            var x = Enum.GetValues(typeof(BO.OrderStatus));
+            List<BO.OrderStatus> orderStatuses = new List<BO.OrderStatus>();
+            foreach (BO.OrderStatus status in x)
+                orderStatuses.Add(status);
+            StatusComboBoxUpdateOrder.ItemsSource = from y in orderStatuses where y != OrderStatus.None select y;
+
             StatusComboBoxUpdateOrder.SelectedItem = order?.Status;
             ItemsComboBoxUpdateOrder.ItemsSource = order?.Items;
         }
