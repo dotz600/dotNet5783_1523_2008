@@ -21,6 +21,7 @@ namespace PL.New_order;
 /// </summary>
 public partial class CartView : Window
 {
+   
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
     Cart tmpCart;
@@ -30,8 +31,8 @@ public partial class CartView : Window
         Cart_list_view.ItemsSource = cart.Items;
         tmpCart= cart;
     }
-    //need to add update function
-    private void confirmCartButton_Click(object sender, RoutedEventArgs e)
+  
+    private void ConfirmCartButton_Click(object sender, RoutedEventArgs e)
     {
         this.Close();
         new Payment(tmpCart).Show();

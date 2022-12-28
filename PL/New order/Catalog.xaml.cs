@@ -72,16 +72,10 @@ namespace PL.New_order
 
         private void WatchCartButton_Click(object sender, RoutedEventArgs e)
         {
-            new CartView(cart).Show();
-            this.Close();
+            new CartView(cart).ShowDialog();
+            //this.Close();
         }
 
-
-        private void CategoryColumn_Selected(object sender, RoutedEventArgs e)
-        {
-            Product_item_list_view.ItemsSource = from x in bl?.ProductItem.ReadAll() group x by x.Category;
-            
-        }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {

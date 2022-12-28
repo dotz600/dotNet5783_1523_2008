@@ -15,17 +15,16 @@ internal class ProductItem : IProductItem
 
     public IEnumerable<BO.ProductItem> ReadAll(Func<BO.ProductItem, bool>? predicate = null)
     {
-        List<BO.ProductItem> res = new();
-        foreach (var pro in Dal?.Product.ReadAll() ?? throw new Exception())
-        {
-            DO.Product p = pro ?? throw new NullReferenceException();
-            var temp = PruductToProductItem(p);//covert
+        IEnumerable<BO.ProductItem> res ;
+        res = from pro in Dal?.Product.ReadAll()
+              where pro != null
+              let tmp = PruductToProductItem((DO.Product)pro)//convert
+              select tmp; 
 
-            res.Add(temp);//add to result list
-        }
-
-        if(predicate != null )//sort by predicate
-            res.RemoveAll(x => !predicate(x));
+        if (predicate != null )//sort by predicate
+            res = from p in res
+                  where(predicate(p))
+                  select p;
         
         return res;
     }
