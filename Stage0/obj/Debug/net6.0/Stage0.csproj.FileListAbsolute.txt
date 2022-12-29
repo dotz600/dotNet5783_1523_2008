@@ -21,3 +21,11 @@ C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\ne
 C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.dll
 C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\refint\Stage0.dll
 C:\Users\Mordechay\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.pdb
+C:\Users\ohevd\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.csproj.AssemblyReference.cache
+C:\Users\ohevd\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ohevd\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.AssemblyInfoInputs.cache
+C:\Users\ohevd\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.AssemblyInfo.cs
+C:\Users\ohevd\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.csproj.CoreCompileInputs.cache
+C:\Users\ohevd\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.dll
+C:\Users\ohevd\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\refint\Stage0.dll
+C:\Users\ohevd\Source\Repos\dotz600\dotNet5783_1523_2008\Stage0\obj\Debug\net6.0\Stage0.pdb

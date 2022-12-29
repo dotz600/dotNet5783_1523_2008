@@ -26,6 +26,7 @@ internal class Cart : ICart
                 ot.Amount++;
                 ot.TotalPrice += ot.Price;
                 cart.TotalPrice += ot.Price;
+                ot.Name = p.Name;
                 return cart;
             }
             else//not found in cart - will careate new one and add it to cart
@@ -34,6 +35,7 @@ internal class Cart : ICart
                 ot.TotalPrice = p.Price;
                 ot.ProductID = productId;
                 ot.Amount = 1;
+                ot.Name = p.Name;
                 cart.Items.Add(ot);
                 cart.TotalPrice = p.Price;
                 return cart;

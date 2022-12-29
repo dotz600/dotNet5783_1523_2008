@@ -23,13 +23,13 @@ namespace PL.BoEntityWindows
     public partial class OrderWindow : Window
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        ObservableCollection<OrderForList> orderForLists = new ObservableCollection<OrderForList>();
+        ObservableCollection<OrderForList> orderForLists = new();
         public OrderWindow()
         {
             InitializeComponent();
             orderStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));//set list of statuses
             orderStatusSelector.SelectedIndex = 3;//choose default value(None)
-            foreach (var x in bl.Order.ReadAll()) orderForLists.Add(x);
+            foreach (var x in bl!.Order.ReadAll()) orderForLists.Add(x);
             ListViewOrders.ItemsSource = orderForLists;//set list of Orders
         }
         private void OrderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -37,12 +37,12 @@ namespace PL.BoEntityWindows
         {
             if (orderStatusSelector.SelectedItem.ToString() == BO.OrderStatus.None.ToString())
             {
-                refresh();
+                Refresh();
             }
             else
             {
                 orderForLists.Clear();
-                foreach (var order in bl?.Order.ReadAll())
+                foreach (var order in bl!.Order.ReadAll())
                      if (order?.Status == (BO.OrderStatus)orderStatusSelector.SelectedItem)
                            orderForLists.Add(order);
                 ListViewOrders.ItemsSource = orderForLists;
@@ -55,7 +55,7 @@ namespace PL.BoEntityWindows
             if (ListViewOrders.SelectedItem != null)
             {
                 BO.OrderForList order = (BO.OrderForList)ListViewOrders.SelectedItem;
-                UpdateOrderWindow win = new UpdateOrderWindow(order.ID);
+                UpdateOrderWindow win = new(order.ID);
                 win.prevWin = this;
                 win.Show(); 
             }
@@ -74,10 +74,10 @@ namespace PL.BoEntityWindows
             else
                 new trackOrderWindow().Show();
         }
-        public void refresh()
+        public void Refresh()
         {
             orderForLists.Clear();
-            foreach (var x in bl.Order.ReadAll()) orderForLists.Add(x);
+            foreach (var x in bl!.Order.ReadAll()) orderForLists.Add(x);
                  ListViewOrders.ItemsSource = orderForLists;
             orderStatusSelector.SelectedIndex = 3;
         }
