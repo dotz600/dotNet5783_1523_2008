@@ -40,7 +40,10 @@ public partial class ProductForListWindow : Window
     {
         AddProductWindow addProductWindow = new();
         addProductWindow.Bl = bl;//pass the data
-        addProductWindow.Show();
+        addProductWindow.ShowDialog();
+        this.Refresh();
+        ListViewProductForList.ItemsSource = productForLists;//update the list of products
+
     }
 
 
@@ -78,7 +81,7 @@ public partial class ProductForListWindow : Window
         new OrderWindow().Show();
        
     }
-    public void refresh()
+    public void Refresh()
     {
         productForLists.Clear();
         foreach (var x in bl.Product.ReadAll()) productForLists.Add(x);

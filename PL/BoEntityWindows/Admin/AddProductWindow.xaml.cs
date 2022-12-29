@@ -34,7 +34,7 @@ public partial class AddProductWindow : Window
             BO.Product p = Create_product_Add();
             Bl!.Product.Create(p);
             this.Close();
-            new ProductForListWindow().Show();
+            
         }
         catch (Exception ex)
         {

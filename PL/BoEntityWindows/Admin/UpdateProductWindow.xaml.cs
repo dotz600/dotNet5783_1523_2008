@@ -40,7 +40,7 @@ public partial class UpdateProductWindow : Window
         {
             BO.Product p = Update_product();
             bl!.Product.Update(p);
-            prevWin.refresh();
+            prevWin.Refresh();
             this.Close();
              
            
