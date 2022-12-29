@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:PL.BoEntityWindows.Admin"
+        xmlns:local="clr-namespace:PL.BoEntityWindows.Admin" 
+        xmlns:local1="clr-namespace:BO;assembly=BL"
         mc:Ignorable="d"
         Title="UpdateOrderWindow" Height="450" Width="800">
     <Grid Name="UpdateProductGrid"> 
@@ -33,23 +34,23 @@
         <Label Content="Order Details" Width="176" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"  Margin="10,0,0,0" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Arial Black"/>
         <TextBox x:Name="textBoxUpdateOrderID" Width="300" Text="" Grid.Row="1" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Order ID :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1"/>
-        <TextBox x:Name="textBoxUpdateOrderCostumerName" Width="300" Text="" Grid.Row="2" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdateOrderCostumerName" Width="300" Text="{Binding Path=CustomerName}" Grid.Row="2" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Name of costumer :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"/>
-        <TextBox x:Name="textBoxUpdateOrderCostumerEmail" Width="300" Text="" Grid.Row="3" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdateOrderCostumerEmail" Width="300" Text="{Binding Path=CustomerEmail}" Grid.Row="3" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Costumer email :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3"/>
-        <ComboBox x:Name="StatusComboBoxUpdateOrder" Width="300" Focusable="False" Text="" Grid.Row="4" Grid.Column="2"/>
+        <ComboBox x:Name="StatusComboBoxUpdateOrder" SelectedItem="{Binding Path=Status}" Width="300" Focusable="False" Text="" Grid.Row="4" Grid.Column="2"/>
         <Label Content="Order status :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="4"/>
-        <TextBox x:Name="textBoxUpdateOrderDate" Width="300" Text="" Grid.Row="5" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdateOrderDate" Width="300" Text="{Binding Path=OrderDate}" Grid.Row="5" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Order date :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="5"/>
-        <TextBox x:Name="textBoxUpdatePaymentDate" Width="300" Text="" Grid.Row="6" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdatePaymentDate" Width="300" Text="{Binding Path=PaymentDate}" Grid.Row="6" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Payment date :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="6"/>
-        <TextBox x:Name="textBoxUpdateShipDate" Width="300" Text="" Grid.Row="7" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdateShipDate" Width="300" Text="{Binding Path=ShipDate}" Grid.Row="7" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Ship date :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="7"/>
-        <TextBox x:Name="textBoxUpdateDeliveryDate" Width="300" Text="" Grid.Row="8" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdateDeliveryDate" Width="300" Text="{Binding Path=DeliveryDate}" Grid.Row="8" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Delivery date :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="8"/>
-        <ComboBox x:Name="ItemsComboBoxUpdateOrder" Width="300" Focusable="False" Text="" Grid.Row="9" Grid.Column="2"/>
+        <ComboBox x:Name="ItemsComboBoxUpdateOrder" ItemsSource="{Binding Path=Items}" Width="300" Focusable="False" Text="" Grid.Row="9" Grid.Column="2"/>
         <Label Content="Items :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="9"/>
-        <TextBox x:Name="textBoxUpdateOrderPrice" Width="300" Text="" Grid.Row="10" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdateOrderPrice" Width="300" Text="{Binding Path=TotalPrice}" Grid.Row="10" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Total price :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="10"/>
         <Button x:Name="cofirmUpdate" Content="Confirm" Height="30" Width="194" Click="Update_Order_Confirmation_Click" Grid.Row="11" Grid.Column="2"/>
 

@@ -49,7 +49,7 @@ namespace PL.BoEntityWindows.Admin
             }
                 this.Close();
         }
-        private void InitializeFields(int id)
+        private void InitializeFields()
         {
             BO.Order order = bl!.Order.Read(id);//The object definitely exists
             textBoxUpdateOrderID.Text = order.ID.ToString();

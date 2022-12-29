@@ -29,7 +29,7 @@
         <Label Content="Enter Product ID :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1"/>
         <TextBox x:Name="textBoxAddProductName" Width="300" Text="" Grid.Row="2" Grid.Column="2"/>
         <Label Content="Enter name of product :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"/>
-        <ComboBox x:Name="CategoryComboBoxAdd" Width="300" Focusable="False" Text="" Grid.Row="3" Grid.Column="2"/>
+        <ComboBox x:Name="CategoryComboBoxAdd" SelectedIndex="9" Width="300" Focusable="False" Text="" Grid.Row="3" Grid.Column="2"/>
         <Label Content="Select category from list :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3"/>
         <TextBox x:Name="textBoxAddProductAmount" Width="300" Text="" Grid.Row="4" Grid.Column="2"/>
         <Label Content="Enter amount :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="4"/>
