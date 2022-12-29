@@ -66,13 +66,7 @@ namespace PL.BoEntityWindows
             new ProductForListWindow().Show();
         }
 
-        //private void TrackOrder_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (ListViewOrders.SelectedItem != null)//then open track window with the choosen ID
-        //        new trackOrderWindow(((BO.OrderForList)ListViewOrders.SelectedItem).ID).Show();
-        //    else
-        //        new trackOrderWindow().Show();
-        //}
+
         public void Refresh()//update the Observable Collection order for list
         {
             orderForLists.Clear();

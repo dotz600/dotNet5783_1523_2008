@@ -25,18 +25,6 @@ namespace PL.BoEntityWindows
         public trackOrderWindow()//can open fron order window with id to track
         {
             InitializeComponent();
-            //if(id != 0)//else get the id to track from textBox
-            //{
-            //    var x = (bl.Order.TrackingOrder(id));
-            //    ID.Content = "ID : " + x.ID.ToString();
-            //    Status.Content = "Status : " + x.Status.ToString();
-            //    confirmed.Content = x.Events[0].os.ToString() + ": " + x.Events[0].dt.ToString();
-            //    if (x.Events.Count > 1)
-            //        sent.Content = x.Events[1].os.ToString() + ": " + x.Events[1].dt.ToString();
-            //    if (x.Events.Count > 2)
-            //        provided.Content = x.Events[2].os.ToString() + ": " + x.Events[2].dt.ToString();
-            //}
-
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -48,14 +36,6 @@ namespace PL.BoEntityWindows
                 int id = int.Parse(tmp);//convert id to int
                 this.Close();
                 new UpdateOrderWindow(id, false).Show();
-                //var x = (bl?.Order.TrackingOrder(id));
-                //ID.Content = "ID : " + x?.ID.ToString();
-                //Status.Content = "Status : " + x?.Status.ToString();
-                //confirmed.Content = x?.Events[0].os.ToString() + ": " + x?.Events[0].dt.ToString();
-                //if (x?.Events.Count > 1)
-                //    sent.Content = x?.Events[1].os.ToString() + ": " + x?.Events[1].dt.ToString();
-                //if (x?.Events.Count > 2)
-                //    provided.Content = x?.Events[2].os.ToString() + ": " + x?.Events[2].dt.ToString();
             }
             catch(Exception ex)
             {

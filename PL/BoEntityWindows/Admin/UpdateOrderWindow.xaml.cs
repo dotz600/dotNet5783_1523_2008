@@ -26,6 +26,7 @@ namespace PL.BoEntityWindows.Admin
         public UpdateOrderWindow(int id, bool flag)
         {
             InitializeComponent();
+            UpdateProductGrid.DataContext = bl!.Order.Read(id);
             InitializeFields(id);
             StatusComboBoxUpdateOrder.IsEnabled = flag;
             cofirmUpdate.IsEnabled = flag;
@@ -49,18 +50,8 @@ namespace PL.BoEntityWindows.Admin
             }
                 this.Close();
         }
-        private void InitializeFields()
+        private void InitializeFields(int id)
         {
-            BO.Order order = bl!.Order.Read(id);//The object definitely exists
-            textBoxUpdateOrderID.Text = order.ID.ToString();
-            textBoxUpdateOrderCostumerName.Text = order.CustomerName;
-            textBoxUpdateOrderCostumerEmail.Text = order.CustomerEmail;
-            textBoxUpdateOrderDate.Text = order.OrderDate.ToString();
-            textBoxUpdatePaymentDate.Text = order.PaymentDate.ToString();
-            textBoxUpdateShipDate.Text = order.ShipDate != null ? order.ShipDate.ToString() : null;
-            textBoxUpdateDeliveryDate.Text = order?.DeliveryDate != null ? order.DeliveryDate.ToString() : null;
-            textBoxUpdateOrderPrice.Text = order?.TotalPrice != null ? order.TotalPrice.ToString() : null;
-            //create a list of status
             var x = Enum.GetValues(typeof(BO.OrderStatus));
             List<BO.OrderStatus> orderStatuses = new();
             foreach (BO.OrderStatus status in x)
@@ -69,9 +60,6 @@ namespace PL.BoEntityWindows.Admin
             StatusComboBoxUpdateOrder.ItemsSource = from y in orderStatuses
                                                     where y != OrderStatus.None
                                                     select y;
-
-            StatusComboBoxUpdateOrder.SelectedItem = order?.Status;
-            ItemsComboBoxUpdateOrder.ItemsSource = order?.Items;
         }
     }
 }

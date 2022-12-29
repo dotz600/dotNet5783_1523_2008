@@ -48,8 +48,4 @@ public partial class CartView : Window
         
     }
 
-    private void Cart_list_view_Selected(object sender, RoutedEventArgs e)
-    {
-
-    }
 }

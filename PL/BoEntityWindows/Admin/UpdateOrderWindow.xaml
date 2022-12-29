@@ -32,13 +32,13 @@
 
 
         <Label Content="Order Details" Width="176" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"  Margin="10,0,0,0" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" FontFamily="Arial Black"/>
-        <TextBox x:Name="textBoxUpdateOrderID" Width="300" Text="" Grid.Row="1" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdateOrderID" Width="300" Text="{Binding Path= ID}" Grid.Row="1" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Order ID :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1"/>
         <TextBox x:Name="textBoxUpdateOrderCostumerName" Width="300" Text="{Binding Path=CustomerName}" Grid.Row="2" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Name of costumer :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"/>
         <TextBox x:Name="textBoxUpdateOrderCostumerEmail" Width="300" Text="{Binding Path=CustomerEmail}" Grid.Row="3" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Costumer email :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3"/>
-        <ComboBox x:Name="StatusComboBoxUpdateOrder" SelectedItem="{Binding Path=Status}" Width="300" Focusable="False" Text="" Grid.Row="4" Grid.Column="2"/>
+        <ComboBox x:Name="StatusComboBoxUpdateOrder" SelectedItem="{Binding Path=Status}"  Width="300" Focusable="False" Text="" Grid.Row="4" Grid.Column="2"/>
         <Label Content="Order status :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="4"/>
         <TextBox x:Name="textBoxUpdateOrderDate" Width="300" Text="{Binding Path=OrderDate}" Grid.Row="5" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Order date :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="5"/>
