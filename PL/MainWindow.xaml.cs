@@ -1,4 +1,5 @@
 ﻿
+using BO;
 using PL.BoEntityWindows;
 using PL.BoEntityWindows.Admin;
 using PL.New_order;
@@ -20,12 +21,12 @@ using System.Windows.Shapes;
 namespace PL;
 
 /// <summary>
-/// Interaction logic for MainWindow.xaml
+/// Main window - control the 3 buttons - admin, order and track
 /// </summary>
 public partial class MainWindow : Window
 {
-    readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
+    internal static Cart cart = new();//each entry get a brand new cart, the cart will pass bettwen all the relevant window - rest only after payment!
     public MainWindow() => InitializeComponent();
     private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
 

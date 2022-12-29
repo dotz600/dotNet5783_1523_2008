@@ -1,4 +1,5 @@
 ﻿using BO;
+using PL.BoEntityWindows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,12 @@ using System.Windows.Shapes;
 namespace PL.New_order
 {
     /// <summary>
-    /// Interaction logic for Catalog.xaml
+    /// this window show all the product that in the catlog - 
+    /// by duoble click user can add product to cart
     /// </summary>
     public partial class Catalog : Window
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        Cart cart = new();
 
         public Catalog()
         {
@@ -29,14 +30,15 @@ namespace PL.New_order
             try
             {
                 this.DataContext = bl.ProductItem.ReadAll();
+                CategorySort.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories for combobox
+                CategorySort.SelectedIndex = 9;//choose default value(None)
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
                 , MessageBoxResult.Cancel);
             }
-            CategorySort.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
-            CategorySort.SelectedIndex = 9;//choose default value(None)
+           
         }
 
         private void CategorySort_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -45,7 +47,7 @@ namespace PL.New_order
             {
                 if (CategorySort.SelectedItem.ToString() == BO.Categories.None.ToString())
                     Product_item_list_view.ItemsSource = bl?.ProductItem.ReadAll();
-                else
+                else//read with predicate
                     Product_item_list_view.ItemsSource = bl?.ProductItem.ReadAll(x => x?.Category.ToString() == CategorySort.SelectedItem.ToString());
             }
             catch (Exception ex)
@@ -56,12 +58,18 @@ namespace PL.New_order
 
         }
         
-        private void Product_item_list_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void Product_item_list_MouseDoubleClick(object sender, MouseButtonEventArgs e)//duoble click will add product to cart
         {
-            var tmp = (BO.ProductItem)Product_item_list_view.SelectedItem;
             try
             {
-                bl?.Cart.Add(cart, tmp.ID);
+                var tmp = (BO.ProductItem)Product_item_list_view.SelectedItem;
+                int id = tmp.ID;
+                var win = new UpdateProductWindow(id);
+                win.textBoxUpdateProductAmount.IsEnabled= false;
+                win.textBoxUpdateProductPrice.IsEnabled= false;
+                win.ConfirmButton.IsEnabled= false;
+                win.Show();
+    
             }
             catch (Exception ex) 
             {
@@ -70,14 +78,14 @@ namespace PL.New_order
             }
         }
 
-        private void WatchCartButton_Click(object sender, RoutedEventArgs e)
+        private void WatchCartButton_Click(object sender, RoutedEventArgs e)//go to cart
         {
-            new CartView(cart).ShowDialog();
-            //this.Close();
+            new CartView().ShowDialog();
+            this.Close();
         }
 
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)//sort all the product by category
         {
             Product_item_list_view.ItemsSource = from x in bl?.ProductItem.ReadAll()
                                                  orderby x.Category 

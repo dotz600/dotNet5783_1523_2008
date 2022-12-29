@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 
@@ -55,11 +56,11 @@ internal class Cart : ICart
 
     public BO.Cart Update(BO.Cart cart, int productId, int amount)
     {
+        if (amount < 0)
+            throw new BO.NegativeAmountException("Cant Order Negative Amount!");
         BO.OrderItem ot = SearchInCart(cart, productId);
         if (ot.ProductID == 0)
-        {
             throw new BO.ObjectNotExistException("the product not in cart, can't update");
-        }
         else
         {
             try
@@ -114,7 +115,10 @@ internal class Cart : ICart
                 throw new BO.EmptyNameException("coustomer name is empty");
             if (adress.Length == 0)
                 throw new BO.EmptyNameException("addres is empty");
-            if (cart.Items != null)
+            if (cart?.Items?.Any() == false)
+                throw new BO.CreateObjectFailedException("Your Cart Is Empty! Fill Your Cart First");
+
+            if (cart?.Items != null)
             {
                 foreach (var ot in cart.Items)
                 {
@@ -124,7 +128,8 @@ internal class Cart : ICart
                 }
             }
             else
-                throw new BO.ObjectNotExistException("Cart is empty, try again...");
+                throw new BO.CreateObjectFailedException("Your Cart Is Empty! Fill Your Cart First");
+
             //create new order and add it to data base
             int orderId = Dal?.Order.Create(new DO.Order
             {
@@ -170,7 +175,7 @@ internal class Cart : ICart
         }
         catch (BO.ObjectNotExistException ex)
         {
-            throw new BO.ObjectNotExistException("cant read product from cart", ex);
+            throw new BO.ObjectNotExistException(ex.Message);
         }
         catch(DalApi.ObjNotFoundException ex)
         {

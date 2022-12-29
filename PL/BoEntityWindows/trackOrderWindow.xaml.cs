@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using PL.BoEntityWindows.Admin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,52 +17,45 @@ using System.Windows.Shapes;
 namespace PL.BoEntityWindows
 {
     /// <summary>
-    /// Interaction logic for trackOrderWindow.xaml
+    /// show tracking details
     /// </summary>
     public partial class trackOrderWindow : Window
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        public trackOrderWindow(int id = 0)
+        public trackOrderWindow()//can open fron order window with id to track
         {
             InitializeComponent();
-            if(id != 0)
-            {
-                var x = (bl.Order.TrackingOrder(id));
-                ID.Content = "ID : " + x.ID.ToString();
-                Status.Content = "Status : " + x.Status.ToString();
-                confirmed.Content = x.Events[0].os.ToString() + ": " + x.Events[0].dt.ToString();
-                if (x.Events.Count > 1)
-                    sent.Content = x.Events[1].os.ToString() + ": " + x.Events[1].dt.ToString();
-                if (x.Events.Count > 2)
-                    provided.Content = x.Events[2].os.ToString() + ": " + x.Events[2].dt.ToString();
-            }
+            //if(id != 0)//else get the id to track from textBox
+            //{
+            //    var x = (bl.Order.TrackingOrder(id));
+            //    ID.Content = "ID : " + x.ID.ToString();
+            //    Status.Content = "Status : " + x.Status.ToString();
+            //    confirmed.Content = x.Events[0].os.ToString() + ": " + x.Events[0].dt.ToString();
+            //    if (x.Events.Count > 1)
+            //        sent.Content = x.Events[1].os.ToString() + ": " + x.Events[1].dt.ToString();
+            //    if (x.Events.Count > 2)
+            //        provided.Content = x.Events[2].os.ToString() + ": " + x.Events[2].dt.ToString();
+            //}
 
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string tmp = IdToTrack.Text;
        
             try
             {
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Invalid Input! Try Agian", "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
-         , MessageBoxResult.Cancel);
-            }
-            try
-            {
-                int id = int.Parse(tmp);
-
-                var x = (bl?.Order.TrackingOrder(id));
-                ID.Content = "ID : " + x?.ID.ToString();
-                Status.Content = "Status : " + x?.Status.ToString();
-                confirmed.Content = x?.Events[0].os.ToString() + ": " + x?.Events[0].dt.ToString();
-                if (x?.Events.Count > 1)
-                    sent.Content = x?.Events[1].os.ToString() + ": " + x?.Events[1].dt.ToString();
-                if (x?.Events.Count > 2)
-                    provided.Content = x?.Events[2].os.ToString() + ": " + x?.Events[2].dt.ToString();
+                string tmp = IdToTrack.Text;
+                int id = int.Parse(tmp);//convert id to int
+                this.Close();
+                new UpdateOrderWindow(id, false).Show();
+                //var x = (bl?.Order.TrackingOrder(id));
+                //ID.Content = "ID : " + x?.ID.ToString();
+                //Status.Content = "Status : " + x?.Status.ToString();
+                //confirmed.Content = x?.Events[0].os.ToString() + ": " + x?.Events[0].dt.ToString();
+                //if (x?.Events.Count > 1)
+                //    sent.Content = x?.Events[1].os.ToString() + ": " + x?.Events[1].dt.ToString();
+                //if (x?.Events.Count > 2)
+                //    provided.Content = x?.Events[2].os.ToString() + ": " + x?.Events[2].dt.ToString();
             }
             catch(Exception ex)
             {

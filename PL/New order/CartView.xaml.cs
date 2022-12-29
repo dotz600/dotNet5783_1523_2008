@@ -17,25 +17,26 @@ using System.Windows.Shapes;
 namespace PL.New_order;
 
 /// <summary>
-/// Interaction logic for CartView.xaml
+/// show the product coustumer have in cart, 
+/// can click on each product to update amount
+/// 
 /// </summary>
 public partial class CartView : Window
 {
    
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-    Cart tmpCart;
-    public CartView(Cart cart)
+
+    public CartView()
     {
         InitializeComponent();
-        Cart_list_view.ItemsSource = cart.Items;
-        tmpCart= cart;
+        Cart_list_view.ItemsSource = MainWindow.cart.Items;
     }
   
     private void ConfirmCartButton_Click(object sender, RoutedEventArgs e)
     {
         this.Close();
-        new Payment(tmpCart).Show();
+        new Payment().Show();
 
     }
 
@@ -43,7 +44,12 @@ public partial class CartView : Window
     {
         var slected = (BO.OrderItem)Cart_list_view.SelectedItem;
         this.Close();
-        new UpdateAmount(tmpCart, slected.ProductID).Show();
+        new UpdateAmount(slected.ProductID).Show();
         
+    }
+
+    private void Cart_list_view_Selected(object sender, RoutedEventArgs e)
+    {
+
     }
 }

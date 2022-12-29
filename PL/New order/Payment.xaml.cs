@@ -16,27 +16,27 @@ using System.Windows.Shapes;
 namespace PL.New_order;
 
 /// <summary>
-/// Interaction logic for Payment.xaml
+/// this window represent the checkout process, take name email address from user and crate new order
 /// </summary>
 public partial class Payment : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-    BO.Cart cart;
-    public Payment(BO.Cart cart)
+
+    public Payment()
     {
         InitializeComponent();
-        this.cart = cart;
             
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
     {
-        string name = textBoxName.Text, email = textBoxEmail.Text, addres = textBoxAddres.Text;
         try
         {
-            bl?.Cart.CartConfirmation(cart, name, email, addres);
-            cart = new BO.Cart();
+            string name = textBoxName.Text, email = textBoxEmail.Text, addres = textBoxAddres.Text;
+            bl?.Cart.CartConfirmation(MainWindow.cart, name, email, addres);//confirm cart
+            //reset cart
+            MainWindow.cart = new BO.Cart();
             Page page = new ThankYouPage();
             this.Content = page;
         }

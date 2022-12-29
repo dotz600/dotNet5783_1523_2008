@@ -20,16 +20,21 @@ using System.Windows.Shapes;
 namespace PL;
 
 /// <summary>
-/// Interaction logic for ProducrForListWindow.xaml
+/// admin window - can watch all the products in store - as productForList Entity
+/// can update/add products, also can watch all order and update it shipping details
 /// </summary>
 public partial class ProductForListWindow : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
-    ObservableCollection<ProductForList> productForLists = new ObservableCollection<ProductForList>();
+    ObservableCollection<ProductForList> productForLists = new();
+ 
     public ProductForListWindow()
     {
         InitializeComponent();
-        foreach (var x in bl.Product.ReadAll()) productForLists.Add(x);
+        
+        foreach (var x in bl!.Product.ReadAll()) 
+            productForLists.Add(x);
+        
         EventArgs args = new();
         ProductSelector.SelectedIndex = 9;//choose default value(None)
         ListViewProductForList.ItemsSource = productForLists;//set list of products
@@ -38,8 +43,10 @@ public partial class ProductForListWindow : Window
 
     private void AddProductButton_Click(object sender, RoutedEventArgs e)
     {
-        AddProductWindow addProductWindow = new();
-        addProductWindow.Bl = bl;//pass the data
+        AddProductWindow addProductWindow = new()
+        {
+            Bl = bl//pass the data
+        };
         addProductWindow.ShowDialog();
         this.Refresh();
         ListViewProductForList.ItemsSource = productForLists;//update the list of products
@@ -54,23 +61,27 @@ public partial class ProductForListWindow : Window
         if (ProductSelector.SelectedItem.ToString() == BO.Categories.None.ToString())
         {
             productForLists.Clear();
-            foreach (var x in bl.Product.ReadAll()) productForLists.Add(x);
+            foreach (var x in bl!.Product.ReadAll()) 
+                productForLists.Add(x);
         }
         else
         {
             productForLists.Clear();
-            foreach (var x in (bl?.Product.ReadAll(x => x?.Category.ToString() == ProductSelector.SelectedItem.ToString())) ) productForLists.Add(x);
+            foreach (var x in (bl!.Product.ReadAll(x => x?.Category.ToString() == ProductSelector.SelectedItem.ToString())))
+                productForLists.Add(x);
         }
        
     }
-
+    
     private void ListViewProductForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         //double click on product takes to update win
     {
+        
         if (ListViewProductForList.SelectedItem != null)
         {
             BO.ProductForList p = (BO.ProductForList)ListViewProductForList.SelectedItem;
-            UpdateProductWindow updateProductWindow = new(p){ bl = bl, prevWin = this};
+            UpdateProductWindow updateProductWindow = new(p.ID){ bl = bl, prevWin = this};
+            updateProductWindow.addToCartButton.IsEnabled = false;
             updateProductWindow.Show();
         }
     }
@@ -84,7 +95,8 @@ public partial class ProductForListWindow : Window
     public void Refresh()
     {
         productForLists.Clear();
-        foreach (var x in bl.Product.ReadAll()) productForLists.Add(x);
+        foreach (var x in bl!.Product.ReadAll()) 
+            productForLists.Add(x);
         ProductSelector.SelectedIndex = 9;
     }
 }

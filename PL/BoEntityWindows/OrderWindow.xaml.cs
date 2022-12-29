@@ -18,7 +18,7 @@ using System.Windows.Shapes;
 namespace PL.BoEntityWindows
 {
     /// <summary>
-    /// Interaction logic for OrderWindow.xaml
+    /// from admin window- can update order status and watch all orders
     /// </summary>
     public partial class OrderWindow : Window
     {
@@ -50,13 +50,12 @@ namespace PL.BoEntityWindows
 
 
         }
-        private void ListViewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void ListViewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)//open update order window
         {
             if (ListViewOrders.SelectedItem != null)
             {
                 BO.OrderForList order = (BO.OrderForList)ListViewOrders.SelectedItem;
-                UpdateOrderWindow win = new(order.ID);
-                win.prevWin = this;
+                UpdateOrderWindow win = new(order.ID, true) { prevWin = this };
                 win.Show(); 
             }
         }
@@ -67,14 +66,14 @@ namespace PL.BoEntityWindows
             new ProductForListWindow().Show();
         }
 
-        private void TrackOrder_Click(object sender, RoutedEventArgs e)
-        {
-            if (ListViewOrders.SelectedItem != null)
-                new trackOrderWindow(((BO.OrderForList)ListViewOrders.SelectedItem).ID).Show();
-            else
-                new trackOrderWindow().Show();
-        }
-        public void Refresh()
+        //private void TrackOrder_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (ListViewOrders.SelectedItem != null)//then open track window with the choosen ID
+        //        new trackOrderWindow(((BO.OrderForList)ListViewOrders.SelectedItem).ID).Show();
+        //    else
+        //        new trackOrderWindow().Show();
+        //}
+        public void Refresh()//update the Observable Collection order for list
         {
             orderForLists.Clear();
             foreach (var x in bl!.Order.ReadAll()) orderForLists.Add(x);

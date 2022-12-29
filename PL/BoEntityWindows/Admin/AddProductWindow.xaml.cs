@@ -1,4 +1,5 @@
 ﻿using BlImplementation;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +17,22 @@ using System.Windows.Shapes;
 namespace PL.BoEntityWindows;
 
 /// <summary>
-/// Interaction logic for Window1.xaml
+/// from admin page- can add new product to store
 /// </summary>
 public partial class AddProductWindow : Window   
 {
     public AddProductWindow()
     {
         InitializeComponent();
-        CategoryComboBoxAdd.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
-        CategoryComboBoxAdd.SelectedIndex = 9;//choose default value(None)
+        var x = Enum.GetValues(typeof(BO.Categories));
+        List<BO.Categories> orderStatuses = new();
+        foreach (BO.Categories cat in x)
+            orderStatuses.Add(cat);
+        //take all the status exept None
+        CategoryComboBoxAdd.ItemsSource = from y in orderStatuses
+                                                where y != Categories.None
+                                                select y;
+        CategoryComboBoxAdd.SelectedIndex = 8;//choose default value(None)
         
     }
     public BlApi.IBl? Bl;
@@ -35,8 +43,7 @@ public partial class AddProductWindow : Window
         {
             BO.Product p = Create_product_Add();
             Bl!.Product.Create(p);
-            this.Close();
-            
+            this.Close();    
         }
         catch (Exception ex)
         {

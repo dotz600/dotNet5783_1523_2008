@@ -16,17 +16,20 @@ using System.Windows.Shapes;
 namespace PL.BoEntityWindows.Admin
 {
     /// <summary>
-    /// Interaction logic for UpdateOrderWindow.xaml
+    /// show order details and can update status
     /// </summary>
     public partial class UpdateOrderWindow : Window
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        public UpdateOrderWindow(int id)
+        
+        public OrderWindow? prevWin;
+        public UpdateOrderWindow(int id, bool flag)
         {
             InitializeComponent();
             InitializeFields(id);
+            StatusComboBoxUpdateOrder.IsEnabled = flag;
+            cofirmUpdate.IsEnabled = flag;
         }
-        public OrderWindow? prevWin;
         private void Update_Order_Confirmation_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -57,11 +60,12 @@ namespace PL.BoEntityWindows.Admin
             textBoxUpdateShipDate.Text = order.ShipDate != null ? order.ShipDate.ToString() : null;
             textBoxUpdateDeliveryDate.Text = order?.DeliveryDate != null ? order.DeliveryDate.ToString() : null;
             textBoxUpdateOrderPrice.Text = order?.TotalPrice != null ? order.TotalPrice.ToString() : null;
+            //create a list of status
             var x = Enum.GetValues(typeof(BO.OrderStatus));
             List<BO.OrderStatus> orderStatuses = new();
             foreach (BO.OrderStatus status in x)
                 orderStatuses.Add(status);
-            
+            //take all the status exept None
             StatusComboBoxUpdateOrder.ItemsSource = from y in orderStatuses
                                                     where y != OrderStatus.None
                                                     select y;

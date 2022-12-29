@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,9 +17,17 @@ using System.Windows.Shapes;
 namespace PL.New_order;
 
 /// <summary>
-/// Interaction logic for ThankYouPage.xaml
+/// this page whish good luck to buyer and that we hope to see him next time
 /// </summary>
 public partial class ThankYouPage : Page
 {
-    public ThankYouPage() => InitializeComponent();
+    public ThankYouPage()
+    {
+        InitializeComponent();
+     
+    }
+
+
+
+
 }

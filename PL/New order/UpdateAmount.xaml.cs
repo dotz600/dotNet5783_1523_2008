@@ -16,27 +16,29 @@ using System.Windows.Shapes;
 namespace PL.New_order
 {
     /// <summary>
-    /// Interaction logic for UpdateAmount.xaml
+    /// the window will takse from user the amount he want to order
+    /// and update the cart
     /// </summary>
     public partial class UpdateAmount : Window
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        Cart Cart;
+
         int productId;
-        public UpdateAmount(Cart c, int id)
+        public UpdateAmount(int id)
         {
             InitializeComponent();
-            Cart = c;
             productId= id;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string amount = AmountToUpdate.Text;
-            int num = int.Parse(amount);
             try
             {
-                bl?.Cart.Update(Cart, productId, num);
+                string amount = AmountToUpdate.Text;
+                int num = int.Parse(amount);//convert amount to int
+                bl?.Cart.Update(MainWindow.cart, productId, num);
+                this.Close();
+                new CartView().Show();
 
             }
             catch (Exception ex)
@@ -44,8 +46,7 @@ namespace PL.New_order
                 MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
               , MessageBoxResult.Cancel);
             }
-            this.Close();
-            new CartView(Cart).Show();
+   
         }
     }
 }
