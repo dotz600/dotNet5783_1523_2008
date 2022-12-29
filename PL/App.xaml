@@ -8,7 +8,7 @@
             <GradientStop Color ="#FFFFC934" Offset="0"/>
             <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
         </LinearGradientBrush>
-
+       
         <Style TargetType="Button">
             <Setter Property="FontFamily" Value="Harrington"></Setter>
             <Setter Property="Background" Value="{StaticResource buttonBackground}"/>

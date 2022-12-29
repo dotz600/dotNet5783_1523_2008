@@ -23,9 +23,7 @@ public partial class AddProductWindow : Window
     public AddProductWindow()
     {
         InitializeComponent();
-        CategoryComboBoxAdd.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
-        CategoryComboBoxAdd.SelectedIndex = 9;//choose default value(None)
-        
+        CategoryComboBoxAdd.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories        
     }
     public BlApi.IBl? Bl;
     private void Add_Product_Confirmation_Click(object sender, RoutedEventArgs e)//creates a product, and open PFL win
