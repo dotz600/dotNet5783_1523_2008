@@ -80,9 +80,10 @@ public partial class UpdateProductWindow : Window
         try
         {
             bl?.Cart.Add(MainWindow.cart,int.Parse(textBoxUpdateProductID.Text));
+
             MessageBox.Show("Successfully added to cart", "Success", MessageBoxButton.OK, MessageBoxImage.Information
             , MessageBoxResult.Cancel);
-            cartPrevWin.CartRefresh();
+            //cartPrevWin.CartRefresh();
             this.Close();
         }
         catch (Exception ex)

@@ -37,6 +37,7 @@ namespace PL.New_order
                 string amount = AmountToUpdate.Text;
                 int num = int.Parse(amount);//convert amount to int
                 bl?.Cart.Update(MainWindow.cart, productId, num);
+  
                 this.Close();
                 new CartView().Show();
 

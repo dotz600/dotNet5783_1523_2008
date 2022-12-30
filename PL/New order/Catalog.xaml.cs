@@ -25,25 +25,34 @@ namespace PL.New_order
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-        private List<BO.ProductItem> ProductToShow { get { return bl!.ProductItem.ReadAll().ToList(); } }
+        public ObservableCollection<BO.ProductItem> ProductToShow { get; }
         public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }
-
-        CartView cartView;
 
         public Catalog()
         {
+            ProductToShow ??= new();
+            foreach (var x in bl!.ProductItem.ReadAll())
+                ProductToShow.Add(x);
             InitializeComponent();
-            cartView = new CartView();
         }
 
         private void CategorySort_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
+                ProductToShow.Clear();
                 if (CategorySort.SelectedItem.ToString() == BO.Categories.None.ToString())
-                    Product_item_list_view.ItemsSource = bl?.ProductItem.ReadAll();
+                {
+                    foreach (var x in bl!.ProductItem.ReadAll())
+                        ProductToShow.Add(x);
+                }
                 else//read with predicate
-                    Product_item_list_view.ItemsSource = bl?.ProductItem.ReadAll(x => x?.Category.ToString() == CategorySort.SelectedItem.ToString());
+                {
+                    foreach (var x in bl!.ProductItem.ReadAll
+                        (x => x?.Category.ToString() == CategorySort.SelectedItem.ToString()))
+                        ProductToShow.Add(x);
+                  
+                }
             }
             catch (Exception ex)
             {
@@ -60,12 +69,10 @@ namespace PL.New_order
                 var tmp = (BO.ProductItem)Product_item_list_view.SelectedItem;
                 int id = tmp.ID;
                 var win = new UpdateProductWindow(id);
-                win.textBoxUpdateProductAmount.IsEnabled= false;
-                win.textBoxUpdateProductPrice.IsEnabled= false;
-                win.ConfirmButton.IsEnabled= false;
-                win.cartPrevWin = cartView;
+                win.textBoxUpdateProductAmount.IsEnabled = false;
+                win.textBoxUpdateProductPrice.IsEnabled = false;
+                win.ConfirmButton.IsEnabled = false;
                 win.Show();
-    
             }
             catch (Exception ex) 
             {
@@ -76,22 +83,28 @@ namespace PL.New_order
 
         private void WatchCartButton_Click(object sender, RoutedEventArgs e)//go to cart
         {
-            cartView.Show();
-            //this.Close();
+            new CartView().ShowDialog();
+            this.Close();
         }
 
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)//sort all the product by category
         {
-            Product_item_list_view.ItemsSource = from x in bl?.ProductItem.ReadAll()
-                                                 orderby x.Category 
-                                                 select x;
+            var temp = from x in bl?.ProductItem.ReadAll()
+                            orderby x.Category
+                            select x;
+
+            ProductToShow.Clear();
+            foreach (var x in temp)
+                ProductToShow.Add(x);
 
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            Product_item_list_view.ItemsSource = bl?.ProductItem.ReadAll();
+            ProductToShow.Clear();
+            foreach (var x in bl!.ProductItem.ReadAll())
+                ProductToShow.Add(x);
         }
     }
 }

@@ -8,12 +8,12 @@
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         
         Title="Window1" Height="450" Width="800">
-    <Grid Margin="74,58,229,50">
+    <Grid Margin="74,58,540,193">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="63*"/>
             <ColumnDefinition Width="737*"/>
         </Grid.ColumnDefinitions>
-        <ListView  ItemsSource="{Binding me}" x:Name="ListView" Grid.ColumnSpan="2" Margin="0,0,35,0">
+        <ListView  ItemsSource="{Binding me}" x:Name="ListView" Grid.ColumnSpan="2" Margin="0,0,23,0">
 
             <ListView.View>
                 <GridView>
@@ -26,6 +26,13 @@
 
         </ListView>
         <ComboBox ItemsSource="{Binding combo}" Grid.Column="1" HorizontalAlignment="Left" Margin="299,45,0,0" VerticalAlignment="Top" Width="120"/>
+        <ListView Grid.Column="1" ItemsSource="{Binding foo}" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="344,45,-478,-116" SelectionChanged="ListView_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn/>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>

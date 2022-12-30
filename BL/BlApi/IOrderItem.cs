@@ -18,5 +18,5 @@ namespace BlApi;
 /// </summary>
 public interface IOrderItem
 {
-
+    public BO.OrderItem Read(int productID);
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,12 +35,25 @@ namespace PL
                 return Enum.GetValues(typeof(BO.Categories));
             }
         }
+        public ObservableCollection<BO.OrderItem?> foo { get; }
 
         public Window1()
         {
+            MainWindow.cart.Items = new();
+            foo = new();
+            MainWindow.cart.Items.Add(new BO.OrderItem{ Amount = 5, ID = 10, Name = "da", Price = 5, ProductID = 32, TotalPrice = 55 });
+            foreach(var x in MainWindow.cart.Items)
+                foo.Add(x);
             InitializeComponent();
+
             //this.DataContext = this;
            // me = bl!.Product.ReadAll().ToList();
+        }
+
+        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            foo.Add(new BO.OrderItem { Amount = 5, ID = 10, Name = "fgg", Price = 5, ProductID = 32, TotalPrice = 55 });
+            me.Add(new BO.ProductForList { ID = 10, Name = "dotz", Price = 65 });
         }
     }
 }

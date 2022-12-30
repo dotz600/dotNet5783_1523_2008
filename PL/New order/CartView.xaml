@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="Cart_list_view" Grid.Row="0" Grid.Column="0" SelectionChanged="Cart_list_view_SelectionChanged">
+        <ListView x:Name="Cart_list_view" ItemsSource="{Binding OrderItems}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="0" Grid.Column="0" SelectionChanged="Cart_list_view_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ProductID}" />
