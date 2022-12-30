@@ -25,5 +25,6 @@
         <Style TargetType="Grid">
             <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
         </Style>
+                            
     </Application.Resources>
 </Application>

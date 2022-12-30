@@ -2,6 +2,7 @@
 using BO;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,11 +28,14 @@ public partial class CartView : Window
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
     List<BO.ProductForList?> me;
+    ObservableCollection<BO.OrderItem> orderItems = new ObservableCollection<BO.OrderItem>();
     public CartView()
     {
         InitializeComponent();
         me = bl!.Product.ReadAll().ToList();
         //Cart_list_view.ItemsSource = MainWindow.cart.Items;
+        CartRefresh();
+        Cart_list_view.ItemsSource = orderItems;
     }
   
     private void ConfirmCartButton_Click(object sender, RoutedEventArgs e)
@@ -47,6 +51,15 @@ public partial class CartView : Window
         this.Close();
         new UpdateAmount(slected.ProductID).Show();
         
+    }
+    public void CartRefresh()
+    {
+        orderItems.Clear();
+        for (int i = 0; i < MainWindow.cart.Items?.Count; i++)
+        {
+            OrderItem? x = MainWindow.cart.Items[i];
+            orderItems.Add(x);
+        }
     }
 
 }

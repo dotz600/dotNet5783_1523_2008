@@ -27,11 +27,13 @@ namespace PL.New_order
 
         private List<BO.ProductItem> ProductToShow { get { return bl!.ProductItem.ReadAll().ToList(); } }
         public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }
-        
+
+        CartView cartView;
 
         public Catalog()
         {
             InitializeComponent();
+            cartView = new CartView();
         }
 
         private void CategorySort_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -61,6 +63,7 @@ namespace PL.New_order
                 win.textBoxUpdateProductAmount.IsEnabled= false;
                 win.textBoxUpdateProductPrice.IsEnabled= false;
                 win.ConfirmButton.IsEnabled= false;
+                win.cartPrevWin = cartView;
                 win.Show();
     
             }
@@ -73,8 +76,8 @@ namespace PL.New_order
 
         private void WatchCartButton_Click(object sender, RoutedEventArgs e)//go to cart
         {
-            new CartView().ShowDialog();
-            this.Close();
+            cartView.Show();
+            //this.Close();
         }
 
 

@@ -1,5 +1,6 @@
 ﻿
 using BO;
+using PL.New_order;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ public partial class UpdateProductWindow : Window
 {
     public BlApi.IBl? bl = BlApi.Factory.Get();//pass data
     public ProductForListWindow prevWin;//preview window
+    public CartView cartPrevWin;
 
     public UpdateProductWindow(int id)
     {
@@ -78,8 +80,9 @@ public partial class UpdateProductWindow : Window
         try
         {
             bl?.Cart.Add(MainWindow.cart,int.Parse(textBoxUpdateProductID.Text));
-            MessageBox.Show("Successfully added to cart", "Success", MessageBoxButton.OK, MessageBoxImage.Hand
+            MessageBox.Show("Successfully added to cart", "Success", MessageBoxButton.OK, MessageBoxImage.Information
             , MessageBoxResult.Cancel);
+            cartPrevWin.CartRefresh();
             this.Close();
         }
         catch (Exception ex)
