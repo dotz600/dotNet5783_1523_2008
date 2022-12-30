@@ -26,11 +26,12 @@ public partial class CartView : Window
    
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-
+    List<BO.ProductForList?> me;
     public CartView()
     {
         InitializeComponent();
-        Cart_list_view.ItemsSource = MainWindow.cart.Items;
+        me = bl!.Product.ReadAll().ToList();
+        //Cart_list_view.ItemsSource = MainWindow.cart.Items;
     }
   
     private void ConfirmCartButton_Click(object sender, RoutedEventArgs e)

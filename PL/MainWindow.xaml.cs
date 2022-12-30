@@ -26,8 +26,9 @@ namespace PL;
 public partial class MainWindow : Window
 {
 
-    internal static Cart cart = new();//each entry get a brand new cart, the cart will pass bettwen all the relevant window - rest only after payment!
+    internal static Cart cart = new();//static global cart - all the windows can use
     public MainWindow() => InitializeComponent();
+  
     private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();
 
     private void Show_New_Order_Screen_Click(object sender, RoutedEventArgs e) => new Catalog().Show();

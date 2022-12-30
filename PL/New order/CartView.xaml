@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.New_order"
         mc:Ignorable="d"
-        Title="Cart View" Height="450" Width="800">
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Cart View" Height="450" Width="800" >
     <Grid>
 
         <Grid.RowDefinitions>
@@ -13,10 +14,10 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="Cart_list_view" Grid.Row="0" Grid.Column="0" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="Cart_list_view_SelectionChanged">
+        <ListView x:Name="Cart_list_view" Grid.Row="0" Grid.Column="0" ItemsSource="{Binding me}" SelectionChanged="Cart_list_view_SelectionChanged">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ProductID}"/>
+                    <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ProductID}" />
                     <GridViewColumn Header= "Name" DisplayMemberBinding="{Binding Path = Name}"/>
                     <GridViewColumn Header= "Amount" DisplayMemberBinding="{Binding Path = Amount}"/>
                     <GridViewColumn Header= "Price" DisplayMemberBinding="{Binding Path = Price}"/>

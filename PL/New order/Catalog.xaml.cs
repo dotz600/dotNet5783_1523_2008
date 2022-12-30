@@ -2,6 +2,7 @@
 using PL.BoEntityWindows;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,21 +25,13 @@ namespace PL.New_order
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
+        private List<BO.ProductItem> ProductToShow { get { return bl!.ProductItem.ReadAll().ToList(); } }
+        public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }
+        
+
         public Catalog()
         {
             InitializeComponent();
-            try
-            {
-                this.DataContext = bl.ProductItem.ReadAll();
-                CategorySort.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories for combobox
-                CategorySort.SelectedIndex = 9;//choose default value(None)
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
-                , MessageBoxResult.Cancel);
-            }
-           
         }
 
         private void CategorySort_SelectionChanged(object sender, SelectionChangedEventArgs e)
