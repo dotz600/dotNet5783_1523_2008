@@ -36,10 +36,8 @@ namespace PL.New_order
             {
                 string amount = AmountToUpdate.Text;
                 int num = int.Parse(amount);//convert amount to int
-                bl?.Cart.Update(MainWindow.cart, productId, num);
-  
+                bl?.Cart.Update(MainWindow.cart, productId, num);//update amount in cart
                 this.Close();
-                //new CartView().Show();
 
             }
             catch (Exception ex)

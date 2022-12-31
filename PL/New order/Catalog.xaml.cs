@@ -25,29 +25,29 @@ namespace PL.New_order
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-        public ObservableCollection<BO.ProductItem> ProductToShow { get; }
-        public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }
+        public ObservableCollection<BO.ProductItem> ProductToShow { get; }//will update automatic to show the product on the catalog
+        public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }//show all the categories in the combobox
 
         public Catalog()
         {
             ProductToShow ??= new();
-            foreach (var x in bl!.ProductItem.ReadAll())
-                ProductToShow.Add(x);
+            Refresh();
             InitializeComponent();
         }
 
-        private void CategorySort_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+
+        private void CategorySort_SelectionChanged(object sender, SelectionChangedEventArgs e)//show  only the product of the same category
         {
             try
             {
-                ProductToShow.Clear();
-                if (CategorySort.SelectedItem.ToString() == BO.Categories.None.ToString())
+                if (CategorySort.SelectedItem.ToString() == BO.Categories.None.ToString())//show all products
                 {
-                    foreach (var x in bl!.ProductItem.ReadAll())
-                        ProductToShow.Add(x);
+                    Refresh();
                 }
-                else//read with predicate
+                else//read with predicate, and show only the chossen category 
                 {
+                    ProductToShow.Clear();
                     foreach (var x in bl!.ProductItem.ReadAll
                         (x => x?.Category.ToString() == CategorySort.SelectedItem.ToString()))
                         ProductToShow.Add(x);
@@ -66,9 +66,10 @@ namespace PL.New_order
         {
             try
             {
-                var tmp = (BO.ProductItem)Product_item_list_view.SelectedItem;
+                var tmp = (BO.ProductItem)Product_item_list_view.SelectedItem;//extract the product ID
                 int id = tmp.ID;
                 var win = new UpdateProductWindow(id);
+                //unable to change details in window 
                 win.textBoxUpdateProductAmount.IsEnabled = false;
                 win.textBoxUpdateProductPrice.IsEnabled = false;
                 win.ConfirmButton.IsEnabled = false;
@@ -88,7 +89,7 @@ namespace PL.New_order
         }
 
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)//sort all the product by category
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)//group/sort all the product by category
         {
             var temp = from x in bl?.ProductItem.ReadAll()
                             orderby x.Category
@@ -97,10 +98,14 @@ namespace PL.New_order
             ProductToShow.Clear();
             foreach (var x in temp)
                 ProductToShow.Add(x);
-
         }
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+           Refresh();
+        }
+
+        private void Refresh()//clear productItem to show and replace them with the updated products
         {
             ProductToShow.Clear();
             foreach (var x in bl!.ProductItem.ReadAll())

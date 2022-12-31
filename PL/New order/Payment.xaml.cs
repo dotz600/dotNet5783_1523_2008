@@ -16,7 +16,8 @@ using System.Windows.Shapes;
 namespace PL.New_order;
 
 /// <summary>
-/// this window represent the checkout process, take name email address from user and crate new order
+/// this window represent the checkout process, 
+/// take name, email and address from user and crate new order
 /// </summary>
 public partial class Payment : Window
 {
@@ -35,7 +36,7 @@ public partial class Payment : Window
         {
             string name = textBoxName.Text, email = textBoxEmail.Text, addres = textBoxAddres.Text;
             bl?.Cart.CartConfirmation(MainWindow.cart, name, email, addres);//confirm cart
-            //reset cart
+            //reset cart 
             MainWindow.cart = new BO.Cart();
             Page page = new ThankYouPage();
             this.Content = page;

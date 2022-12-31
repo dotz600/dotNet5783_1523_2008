@@ -20,51 +20,45 @@ namespace PL.New_order;
 /// <summary>
 /// show the product coustumer have in cart, 
 /// can click on each product to update amount
-/// 
+/// can return to catalog and crate new order with confirm cart
 /// </summary>
 public partial class CartView : Window
 {
-   
-    readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-    public ObservableCollection<BO.OrderItem?> OrderItems 
-    {
-        get; set;
-    }
+    public ObservableCollection<BO.OrderItem?> OrderItems { get; set; }//wiil hold all the product item in cart, and show them
     public CartView()
     {
         OrderItems ??= new();
         MainWindow.cart.Items ??= new();
-        Refresh();
+        Refresh();//fill OrderItems with the updated items in cart
         InitializeComponent();
     }
   
-    private void ConfirmCartButton_Click(object sender, RoutedEventArgs e)
+    private void ConfirmCartButton_Click(object sender, RoutedEventArgs e)//go to payment window to confirm order
     {
         this.Close();
         new Payment().Show();
 
     }
 
-    private void Refresh()
+    private void Cart_list_view_MouseDoubleClick(object sender, MouseButtonEventArgs e)//go to update amount to order window
+    {
+        var slected = (BO.OrderItem)Cart_list_view.SelectedItem;
+        new UpdateAmount(slected.ProductID).ShowDialog();
+        Refresh();//update the item list
+    }
+
+    private void Button_Click(object sender, RoutedEventArgs e)//return to catalog
+    {
+        this.Close();
+        new Catalog().Show();
+    }
+    private void Refresh()//clear OrderItems to show, and replace them with the updated items in cart
     {
         OrderItems.Clear();
         foreach (var item in MainWindow.cart.Items!)
         {
             OrderItems.Add(item);
         }
-    }
-
-    private void Cart_list_view_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-    {
-        var slected = (BO.OrderItem)Cart_list_view.SelectedItem;
-        new UpdateAmount(slected.ProductID).ShowDialog();
-        Refresh();
-    }
-
-    private void Button_Click(object sender, RoutedEventArgs e)
-    {
-        this.Close();
-        new Catalog().Show();
     }
 }

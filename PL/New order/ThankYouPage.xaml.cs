@@ -27,7 +27,4 @@ public partial class ThankYouPage : Page
      
     }
 
-
-
-
 }
