@@ -21,29 +21,26 @@ namespace PL;
 
 /// <summary>
 /// admin window - can watch all the products in store - as productForList Entity
-/// can update/add products, also can watch all order and update it shipping details
+/// can update/add products, also can watch all order and update its shipping details
 /// </summary>
 public partial class ProductForListWindow : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
-    public ObservableCollection<ProductForList?> productForLists { get; }
-    public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }
+    public ObservableCollection<ProductForList?> productForLists { get; }//hold all the product to show for manger
+    public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }//hold and show the categoris in combobox
 
     public ProductForListWindow()
     {
         productForLists ??= new();
         InitializeComponent();
-        Refresh();
+        Refresh();//update the product to show
     }
 
-    private void AddProductButton_Click(object sender, RoutedEventArgs e)
+    private void AddProductButton_Click(object sender, RoutedEventArgs e)//go to addProduct window
     {
-        AddProductWindow addProductWindow = new()
-        {
-            Bl = bl//pass the data
-        };
+        AddProductWindow addProductWindow = new();
         addProductWindow.ShowDialog();
-        Refresh();
+        Refresh();//update the product list to show manger
     }
 
 
@@ -72,9 +69,10 @@ public partial class ProductForListWindow : Window
         if (ListViewProductForList.SelectedItem != null)
         {
             BO.ProductForList p = (BO.ProductForList)ListViewProductForList.SelectedItem;
-            UpdateProductWindow updateProductWindow = new(p.ID){ bl = bl, prevWin = this};
-            updateProductWindow.addToCartButton.IsEnabled = false;
-            updateProductWindow.Show();
+            UpdateProductWindow updateProductWindow = new(p.ID);
+            updateProductWindow.addToCartButton.IsEnabled = false;//unable add to cart button, its for costumer only
+            updateProductWindow.ShowDialog();
+            Refresh();  
         }
     }
 
@@ -84,7 +82,7 @@ public partial class ProductForListWindow : Window
         new OrderWindow().Show();
        
     }
-    public void Refresh()
+    public void Refresh()//update the product to show on screen
     {
         productForLists.Clear();
         foreach (var x in bl!.Product.ReadAll()) 

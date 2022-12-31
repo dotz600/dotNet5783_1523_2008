@@ -203,7 +203,7 @@ internal class Order : IOrder
    
     }
 
-    public List<BO.OrderItem?> BuildItemsList(int id)//return a list of all the orderItems that related to a one order
+    private List<BO.OrderItem?> BuildItemsList(int id)//return a list of all the orderItems that related to a one order
     {
         var listReturn = from doi in Dal?.OrderItem.ReadAll()
                          where (doi?.OrderID == id)
@@ -219,7 +219,7 @@ internal class Order : IOrder
 
         return listReturn.ToList();
     }
-    public void CalcAmountAndPrice(ref int countAmountOfItems, ref double price, int? id)//search for all the products for the same order and return the price and the sum amount
+    private void CalcAmountAndPrice(ref int countAmountOfItems, ref double price, int? id)//search for all the products for the same order and return the price and the sum amount
     {
         foreach (DO.OrderItem? orderItem in Dal?.OrderItem.ReadAll()!)
         {

@@ -16,26 +16,29 @@ using System.Windows.Shapes;
 namespace PL.BoEntityWindows.Admin
 {
     /// <summary>
-    /// show order details and can update status
+    /// show order details 
+    /// admin can update status
+    /// buyer only can watch
     /// </summary>
     public partial class UpdateOrderWindow : Window
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-        public UpdateOrderWindow(int id, bool flag)
+        public UpdateOrderWindow(int id, bool flag)//flag is for to determine if its a buyer or a admin
         {
             InitializeComponent();
-            UpdateProductGrid.DataContext = bl!.Order.Read(id);
-            InitializeFields();
+            UpdateProductGrid.DataContext = bl!.Order.Read(id);//insert order data to dataContext
+            InitializeFields();//set the status value to show
+
             StatusComboBoxUpdateOrder.IsEnabled = flag;
             cofirmUpdate.IsEnabled = flag;
         }
-        private void Update_Order_Confirmation_Click(object sender, RoutedEventArgs e)
+        private void Update_Order_Confirmation_Click(object sender, RoutedEventArgs e)//will update the shipping details
         {
             try
             {
                 if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.ConfirmedOrder)
-                    throw new BO.UpdateObjectFailedException("Order allredy Confirm");
+                    throw new BO.UpdateObjectFailedException("Order allredy Confirm");//all the orders are confirm allredy 
                 if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.Sent)
                     bl!.Order.UpdateShipping(int.Parse(textBoxUpdateOrderID.Text));
                 if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.Provided)
@@ -49,7 +52,7 @@ namespace PL.BoEntityWindows.Admin
             }
             this.Close();
         }
-        private void InitializeFields()
+        private void InitializeFields()//set the status value to show 
         {
             var x = Enum.GetValues(typeof(BO.OrderStatus));
             List<BO.OrderStatus> orderStatuses = new();

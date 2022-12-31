@@ -1,5 +1,4 @@
-﻿using BlImplementation;
-using BO;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +20,15 @@ namespace PL.BoEntityWindows;
 /// </summary>
 public partial class AddProductWindow : Window   
 {
-    public BlApi.IBl? Bl;
-    public List<BO.Categories> Ctegories 
+    private BlApi.IBl? Bl = BlApi.Factory.Get();
+    public List<BO.Categories> Ctegories //hold the categories to show - exept None
     { 
         get
         {
             var x = Enum.GetValues(typeof(BO.Categories));
             List<BO.Categories> res = new();
             foreach (BO.Categories cat in x)
-                if(cat != Categories.None)
+                if(cat != BO.Categories.None)
                     res.Add(cat);
             
             return res;

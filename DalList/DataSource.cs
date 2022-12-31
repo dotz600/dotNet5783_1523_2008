@@ -24,7 +24,7 @@ internal static class DataSource
         
     }
 
-    private static void addOrder(Order o1)
+    private static void AddOrder(Order o1)
     {
         //update the dates
         o1.OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//time now - random time
@@ -35,16 +35,17 @@ internal static class DataSource
         s_ordersArr.Add(o1);
     }
 
-    private static void AddOrderItem(int i = 1)//add one orderItem
+    private static void AddOrderItem(int i)//add one orderItem
     {
 
         int amount = Config.rand.Next(1, 5);
-         
-        OrderItem ot1 = new OrderItem();
-        ot1.ProductID = s_productsArr[i % 10].Value.ID;//alreday added 10 product to the list 
-        ot1.OrderID = s_ordersArr[i % 20].Value.ID; // allready added 20 orders to the list
+        int randomProduct = Config.rand.Next(10);
+        OrderItem ot1 = new();
+        
+        ot1.ProductID = (int)s_productsArr[randomProduct]?.ID!;  //alreday added 10 product to the list 
+        ot1.OrderID = (int)s_ordersArr[i % 20]?.ID!; // allready added 20 orders to the list
         ot1.Amount = amount;//amount is random number
-        ot1.Price = s_productsArr[i % 10].Value.Price * amount;
+        ot1.Price = (int)s_productsArr[randomProduct]?.Price! * amount;
         s_ordersItemArr.Add(ot1);
 
     }
@@ -73,7 +74,7 @@ internal static class DataSource
         //adding 20 orders. 
         for (char i = 'a'; i < 'a' + 20; i++)
         {
-            addOrder(new Order
+            AddOrder(new Order
             {
                 ID = Config.getIdRunNum(),
                 CustomerName = "Avi" + i,
@@ -86,7 +87,7 @@ internal static class DataSource
         }
 
         //adding 40 orderItem
-        for (int i = 1; i < 41; i++)
+        for (int i = 0; i < 40; i++)
         {
             AddOrderItem(i);
         }

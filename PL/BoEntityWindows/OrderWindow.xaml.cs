@@ -16,67 +16,66 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace PL.BoEntityWindows
+namespace PL.BoEntityWindows;
+
+/// <summary>
+/// from admin window- can update order status and watch all orders
+/// </summary>
+public partial class OrderWindow : Window
 {
-    /// <summary>
-    /// from admin window- can update order status and watch all orders
-    /// </summary>
-    public partial class OrderWindow : Window
+    readonly BlApi.IBl? bl = BlApi.Factory.Get();
+    public ObservableCollection<OrderForList?> orderForLists { get; set; }//hold the order list to show on screen
+    public Array OrderStat { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }//hold the category list to show on combobox
+    public OrderWindow()
     {
-        readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        public ObservableCollection<OrderForList?> orderForLists { get; set; }
-        public Array OrderStat { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }
-        public OrderWindow()
-        {
-            orderForLists ??= new();
-            foreach (var x in bl!.Order.ReadAll())
-                orderForLists.Add(x);
+        orderForLists ??= new();
+        foreach (var x in bl!.Order.ReadAll())//fill orderForList collction to show on screen
+            orderForLists.Add(x);
 
-            InitializeComponent();
+        InitializeComponent();
+    }
+    private void OrderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    //filter Orders by status, if status = None, will show all orders
+    {
+        if (orderStatusSelector.SelectedItem.ToString() == BO.OrderStatus.None.ToString())
+        {
+            Refresh();
         }
-        private void OrderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //filter Orders by status, if status = None, will show all orders
+        else
         {
-            if (orderStatusSelector.SelectedItem.ToString() == BO.OrderStatus.None.ToString())
-            {
-                Refresh();
-            }
-            else
-            {
-                orderForLists.Clear();
-                foreach (var order in bl!.Order.ReadAll())
-                    if (order?.Status == (BO.OrderStatus)orderStatusSelector.SelectedItem)
-                        orderForLists.Add(order);
-            }
-
-
-        }
-        private void ListViewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)//open update order window
-        {
-            if (ListViewOrders.SelectedItem != null)
-            {
-                BO.OrderForList order = (BO.OrderForList)ListViewOrders.SelectedItem;
-                UpdateOrderWindow win = new(order.ID, true);
-                win.ShowDialog();
-                Refresh();
-            }
-        }
-
-        private void Product_page_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-            new ProductForListWindow().Show();
-        }
-
-
-        public void Refresh()//update the Observable Collection order for list
-        {
-
             orderForLists.Clear();
-            foreach (var x in bl!.Order.ReadAll()) 
-                orderForLists.Add(x);
-
-            orderStatusSelector.SelectedIndex = 3;
+            foreach (var order in bl!.Order.ReadAll())
+                if (order?.Status == (BO.OrderStatus)orderStatusSelector.SelectedItem)
+                    orderForLists.Add(order);
         }
+
+
+    }
+    private void ListViewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)//open update order window, can update shipping
+    {
+        if (ListViewOrders.SelectedItem != null)
+        {
+            BO.OrderForList order = (BO.OrderForList)ListViewOrders.SelectedItem;
+            UpdateOrderWindow win = new(order.ID, true);
+            win.ShowDialog();
+            Refresh();//update the order collction to show on screen
+        }
+    }
+
+    private void Product_page_Click(object sender, RoutedEventArgs e)//go to product page
+    {
+        this.Close();
+        new ProductForListWindow().Show();
+    }
+
+
+    public void Refresh()//update the Observable Collection order for list
+    {
+
+        orderForLists.Clear();
+        foreach (var x in bl!.Order.ReadAll()) 
+            orderForLists.Add(x);
+
+        orderStatusSelector.SelectedIndex = 3;
     }
 }
