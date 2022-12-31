@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.BoEntityWindows"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        
         Title="UpdateProductWindow" Height="450" Width="800">
     <Grid Name="UpdateProductGrid">
         <Grid.RowDefinitions>
@@ -26,15 +28,15 @@
 
 
         <Label Content="Product Details" Width="176" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center"  Margin="10,0,0,0" VerticalAlignment="Top" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="textBoxUpdateProductID" Width="300" Text="" Grid.Row="1" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdateProductID" Text="{Binding Path= ID}" Width="300" Grid.Row="1" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Product ID :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1"/>
-        <TextBox x:Name="textBoxUpdateProductName" Width="300" Text="" Grid.Row="2" Grid.Column="2" IsReadOnly="True"/>
+        <TextBox x:Name="textBoxUpdateProductName" Width="300" Text="{Binding Path= Name}" Grid.Row="2" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Name of product :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"/>
-        <ComboBox x:Name="CategoryComboBoxUpdate" Width="300" Focusable="False" Text="" Grid.Row="3" Grid.Column="2" IsEnabled="False"/>
+        <ComboBox x:Name="CategoryComboBoxUpdate" ItemsSource="{Binding MyCategory}" SelectedItem="{Binding Path= Category}" Width="300" Focusable="False" Text="" Grid.Row="3" Grid.Column="2" IsEnabled="False"/>
         <Label Content="Category of product :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3"/>
-        <TextBox x:Name="textBoxUpdateProductAmount" Width="300" Text="" Grid.Row="4" Grid.Column="2"/>
+        <TextBox x:Name="textBoxUpdateProductAmount" Width="300" Text="{Binding Path= InStock}" Grid.Row="4" Grid.Column="2"/>
         <Label Content="Enter amount :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="4"/>
-        <TextBox x:Name="textBoxUpdateProductPrice" Width="300" Text="" Grid.Row="5" Grid.Column="2"/>
+        <TextBox x:Name="textBoxUpdateProductPrice" Width="300" Text="{Binding Path= Price}" Grid.Row="5" Grid.Column="2"/>
         <Label Content="Enter price :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="5"/>
         <Button x:Name="ConfirmButton" Content="Confirm" Height="40" Width="194" Click="Update_Product_Confirmation_Click" Grid.Row="6" Grid.Column="2" />
         <Button x:Name="addToCartButton" Grid.Column="2" Height="40" Width="194" Content="Add To Cart" HorizontalAlignment="Center" Grid.Row="7" VerticalAlignment="Center" Click="AddToCartButton_Click" />

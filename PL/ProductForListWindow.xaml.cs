@@ -26,19 +26,14 @@ namespace PL;
 public partial class ProductForListWindow : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
-    ObservableCollection<ProductForList> productForLists = new();
- 
+    public ObservableCollection<ProductForList?> productForLists { get; }
+    public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }
+
     public ProductForListWindow()
     {
+        productForLists ??= new();
         InitializeComponent();
-        
-        foreach (var x in bl!.Product.ReadAll()) 
-            productForLists.Add(x);
-        
-        EventArgs args = new();
-        ProductSelector.SelectedIndex = 9;//choose default value(None)
-        ListViewProductForList.ItemsSource = productForLists;//set list of products
-        ProductSelector.ItemsSource = Enum.GetValues(typeof(BO.Categories));//set list of categories
+        Refresh();
     }
 
     private void AddProductButton_Click(object sender, RoutedEventArgs e)
@@ -48,9 +43,7 @@ public partial class ProductForListWindow : Window
             Bl = bl//pass the data
         };
         addProductWindow.ShowDialog();
-        this.Refresh();
-        ListViewProductForList.ItemsSource = productForLists;//update the list of products
-
+        Refresh();
     }
 
 
@@ -58,11 +51,10 @@ public partial class ProductForListWindow : Window
     private void ProductSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     //filter products by category, if category = None, will show all products
     {
+
         if (ProductSelector.SelectedItem.ToString() == BO.Categories.None.ToString())
         {
-            productForLists.Clear();
-            foreach (var x in bl!.Product.ReadAll()) 
-                productForLists.Add(x);
+            Refresh();
         }
         else
         {
@@ -70,9 +62,9 @@ public partial class ProductForListWindow : Window
             foreach (var x in (bl!.Product.ReadAll(x => x?.Category.ToString() == ProductSelector.SelectedItem.ToString())))
                 productForLists.Add(x);
         }
-       
+
     }
-    
+
     private void ListViewProductForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         //double click on product takes to update win
     {

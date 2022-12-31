@@ -39,7 +39,7 @@ namespace PL.New_order
                 bl?.Cart.Update(MainWindow.cart, productId, num);
   
                 this.Close();
-                new CartView().Show();
+                //new CartView().Show();
 
             }
             catch (Exception ex)

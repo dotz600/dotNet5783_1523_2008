@@ -1,4 +1,5 @@
-﻿using BO;
+﻿using BlApi;
+using BO;
 using PL.BoEntityWindows.Admin;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,15 @@ namespace PL.BoEntityWindows
     public partial class OrderWindow : Window
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        ObservableCollection<OrderForList> orderForLists = new();
+        public ObservableCollection<OrderForList?> orderForLists { get; set; }
+        public Array OrderStat { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }
         public OrderWindow()
         {
+            orderForLists ??= new();
+            foreach (var x in bl!.Order.ReadAll())
+                orderForLists.Add(x);
+
             InitializeComponent();
-            orderStatusSelector.ItemsSource = Enum.GetValues(typeof(BO.OrderStatus));//set list of statuses
-            orderStatusSelector.SelectedIndex = 3;//choose default value(None)
-            foreach (var x in bl!.Order.ReadAll()) orderForLists.Add(x);
-            ListViewOrders.ItemsSource = orderForLists;//set list of Orders
         }
         private void OrderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         //filter Orders by status, if status = None, will show all orders
@@ -43,9 +45,8 @@ namespace PL.BoEntityWindows
             {
                 orderForLists.Clear();
                 foreach (var order in bl!.Order.ReadAll())
-                     if (order?.Status == (BO.OrderStatus)orderStatusSelector.SelectedItem)
-                           orderForLists.Add(order);
-                ListViewOrders.ItemsSource = orderForLists;
+                    if (order?.Status == (BO.OrderStatus)orderStatusSelector.SelectedItem)
+                        orderForLists.Add(order);
             }
 
 
@@ -55,8 +56,9 @@ namespace PL.BoEntityWindows
             if (ListViewOrders.SelectedItem != null)
             {
                 BO.OrderForList order = (BO.OrderForList)ListViewOrders.SelectedItem;
-                UpdateOrderWindow win = new(order.ID, true) { prevWin = this };
-                win.Show(); 
+                UpdateOrderWindow win = new(order.ID, true);
+                win.ShowDialog();
+                Refresh();
             }
         }
 
@@ -69,9 +71,11 @@ namespace PL.BoEntityWindows
 
         public void Refresh()//update the Observable Collection order for list
         {
+
             orderForLists.Clear();
-            foreach (var x in bl!.Order.ReadAll()) orderForLists.Add(x);
-                 ListViewOrders.ItemsSource = orderForLists;
+            foreach (var x in bl!.Order.ReadAll()) 
+                orderForLists.Add(x);
+
             orderStatusSelector.SelectedIndex = 3;
         }
     }

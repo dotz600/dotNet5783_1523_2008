@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="Cart_list_view" ItemsSource="{Binding OrderItems}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="0" Grid.Column="0" SelectionChanged="Cart_list_view_SelectionChanged">
+        <ListView x:Name="Cart_list_view" ItemsSource="{Binding OrderItems}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="0" Grid.Column="0"  MouseDoubleClick="Cart_list_view_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ProductID}" />
@@ -28,6 +28,7 @@
         </ListView>
 
         <Button x:Name="confirmCartButton" VerticalAlignment="Center"  HorizontalAlignment="Right" Content="Confirm Cart" Grid.Column="1" Grid.Row="1" Height="35" Width="150" Click="ConfirmCartButton_Click"/>
+        <Button Content="Catalog" Height="35" Width="150" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" Click="Button_Click"/>
 
     </Grid>
 </Window>

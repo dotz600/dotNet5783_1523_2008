@@ -33,7 +33,7 @@ public partial class MainWindow : Window
 
     private void Show_New_Order_Screen_Click(object sender, RoutedEventArgs e) => new Catalog().Show();
 
-    private void Show_New_Track_Screen_Click(object sender, RoutedEventArgs e) => new Window1().Show();
+    private void Show_New_Track_Screen_Click(object sender, RoutedEventArgs e) => new trackOrderWindow().Show();
 
    
 }

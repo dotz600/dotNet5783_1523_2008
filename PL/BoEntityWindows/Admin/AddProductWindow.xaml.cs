@@ -21,21 +21,24 @@ namespace PL.BoEntityWindows;
 /// </summary>
 public partial class AddProductWindow : Window   
 {
+    public BlApi.IBl? Bl;
+    public List<BO.Categories> Ctegories 
+    { 
+        get
+        {
+            var x = Enum.GetValues(typeof(BO.Categories));
+            List<BO.Categories> res = new();
+            foreach (BO.Categories cat in x)
+                if(cat != Categories.None)
+                    res.Add(cat);
+            
+            return res;
+        } 
+    }
     public AddProductWindow()
     {
         InitializeComponent();
-        var x = Enum.GetValues(typeof(BO.Categories));
-        List<BO.Categories> orderStatuses = new();
-        foreach (BO.Categories cat in x)
-            orderStatuses.Add(cat);
-        //take all the status exept None
-        CategoryComboBoxAdd.ItemsSource = from y in orderStatuses
-                                                where y != Categories.None
-                                                select y;
-        CategoryComboBoxAdd.SelectedIndex = 8;//choose default value(None)
-        
     }
-    public BlApi.IBl? Bl;
     private void Add_Product_Confirmation_Click(object sender, RoutedEventArgs e)//creates a product, and open PFL win
     {
 

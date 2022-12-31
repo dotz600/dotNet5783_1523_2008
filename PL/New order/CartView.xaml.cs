@@ -27,16 +27,15 @@ public partial class CartView : Window
    
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-    public List<BO.OrderItem?> OrderItems 
-    { 
-        get
-        {
-            MainWindow.cart.Items ??= new();
-            return MainWindow.cart.Items; 
-        } 
+    public ObservableCollection<BO.OrderItem?> OrderItems 
+    {
+        get; set;
     }
     public CartView()
     {
+        OrderItems ??= new();
+        MainWindow.cart.Items ??= new();
+        Refresh();
         InitializeComponent();
     }
   
@@ -47,15 +46,25 @@ public partial class CartView : Window
 
     }
 
-    private void Cart_list_view_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void Refresh()
     {
-        var slected = (BO.OrderItem)Cart_list_view.SelectedItem;
-        this.Close();
-        new UpdateAmount(slected.ProductID).Show();
-        
-
-
+        OrderItems.Clear();
+        foreach (var item in MainWindow.cart.Items!)
+        {
+            OrderItems.Add(item);
+        }
     }
 
+    private void Cart_list_view_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+        var slected = (BO.OrderItem)Cart_list_view.SelectedItem;
+        new UpdateAmount(slected.ProductID).ShowDialog();
+        Refresh();
+    }
 
+    private void Button_Click(object sender, RoutedEventArgs e)
+    {
+        this.Close();
+        new Catalog().Show();
+    }
 }

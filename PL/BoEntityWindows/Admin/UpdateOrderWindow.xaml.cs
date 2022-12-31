@@ -21,13 +21,12 @@ namespace PL.BoEntityWindows.Admin
     public partial class UpdateOrderWindow : Window
     {
         readonly BlApi.IBl? bl = BlApi.Factory.Get();
-        
-        public OrderWindow? prevWin;
+
         public UpdateOrderWindow(int id, bool flag)
         {
             InitializeComponent();
             UpdateProductGrid.DataContext = bl!.Order.Read(id);
-            InitializeFields(id);
+            InitializeFields();
             StatusComboBoxUpdateOrder.IsEnabled = flag;
             cofirmUpdate.IsEnabled = flag;
         }
@@ -41,25 +40,24 @@ namespace PL.BoEntityWindows.Admin
                     bl!.Order.UpdateShipping(int.Parse(textBoxUpdateOrderID.Text));
                 if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.Provided)
                     bl!.Order.UpdateDelivery(int.Parse(textBoxUpdateOrderID.Text));
-                prevWin?.Refresh();
+
             }
             catch(UpdateObjectFailedException ex)
             {
                 MessageBox.Show(ex.Message, "Exception" , MessageBoxButton.OK, MessageBoxImage.Hand
                                 , MessageBoxResult.Cancel);
             }
-                this.Close();
+            this.Close();
         }
-        private void InitializeFields(int id)
+        private void InitializeFields()
         {
             var x = Enum.GetValues(typeof(BO.OrderStatus));
             List<BO.OrderStatus> orderStatuses = new();
             foreach (BO.OrderStatus status in x)
-                orderStatuses.Add(status);
+                if(status != OrderStatus.None)
+                    orderStatuses.Add(status);
             //take all the status exept None
-            StatusComboBoxUpdateOrder.ItemsSource = from y in orderStatuses
-                                                    where y != OrderStatus.None
-                                                    select y;
+            StatusComboBoxUpdateOrder.ItemsSource = orderStatuses;
         }
     }
 }

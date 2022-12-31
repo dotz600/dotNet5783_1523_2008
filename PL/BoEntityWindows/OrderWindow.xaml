@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.BoEntityWindows"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        
         Title="OrderWindow" Height="450" Width="800">
     <Grid Name="OrderGrid">
         <Grid.RowDefinitions>
@@ -22,11 +24,11 @@
         <Button x:Name="Product_page" Content="Product Window" Grid.Row="2" HorizontalAlignment="Left" Margin="5" Padding="5" Click="Product_page_Click"/>
         <!--<Button x:Name="TrackOrder" Content="Track order" Grid.Row="2" HorizontalAlignment="Right" Margin="5" Padding="5" Click="TrackOrder_Click"/>-->
 
-        <ComboBox Name="orderStatusSelector" Margin="464,0,0,0" Height="46" VerticalAlignment="Top" SelectionChanged="OrderStatusSelector_SelectionChanged"/>
+        <ComboBox Name="orderStatusSelector" ItemsSource="{Binding OrderStat}" SelectedIndex="3" Margin="464,0,0,0" Height="46" VerticalAlignment="Top" SelectionChanged="OrderStatusSelector_SelectionChanged"/>
         <Label Content="Status:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
                Grid.Column="0"/>
         <ListView  MouseDoubleClick="ListViewOrders_MouseDoubleClick" 
-                   Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewOrders">
+                   Grid.Row="1" ItemsSource="{Binding orderForLists}" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewOrders">
 
             <ListView.View>
                 <GridView>
