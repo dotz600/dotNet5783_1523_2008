@@ -47,7 +47,6 @@ internal static class DataSource
         ot1.Amount = amount;//amount is random number
         ot1.Price = (int)s_productsArr[randomProduct]?.Price! * amount;
         s_ordersItemArr.Add(ot1);
-
     }
 
     private static void AddProduct(Product p1)

@@ -84,7 +84,7 @@ namespace PL.New_order
 
         private void WatchCartButton_Click(object sender, RoutedEventArgs e)//go to cart
         {
-            this.Close();
+            //this.Close();
             new CartView().Show();
         }
 

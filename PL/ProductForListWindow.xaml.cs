@@ -1,5 +1,5 @@
 ﻿
-using BO;
+
 using PL.BoEntityWindows;
 using System;
 using System.Collections.Generic;
@@ -26,7 +26,7 @@ namespace PL;
 public partial class ProductForListWindow : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
-    public ObservableCollection<ProductForList?> productForLists { get; }//hold all the product to show for manger
+    public ObservableCollection<BO.ProductForList?> productForLists { get; }//hold all the product to show for manger
     public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }//hold and show the categoris in combobox
 
     public ProductForListWindow()

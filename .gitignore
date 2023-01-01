@@ -391,3 +391,7 @@ MigrationBackup/
 /DalList/obj/Release/DalList.GeneratedMSBuildEditorConfig.editorconfig
 /DalList/obj/Release/DalList.assets.cache
 /DalTest/obj/Release/DalTest.GeneratedMSBuildEditorConfig.editorconfig
+/BL/obj/Debug/BL.csproj.FileListAbsolute.txt
+/DalFacade/obj/Debug/DalFacade.csproj.AssemblyReference.cache
+/DalFacade/obj/Debug/DalFacade.csproj.FileListAbsolute.txt
+/DalList/obj/Debug/DalList.csproj.FileListAbsolute.txt

@@ -25,6 +25,7 @@ public partial class UpdateProductWindow : Window
 {
     private BlApi.IBl? bl = BlApi.Factory.Get();
 
+
     public UpdateProductWindow(int id)
     {
         InitializeComponent();
