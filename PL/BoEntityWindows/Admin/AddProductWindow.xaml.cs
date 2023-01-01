@@ -43,7 +43,10 @@ public partial class AddProductWindow : Window
 
         try
         {
+            int x;
             BO.Product p = Create_product_Add();
+            if (int.TryParse(p.Name, out x))
+                throw new BO.EmptyNameException("Name must be a string!");
             Bl!.Product.Create(p);
             this.Close();    
         }

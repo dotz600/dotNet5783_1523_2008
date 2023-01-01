@@ -24,7 +24,7 @@ internal class Product : IProduct
         }
         catch (DalApi.ObjExistException ex)
         {
-            throw new BO.CreateObjectFailedException("cant create new product", ex);
+            throw new BO.CreateObjectFailedException("product ID already exist", ex);
         }
         //all the other main will catch
     }

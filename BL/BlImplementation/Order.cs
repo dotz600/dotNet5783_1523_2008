@@ -82,7 +82,7 @@ internal class Order : IOrder
             }//check if the order exist in DL
             catch (DalApi.ObjNotFoundException ex)//all the other main will catch
             {
-                throw new BO.ObjectNotExistException("BO.Order.Read", ex);
+                throw new BO.ObjectNotExistException("Order does not exist", ex);
             }
         }
         else
