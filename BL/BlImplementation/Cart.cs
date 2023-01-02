@@ -117,6 +117,10 @@ internal class Cart : ICart
                 throw new BO.EmptyNameException("addres is empty");
             if (cart?.Items?.Any() == false)
                 throw new BO.CreateObjectFailedException("Your Cart Is Empty! Fill Your Cart First");
+            if (int.TryParse(name, out int x))
+                throw new BO.EmptyNameException("Name must be a string!");
+            if (int.TryParse(adress, out int y))
+                throw new BO.EmptyNameException("Adress must be a string!");
 
             if (cart?.Items != null)
             {

@@ -1,5 +1,4 @@
 ﻿
-using BO;
 using PL.BoEntityWindows;
 using PL.BoEntityWindows.Admin;
 using PL.New_order;
@@ -30,7 +29,7 @@ namespace PL;
 public partial class MainWindow : Window
 {
 
-    internal static Cart cart = new();//static global cart - all the windows can use
+    internal static BO.Cart cart = new();//static global cart - all the windows can use
     public MainWindow() => InitializeComponent();
   
     private void Show_Admin_Screen_Click(object sender, RoutedEventArgs e) => new ProductForListWindow().Show();

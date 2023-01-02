@@ -34,10 +34,7 @@ public partial class Payment : Window
     {
         try
         {
-            int x;
             string name = textBoxName.Text, email = textBoxEmail.Text, addres = textBoxAddres.Text;
-            if (int.TryParse(name, out x) || int.TryParse(addres, out x))
-                throw new BO.EmptyNameException("Name or adress must be a string!");
             bl?.Cart.CartConfirmation(MainWindow.cart, name, email, addres);//confirm cart
             //reset cart 
             MainWindow.cart = new BO.Cart();

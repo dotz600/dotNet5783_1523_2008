@@ -9,9 +9,19 @@ internal class Product : IProduct
     private readonly DalApi.IDal? Dal = DalApi.Factory.Get();
     public void Create(BO.Product p)
     {
-
+        if (int.TryParse(p.Name, out int x))
+            throw new BO.EmptyNameException("Name must be a string!");
+        if (p?.Name?.Length == 0)
+            throw new BO.EmptyNameException("Name cat be a empty!");
+        if (p?.InStock < 0)
+            throw new BO.NegativeAmountException("Amount in stock cant be negative!");
+        if (p?.ID < 0)
+            throw new BO.NegativeIDException("ID cant be negative!");
+        if (p?.Price < 0)
+            throw new BO.NegativePriceException("price cant be negative!");
         try
         {
+
             CheckNameIdPriceStock(p);
             Dal?.Product.Create(new DO.Product
             {
