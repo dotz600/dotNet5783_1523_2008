@@ -68,11 +68,7 @@ public partial class Catalog : Window
         {
             var tmp = (BO.ProductItem)Product_item_list_view.SelectedItem;//extract the product ID
             int id = tmp.ID;
-            var win = new UpdateProductWindow(id);
-            //unable to change details in window 
-            win.textBoxUpdateProductAmount.IsEnabled = false;
-            win.textBoxUpdateProductPrice.IsEnabled = false;
-            win.ConfirmButton.IsEnabled = false;
+            var win = new UpdateProductWindow(id, true);//true-> its a user that enter the screen
             win.Show();
         }
         catch (Exception ex) 
@@ -84,7 +80,7 @@ public partial class Catalog : Window
 
     private void WatchCartButton_Click(object sender, RoutedEventArgs e)//go to cart
     {
-        //this.Close();
+        this.Close();
         new CartView().Show();
     }
 

@@ -31,7 +31,7 @@ public partial class ProductForListWindow : Window
 
     public ProductForListWindow()
     {
-        productForLists ??= new();
+        productForLists = new();
         InitializeComponent();
         Refresh();//update the product to show
     }
@@ -69,8 +69,7 @@ public partial class ProductForListWindow : Window
         if (ListViewProductForList.SelectedItem != null)
         {
             BO.ProductForList p = (BO.ProductForList)ListViewProductForList.SelectedItem;
-            UpdateProductWindow updateProductWindow = new(p.ID);
-            updateProductWindow.addToCartButton.IsEnabled = false;//unable add to cart button, its for costumer only
+            UpdateProductWindow updateProductWindow = new(p.ID, false);//false -> its not a user that want to enter the screen
             updateProductWindow.ShowDialog();
             Refresh();  
         }
