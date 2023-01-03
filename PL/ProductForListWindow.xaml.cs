@@ -69,7 +69,7 @@ public partial class ProductForListWindow : Window
         if (ListViewProductForList.SelectedItem != null)
         {
             BO.ProductForList p = (BO.ProductForList)ListViewProductForList.SelectedItem;
-            UpdateProductWindow updateProductWindow = new(p.ID, false);//false -> its not a user that want to enter the screen
+            UpdateProductWindow updateProductWindow = new(p.ID);
             updateProductWindow.ShowDialog();
             Refresh();  
         }

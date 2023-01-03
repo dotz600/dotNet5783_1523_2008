@@ -25,7 +25,7 @@
                     <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ID}" />
                     <GridViewColumn Header= "Name" DisplayMemberBinding="{Binding Path = Name}"/>
                     <GridViewColumn Header= "Price" DisplayMemberBinding="{Binding Path = Price}"/>
-                    <GridViewColumn Header= "Amount" DisplayMemberBinding="{Binding Path = Amount}"/>
+                    <GridViewColumn Header= "In cart" DisplayMemberBinding="{Binding Path = AmountInCart}"/>
                     <GridViewColumn Header= "Category"  DisplayMemberBinding="{Binding Path = Category}"/>
                     <GridViewColumn Header= "In Stock" DisplayMemberBinding="{Binding Path = InStock}"/>
 
@@ -36,7 +36,8 @@
         </ListView>
         <ComboBox x:Name="CategorySort" ItemsSource="{Binding Categories}" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top"
                   Width="152" SelectionChanged="CategorySort_SelectionChanged" BorderBrush="{DynamicResource buttonBackground}"
-                  OpacityMask="{DynamicResource buttonBackground}" SelectedIndex="9" ></ComboBox>
+                  OpacityMask="{DynamicResource buttonBackground}" SelectedIndex="9"
+        ></ComboBox>
 
         <Label Content="Category" HorizontalAlignment="Left" Margin="192,-3,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.75,0.292" Width="74" Height="28" Grid.Column="2"/>
         <Button x:Name="WatchCartButton" Grid.Column="3" Content="Watch Cart" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Height="35" Width="145" Click="WatchCartButton_Click"/>

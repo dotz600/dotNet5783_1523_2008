@@ -68,23 +68,17 @@ internal class Cart : ICart
                 DO.Product p = Dal?.Product.Read(productId) ?? throw new NullReferenceException();
                 if (ot.Amount < amount)                         //if want to increase the amount
                 {
-                    if (p.InStock >= amount)
-                    {
-                        ot.Amount = amount;
-                        cart.TotalPrice -= ot.TotalPrice;
-                        ot.TotalPrice = ot.Price * amount;
-                        cart.TotalPrice += ot.TotalPrice;
-                        return cart;
-                    }
-                    else
-                    {
-                        throw new BO.NegativeAmountException("not enough in stock");
-                    }
+                    ot.Amount = amount;
+                    cart.TotalPrice -= ot.TotalPrice;
+                    ot.TotalPrice = ot.Price * amount;
+                    cart.TotalPrice += ot.TotalPrice;
+                    return cart;
                 }
                 else if (amount == 0)                        //if want to not order at all
                 {
                     cart.TotalPrice -= ot.TotalPrice;
                     cart.Items?.Remove(ot);
+                    return cart;
                 }
                 else if (ot.Amount > amount)                //if want to decrease the amount
                 {
@@ -126,9 +120,9 @@ internal class Cart : ICart
             {
                 foreach (var ot in cart.Items)
                 {
-                    if (ot != null)
-                    if (Dal?.Product.Read(ot.ProductID).InStock < ot.Amount)
-                        throw new BO.NegativeAmountException("product in cart dont have enough in stock");
+                    var p = Dal?.Product.Read(ot!.ProductID);
+                    if (p?.InStock < ot!.Amount)
+                        throw new BO.NegativeAmountException("product " + p?.Name + " in cart dont have enough in stock");
                 }
             }
             else

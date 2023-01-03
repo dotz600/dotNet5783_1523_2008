@@ -25,19 +25,15 @@ public partial class UpdateProductWindow : Window
 {
     private BlApi.IBl? bl = BlApi.Factory.Get();
 
-    public bool IsUser { get; set; }//determine if  user enter the screen
-
-    public bool IsAdmin { get; set; }//determine if admin enter the screen
-
     public BO.Product ProductDetails { get; set; } //hold the product details
 
     public BO.Categories? CurrentCategory { get; set; } //hold the catrgory of the product
+    
 
     public Array CategoriesToShow { get { return Enum.GetValues(typeof(BO.Categories)); } } //return array with all the categories
-    public UpdateProductWindow(int id, bool isUser)
+    public UpdateProductWindow(int id)
     {
-        this.IsUser = isUser;
-        IsAdmin = !isUser;
+
         ProductDetails = bl.Product.Read(id);
         CurrentCategory = ProductDetails.Category;
         InitializeComponent();
@@ -74,23 +70,4 @@ public partial class UpdateProductWindow : Window
         return p;
     }
 
-    private void AddToCartButton_Click(object sender, RoutedEventArgs e)//for buyer only, can add the product to cart
-    {
-        try
-        {
-            bl?.Cart.Add(MainWindow.cart,int.Parse(textBoxUpdateProductID.Text));
-            this.Close();
-
-            MessageBox.Show("Successfully added to cart", "Success", MessageBoxButton.OK, MessageBoxImage.Information
-            , MessageBoxResult.Cancel);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
-            , MessageBoxResult.Cancel);
-            this.Close();
-
-        }
-
-    }
 }

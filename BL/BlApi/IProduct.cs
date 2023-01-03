@@ -32,5 +32,7 @@ public interface IProduct
     void Create(Product p);//for manager screen, create new product in the DL
     void Delete(int id);//for manager screen, delete one product from DL according to ID
     void Update(Product p);//for manager screen, update one product in DL
+    IEnumerable<BO.ProductItem> GetCatalog(BO.Cart c, Func<BO.ProductItem, bool>? predicate = null);//returns all the product as product item
+
 
 }
