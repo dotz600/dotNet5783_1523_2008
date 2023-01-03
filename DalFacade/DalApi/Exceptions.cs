@@ -13,7 +13,18 @@ public class ObjNotFoundException : Exception
     protected ObjNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
 }
 
+[Serializable]
+public class XMLFileSaveLoadException : Exception
+{
+    public XMLFileSaveLoadException() : base() { }
 
+    public XMLFileSaveLoadException(string message) : base(message) { }
+
+    public XMLFileSaveLoadException(string message, Exception inner) : base(message, inner) { }
+
+    public XMLFileSaveLoadException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+
+}
 
 [Serializable]
 public class ObjExistException : Exception
