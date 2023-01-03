@@ -7,4 +7,11 @@
     <Category>Grocery</Category>
     <InStock>50</InStock>
   </Product>
+  <Product>
+    <ID>10</ID>
+    <Name>David</Name>
+    <Price>100</Price>
+    <Category>Grocery</Category>
+    <InStock>50</InStock>
+  </Product>
 </ProductsList>
