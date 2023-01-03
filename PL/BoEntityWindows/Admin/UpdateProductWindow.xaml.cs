@@ -25,12 +25,18 @@ public partial class UpdateProductWindow : Window
 {
     private BlApi.IBl? bl = BlApi.Factory.Get();
 
+    public BO.Product ProductDetails { get; set; } //hold the product details
 
+    public BO.Categories? CurrentCategory { get; set; } //hold the catrgory of the product
+    
+
+    public Array CategoriesToShow { get { return Enum.GetValues(typeof(BO.Categories)); } } //return array with all the categories
     public UpdateProductWindow(int id)
     {
+
+        ProductDetails = bl.Product.Read(id);
+        CurrentCategory = ProductDetails.Category;
         InitializeComponent();
-        UpdateProductGrid.DataContext = bl.Product.Read(id);
-        CategoryComboBoxUpdate.ItemsSource = Enum.GetValues(typeof(BO.Categories)); //set list of categories
     }
     
     private void Update_Product_Confirmation_Click(object sender, RoutedEventArgs e)//Update product and return to PFL win
@@ -64,23 +70,4 @@ public partial class UpdateProductWindow : Window
         return p;
     }
 
-    private void AddToCartButton_Click(object sender, RoutedEventArgs e)//for buyer only, can add the product to cart
-    {
-        try
-        {
-            bl?.Cart.Add(MainWindow.cart,int.Parse(textBoxUpdateProductID.Text));
-            this.Close();
-
-            MessageBox.Show("Successfully added to cart", "Success", MessageBoxButton.OK, MessageBoxImage.Information
-            , MessageBoxResult.Cancel);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
-            , MessageBoxResult.Cancel);
-            this.Close();
-
-        }
-
-    }
 }

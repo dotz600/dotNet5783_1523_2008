@@ -48,8 +48,8 @@ public partial class Catalog : Window
             else//read with predicate, and show only the chossen category 
             {
                 ProductToShow.Clear();
-                foreach (var x in bl!.ProductItem.ReadAll
-                    (x => x?.Category.ToString() == CategorySort.SelectedItem.ToString()))
+                foreach (var x in bl!.Product.GetCatalog(MainWindow.cart,
+                    x => x?.Category.ToString() == CategorySort.SelectedItem.ToString()))
                     ProductToShow.Add(x);
               
             }
@@ -68,12 +68,8 @@ public partial class Catalog : Window
         {
             var tmp = (BO.ProductItem)Product_item_list_view.SelectedItem;//extract the product ID
             int id = tmp.ID;
-            var win = new UpdateProductWindow(id);
-            //unable to change details in window 
-            win.textBoxUpdateProductAmount.IsEnabled = false;
-            win.textBoxUpdateProductPrice.IsEnabled = false;
-            win.ConfirmButton.IsEnabled = false;
-            win.Show();
+            new ProductItemForUser(id).ShowDialog();
+            Refresh();
         }
         catch (Exception ex) 
         {
@@ -84,14 +80,14 @@ public partial class Catalog : Window
 
     private void WatchCartButton_Click(object sender, RoutedEventArgs e)//go to cart
     {
-        //this.Close();
+        this.Close();
         new CartView().Show();
     }
 
 
     private void CheckBox_Checked(object sender, RoutedEventArgs e)//group/sort all the product by category
     {
-        var temp = from x in bl?.ProductItem.ReadAll()
+        var temp = from x in bl?.Product.GetCatalog(MainWindow.cart)
                         orderby x.Category
                         select x;
 
@@ -108,7 +104,7 @@ public partial class Catalog : Window
     private void Refresh()//clear productItem to show and replace them with the updated products
     {
         ProductToShow.Clear();
-        foreach (var x in bl!.ProductItem.ReadAll())
+        foreach (var x in bl!.Product.GetCatalog(MainWindow.cart))
             ProductToShow.Add(x);
     }
 }

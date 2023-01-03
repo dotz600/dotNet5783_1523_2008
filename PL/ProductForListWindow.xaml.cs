@@ -31,7 +31,7 @@ public partial class ProductForListWindow : Window
 
     public ProductForListWindow()
     {
-        productForLists ??= new();
+        productForLists = new();
         InitializeComponent();
         Refresh();//update the product to show
     }
@@ -70,7 +70,6 @@ public partial class ProductForListWindow : Window
         {
             BO.ProductForList p = (BO.ProductForList)ListViewProductForList.SelectedItem;
             UpdateProductWindow updateProductWindow = new(p.ID);
-            updateProductWindow.addToCartButton.IsEnabled = false;//unable add to cart button, its for costumer only
             updateProductWindow.ShowDialog();
             Refresh();  
         }

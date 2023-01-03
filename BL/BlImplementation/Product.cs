@@ -1,5 +1,6 @@
 ﻿using BlApi;
 using BlImplementation;
+using BO;
 
 namespace BlImplementation;
 
@@ -9,7 +10,7 @@ internal class Product : IProduct
     private readonly DalApi.IDal? Dal = DalApi.Factory.Get();
     public void Create(BO.Product p)
     {
-        if (int.TryParse(p.Name, out int x))
+        if (int.TryParse(p.Name, out _))
             throw new BO.EmptyNameException("Name must be a string!");
         if (p?.Name?.Length == 0)
             throw new BO.EmptyNameException("Name cat be a empty!");
@@ -49,32 +50,32 @@ internal class Product : IProduct
                 throw new BO.NegativeIDException("negetive id");
             DO.Product p = Dal?.Product.Read(id) ?? throw new NullReferenceException();
         }
-        catch(BO.NegativeIDException ex) 
-        { 
+        catch (BO.NegativeIDException ex)
+        {
             throw ex;
         }
-        catch(DalApi.ObjNotFoundException ex) 
-        { 
-            throw new BO.ReadObjectFailedException("there is no product to delete", ex); 
+        catch (DalApi.ObjNotFoundException ex)
+        {
+            throw new BO.ReadObjectFailedException("there is no product to delete", ex);
         }
         try
         {
             //search the product id in all order item, if product dont found wiil throw exp and will catch it next,
             //and then in the catch delete the product
             DO.OrderItem ot = Dal?.OrderItem.ReadProductId(id) ?? throw new NullReferenceException();
-            
+
             throw new DalApi.ObjExistException();//if reachd here that mean product found in order
         }
-        
+
         catch (DalApi.ObjNotFoundException)//that mean product not found in order item and we can delete it
         {
             try//just for safety// by now we now the product found and can be delete, but just for safety
             {
                 Dal?.Product.Delete(id);
             }
-            catch(DalApi.ObjNotFoundException ex) 
-            { 
-                throw new BO.ObjectNotExistException("cant delete product", ex); 
+            catch (DalApi.ObjNotFoundException ex)
+            {
+                throw new BO.ObjectNotExistException("cant delete product", ex);
             }
         }
         catch (DalApi.ObjExistException ex)
@@ -114,20 +115,16 @@ internal class Product : IProduct
         try
         {
             DO.Product DOproduct = Dal?.Product.Read(id) ?? throw new NullReferenceException();
-            BO.ProductItem BOproductItem = new()
+            return new BO.ProductItem
             {
                 Name = DOproduct.Name,
                 Price = DOproduct.Price,
-                Amount = DOproduct.InStock,
+                AmountInCart = myCart.Items != null ? myCart.Items.FindAll(x => x?.ProductID == DOproduct.ID).Count() : 0,//search all the item in cart 
                 Category = (BO.Categories)DOproduct.Category,
-                InStock = false,
+                InStock = DOproduct.InStock > 0,
                 ID = DOproduct.ID
             };
 
-            if (DOproduct.InStock > 0)
-                BOproductItem.InStock = true;
-
-            return BOproductItem;
         }
         catch (DalApi.ObjNotFoundException ex)
         {
@@ -145,12 +142,12 @@ internal class Product : IProduct
             var listReturn = from DOproduct in Dal?.Product.ReadAll()
                              where (DOproduct != null)
                              select bl.ProductForList.DOproductToBOproductForList((DO.Product)DOproduct);
-           
+
             if (predicate != null)//if the user ask to read with predicate, will remove from res all the !predcate 
             {
-               listReturn = from x in listReturn
-                            where predicate(x)
-                            select x;
+                listReturn = from x in listReturn
+                             where predicate(x)
+                             select x;
             }
 
             return listReturn.ToList();
@@ -188,7 +185,7 @@ internal class Product : IProduct
     {
         if (p.ID < 0)
             throw new BO.NegativeIDException("id is negative");
-        if (p.Name== null || p.Name.Length == 0)
+        if (p.Name == null || p.Name.Length == 0)
             throw new BO.EmptyNameException("your name is empty");
         if (p.Price <= 0)
             throw new BO.NegativePriceException("price is negative");
@@ -196,5 +193,40 @@ internal class Product : IProduct
             throw new BO.NegativeAmountException("in stock is negative");
     }
 
- 
+
+    public IEnumerable<BO.ProductItem> GetCatalog(BO.Cart c, Func<BO.ProductItem, bool>? predicate = null)//return list of product item
+    {
+        try
+        {
+            IEnumerable<BO.ProductItem> res;
+            res = from pro in Dal?.Product.ReadAll()
+                  let DoProduct = pro ?? throw new Exception()
+                  let tmp = new BO.ProductItem //convert to BO
+                  {
+                      ID = DoProduct.ID,
+                      Name = DoProduct.Name,
+                      Category = (BO.Categories)DoProduct.Category,
+                      Price = DoProduct.Price,
+                      AmountInCart = c.Items != null && c.Items.FirstOrDefault(x => x?.ProductID == DoProduct.ID) != null
+                      ? c.Items.FirstOrDefault(x => x?.ProductID == DoProduct.ID).Amount  : 0,
+                      InStock = DoProduct.InStock > 0,
+                  }
+                  select tmp;
+
+            if (predicate != null)//sort by predicate
+                res = from p in res
+                      where (predicate(p))
+                      select p;
+
+            return res;
+        }
+        catch (Exception ex)
+        {
+            throw ex ?? throw new Exception("cant read product");
+        }
+
+
+    }
+
+
 }
