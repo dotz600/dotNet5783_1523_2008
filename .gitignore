@@ -395,3 +395,4 @@ MigrationBackup/
 /DalFacade/obj/Debug/DalFacade.csproj.AssemblyReference.cache
 /DalFacade/obj/Debug/DalFacade.csproj.FileListAbsolute.txt
 /DalList/obj/Debug/DalList.csproj.FileListAbsolute.txt
+/Stage0/obj/Debug/net6.0/Stage0.csproj.AssemblyReference.cache

@@ -54,15 +54,15 @@ class XmlTools
     {
         return new DO.Product()
         {
-            ID = int.Parse(newProduct.Element("ID")!.Value)
+            ID = int.Parse(newProduct.Element("ID")?.Value)
            ,
             Category = (Categories)Enum.Parse(typeof(Categories), newProduct.Element("Category").Value)
            ,
-            InStock = int.Parse(newProduct.Element("InStock")!.Value)
+            InStock = int.Parse(newProduct.Element("InStock")?.Value)
            ,
-            Name = newProduct.Element("Name").Value
+            Name = newProduct.Element("Name")?.Value
            ,
-            Price = double.Parse(newProduct.Element("Price").Value)
+            Price = double.Parse(newProduct.Element("Price")?.Value)
         };
     }
 

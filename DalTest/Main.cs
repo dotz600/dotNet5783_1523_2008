@@ -17,7 +17,7 @@ class MyMain
     {
     string productsPath = @"..\xml\ProductsXml.xml";//XElement
 
-        var x = new DO.Product() { Category = Categories.Grocery, ID = 10, InStock = 50, Name = "David", Price = 100 };
+        var x = new DO.Product() { Category = Categories.Meat, ID = 10, InStock = 10, Name = "me", Price = 10 };
         
         XElement productsRootElement = LoadListFromXMLElement(productsPath);
 
