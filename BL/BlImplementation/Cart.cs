@@ -98,7 +98,7 @@ internal class Cart : ICart
 
     }
 
-    public void CartConfirmation(BO.Cart cart, string name, string email, string adress)
+    public int CartConfirmation(BO.Cart cart, string name, string email, string adress)
     {
         //check all the data is good
         try
@@ -169,7 +169,7 @@ internal class Cart : ICart
             cart.CustomerEmail = email;
             cart.CustomerAddress = adress;
             cart.CustomerName = name;
-
+            return orderId;
         }
         catch (BO.ObjectNotExistException ex)
         {

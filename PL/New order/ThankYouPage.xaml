@@ -6,6 +6,8 @@
       xmlns:local="clr-namespace:PL.New_order"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="300"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+      
       Title="ThankYouPage">
 
     <Grid HorizontalAlignment="Right" Width="300">
@@ -16,12 +18,14 @@
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="10*" ></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="Thank You For Your Order! See You Next Time" VerticalAlignment="Center" Height="112" Width="230" FontWeight="Bold" FontFamily="Segoe Print" TextAlignment="Center" FontSize="18"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Thank You For Your Order! See You Next Time" VerticalAlignment="Top" Height="112" Width="230" FontWeight="Bold" FontFamily="Segoe Print" TextAlignment="Center" FontSize="18" Margin="30,39,0,0"/>
         <Image HorizontalAlignment="Center" Height="240" Margin="0,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="270" Source="/New order/waving-hand.png">
             <Image.OpacityMask>
                 <ImageBrush ImageSource="/New order/waving-hand.png"/>
             </Image.OpacityMask>
         </Image>
+        <TextBlock HorizontalAlignment="Left" Margin="30,175,0,0" TextWrapping="Wrap" Text="Your order ID : " VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Margin="115,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding orderId}" IsReadOnly="True"/>
 
     </Grid>
 </Page>

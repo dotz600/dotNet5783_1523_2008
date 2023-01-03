@@ -35,10 +35,10 @@ public partial class Payment : Window
         try
         {
             string name = textBoxName.Text, email = textBoxEmail.Text, addres = textBoxAddres.Text;
-            bl?.Cart.CartConfirmation(MainWindow.cart, name, email, addres);//confirm cart
+            int orderId = (int)bl?.Cart.CartConfirmation(MainWindow.cart, name, email, addres)!;//confirm cart
             //reset cart 
             MainWindow.cart = new BO.Cart();
-            Page page = new ThankYouPage();
+            Page page = new ThankYouPage(orderId);
             this.Content = page;
         }
         catch(Exception ex) 

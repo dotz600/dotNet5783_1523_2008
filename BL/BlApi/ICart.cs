@@ -22,6 +22,6 @@ namespace BlApi;
 public interface ICart 
 {
     Cart Add(Cart cart, int productId);//Add product to the cart
-    void CartConfirmation(Cart cart, string name, string email, string adress);//Confirm the order
+    int CartConfirmation(Cart cart, string name, string email, string adress);//Confirm the order
     Cart Update(Cart cart, int productId, int amount);//Update sigle product
 }

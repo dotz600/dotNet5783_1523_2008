@@ -21,10 +21,13 @@ namespace PL.New_order;
 /// </summary>
 public partial class ThankYouPage : Page
 {
-    public ThankYouPage()
+    public int orderId {get; set;}
+    public ThankYouPage(int id)
     {
+        orderId = id;
         InitializeComponent();
      
     }
 
+   
 }

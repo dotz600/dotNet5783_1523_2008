@@ -194,7 +194,7 @@ internal class Product : IProduct
     }
 
 
-    public IEnumerable<BO.ProductItem> GetCatalog(BO.Cart c, Func<BO.ProductItem, bool>? predicate = null)
+    public IEnumerable<BO.ProductItem> GetCatalog(BO.Cart c, Func<BO.ProductItem, bool>? predicate = null)//return list of product item
     {
         try
         {
@@ -207,7 +207,8 @@ internal class Product : IProduct
                       Name = DoProduct.Name,
                       Category = (BO.Categories)DoProduct.Category,
                       Price = DoProduct.Price,
-                      AmountInCart = c.Items != null  ? c.Items.FindAll(x => x?.ProductID == DoProduct.ID).Count() : 0,
+                      AmountInCart = c.Items != null && c.Items.FirstOrDefault(x => x?.ProductID == DoProduct.ID) != null
+                      ? c.Items.FirstOrDefault(x => x?.ProductID == DoProduct.ID).Amount  : 0,
                       InStock = DoProduct.InStock > 0,
                   }
                   select tmp;
