@@ -1,4 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <OrderItemsList>
-	
+  <OrderItem>
+    <ProductID>3232</ProductID>
+    <OrderID>1010</OrderID>
+    <Price>50</Price>
+    <Amount>20</Amount>
+  </OrderItem>
+  <OrderItem>
+    <ProductID>10</ProductID>
+    <OrderID>1013</OrderID>
+    <Price>10</Price>
+    <Amount>10</Amount>
+  </OrderItem>
+  <OrderItem>
+    <ProductID>8585</ProductID>
+    <OrderID>1012</OrderID>
+    <Price>70</Price>
+    <Amount>14</Amount>
+  </OrderItem>
+  <OrderItem>
+    <ProductID>5757</ProductID>
+    <OrderID>1011</OrderID>
+    <Price>60</Price>
+    <Amount>13</Amount>
+  </OrderItem>
+  <Order>
+    <ID>1014</ID>
+    <CustomerName>david</CustomerName>
+    <CustomerEmail>@gmail</CustomerEmail>
+    <CustomerAdress>carmel</CustomerAdress>
+    <OrderDate>2023-01-05T00:31:39.7924043+02:00</OrderDate>
+    <ShipDate>2023-01-05T00:31:39.7925041+02:00</ShipDate>
+    <DeliveryDate>2023-01-05T00:31:39.7476536+02:00</DeliveryDate>
+  </Order>
 </OrderItemsList>

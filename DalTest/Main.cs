@@ -10,86 +10,28 @@ using System.Diagnostics;
 using System.Xml.Linq;
 using DalApi;
 using System.Diagnostics.Metrics;
+using System.Runtime.InteropServices;
 
 class MyMain
 {
     public static void Main()
-    {
-    string productsPath = @"..\xml\ProductsXml.xml";//XElement
-
-        var x = new DO.Product() { Category = Categories.Meat, ID = 10, InStock = 10, Name = "me", Price = 10 };
-        
-        XElement productsRootElement = LoadListFromXMLElement(productsPath);
-
-        productsRootElement?.Add(BuildProductXElement(x));
-
-        saveList(productsRootElement, productsPath);
-
-        //int X = -1, classType;
-        //Console.WriteLine("Hello!");
-        //do
-        //{
-        //    try
-        //    {
-        //        classType = MainInput(ref X);//get input from the user
-        //        MainSwitch(X, classType);
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-        //}
-        //while (X != 0);
-
-    }
-
-    public static void saveList(XElement xElement, string filePath)
-    {
-        try { xElement.Save(filePath); }
-        catch (Exception ex)
+    {   
+        int X = -1, classType;
+        Console.WriteLine("Hello!");
+        do
         {
-            throw new XMLFileSaveLoadException($"fail to save xml file: {filePath}", ex);
-        }
-    }
-
-
-    public static XElement BuildProductXElement(DO.Product obj)
-    {
-        return new XElement("Product", new XElement("ID", obj.ID)
-                                                            , new XElement("Name", obj.Name)
-                                                            , new XElement("Price", obj.Price)
-                                                            , new XElement("Category", obj.Category)
-                                                            , new XElement("InStock", obj.InStock));
-    }
-
-
-
-    public static XElement LoadListFromXMLElement(string filePath)
-    {
-        try
-        {
-            if (File.Exists(filePath))
+            try
             {
-                return XElement.Load(filePath);
+                classType = MainInput(ref X);//get input from the user
+                MainSwitch(X, classType);
             }
-            else
+            catch (Exception e)
             {
-                XElement rootElem = new XElement(filePath);
-                rootElem.Save(filePath);
-                return rootElem;
+                Console.WriteLine(e);
             }
         }
-        catch (Exception ex)
-        {
-            throw new XMLFileSaveLoadException($"fail to load xml file: {filePath}", ex);
-        }
+        while (X != 0);
     }
-
-
-
-
-
-
 
     private static void MainSwitch(int X, int classType)
     {
