@@ -1,39 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Order>
-  <Order>
-    <ID>1015</ID>
-    <CustomerName>zz</CustomerName>
-    <CustomerEmail>@zz</CustomerEmail>
-    <CustomerAdress>zz</CustomerAdress>
-    <OrderDate>2023-01-05T02:22:43.8862774+02:00</OrderDate>
-    <ShipDate>2023-01-05T02:22:43.8863681+02:00</ShipDate>
-    <DeliveryDate>2023-01-05T02:22:43.8678634+02:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>1016</ID>
-    <CustomerName>aa</CustomerName>
-    <CustomerEmail>@aa</CustomerEmail>
-    <CustomerAdress>aa</CustomerAdress>
-    <OrderDate>2023-01-05T02:22:44.2871636+02:00</OrderDate>
-    <ShipDate>2023-01-05T02:22:44.2871671+02:00</ShipDate>
-    <DeliveryDate>2023-01-05T02:22:44.2871523+02:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>17</ID>
-    <CustomerName>ss</CustomerName>
-    <CustomerEmail>@ss</CustomerEmail>
-    <CustomerAdress>ss</CustomerAdress>
-    <OrderDate>2023-01-05T02:22:44.3542742+02:00</OrderDate>
-    <ShipDate>2023-01-05T02:22:44.354275+02:00</ShipDate>
-    <DeliveryDate>2023-01-05T02:22:44.3542682+02:00</DeliveryDate>
-  </Order>
-  <Order>
-    <ID>18</ID>
-    <CustomerName>dd</CustomerName>
-    <CustomerEmail>@dd</CustomerEmail>
-    <CustomerAdress>dd</CustomerAdress>
-    <OrderDate>2023-01-05T02:22:44.3926167+02:00</OrderDate>
-    <ShipDate>2023-01-05T02:22:44.3926175+02:00</ShipDate>
-    <DeliveryDate>2023-01-05T02:22:44.3926097+02:00</DeliveryDate>
-  </Order>
+
 </Order>

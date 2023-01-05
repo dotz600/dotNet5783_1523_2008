@@ -3,6 +3,8 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Xml.Linq;
+
 
 /// <summary>
 ///XmlSerializer
@@ -22,7 +24,7 @@ internal class Order : IOrder
 
         root?.Add(xmlObj);
         XmlTools.saveList(root, XmlTools.ordersPath);
-        return obj.OrderID;
+        return obj.ID;
     }
 
     public void Delete(int id)
@@ -99,11 +101,11 @@ internal class Order : IOrder
         XeOrder.Element("ShipDate").Value = obj.ShipDate.ToString();
         XeOrder.Element("DeliveryDate").Value = obj.DeliveryDate.ToString();
 
-        XmlTools.saveList(root, ordersPath);
+        XmlTools.saveList(root, XmlTools.ordersPath);
     }
 
     //private help functions
-    private XElement buildXElementOrder(Order obj)
+    private XElement buildXElementOrder(DO.Order obj)
     {
         return new XElement("Order", new XElement("ID", obj.ID),
                                                            new XElement("CustomerName", obj.CustomerName),
@@ -113,7 +115,7 @@ internal class Order : IOrder
                                                            new XElement("ShipDate", obj.ShipDate),
                                                            new XElement("DeliveryDate", obj.DeliveryDate));
     }
-    private XElement serchXOrderInRoot(int id, XEelment root)
+    private XElement serchXOrderInRoot(int id, XElement root)
     {
          return (from x in root?.Elements()
             where int.Parse(x?.Element("ID").Value) == id

@@ -19,7 +19,7 @@ internal class OrderItem : IOrderItem
         if (ot != null)
             throw new ObjExistException("Order item allready found");
 
-        XElement xmlObj = buildOrderItemXElemnt();
+        XElement xmlObj = buildOrderItemXElemnt(obj);
 
         root.Add(xmlObj);
         XmlTools.saveList(root, XmlTools.orderItemsPath);
@@ -90,7 +90,7 @@ internal class OrderItem : IOrderItem
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
         //search and convert
         DO.OrderItem? ot = (from x in root?.Elements()
-                            where int.Parse(x?.Element("ProductID").Value) == ProductId
+                            where int.Parse(x?.Element("ProductID").Value) == productId
                             select buildOrderItemDO(x)
                             ).FirstOrDefault();
         if (ot != null)
@@ -109,9 +109,9 @@ internal class OrderItem : IOrderItem
         if(ot == null)
             throw new ObjNotFoundException("cant update order item");
         
-        ot.Element("ProductID").Value = obj.ProductID;
-        ot.Element("Price").Value = obj.Price;
-        ot.Element("Amount").Value = obj.Amount;
+        ot.Element("ProductID").Value = obj.ProductID.ToString();
+        ot.Element("Price").Value = obj.Price.ToString();
+        ot.Element("Amount").Value = obj.Amount.ToString();
 
         XmlTools.saveList(root, XmlTools.orderItemsPath);
     }
