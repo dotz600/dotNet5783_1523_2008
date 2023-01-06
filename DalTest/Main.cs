@@ -3,6 +3,7 @@
 //david ohev tzion 206672008
 //super market store stage 1
 using DO;
+
 using Dal;
 using System;
 using System.ComponentModel;
@@ -11,11 +12,15 @@ using System.Xml.Linq;
 using DalApi;
 using System.Diagnostics.Metrics;
 using System.Runtime.InteropServices;
-
+using System.Net.NetworkInformation;
+using Product = DO.Product;
+using Order = DO.Order;
+using OrderItem = DO.OrderItem;
 class MyMain
 {
     public static void Main()
-    {   
+    {
+
        
 
         int X = -1, classType;
@@ -40,7 +45,7 @@ class MyMain
         int id;
         IDal? Obj = Factory.Get(); 
         ///variable for input data from user
-        Product product = new();
+        DO.Product product = new();
         Order order = new();
         OrderItem orderItem = new();
 
@@ -85,7 +90,7 @@ class MyMain
             case 3:                                                   //read obj list an print it all
                 if (classType == 1)
                 {
-                    foreach (Product? p in Obj?.Product.ReadAll()!)
+                    foreach (var p in Obj?.Product.ReadAll()!)
                         if (p != null)
                             Console.WriteLine(p);
                 }
@@ -196,7 +201,7 @@ class MyMain
         o.ShipDate = DateTime.Parse(data[6]);
 
     }
-    public static void InputProduct(ref Product p)///get input for all Product details
+    public static void InputProduct(ref DO.Product p)///get input for all Product details
     {
         Console.WriteLine("Product: ProductID, Name, Price, Category, InStock");
         var line = Console.ReadLine();

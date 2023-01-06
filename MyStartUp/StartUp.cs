@@ -30,6 +30,20 @@ internal class StartUp
         return ++s_idRunNum;
     }
     static internal Random rand = new Random(DateTime.Now.Millisecond);
+
+    private int getProductRandomID()//rec function that gunrate rundom product id,and check that random dosnt exist
+    {
+        int tmp = rand.Next(100000, 1000000);
+        var isExist = (from x in s_productsArr
+                       where x.Value.ID == tmp
+                       select x).FirstOrDefault();
+        if (isExist == null)
+            return tmp;
+
+        return getProductRandomID();
+
+    }
+    
     public StartUp()
     {
         //initeliz the list
@@ -46,32 +60,31 @@ internal class StartUp
         for (int i = 0; i < 40; i++)//make order item
             addOrderItem(i);
 
-        XElement root = LoadListFromXMLElement(orderItemsPath);
-        foreach(var x in s_ordersItemArr)
+        XElement orderRoot = LoadListFromXMLElement(ordersPath);
+        for(int i = 0; i<  s_ordersArr.Count; i++)
         {
-            buildXElementOrderItem((DO.OrderItem)x!);
-            root.Add(x);
+            orderRoot.Add(buildXElementOrder((DO.Order)s_ordersArr[i]!));
         }
-        saveList(root, ordersPath);
+        saveList(orderRoot, ordersPath);
 
 
-        XElement rootP = LoadListFromXMLElement(productsPath);
-        foreach (var x in s_productsArr)
+        XElement productRoot = LoadListFromXMLElement(productsPath);
+        for (int i = 0; i < s_productsArr.Count; i++)
         {
-            buildXElementProduct((DO.Product)x!);
-            rootP.Add(x);
-
+            productRoot.Add(buildXElementProduct((DO.Product)s_productsArr[i]!));
         }
-        saveList(rootP, productsPath);
+        saveList(productRoot, productsPath);
 
 
-        XElement rootOT = LoadListFromXMLElement(ordersPath);
-        foreach (var x in s_ordersArr)
+        XElement orderItemRoot = LoadListFromXMLElement(orderItemsPath);
+        for(int i = 0;i < s_ordersItemArr.Count; i++)
         {
-            buildXElementOrder((DO.Order)x!);
-            rootOT.Add(x);
+            orderItemRoot.Add(buildXElementOrderItem((DO.OrderItem)s_ordersItemArr[i]!)
+);
         }
-        saveList(rootOT, orderItemsPath);
+        saveList(orderItemRoot, orderItemsPath);
+
+
 
     }
 
@@ -108,24 +121,25 @@ internal class StartUp
 
     private void addProduct()
     {
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Doughnut", Category = Categories.Bakery, InStock = 15, Price = 5 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Chicken", Category = Categories.Meat, InStock = 25, Price = 30 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Yellow cheese", Category = Categories.Deli, InStock = 12, Price = 33 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Bean", Category = Categories.Frozen, InStock = 7, Price = 16 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Mop", Category = Categories.Cleaning, InStock = 3, Price = 22 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Cows Milk", Category = Categories.Dairy, InStock = 45, Price = 4.99 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Gum", Category = Categories.Sweets, InStock = 75, Price = 0.99 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Makeup", Category = Categories.Beauty, InStock = 15, Price = 7 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Bread", Category = Categories.Bakery, InStock = 50, Price = 5.99 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Eggs", Category = Categories.Deli, InStock = 500, Price = 1.5 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Milki", Category = Categories.Deli, InStock = 30, Price = 4.7 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Baguette", Category = Categories.Bakery, InStock = 30, Price = 5.5 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Chocolate Croissant", Category = Categories.Bakery, InStock = 15, Price = 3 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Garbage Bags", Category = Categories.Cleaning, InStock = 50, Price = 10 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Bleach", Category = Categories.Cleaning, InStock = 15, Price = 32.5 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Salmon", Category = Categories.Meat, InStock = 15, Price = 105.24 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Ice Cream", Category = Categories.Frozen, InStock = 7, Price = 17.5 });
-        s_productsArr.Add(new DO.Product { ID = rand.Next(100000, 1000000), Name = "Disposable Cups", Category = Categories.Grocery, InStock = 200, Price = 7.5 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Doughnut", Category = Categories.Bakery, InStock = 15, Price = 5 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Chicken", Category = Categories.Meat, InStock = 25, Price = 30 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Yellow cheese", Category = Categories.Deli, InStock = 12, Price = 33 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Bean", Category = Categories.Frozen, InStock = 7, Price = 16 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Mop", Category = Categories.Cleaning, InStock = 3, Price = 22 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Cows Milk", Category = Categories.Dairy, InStock = 45, Price = 4.99 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Gum", Category = Categories.Sweets, InStock = 75, Price = 0.99 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Makeup", Category = Categories.Beauty, InStock = 15, Price = 7 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Bread", Category = Categories.Bakery, InStock = 50, Price = 5.99 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Eggs", Category = Categories.Deli, InStock = 500, Price = 1.5 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Milki", Category = Categories.Deli, InStock = 30, Price = 4.7 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Baguette", Category = Categories.Bakery, InStock = 30, Price = 5.5 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Chocolate Croissant", Category = Categories.Bakery, InStock = 15, Price = 3 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Garbage Bags", Category = Categories.Cleaning, InStock = 50, Price = 10 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Bleach", Category = Categories.Cleaning, InStock = 15, Price = 32.5 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Salmon", Category = Categories.Meat, InStock = 15, Price = 105.24 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Ice Cream", Category = Categories.Frozen, InStock = 7, Price = 17.5 });
+        s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Disposable Cups", Category = Categories.Grocery, InStock = 200, Price = 7.5 });
+
 
     }
 
