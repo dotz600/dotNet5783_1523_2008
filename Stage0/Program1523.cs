@@ -5,7 +5,7 @@ namespace Targil0
     partial class Program
     {
 
-        static void Main(string[] args)
+        static void me(string[] args)
         {
             welcome2008();
             welcome1523();
