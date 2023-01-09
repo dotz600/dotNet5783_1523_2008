@@ -119,7 +119,7 @@ internal class Product : IProduct
             {
                 Name = DOproduct.Name,
                 Price = DOproduct.Price,
-                AmountInCart = myCart.Items != null ? myCart.Items.FindAll(x => x?.ProductID == DOproduct.ID).Count() : 0,//search all the item in cart 
+                AmountInCart = myCart.Items != null ? myCart.Items.FindAll(x => x?.ProductID == DOproduct.ID).Count : 0,//search all the item in cart 
                 Category = (BO.Categories)DOproduct.Category,
                 InStock = DOproduct.InStock > 0,
                 ID = DOproduct.ID

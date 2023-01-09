@@ -123,16 +123,18 @@ internal class Order : IOrder
     }
     private DO.Order? fromXElementToOrder(XElement obj)
     {
-        return new DO.Order
+        var res = new DO.Order
         {
             ID = int.Parse(obj.Element("ID").Value),
             CustomerName = obj?.Element("CustomerName").Value,
             CustomerEmail = obj?.Element("CustomerEmail").Value,
             CustomerAdress = obj?.Element("CustomerAdress").Value,
             OrderDate = DateTime.Parse(obj?.Element("OrderDate").Value),
-            ShipDate = DateTime.Parse(obj?.Element("ShipDate").Value),
-            DeliveryDate = DateTime.Parse(obj?.Element("DeliveryDate").Value),
+            ShipDate = obj?.Element("ShipDate").IsEmpty == false ? DateTime.Parse(obj?.Element("ShipDate").Value) : null,
+            DeliveryDate = obj?.Element("DeliveryDate").IsEmpty == false ? DateTime.Parse(obj?.Element("DeliveryDate").Value) : null
         };
+
+       return res;
     }
 }
     

@@ -27,7 +27,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{9BEB2BAB-DCC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{9C2EECE6-7478-48D5-91C0-E8839EE2D3EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyStartUp", "MyStartUp\MyStartUp.csproj", "{75DB58B4-4187-4A9A-80A5-70AA0729C6EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlFileslinitialization", "MyStartUp\XmlFileslinitialization.csproj", "{75DB58B4-4187-4A9A-80A5-70AA0729C6EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

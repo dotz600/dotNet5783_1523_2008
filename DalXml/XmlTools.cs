@@ -27,7 +27,7 @@ class XmlTools
             }
             else
             {
-                XElement rootElem = new XElement(filePath);
+                XElement rootElem = new(filePath);
                 rootElem.Save(filePath);
                 return rootElem;
             }

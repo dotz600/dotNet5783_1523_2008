@@ -17,36 +17,10 @@ class MyMain
     public static void Main()
     {
 
-        var x = new DO.Product() { Category = Categories.Meat, ID = 10, InStock = 10, Name = "me", Price = 10 };
-        
-        XElement productsRootElement = LoadListFromXMLElement(productsPath);
 
-        productsRootElement?.Add(BuildProductXElement(x));
-
-        saveList(productsRootElement, productsPath);
-
-        //int X = -1, classType;
-        //Console.WriteLine("Hello!");
-        //do
-        //{
-        //    try
-        //    {
-        //        classType = MainInput(ref X);//get input from the user
-        //        MainSwitch(X, classType);
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-        //}
-        //while (X != 0);
-
-    }
-
-    public static void saveList(XElement xElement, string filePath)
-    {
-        try { xElement.Save(filePath); }
-        catch (Exception ex)
+        int X = -1, classType;
+        Console.WriteLine("Hello!");
+        do
         {
             try
             {
@@ -59,6 +33,7 @@ class MyMain
             }
         }
         while (X != 0);
+
     }
 
     private static void MainSwitch(int X, int classType)

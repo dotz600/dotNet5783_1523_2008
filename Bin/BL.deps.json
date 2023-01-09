@@ -9,7 +9,7 @@
       "BL/1.0.0": {
         "dependencies": {
           "DalFacade": "1.0.0",
-          "DalList": "1.0.0"
+          "DalXml": "1.0.0"
         },
         "runtime": {
           "BL.dll": {}
@@ -20,12 +20,12 @@
           "DalFacade.dll": {}
         }
       },
-      "DalList/1.0.0": {
+      "DalXml/1.0.0": {
         "dependencies": {
           "DalFacade": "1.0.0"
         },
         "runtime": {
-          "DalList.dll": {}
+          "DalXml.dll": {}
         }
       }
     }
@@ -41,7 +41,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "DalList/1.0.0": {
+    "DalXml/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
