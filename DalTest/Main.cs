@@ -20,9 +20,6 @@ class MyMain
 {
     public static void Main()
     {
-
-       
-
         int X = -1, classType;
         Console.WriteLine("Hello!");
         do

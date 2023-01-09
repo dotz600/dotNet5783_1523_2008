@@ -11,6 +11,7 @@ namespace MyStartUp;
 
 internal class StartUp
 {
+    //list for holding the entity
     internal static List<DO.Product?> s_productsArr = new();
     internal static List<DO.Order?> s_ordersArr = new();
     internal static List<DO.OrderItem?> s_ordersItemArr = new();
@@ -20,11 +21,12 @@ internal class StartUp
     internal static List<string> emails = new();
     internal static List<string> address = new();
 
+    //path for the xml files
     public string productsPath = @"..\xml\ProductsXml.xml";//XElement
     public  string ordersPath = @"..\xml\OrdersXml.xml";//XMLSerializer
     public  string orderItemsPath = @"..\xml\OrderItemsXml.xml";//XMLSerializer
 
-    internal static int s_idRunNum = 1000;
+    internal static int s_idRunNum = 1000;//for order ID
     internal static int getIdRunNum()
     {
         return ++s_idRunNum;
@@ -47,19 +49,21 @@ internal class StartUp
     public StartUp()
     {
         //initeliz the list
+        s_idRunNum = 1000;
         nameSturtup();
         lastNameSturtup();
         emailSturtup();
         addressSturtup();
         addProduct();//make 15 products
-        s_idRunNum = 1000;
 
-        for (int i = 0; i < 20; i++)//make order
+        for (int i = 0; i < 20; i++)//make 20 order
             addOrder(i);
 
-        for (int i = 0; i < 40; i++)//make order item
+        for (int i = 0; i < 40; i++)//make 40 order item
             addOrderItem(i);
 
+        //put the date to xml file
+        //save orders
         XElement orderRoot = LoadListFromXMLElement(ordersPath);
         for(int i = 0; i<  s_ordersArr.Count; i++)
         {
@@ -67,7 +71,7 @@ internal class StartUp
         }
         saveList(orderRoot, ordersPath);
 
-
+        //save products
         XElement productRoot = LoadListFromXMLElement(productsPath);
         for (int i = 0; i < s_productsArr.Count; i++)
         {
@@ -75,20 +79,16 @@ internal class StartUp
         }
         saveList(productRoot, productsPath);
 
-
+        //save order items
         XElement orderItemRoot = LoadListFromXMLElement(orderItemsPath);
         for(int i = 0;i < s_ordersItemArr.Count; i++)
         {
-            orderItemRoot.Add(buildXElementOrderItem((DO.OrderItem)s_ordersItemArr[i]!)
-);
+            orderItemRoot.Add(buildXElementOrderItem((DO.OrderItem)s_ordersItemArr[i]!));
         }
         saveList(orderItemRoot, orderItemsPath);
-
-
-
     }
 
-    private static void emailSturtup()
+    private static void emailSturtup()//adding name + @gmail
     {
         emails = new();
         foreach (var n in names)
@@ -119,7 +119,7 @@ internal class StartUp
         address.Add("Blind Lane");address.Add("Grove Road");address.Add("Court Road");address.Add("York Road");address.Add("Heron Close");
     }
 
-    private void addProduct()
+    private void addProduct()//make new 18 product
     {
         s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Doughnut", Category = Categories.Bakery, InStock = 15, Price = 5 });
         s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Chicken", Category = Categories.Meat, InStock = 25, Price = 30 });
@@ -139,11 +139,9 @@ internal class StartUp
         s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Salmon", Category = Categories.Meat, InStock = 15, Price = 105.24 });
         s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Ice Cream", Category = Categories.Frozen, InStock = 7, Price = 17.5 });
         s_productsArr.Add(new DO.Product { ID = getProductRandomID(), Name = "Disposable Cups", Category = Categories.Grocery, InStock = 200, Price = 7.5 });
-
-
     }
 
-    private void addOrder(int i)
+    private void addOrder(int i)//create 20 orders
     {
         DO.Order res = new();
         res.ID = getIdRunNum();
@@ -152,33 +150,31 @@ internal class StartUp
         res.CustomerAdress = address[i];
 
         res.OrderDate = DateTime.Now - new TimeSpan(rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//time now - random time
-        DateTime? tmp = res.OrderDate + new TimeSpan(rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
-        if (tmp > DateTime.Now)
+        DateTime? tmp = res.OrderDate + new TimeSpan(rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//make random temp time
+        if (tmp > DateTime.Now)//if the random time is bigger than now can add the order and return
         {
             s_ordersArr.Add(res);
-
             return;
-        }
+        }//else
         res.ShipDate = tmp;
-        tmp = res.ShipDate + new TimeSpan(rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
+        tmp = res.ShipDate + new TimeSpan(rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//ship date + random time
 
-        if (tmp > DateTime.Now)//if true - the order has been sent and need to update delivery date
+        if (tmp > DateTime.Now)//if true - the order has been sent but dosnt arrive yet. manger need to update delivery date
         {
             s_ordersArr.Add(res);
             return;
-        }
+        }//else update delivery date
         res.DeliveryDate = tmp;
         
         s_ordersArr.Add(res);
-
     }
 
-    private void addOrderItem(int i)
+    private void addOrderItem(int i)//40 of those
     {
-        int amount = rand.Next(1, 5);
-        int randomProduct = rand.Next(s_productsArr.Count());
+        int amount = rand.Next(1, 5);//amount of products in order
+        int randomProduct = rand.Next(s_productsArr.Count);
         DO.OrderItem ot1 = new();
-
+        
         ot1.ProductID = (int)s_productsArr[randomProduct]?.ID!;  //alreday added 10 product to the list 
         ot1.OrderID = (int)s_ordersArr[i % 20]?.ID!; // allready added 20 orders to the list
         ot1.Amount = amount;//amount is random number
@@ -205,7 +201,7 @@ internal class StartUp
                                                             , new XElement("Category", obj.Category)
                                                             , new XElement("InStock", obj.InStock));
     }
-    private XElement buildXElementOrderItem(DO.OrderItem obj)//buils eml order item obj
+    private XElement buildXElementOrderItem(DO.OrderItem obj)//buils xml orderItem obj
     {
         return new XElement("OrderItem", new XElement("ProductID", obj.ProductID),
                                                            new XElement("OrderID", obj.OrderID),

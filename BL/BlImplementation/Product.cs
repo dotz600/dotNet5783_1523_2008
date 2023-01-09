@@ -13,7 +13,7 @@ internal class Product : IProduct
         if (int.TryParse(p.Name, out _))
             throw new BO.EmptyNameException("Name must be a string!");
         if (p?.Name?.Length == 0)
-            throw new BO.EmptyNameException("Name cat be a empty!");
+            throw new BO.EmptyNameException("Name cant be a empty!");
         if (p?.InStock < 0)
             throw new BO.NegativeAmountException("Amount in stock cant be negative!");
         if (p?.ID < 0)
@@ -23,7 +23,7 @@ internal class Product : IProduct
         try
         {
 
-            CheckNameIdPriceStock(p);
+            CheckNameIdPriceStock(p!);
             Dal?.Product.Create(new DO.Product
             {
                 ID = p.ID,

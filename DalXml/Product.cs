@@ -22,6 +22,8 @@ public class Product : IProduct
         XElement addProduct = XmlTools.BuildProductXElement(obj);
 
         productsRootElement?.Add(addProduct);
+        XmlTools.saveList(productsRootElement!, XmlTools.productsPath);
+
         return obj.ID;
     }
 
@@ -59,7 +61,7 @@ public class Product : IProduct
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
 
-        if (predicate != null)
+        if (predicate == null)
         {
             return from x in productsRootElement?.Elements()
                    where x != null

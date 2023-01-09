@@ -94,7 +94,7 @@ internal class Order : IOrder
         if (XeOrder == null)
             throw new ObjNotFoundException("cant update order");
 
-        XeOrder.Element("CustomerName").Value = obj.CustomerName;
+        XeOrder.Element("CustomerName").Value = obj.CustomerName ;
         XeOrder.Element("CustomerEmail").Value = obj.CustomerEmail;
         XeOrder.Element("CustomerAdress").Value = obj.CustomerAdress;
         XeOrder.Element("OrderDate").Value = obj.OrderDate.ToString();
@@ -132,7 +132,6 @@ internal class Order : IOrder
             OrderDate = DateTime.Parse(obj?.Element("OrderDate").Value),
             ShipDate = DateTime.Parse(obj?.Element("ShipDate").Value),
             DeliveryDate = DateTime.Parse(obj?.Element("DeliveryDate").Value),
-
         };
     }
 }
