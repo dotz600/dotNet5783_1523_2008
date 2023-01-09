@@ -4,12 +4,13 @@ public class Program
 {
     public static void Main()
     {
-        Data startUp = new Data();
+        Data startUp = new();
         //foreach (var x in StartUp.s_productsArr)
         //    Console.WriteLine(x);
         //foreach (var x in StartUp.s_ordersArr)
         //    Console.WriteLine(x);
-        //foreach (var x in StartUp.s_ordersItemArr)
-        //    Console.WriteLine(x);
+        //foreach (var x in Data.s_ordersItemArr)
+        //    if(x.Value.Price == 0)
+        //        Console.WriteLine(x);
     }
 }

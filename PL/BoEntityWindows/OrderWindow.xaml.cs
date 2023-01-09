@@ -26,6 +26,8 @@ public partial class OrderWindow : Window
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
     public ObservableCollection<OrderForList?> orderForLists { get; set; }//hold the order list to show on screen
     public Array OrderStat { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }//hold the category list to show on combobox
+
+    public BO.OrderStatus SelectedStatus { get; set; } = BO.OrderStatus.None;
     public OrderWindow()
     {
         orderForLists ??= new();
@@ -37,7 +39,7 @@ public partial class OrderWindow : Window
     private void OrderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     //filter Orders by status, if status = None, will show all orders
     {
-        if (orderStatusSelector.SelectedItem.ToString() == BO.OrderStatus.None.ToString())
+        if (SelectedStatus == BO.OrderStatus.None)
         {
             Refresh();
         }
@@ -45,7 +47,7 @@ public partial class OrderWindow : Window
         {
             orderForLists.Clear();
             foreach (var order in bl!.Order.ReadAll())
-                if (order?.Status == (BO.OrderStatus)orderStatusSelector.SelectedItem)
+                if (order?.Status == SelectedStatus)
                     orderForLists.Add(order);
         }
 

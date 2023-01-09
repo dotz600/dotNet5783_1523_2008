@@ -177,7 +177,7 @@ class MyMain
         Console.WriteLine("OrderItem: ProductID, OrderID, Price, Amount");
         var line = Console.ReadLine();
         var data = line?.Split(' ');/// add all the input data to array, split each elemnt by space
-        o.ProductID = int.Parse(data[0]);
+        o.ProductID = int.Parse(data![0]);
         o.OrderID = int.Parse(data[1]);
         o.Price = double.Parse(data[2]);
         o.Amount = int.Parse(data[3]);
@@ -188,10 +188,10 @@ class MyMain
         Console.WriteLine("Order: OrderID, CustomerAdress, CustomerEmail, CustomerName, DeliveryDate, OrderDate, ShipDate");
         var line = Console.ReadLine();
         var data = line?.Split(' ');
-        o.ID = int.Parse(data[0]);
-        o.CustomerAdress = data[1];
-        o.CustomerEmail = data[2];
-        o.CustomerName = data[3];
+        o.ID = int.Parse(data![0]);
+        o.CustomerAdress = data[1]!;
+        o.CustomerEmail = data[2]!;
+        o.CustomerName = data[3]!;
         o.DeliveryDate = DateTime.Parse(data[4]);
         o.OrderDate = DateTime.Parse(data[5]);
         o.ShipDate = DateTime.Parse(data[6]);
@@ -202,7 +202,7 @@ class MyMain
         Console.WriteLine("Product: ProductID, Name, Price, Category, InStock");
         var line = Console.ReadLine();
         var data = line?.Split(' ');
-        p.ID = int.Parse(data[0]);
+        p.ID = int.Parse(data![0]);
         p.Name = data[1];
         p.Price = double.Parse(data[2]);
         if(!Enum.TryParse(data[3], out Categories category))

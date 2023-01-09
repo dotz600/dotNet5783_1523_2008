@@ -148,7 +148,7 @@ internal class Cart : ICart
                         OrderID = orderId,
                         ProductID = ot.ProductID,
                         Amount = ot.Amount,
-                        Price = ot.TotalPrice
+                        Price = ot.Price
                     };
                     Dal?.OrderItem.Create(DOot);
                 } //make new order item and push it to data source

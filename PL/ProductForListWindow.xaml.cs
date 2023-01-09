@@ -26,12 +26,12 @@ namespace PL;
 public partial class ProductForListWindow : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
-    public ObservableCollection<BO.ProductForList?> productForLists { get; }//hold all the product to show for manger
+    public ObservableCollection<BO.ProductForList?> ProductForLists { get; }//hold all the product to show for manger
     public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }//hold and show the categoris in combobox
 
     public ProductForListWindow()
     {
-        productForLists = new();
+        ProductForLists = new();
         InitializeComponent();
         Refresh();//update the product to show
     }
@@ -55,9 +55,9 @@ public partial class ProductForListWindow : Window
         }
         else
         {
-            productForLists.Clear();
+            ProductForLists.Clear();
             foreach (var x in (bl!.Product.ReadAll(x => x?.Category.ToString() == ProductSelector.SelectedItem.ToString())))
-                productForLists.Add(x);
+                ProductForLists.Add(x);
         }
 
     }
@@ -83,9 +83,9 @@ public partial class ProductForListWindow : Window
     }
     public void Refresh()//update the product to show on screen
     {
-        productForLists.Clear();
+        ProductForLists.Clear();
         foreach (var x in bl!.Product.ReadAll()) 
-            productForLists.Add(x);
+            ProductForLists.Add(x);
         ProductSelector.SelectedIndex = 9;
     }
 }

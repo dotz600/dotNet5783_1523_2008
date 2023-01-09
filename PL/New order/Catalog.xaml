@@ -34,7 +34,7 @@
             </ListView.View>
 
         </ListView>
-        <ComboBox x:Name="CategorySort" ItemsSource="{Binding Categories}" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top"
+        <ComboBox x:Name="CategorySort" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Top"
                   Width="152" SelectionChanged="CategorySort_SelectionChanged" BorderBrush="{DynamicResource buttonBackground}"
                   OpacityMask="{DynamicResource buttonBackground}" SelectedIndex="9"
         ></ComboBox>

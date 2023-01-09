@@ -32,7 +32,7 @@
         <Label Content="Product ID :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="1"/>
         <TextBox x:Name="textBoxUpdateProductName" Width="300" DataContext="{Binding ProductDetails}" Text="{Binding Path= Name}" Grid.Row="2" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="Name of product :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="2"/>
-        <ComboBox x:Name="CategoryComboBoxUpdate" ItemsSource="{Binding CategoriesToShow}" SelectedItem="{Binding CurrentCategory}" Width="300" Focusable="False" Text="" Grid.Row="3" Grid.Column="2" IsEnabled="False"/>
+        <ComboBox x:Name="CategoryComboBoxUpdate" ItemsSource="{Binding CategoriesToShow}" SelectedItem="{Binding ProductDetails.Category}" Width="300" Focusable="False" Text="" Grid.Row="3" Grid.Column="2" IsEnabled="False"/>
         <Label Content="Category of product :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="3"/>
         <TextBox x:Name="textBoxUpdateProductAmount" Width="300"  Text="{Binding ElementName=textBoxUpdateProductID , Path= DataContext.InStock}" Grid.Row="4" Grid.Column="2"/>
         <Label Content="Enter amount :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="4"/>

@@ -26,9 +26,6 @@ public partial class UpdateOrderWindow : Window
 
     public bool IsEnable { get; set; }
     public BO.Order OrderDetails { get; set; }
-
-    public BO.OrderStatus CurrentStatus {get; set;}
-
     public List<BO.OrderStatus> StatusList //take all the order status exept none
     {
         get
@@ -45,7 +42,6 @@ public partial class UpdateOrderWindow : Window
     {
         OrderDetails = new();
         OrderDetails = bl!.Order.Read(id);//insert order data to dataContext
-        CurrentStatus = OrderDetails.Status;
         IsEnable = flag;
         InitializeComponent();
     }

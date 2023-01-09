@@ -27,15 +27,11 @@ public partial class UpdateProductWindow : Window
 
     public BO.Product ProductDetails { get; set; } //hold the product details
 
-    public BO.Categories? CurrentCategory { get; set; } //hold the catrgory of the product
-    
-
     public Array CategoriesToShow { get { return Enum.GetValues(typeof(BO.Categories)); } } //return array with all the categories
     public UpdateProductWindow(int id)
     {
 
         ProductDetails = bl.Product.Read(id);
-        CurrentCategory = ProductDetails.Category;
         InitializeComponent();
     }
     

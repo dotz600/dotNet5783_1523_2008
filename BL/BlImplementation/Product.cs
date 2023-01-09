@@ -26,11 +26,11 @@ internal class Product : IProduct
             CheckNameIdPriceStock(p!);
             Dal?.Product.Create(new DO.Product
             {
-                ID = p.ID,
-                Name = p.Name,
-                InStock = p.InStock,
-                Price = p.Price,
-                Category = (DO.Categories)p.Category!
+                ID = p!.ID,
+                Name = p!.Name,
+                InStock = p!.InStock,
+                Price = p!.Price,
+                Category = (DO.Categories)p!.Category!
             });
         }
         catch (DalApi.ObjExistException ex)
@@ -208,7 +208,7 @@ internal class Product : IProduct
                       Category = (BO.Categories)DoProduct.Category,
                       Price = DoProduct.Price,
                       AmountInCart = c.Items != null && c.Items.FirstOrDefault(x => x?.ProductID == DoProduct.ID) != null
-                      ? c.Items.FirstOrDefault(x => x?.ProductID == DoProduct.ID).Amount  : 0,
+                      ? c.Items!.FirstOrDefault(x => x?.ProductID == DoProduct.ID)!.Amount  : 0,
                       InStock = DoProduct.InStock > 0,
                   }
                   select tmp;

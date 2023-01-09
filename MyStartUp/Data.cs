@@ -63,9 +63,10 @@ internal class Data
             AddOrderItem(i);
 
         //put the date to xml file
+
         //save orders
         XElement orderRoot = LoadListFromXMLElement(ordersPath);
-        for(int i = 0; i<  s_ordersArr.Count; i++)
+        for (int i = 0; i < s_ordersArr.Count; i++)
         {
             orderRoot.Add(BuildXElementOrder((DO.Order)s_ordersArr[i]!));
         }
@@ -125,7 +126,7 @@ internal class Data
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Chicken", Category = Categories.Meat, InStock = 25, Price = 30 });
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Yellow cheese", Category = Categories.Deli, InStock = 12, Price = 33 });
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Bean", Category = Categories.Frozen, InStock = 7, Price = 16 });
-        s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Mop", Category = Categories.Cleaning, InStock = 3, Price = 22 });
+        s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Mop", Category = Categories.Cleaning, InStock = 0, Price = 22 });
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Cows Milk", Category = Categories.Dairy, InStock = 45, Price = 4.99 });
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Gum", Category = Categories.Sweets, InStock = 75, Price = 0.99 });
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Makeup", Category = Categories.Beauty, InStock = 15, Price = 7 });
@@ -137,7 +138,7 @@ internal class Data
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Garbage Bags", Category = Categories.Cleaning, InStock = 50, Price = 10 });
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Bleach", Category = Categories.Cleaning, InStock = 15, Price = 32.5 });
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Salmon", Category = Categories.Meat, InStock = 15, Price = 105.24 });
-        s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Ice Cream", Category = Categories.Frozen, InStock = 7, Price = 17.5 });
+        s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Ice Cream", Category = Categories.Frozen, InStock = 0, Price = 17.5 });
         s_productsArr.Add(new DO.Product { ID = GetProductRandomID(), Name = "Disposable Cups", Category = Categories.Grocery, InStock = 200, Price = 7.5 });
     }
 
@@ -179,8 +180,14 @@ internal class Data
             ProductID = (int)s_productsArr[randomProduct]?.ID!,  //alreday added 10 product to the list 
             OrderID = (int)s_ordersArr[i % 20]?.ID!, // allready added 20 orders to the list
             Amount = amount,//amount is random number
-            Price = (int)s_productsArr[randomProduct]?.Price! * amount
+            Price = (double)s_productsArr[randomProduct]?.Price!
         };
+        foreach (var listOT in s_ordersItemArr)//check if we dont have the same object in are list
+            if (listOT!.Value.ProductID == ot1.ProductID && listOT!.Value.OrderID == ot1.OrderID)//if dose, call the function agian
+            {
+                AddOrderItem(rand.Next(1000));
+                return;    
+            }
         s_ordersItemArr.Add(ot1);
     }
 

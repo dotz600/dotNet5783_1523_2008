@@ -29,7 +29,7 @@
         <Label Content="Categories:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
                Grid.Column="0"/>
         <ListView  MouseDoubleClick="ListViewProductForList_MouseDoubleClick"
-                   Grid.Row="1" ItemsSource="{Binding productForLists}" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewProductForList">
+                   Grid.Row="1" ItemsSource="{Binding ProductForLists}" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewProductForList">
            
                 <ListView.View>
                     

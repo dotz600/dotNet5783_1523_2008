@@ -28,6 +28,7 @@ public partial class Catalog : Window
     public ObservableCollection<BO.ProductItem> ProductToShow { get; }//will update automatic to show the product on the catalog
     public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }//show all the categories in the combobox
 
+    public BO.Categories SelectedCategory { get; set; } = BO.Categories.None;
     public Catalog()
     {
         ProductToShow = new();
@@ -41,7 +42,7 @@ public partial class Catalog : Window
     {
         try
         {
-            if (CategorySort.SelectedItem.ToString() == BO.Categories.None.ToString())//show all products
+            if (SelectedCategory == BO.Categories.None)//show all products
             {
                 Refresh();
             }
@@ -49,7 +50,7 @@ public partial class Catalog : Window
             {
                 ProductToShow.Clear();
                 foreach (var x in bl!.Product.GetCatalog(MainWindow.cart,
-                    x => x?.Category.ToString() == CategorySort.SelectedItem.ToString()))
+                    x => x?.Category == SelectedCategory))
                     ProductToShow.Add(x);
               
             }

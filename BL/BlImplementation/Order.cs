@@ -24,9 +24,9 @@ internal class Order : IOrder
             
             BO.OrderStatus status = BO.OrderStatus.ConfirmedOrder;//every order in the data base allready confirm
 
-            if (order?.ShipDate < DateTime.Now && order?.ShipDate != null)//status update(provide or sent)
+            if (order?.ShipDate != null)//status update(provide or sent)
                 status = BO.OrderStatus.Sent;
-            if (order?.DeliveryDate < DateTime.Now && order?.DeliveryDate != null)
+            if (order?.DeliveryDate != null)
                 status = BO.OrderStatus.Provided;
 
             CalcAmountAndPrice(ref countAmountOfItems, ref sumPrice, order?.ID);
@@ -72,9 +72,9 @@ internal class Order : IOrder
                 orderReturn.TotalPrice = price;
 
                 BO.OrderStatus status = BO.OrderStatus.ConfirmedOrder;//evrey order in the data base allready confirm
-                if (orderReturn.ShipDate < DateTime.Now && orderReturn.ShipDate != null)
+                if (orderReturn.ShipDate != null)
                     status = BO.OrderStatus.Sent;
-                if (orderReturn.DeliveryDate < DateTime.Now && orderReturn.DeliveryDate != null)
+                if (orderReturn.DeliveryDate != null)
                     status = BO.OrderStatus.Provided;
                 orderReturn.Status = status;
 
@@ -93,7 +93,7 @@ internal class Order : IOrder
         try
         {
             DO.Order order = Dal?.Order.Read(orderId) ?? throw new NullReferenceException();//if doesn't exist, throw from DALOrder
-            if (order.ShipDate == null || order.ShipDate > DateTime.Now)
+            if (order.ShipDate == null)
                 throw new BO.UpdateObjectFailedException("Send order before!");
             order.DeliveryDate = DateTime.Now;
             Dal?.Order.Update(order);
@@ -128,7 +128,7 @@ internal class Order : IOrder
         try
         {
             DO.Order order = Dal?.Order.Read(orderId) ?? throw new NullReferenceException();//if doesn't exist, throw from DALOrder
-            if (order.DeliveryDate > order.ShipDate)
+            if (order.DeliveryDate != null)
                 throw new BO.UpdateObjectFailedException("Order was provided!");
             order.ShipDate = DateTime.Now;
             Dal?.Order.Update(order);//update the order in data source
@@ -164,9 +164,9 @@ internal class Order : IOrder
             DO.Order o = Dal?.Order.Read(orderId) ?? throw new NullReferenceException();//if doesn't exist, throw from DALOrder
             BO.OrderStatus orderStatus = BO.OrderStatus.ConfirmedOrder;
 
-            if (o.ShipDate < DateTime.Now && o.ShipDate != DateTime.MinValue)//if true - the order has been sent and need to update orderStatus
+            if (o.ShipDate != null)//if true - the order has been sent and need to update orderStatus
                 orderStatus = BO.OrderStatus.Sent;
-            if (o.DeliveryDate < DateTime.Now && o.DeliveryDate != DateTime.MinValue)
+            if (o.DeliveryDate != null)
                 orderStatus = BO.OrderStatus.Provided;
 
             BO.OrderTracking orderTrackingToReturn = new() { ID = orderId, Status = orderStatus };
@@ -181,13 +181,13 @@ internal class Order : IOrder
             orderTrackingToReturn.Events.Add(dateAndStatus1);
 
             //checl if have more events and add them to the list
-            if (o.ShipDate < DateTime.Now && o.ShipDate != DateTime.MinValue)
+            if (o.ShipDate != null)
             {
                 dateAndStatus2.dt = o.ShipDate;
                 dateAndStatus2.os = BO.OrderStatus.Sent;
                 orderTrackingToReturn.Events.Add(dateAndStatus2);
             }
-            if (o.DeliveryDate < DateTime.Now && o.DeliveryDate != DateTime.MinValue)
+            if (o.DeliveryDate != null)
             {
                 dateAndStatus3.dt = o.DeliveryDate;
                 dateAndStatus3.os = BO.OrderStatus.Provided;

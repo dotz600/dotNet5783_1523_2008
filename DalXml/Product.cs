@@ -3,6 +3,7 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 using System.Xml.Linq;
 namespace Dal;
 /// <summary>
@@ -14,15 +15,15 @@ public class Product : IProduct
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
 
-        XElement checkIfExist = XmlTools.SearchInRoot(obj.ID, productsRootElement);
+        XElement checkIfExist = SearchInRoot(obj.ID, productsRootElement);
 
         if (checkIfExist != null)
             throw new ObjExistException("product ID exist!");
 
-        XElement addProduct = XmlTools.BuildProductXElement(obj);
+        XElement addProduct = BuildProductXElement(obj);
 
         productsRootElement?.Add(addProduct);
-        XmlTools.saveList(productsRootElement!, XmlTools.productsPath);
+        XmlTools.SaveList(productsRootElement!, XmlTools.productsPath);
 
         return obj.ID;
     }
@@ -31,13 +32,13 @@ public class Product : IProduct
     public void Delete(int id)
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
-        XElement checkIfExist = XmlTools.SearchInRoot(id, productsRootElement);
+        XElement checkIfExist = SearchInRoot(id, productsRootElement);
 
         if (checkIfExist == null)
             throw new ObjNotFoundException("Product doesn't found");
 
         checkIfExist.Remove();
-        XmlTools.saveList(productsRootElement, XmlTools.productsPath);
+        XmlTools.SaveList(productsRootElement, XmlTools.productsPath);
     }
 
     
@@ -46,13 +47,13 @@ public class Product : IProduct
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
 
-        XElement checkIfExist = XmlTools.SearchInRoot(id, productsRootElement);
+        XElement checkIfExist = SearchInRoot(id, productsRootElement);
 
 
         if (checkIfExist == null)
             throw new ObjNotFoundException("Product doesn't found");
 
-        return XmlTools.BuildProductDO(checkIfExist);
+        return BuildProductDO(checkIfExist);
     }
 
  
@@ -65,12 +66,12 @@ public class Product : IProduct
         {
             return from x in productsRootElement?.Elements()
                    where x != null
-                   select (DO.Product?)XmlTools.BuildProductDO(x);
+                   select (DO.Product?)BuildProductDO(x);
         }
 
         return from x in productsRootElement?.Elements()
-               where x!=null && predicate(XmlTools.BuildProductDO(x))
-               select (DO.Product?)XmlTools.BuildProductDO(x);
+               where x!=null && predicate(BuildProductDO(x))
+               select (DO.Product?)BuildProductDO(x);
  
     }
 
@@ -79,8 +80,8 @@ public class Product : IProduct
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
 
         var p = from x in productsRootElement?.Elements()
-                where x != null && predicate(XmlTools.BuildProductDO(x))
-                select XmlTools.BuildProductDO(x);
+                where x != null && predicate(BuildProductDO(x))
+                select BuildProductDO(x);
         if (p == null)
             throw new ObjNotFoundException("Product doesn't found");
         return p.ElementAt(0);
@@ -90,15 +91,52 @@ public class Product : IProduct
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
 
-        XElement checkIfExist = XmlTools.SearchInRoot(obj.ID, productsRootElement);
+        XElement checkIfExist = SearchInRoot(obj.ID, productsRootElement);
 
         if (checkIfExist != null)
         {
-            checkIfExist.Remove();
-            productsRootElement?.Add(XmlTools.BuildProductXElement(obj));
-            XmlTools.saveList(productsRootElement, XmlTools.productsPath);
+            checkIfExist.Element("Category")!.Value = obj.Category.ToString();
+            checkIfExist.Element("InStock")!.Value = obj.InStock.ToString();
+            checkIfExist.Element("Name")!.Value = obj.Name!;
+            checkIfExist.Element("Price")!.Value = obj.Price.ToString();
+
+            XmlTools.SaveList(productsRootElement!, XmlTools.productsPath);
         }
         else // doesn't exist, checkIfExist is null here
             throw new ObjNotFoundException("Product not found");
     }
+
+    private static DO.Product BuildProductDO(XElement newProduct)
+    {
+        return new DO.Product()
+        {
+            ID = int.Parse(newProduct.Element("ID")!.Value!)
+           ,
+            Category = (Categories)Enum.Parse(typeof(Categories), newProduct?.Element("Category")!.Value!)
+           ,
+            InStock = int.Parse(newProduct?.Element("InStock")?.Value!)
+           ,
+            Name = newProduct?.Element("Name")?.Value!
+           ,
+            Price = double.Parse(newProduct?.Element("Price")?.Value!)
+        };
+    }
+
+
+    private static XElement BuildProductXElement(DO.Product obj)
+    {
+        return new XElement("Product", new XElement("ID", obj.ID)
+                                                            , new XElement("Name", obj.Name)
+                                                            , new XElement("Price", obj.Price)
+                                                            , new XElement("Category", obj.Category)
+                                                            , new XElement("InStock", obj.InStock));
+    }
+
+    private static XElement SearchInRoot(int id, XElement productsRootElement)
+    {
+        return (from x in productsRootElement?.Elements()!
+                where int.Parse(x.Element("ID")!.Value!) == id
+                select x).FirstOrDefault()!;
+    }
+
 }

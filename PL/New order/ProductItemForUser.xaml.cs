@@ -26,12 +26,11 @@ public partial class ProductItemForUser : Window
     public BO.ProductItem ProductToShow { get; }//will update automatic to show the product on the catalog
     public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }//show all the categories in the combobox
 
-    public BO.Categories? CurrentCategory { get; set; }
+
     public ProductItemForUser(int id)
     {
         ProductToShow = new();
         ProductToShow = bl!.Product.Read(id, MainWindow.cart);
-        CurrentCategory = ProductToShow.Category;
         InitializeComponent();
 
     }

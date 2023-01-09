@@ -38,7 +38,7 @@ class XmlTools
         }
     }
 
-    public static void saveList(XElement xElement, string filePath)
+    public static void SaveList(XElement xElement, string filePath)
     {
         try { xElement.Save(filePath); }
         catch(Exception ex)
@@ -48,42 +48,5 @@ class XmlTools
     }
     #endregion
 
-    #region search&build Functions
-
-    public static DO.Product BuildProductDO(XElement newProduct)
-    {
-        return new DO.Product()
-        {
-            ID = int.Parse(newProduct.Element("ID")?.Value)
-           ,
-            Category = (Categories)Enum.Parse(typeof(Categories), newProduct.Element("Category").Value)
-           ,
-            InStock = int.Parse(newProduct.Element("InStock")?.Value)
-           ,
-            Name = newProduct.Element("Name")?.Value
-           ,
-            Price = double.Parse(newProduct.Element("Price")?.Value)
-        };
-    }
-
-
-    public static XElement BuildProductXElement(DO.Product obj)
-    {
-        return new XElement("Product", new XElement("ID", obj.ID)
-                                                            , new XElement("Name", obj.Name)
-                                                            , new XElement("Price", obj.Price)
-                                                            , new XElement("Category", obj.Category)
-                                                            , new XElement("InStock", obj.InStock));
-    }
-
-    public static XElement SearchInRoot(int id, XElement productsRootElement)
-    {
-        return (from x in productsRootElement?.Elements()
-                where int.Parse(x.Element("ID").Value) == id
-                select x)?.FirstOrDefault();
-    }
-
-
-    #endregion
 }
 
