@@ -102,15 +102,15 @@ internal class OrderItem : IOrderItem
     public void Update(DO.OrderItem obj)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
-        
+        //int res;
         XElement ot = (from x in root?.Elements()
-                            where int.Parse(x?.Element("OrderID").Value) == obj.OrderID
+                            where int.TryParse(x?.Element("OrderID").Value, out int res) && res == obj.OrderID
                             select x).FirstOrDefault();
         if(ot == null)
             throw new ObjNotFoundException("cant update order item");
         
         ot.Element("ProductID").Value = obj.ProductID.ToString();
-        ot.Element("Price").Value = obj.Price.ToString();
+        ot.Element("Price").Value = obj.Price.ToString() ;
         ot.Element("Amount").Value = obj.Amount.ToString();
 
         XmlTools.saveList(root, XmlTools.orderItemsPath);
@@ -120,7 +120,7 @@ internal class OrderItem : IOrderItem
     /// private help functions
     /// </summary>
     /// <returns></returns>
-    private XElement buildOrderItemXElemnt(DO.OrderItem obj)//buils eml order item obj
+    private XElement buildOrderItemXElemnt(DO.OrderItem obj)//buils xml order item obj
     {
         return new XElement("OrderItem", new XElement("ProductID", obj.ProductID),
                                                            new XElement("OrderID", obj.OrderID),
