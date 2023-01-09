@@ -10,36 +10,31 @@ using System.Diagnostics;
 using System.Xml.Linq;
 using DalApi;
 using System.Diagnostics.Metrics;
+using System.Xml.Serialization;
+using System.IO;
+using Product = DO.Product;
 
 class MyMain
 {
     public static void Main()
     {
-    string productsPath = @"..\xml\ProductsXml.xml";//XElement
 
-        var x = new DO.Product() { Category = Categories.Meat, ID = 10, InStock = 10, Name = "me", Price = 10 };
-        
-        XElement productsRootElement = LoadListFromXMLElement(productsPath);
 
-        productsRootElement?.Add(BuildProductXElement(x));
-
-        saveList(productsRootElement, productsPath);
-
-        //int X = -1, classType;
-        //Console.WriteLine("Hello!");
-        //do
-        //{
-        //    try
-        //    {
-        //        classType = MainInput(ref X);//get input from the user
-        //        MainSwitch(X, classType);
-        //    }
-        //    catch(Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-        //}
-        //while (X != 0);
+        int X = -1, classType;
+        Console.WriteLine("Hello!");
+        do
+        {
+            try
+            {
+                classType = MainInput(ref X);//get input from the user
+                MainSwitch(X, classType);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+        while (X != 0);
 
     }
 

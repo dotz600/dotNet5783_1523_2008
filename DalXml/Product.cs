@@ -22,6 +22,7 @@ public class Product : IProduct
         XElement addProduct = XmlTools.BuildProductXElement(obj);
 
         productsRootElement?.Add(addProduct);
+        XmlTools.saveList(productsRootElement, XmlTools.productsPath);
         return obj.ID;
     }
 

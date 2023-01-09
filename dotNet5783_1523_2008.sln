@@ -8,6 +8,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlTest", "BITest\BlTest.csproj", "{10286331-5B6C-457A-B8E4-0E5A9F3BE7B3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{E7018E3A-5280-4693-9EEF-CECA73F46955}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9C2EECE6-7478-48D5-91C0-E8839EE2D3EB} = {9C2EECE6-7478-48D5-91C0-E8839EE2D3EB}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalFacade.csproj", "{255E81C0-360E-44F7-A728-7DD3146B4101}"
 EndProject
@@ -25,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{9BEB2BAB-DCC
 		xml\ProductsXml.xml = xml\ProductsXml.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{9C2EECE6-7478-48D5-91C0-E8839EE2D3EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csproj", "{9C2EECE6-7478-48D5-91C0-E8839EE2D3EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -28,4 +28,11 @@
     <Category>Meat</Category>
     <InStock>10</InStock>
   </Product>
+  <Product>
+    <ID>300</ID>
+    <Name>orel</Name>
+    <Price>100</Price>
+    <Category>Meat</Category>
+    <InStock>1</InStock>
+  </Product>
 </ProductsList>
