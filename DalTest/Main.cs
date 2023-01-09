@@ -3,6 +3,7 @@
 //david ohev tzion 206672008
 //super market store stage 1
 using DO;
+
 using Dal;
 using System;
 using System.ComponentModel;
@@ -10,15 +11,17 @@ using System.Diagnostics;
 using System.Xml.Linq;
 using DalApi;
 using System.Diagnostics.Metrics;
-using System.Xml.Serialization;
-using System.IO;
+using System.Runtime.InteropServices;
+using System.Net.NetworkInformation;
 using Product = DO.Product;
-
+using Order = DO.Order;
+using OrderItem = DO.OrderItem;
 class MyMain
 {
     public static void Main()
     {
 
+       
 
         int X = -1, classType;
         Console.WriteLine("Hello!");
@@ -35,63 +38,14 @@ class MyMain
             }
         }
         while (X != 0);
-
     }
-
-    public static void saveList(XElement xElement, string filePath)
-    {
-        try { xElement.Save(filePath); }
-        catch (Exception ex)
-        {
-            throw new XMLFileSaveLoadException($"fail to save xml file: {filePath}", ex);
-        }
-    }
-
-
-    public static XElement BuildProductXElement(DO.Product obj)
-    {
-        return new XElement("Product", new XElement("ID", obj.ID)
-                                                            , new XElement("Name", obj.Name)
-                                                            , new XElement("Price", obj.Price)
-                                                            , new XElement("Category", obj.Category)
-                                                            , new XElement("InStock", obj.InStock));
-    }
-
-
-
-    public static XElement LoadListFromXMLElement(string filePath)
-    {
-        try
-        {
-            if (File.Exists(filePath))
-            {
-                return XElement.Load(filePath);
-            }
-            else
-            {
-                XElement rootElem = new XElement(filePath);
-                rootElem.Save(filePath);
-                return rootElem;
-            }
-        }
-        catch (Exception ex)
-        {
-            throw new XMLFileSaveLoadException($"fail to load xml file: {filePath}", ex);
-        }
-    }
-
-
-
-
-
-
 
     private static void MainSwitch(int X, int classType)
     {
         int id;
         IDal? Obj = Factory.Get(); 
         ///variable for input data from user
-        Product product = new();
+        DO.Product product = new();
         Order order = new();
         OrderItem orderItem = new();
 
@@ -136,7 +90,7 @@ class MyMain
             case 3:                                                   //read obj list an print it all
                 if (classType == 1)
                 {
-                    foreach (Product? p in Obj?.Product.ReadAll()!)
+                    foreach (var p in Obj?.Product.ReadAll()!)
                         if (p != null)
                             Console.WriteLine(p);
                 }
@@ -247,7 +201,7 @@ class MyMain
         o.ShipDate = DateTime.Parse(data[6]);
 
     }
-    public static void InputProduct(ref Product p)///get input for all Product details
+    public static void InputProduct(ref DO.Product p)///get input for all Product details
     {
         Console.WriteLine("Product: ProductID, Name, Price, Category, InStock");
         var line = Console.ReadLine();
