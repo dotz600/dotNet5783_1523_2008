@@ -29,7 +29,7 @@ namespace BlApi;
 /// </summary>
 public interface IOrder
 {
-    IEnumerable<BO.OrderForList?> ReadAll();//returns list of BO.Order
+    IEnumerable<BO.OrderForList?> ReadAll(Func<BO.OrderForList?, bool>? predicate = null);//returns list of BO.Order
     BO.Order Read(int orderId);//returns single BO.Order
     BO.Order UpdateDelivery(int orderId);//update status, and returns BO.Order
     BO.Order UpdateShipping(int orderId);//update status, and returns BO.Order

@@ -23,8 +23,8 @@
     <CustomerName>Feivel Karim</CustomerName>
     <CustomerEmail>Feivel@gmail.com</CustomerEmail>
     <CustomerAdress>Queens Road</CustomerAdress>
-    <OrderDate>2023-01-08T15:00:29.6509536+02:00</OrderDate>
-    <ShipDate />
+    <OrderDate>08/01/2023 15:00:29</OrderDate>
+    <ShipDate>10/01/2023 22:41:40</ShipDate>
     <DeliveryDate />
   </Order>
   <Order>
@@ -41,8 +41,8 @@
     <CustomerName>Ansel Adam</CustomerName>
     <CustomerEmail>Ansel@gmail.com</CustomerEmail>
     <CustomerAdress>Castle Lane</CustomerAdress>
-    <OrderDate>2023-01-08T06:40:09.5802359+02:00</OrderDate>
-    <ShipDate />
+    <OrderDate>08/01/2023 06:40:09</OrderDate>
+    <ShipDate>10/01/2023 22:41:25</ShipDate>
     <DeliveryDate />
   </Order>
   <Order>
@@ -77,8 +77,8 @@
     <CustomerName>Gaspar Moran</CustomerName>
     <CustomerEmail>Gaspar@gmail.com</CustomerEmail>
     <CustomerAdress>Lancaster Avenue</CustomerAdress>
-    <OrderDate>2023-01-08T05:23:01.9270611+02:00</OrderDate>
-    <ShipDate />
+    <OrderDate>08/01/2023 05:23:01</OrderDate>
+    <ShipDate>10/01/2023 22:55:08</ShipDate>
     <DeliveryDate />
   </Order>
   <Order>
@@ -176,7 +176,16 @@
     <CustomerName>Aaron Morton</CustomerName>
     <CustomerEmail>Aaron@gmail.com</CustomerEmail>
     <CustomerAdress>Heron Close</CustomerAdress>
-    <OrderDate>2023-01-07T04:16:15.212145+02:00</OrderDate>
+    <OrderDate>07/01/2023 04:16:15</OrderDate>
+    <ShipDate>10/01/2023 10:24:37</ShipDate>
+    <DeliveryDate />
+  </Order>
+  <Order>
+    <ID>1021</ID>
+    <CustomerName>david</CustomerName>
+    <CustomerEmail>david@gmail.com</CustomerEmail>
+    <CustomerAdress>carmel 208</CustomerAdress>
+    <OrderDate>2023-01-10T23:48:10.1157916+02:00</OrderDate>
     <ShipDate />
     <DeliveryDate />
   </Order>

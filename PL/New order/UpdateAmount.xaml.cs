@@ -28,7 +28,7 @@ public partial class UpdateAmount : Window
     public UpdateAmount(int id)
     {
         InitializeComponent();
-        productId= id;
+        productId = id;
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)//update to amount user enter

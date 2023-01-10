@@ -240,4 +240,22 @@
     <Price>4.7</Price>
     <Amount>3</Amount>
   </OrderItem>
+  <OrderItem>
+    <ProductID>857922</ProductID>
+    <OrderID>1021</OrderID>
+    <Price>3</Price>
+    <Amount>1</Amount>
+  </OrderItem>
+  <OrderItem>
+    <ProductID>231641</ProductID>
+    <OrderID>1021</OrderID>
+    <Price>4.99</Price>
+    <Amount>5</Amount>
+  </OrderItem>
+  <OrderItem>
+    <ProductID>602970</ProductID>
+    <OrderID>1021</OrderID>
+    <Price>32.5</Price>
+    <Amount>1</Amount>
+  </OrderItem>
 </OrderItem>

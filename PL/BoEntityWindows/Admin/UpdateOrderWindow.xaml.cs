@@ -24,8 +24,10 @@ public partial class UpdateOrderWindow : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-    public bool IsEnable { get; set; }
-    public BO.Order OrderDetails { get; set; }
+    public bool IsEnable { get; set; }//determine if its coustumer or admin the enter to window 
+    public BO.Order OrderDetails { get; set; } = new();
+
+    public BO.OrderStatus SelectedStatus { get; set; }//hold the staus that select in the first time in the combobox, and update if change
     public List<BO.OrderStatus> StatusList //take all the order status exept none
     {
         get
@@ -40,20 +42,20 @@ public partial class UpdateOrderWindow : Window
     }
     public UpdateOrderWindow(int id, bool flag)//flag is for to determine if its a buyer or a admin
     {
-        OrderDetails = new();
         OrderDetails = bl!.Order.Read(id);//insert order data to dataContext
         IsEnable = flag;
+        SelectedStatus = OrderDetails.Status;
         InitializeComponent();
     }
     private void Update_Order_Confirmation_Click(object sender, RoutedEventArgs e)//will update the shipping details
     {
         try
         {
-            if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.ConfirmedOrder)
+            if (SelectedStatus == BO.OrderStatus.ConfirmedOrder)
                 throw new BO.UpdateObjectFailedException("Order allredy Confirm");//all the orders are confirm allredy 
-            if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.Sent)
+            if (SelectedStatus == BO.OrderStatus.Sent)
                 bl!.Order.UpdateShipping(int.Parse(textBoxUpdateOrderID.Text));
-            if ((BO.OrderStatus)StatusComboBoxUpdateOrder.SelectedItem == BO.OrderStatus.Provided)
+            if (SelectedStatus == BO.OrderStatus.Provided)
                 bl!.Order.UpdateDelivery(int.Parse(textBoxUpdateOrderID.Text));
 
         }

@@ -26,6 +26,7 @@ public partial class CartView : Window
 {
 
     public ObservableCollection<BO.OrderItem?> OrderItems { get; set; }//wiil hold all the product item in cart, and show them
+    public BO.OrderItem? SelectedOT { get; set; } = new();//hold the delected order item that select from list
     public CartView()
     {
         OrderItems ??= new();
@@ -43,9 +44,12 @@ public partial class CartView : Window
 
     private void Cart_list_view_MouseDoubleClick(object sender, MouseButtonEventArgs e)//go to update amount to order window
     {
-        var slected = (BO.OrderItem)Cart_list_view.SelectedItem;
-        new UpdateAmount(slected.ProductID).ShowDialog();
-        Refresh();//update the item list
+        if(SelectedOT != null)
+        {
+            new UpdateAmount(SelectedOT.ProductID).ShowDialog();
+            Refresh();//update the item list
+        }
+
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)//return to catalog
@@ -57,8 +61,6 @@ public partial class CartView : Window
     {
         OrderItems.Clear();
         foreach (var item in MainWindow.cart.Items!)
-        {
             OrderItems.Add(item);
-        }
     }
 }

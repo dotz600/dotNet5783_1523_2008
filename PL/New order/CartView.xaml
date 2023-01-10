@@ -14,7 +14,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <ListView x:Name="Cart_list_view" ItemsSource="{Binding OrderItems}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="0" Grid.Column="0"  MouseDoubleClick="Cart_list_view_MouseDoubleClick">
+        <ListView x:Name="Cart_list_view" ItemsSource="{Binding OrderItems}" SelectedItem="{Binding SelectedOT, Mode=OneWayToSource}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.Row="0" Grid.Column="0"  MouseDoubleClick="Cart_list_view_MouseDoubleClick">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ProductID}" />
