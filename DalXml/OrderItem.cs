@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 
 /// <summary>
-/// XmlSerializer
+/// XElement
 /// </summary>
 internal class OrderItem : IOrderItem
 {
@@ -95,7 +95,7 @@ internal class OrderItem : IOrderItem
 
         throw new ObjNotFoundException("Order item doesn't found");
     }
-
+    
     public void Update(DO.OrderItem obj)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);

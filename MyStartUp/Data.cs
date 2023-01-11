@@ -7,6 +7,8 @@ using System.Xml.Linq;
 using System.Xml;
 using DalApi;
 using DO;
+using System.Xml.Serialization;
+
 namespace MyStartUp;
 
 internal class Data
@@ -48,31 +50,38 @@ internal class Data
     
     public Data()
     {
-        //initeliz the list
+        //initialize the list
         s_idRunNum = 1000;
-        NameSturtup();
-        LastNameSturtup();
-        EmailSturtup();
-        AddressSturtup();
-        AddProduct();//make 15 products
+        NameInit();
+        LastNameInit();
+        EmailInit();
+        AddressInit();
+        AddProduct();//create 15 products
 
-        for (int i = 0; i < 20; i++)//make 20 order
+        for (int i = 0; i < 20; i++)//create 20 order
             AddOrder(i);
 
-        for (int i = 0; i < 40; i++)//make 40 order item
+        for (int i = 0; i < 40; i++)//create 40 order item
             AddOrderItem(i);
 
         //put the date to xml file
 
-        //save orders
-        XElement orderRoot = LoadListFromXMLElement(ordersPath);
-        for (int i = 0; i < s_ordersArr.Count; i++)
-        {
-            orderRoot.Add(BuildXElementOrder((DO.Order)s_ordersArr[i]!));
-        }
-        SaveList(orderRoot, ordersPath);
+        //save orders with serialize
 
-        //save products
+        try
+        {
+            FileStream file = new FileStream(ordersPath, FileMode.Create);
+            XmlSerializer x = new XmlSerializer(s_ordersArr.GetType());
+            x.Serialize(file, s_ordersArr);
+            file.Close();
+        }
+        catch (Exception ex)
+        {
+            throw new XMLFileSaveLoadException($"fail to create xml file: {ordersPath}", ex);
+        }
+
+
+        save products
         XElement productRoot = LoadListFromXMLElement(productsPath);
         for (int i = 0; i < s_productsArr.Count; i++)
         {
@@ -89,21 +98,21 @@ internal class Data
         SaveList(orderItemRoot, orderItemsPath);
     }
 
-    private static void EmailSturtup()//adding name + @gmail
+    private static void EmailInit()//adding name + @gmail
     {
         emails = new();
         foreach (var n in names)
             emails.Add(n + "@gmail.com");
     }
 
-    private static void NameSturtup()
+    private static void NameInit()
     {
         names.Add("Balthasar"); names.Add("Irving"); names.Add("Feivel"); names.Add("Judah"); names.Add("Ansel"); names.Add("Quang");
         names.Add("Hershel"); names.Add("Avrum"); names.Add("Gaspar"); names.Add("Ephraim"); names.Add("Herschel"); names.Add("Isaac"); names.Add("Hyman");
         names.Add("Mendel"); names.Add("Moss"); names.Add("Shraga"); names.Add("Nosson"); names.Add("Lazer"); names.Add("Jacob"); names.Add("Aaron");
     }
 
-    private static void LastNameSturtup()
+    private static void LastNameInit()
     {
         lastName.Add("Cohen"); lastName.Add("Anwar"); lastName.Add("Karim"); lastName.Add("Rashid"); lastName.Add("Adam");
         lastName.Add("Daniel"); lastName.Add("Abraham"); lastName.Add("Eden"); lastName.Add("Moran"); lastName.Add("Noach"); lastName.Add("Simon");
@@ -111,7 +120,7 @@ internal class Data
         lastName.Add("Arnold"); lastName.Add("Hutchinson"); lastName.Add("Morton"); lastName.Add("Grant");
     }
 
-    private static void AddressSturtup()
+    private static void AddressInit()
     {
 
         address.Add("Robin Close");address.Add("Partridge Close");address.Add("Queens Road");address.Add("Eastern Avenue");address.Add("Castle Lane");
@@ -197,9 +206,9 @@ internal class Data
                                                            new XElement("CustomerName", obj.CustomerName),
                                                            new XElement("CustomerEmail", obj.CustomerEmail),
                                                            new XElement("CustomerAdress", obj.CustomerAdress),
-                                                           new XElement("OrderDate", obj.OrderDate),
-                                                           new XElement("ShipDate", obj.ShipDate),
-                                                           new XElement("DeliveryDate", obj.DeliveryDate));
+                                                            new XElement("OrderDate", obj.OrderDate == null ? null : obj.OrderDate),
+                                                           new XElement("ShipDate", obj.ShipDate == null ? null : obj.ShipDate),
+                                                           new XElement("DeliveryDate", obj.DeliveryDate == null ? null : obj.DeliveryDate));
     }
 
     public static XElement BuildXElementProduct(DO.Product obj)

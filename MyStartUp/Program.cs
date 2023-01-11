@@ -4,7 +4,7 @@ public class Program
 {
     public static void Main()
     {
-        Data startUp = new();
+        Data Initialiaze = new();
         //foreach (var x in StartUp.s_productsArr)
         //    Console.WriteLine(x);
         //foreach (var x in StartUp.s_ordersArr)

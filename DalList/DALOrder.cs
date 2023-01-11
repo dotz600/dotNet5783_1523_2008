@@ -13,7 +13,7 @@ internal class DalOrder : IOrder
         if (t != -1)
             DataSource.s_ordersArr[t] = o1;
         else
-            throw new ObjNotFoundException("cant update order");
+            throw new ObjNotFoundException("Order not exist");
     }
     public int Create(Order o1)//add the new obj to the array, return order ID
     {
