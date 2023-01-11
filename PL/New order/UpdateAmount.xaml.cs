@@ -35,8 +35,7 @@ public partial class UpdateAmount : Window
     {
         try
         {
-            string amount = AmountToUpdate.Text;
-            int num = int.Parse(amount);//convert amount to int
+            int num = int.Parse(AmountToUpdate.Text);//convert amount to int
             bl?.Cart.Update(MainWindow.cart, productId, num);//update amount in cart
             this.Close();
         }
