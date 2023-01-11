@@ -58,4 +58,19 @@ public partial class UpdateProductWindow : Window
         p.InStock = int.Parse(s);
     }
 
+    private void DeleteButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            this.Close();
+            bl!.Product.Delete(ProductDetails.ID);
+            MessageBox.Show("Successfully deleted from store", "Success", MessageBoxButton.OK, MessageBoxImage.Information
+          , MessageBoxResult.Cancel);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
+            , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
+        }
+    }
 }

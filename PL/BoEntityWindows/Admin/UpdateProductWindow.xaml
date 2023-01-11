@@ -39,6 +39,7 @@
         <TextBox x:Name="textBoxUpdateProductPrice" Width="300"  Text="{Binding ElementName=textBoxUpdateProductID , Path= DataContext.Price}" Grid.Row="5" Grid.Column="2" />
         <Label Content="Enter price :" HorizontalAlignment="Right" Grid.Column="1" Grid.Row="5"/>
         <Button x:Name="ConfirmButton" Content="Confirm" Height="40" Width="194" Grid.Row="7" Grid.Column="2" Click="Update_Product_Confirmation_Click" />
+        <Button x:Name="DeleteButton" Content="Delete Product" Height="40" Width="194" Grid.Row="6" Grid.Column="2" Click="DeleteButton_Click" />
 
 
     </Grid>
