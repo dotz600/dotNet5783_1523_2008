@@ -31,7 +31,7 @@ internal class Order : IOrder
         List<DO.Order?> orders = LoadListFromXMLSerializer<DO.Order?>(XmlTools.ordersPath);
 
         var y = orders.Find(x => x?.ID == obj.ID);//search if the obj allready in data base
-        if (y?.ID != 0)
+        if (y != null)
             throw new ObjExistException("Order allready found");
 
         obj.ID = GetIdRunNumber();
@@ -48,7 +48,7 @@ internal class Order : IOrder
         List<DO.Order?> orders = LoadListFromXMLSerializer<DO.Order?>(XmlTools.ordersPath);
 
         var y = orders.Find(x => x?.ID == id);//search if the obj allready in data base
-        if (y?.ID == 0)
+        if (y is null)
             throw new ObjNotFoundException("Order not found");
 
         orders.Remove(y);
@@ -63,7 +63,7 @@ internal class Order : IOrder
         List<DO.Order?> orders = LoadListFromXMLSerializer<DO.Order?>(XmlTools.ordersPath);
 
         var y = orders.Find(x => x?.ID == id);//search if the obj allready in data base
-        if (y?.ID == 0)
+        if (y is null)
             throw new ObjNotFoundException("Order not found");
         return (DO.Order)y!;
     }
