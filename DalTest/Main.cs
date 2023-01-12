@@ -39,7 +39,7 @@ class MyMain
     private static void MainSwitch(int X, int classType)
     {
         int id;
-        IDal? Obj = Factory.Get(); 
+        IDal? Obj = Factory.Get();
         ///variable for input data from user
         DO.Product product = new();
         Order order = new();
@@ -100,7 +100,7 @@ class MyMain
                 {
                     foreach (OrderItem? it in Obj?.OrderItem.ReadAll()!)
                         if (it != null)
-                            Console.WriteLine(it);             
+                            Console.WriteLine(it);
                 }
                 break;
             case 4:                                                    ///update obj
@@ -151,12 +151,12 @@ class MyMain
                                      "For OrderItem enter 3");
         checkInput = int.TryParse(Console.ReadLine(), out int classType);
         if (classType > 3 || classType < 1 || !checkInput)
-           {
+        {
             if (checkInput)///that mean we get good int but not in the range 1 - 3
                 X = 0;
             else ///its just error input
-            Console.WriteLine("Try again...");
-            }
+                Console.WriteLine("Try again...");
+        }
         else///we got correct input in range 1-3
         {
             Console.WriteLine("Select the desired test:\n" +
@@ -205,7 +205,7 @@ class MyMain
         p.ID = int.Parse(data![0]);
         p.Name = data[1];
         p.Price = double.Parse(data[2]);
-        if(!Enum.TryParse(data[3], out Categories category))
+        if (!Enum.TryParse(data[3], out Categories category))
             throw new NullReferenceException();
         p.Category = category;
         p.InStock = int.Parse(data[4]);

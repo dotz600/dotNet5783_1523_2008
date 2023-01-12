@@ -16,8 +16,8 @@ sealed internal class Bl : IBl
         Cart = new Cart();
         Order = new Order();
         OrderForList = new OrderForList();
-        OrderItem= new OrderItem();
-        ProductForList= new ProductForList();
+        OrderItem = new OrderItem();
+        ProductForList = new ProductForList();
         ProductItem = new ProductItem();
     }
     public IProduct Product { get; }

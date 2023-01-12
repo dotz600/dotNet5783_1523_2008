@@ -4,7 +4,7 @@ using DO;
 
 namespace Dal;
 //search by order ID
-internal class DalOredrItem :IOrderItem
+internal class DalOredrItem : IOrderItem
 {
     public int Create(OrderItem Ot)//add new obj to the data base
     {
@@ -37,7 +37,7 @@ internal class DalOredrItem :IOrderItem
         if (predicate == null)
             return DataSource.s_ordersItemArr.ToList();
         else
-        return DataSource.s_ordersItemArr.FindAll(x => predicate(x));
+            return DataSource.s_ordersItemArr.FindAll(x => predicate(x));
     }
 
     public void Delete(int id)//search the obj and delete it from the array
@@ -59,7 +59,7 @@ internal class DalOredrItem :IOrderItem
 
     }
 
-   
+
     public OrderItem ReadIf(Func<OrderItem?, bool> predicate)
     {
         OrderItem? orderItem = DataSource.s_ordersItemArr.FindLast(x => predicate(x));

@@ -25,8 +25,8 @@ internal class Data
 
     //path for the xml files
     public string productsPath = @"..\xml\ProductsXml.xml";//XElement
-    public  string ordersPath = @"..\xml\OrdersXml.xml";//XMLSerializer
-    public  string orderItemsPath = @"..\xml\OrderItemsXml.xml";//XMLSerializer
+    public string ordersPath = @"..\xml\OrdersXml.xml";//XMLSerializer
+    public string orderItemsPath = @"..\xml\OrderItemsXml.xml";//XMLSerializer
 
     internal static int s_idRunNum = 1000;//for order ID
     internal static int GetIdRunNum()
@@ -47,7 +47,7 @@ internal class Data
         return GetProductRandomID();
 
     }
-    
+
     public Data()
     {
         //initialize the list
@@ -81,7 +81,7 @@ internal class Data
         }
 
 
-        save products
+        //save products
         XElement productRoot = LoadListFromXMLElement(productsPath);
         for (int i = 0; i < s_productsArr.Count; i++)
         {
@@ -123,10 +123,10 @@ internal class Data
     private static void AddressInit()
     {
 
-        address.Add("Robin Close");address.Add("Partridge Close");address.Add("Queens Road");address.Add("Eastern Avenue");address.Add("Castle Lane");
-        address.Add("Station Close");address.Add("The Street");address.Add("Teal Close");address.Add("Lancaster Avenue");address.Add("Byron Close");
-        address.Add("Market Place");address.Add("Chestnut Grove");address.Add("Lodge Close");address.Add("Old Lane");address.Add("Thornhill Road");
-        address.Add("Blind Lane");address.Add("Grove Road");address.Add("Court Road");address.Add("York Road");address.Add("Heron Close");
+        address.Add("Robin Close"); address.Add("Partridge Close"); address.Add("Queens Road"); address.Add("Eastern Avenue"); address.Add("Castle Lane");
+        address.Add("Station Close"); address.Add("The Street"); address.Add("Teal Close"); address.Add("Lancaster Avenue"); address.Add("Byron Close");
+        address.Add("Market Place"); address.Add("Chestnut Grove"); address.Add("Lodge Close"); address.Add("Old Lane"); address.Add("Thornhill Road");
+        address.Add("Blind Lane"); address.Add("Grove Road"); address.Add("Court Road"); address.Add("York Road"); address.Add("Heron Close");
     }
 
     private void AddProduct()//make new 18 product
@@ -176,7 +176,7 @@ internal class Data
             return;
         }//else update delivery date
         res.DeliveryDate = tmp;
-        
+
         s_ordersArr.Add(res);
     }
 
@@ -195,7 +195,7 @@ internal class Data
             if (listOT!.Value.ProductID == ot1.ProductID && listOT!.Value.OrderID == ot1.OrderID)//if dose, call the function agian
             {
                 AddOrderItem(rand.Next(1000));
-                return;    
+                return;
             }
         s_ordersItemArr.Add(ot1);
     }

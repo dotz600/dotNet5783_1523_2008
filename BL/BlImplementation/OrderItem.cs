@@ -13,7 +13,7 @@ internal class OrderItem : IOrderItem
 
     public BO.OrderItem Read(int productID)//return BO OrderItem - search by product id 
     {
-        DO.OrderItem item =  Dal!.OrderItem.ReadProductId(productID);
+        DO.OrderItem item = Dal!.OrderItem.ReadProductId(productID);
         BO.OrderItem res = new();
         res.ProductID = productID;
         res.Price = item.Price;
