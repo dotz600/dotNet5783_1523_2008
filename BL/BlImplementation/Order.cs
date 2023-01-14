@@ -10,9 +10,11 @@ internal class Order : IOrder
     private readonly DalApi.IDal? Dal = DalApi.Factory.Get();
 
 
-    public IEnumerable<BO.OrderForList?> ReadAll()//returns list of BO.Order
+    public IEnumerable<BO.OrderForList?> ReadAll(Func<BO.OrderForList?,bool>? predicate = null)//returns list of BO.Order
     {
         List<BO.OrderForList?> list = new();//create list to return
+        
+        predicate ??= (o => true);
 
         foreach (DO.Order? order in Dal?.Order.ReadAll()!)//build and push elements to the list
         {
@@ -39,7 +41,9 @@ internal class Order : IOrder
                 TotalPrice = sumPrice,
                 Status = status,
             };
-            list.Add(o);//push the element to the list
+            if(predicate(o))
+                list.Add(o);//push the element to the list
+
         }
         return list;
 

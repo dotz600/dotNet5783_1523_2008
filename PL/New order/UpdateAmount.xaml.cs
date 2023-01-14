@@ -28,15 +28,14 @@ public partial class UpdateAmount : Window
     public UpdateAmount(int id)
     {
         InitializeComponent();
-        productId= id;
+        productId = id;
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)//update to amount user enter
     {
         try
         {
-            string amount = AmountToUpdate.Text;
-            int num = int.Parse(amount);//convert amount to int
+            int num = int.Parse(AmountToUpdate.Text);//convert amount to int
             bl?.Cart.Update(MainWindow.cart, productId, num);//update amount in cart
             this.Close();
         }

@@ -80,7 +80,7 @@ internal class Product : IProduct
         }
         catch (DalApi.ObjExistException ex)
         {
-            throw new BO.ProductFoundInOrderException("product found and cant be deleted", ex);
+            throw new BO.ProductFoundInOrderException("The product found in order and can't be deleted", ex);
         }
     }
 

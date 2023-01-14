@@ -27,7 +27,7 @@
         <Label Content="Status:" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Height="36" Width="219"
                Grid.Column="0"/>
         <ListView  MouseDoubleClick="ListViewOrders_MouseDoubleClick" 
-                   Grid.Row="1" ItemsSource="{Binding orderForLists}" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewOrders">
+                   Grid.Row="1" ItemsSource="{Binding OrderForLists}" SelectedItem="{Binding SelectedOrder, Mode=OneWayToSource}" d:ItemsSource="{d:SampleData ItemCount=5}" x:Name="ListViewOrders">
 
             <ListView.View>
                 <GridView>

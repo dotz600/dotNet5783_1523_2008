@@ -1,20 +1,10 @@
-﻿using BlApi;
-using BO;
+﻿using BO;
 using PL.BoEntityWindows.Admin;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PL.BoEntityWindows;
 
@@ -24,42 +14,33 @@ namespace PL.BoEntityWindows;
 public partial class OrderWindow : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
-    public ObservableCollection<OrderForList?> orderForLists { get; set; }//hold the order list to show on screen
+    public ObservableCollection<OrderForList?> OrderForLists { get; set; } = new();//hold the order list to show on screen
     public Array OrderStat { get { return Enum.GetValues(typeof(BO.OrderStatus)); } }//hold the category list to show on combobox
 
     public BO.OrderStatus SelectedStatus { get; set; } = BO.OrderStatus.None;
+
+    public BO.OrderForList SelectedOrder { get; set; } = new();
     public OrderWindow()
     {
-        orderForLists ??= new();
-        foreach (var x in bl!.Order.ReadAll())//fill orderForList collction to show on screen
-            orderForLists.Add(x);
-
+        Refresh();//fill orderForList collction to show on screen
         InitializeComponent();
     }
+
     private void OrderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
     //filter Orders by status, if status = None, will show all orders
     {
         if (SelectedStatus == BO.OrderStatus.None)
-        {
             Refresh();
-        }
         else
-        {
-            orderForLists.Clear();
-            foreach (var order in bl!.Order.ReadAll())
-                if (order?.Status == SelectedStatus)
-                    orderForLists.Add(order);
-        }
-
-
+            Refresh(o => o?.Status == SelectedStatus);
     }
+
     private void ListViewOrders_MouseDoubleClick(object sender, MouseButtonEventArgs e)//open update order window, can update shipping
     {
-        if (ListViewOrders.SelectedItem != null)
+
+        if(SelectedOrder != null)
         {
-            BO.OrderForList order = (BO.OrderForList)ListViewOrders.SelectedItem;
-            UpdateOrderWindow win = new(order.ID, true);
-            win.ShowDialog();
+            new UpdateOrderWindow(SelectedOrder.ID, true).ShowDialog();
             Refresh();//update the order collction to show on screen
         }
     }
@@ -71,13 +52,10 @@ public partial class OrderWindow : Window
     }
 
 
-    public void Refresh()//update the Observable Collection order for list
+    public void Refresh(Func<BO.OrderForList?, bool>? predicate = null)//update the Observable Collection order for list
     {
-
-        orderForLists.Clear();
-        foreach (var x in bl!.Order.ReadAll()) 
-            orderForLists.Add(x);
-
-        orderStatusSelector.SelectedIndex = 3;
+        OrderForLists.Clear();
+        foreach (var x in bl!.Order.ReadAll(predicate))
+            OrderForLists.Add(x);
     }
 }

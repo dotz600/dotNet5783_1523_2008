@@ -40,7 +40,6 @@ public partial class AddProductWindow : Window
     }
     private void Add_Product_Confirmation_Click(object sender, RoutedEventArgs e)//creates a product, and open PFL win
     {
-
         try
         {
             BO.Product p = Create_product_Add();

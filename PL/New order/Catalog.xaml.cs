@@ -28,7 +28,8 @@ public partial class Catalog : Window
     public ObservableCollection<BO.ProductItem> ProductToShow { get; }//will update automatic to show the product on the catalog
     public Array Categories { get { return Enum.GetValues(typeof(BO.Categories)); } }//show all the categories in the combobox
 
-    public BO.Categories SelectedCategory { get; set; } = BO.Categories.None;
+    public BO.ProductItem SelectedProduct { get; set; } = new();
+    public BO.Categories SelectedCategory { get; set; } = BO.Categories.None;//hold the selected category from combobx
     public Catalog()
     {
         ProductToShow = new();
@@ -36,24 +37,14 @@ public partial class Catalog : Window
         InitializeComponent();
     }
 
-
-
     private void CategorySort_SelectionChanged(object sender, SelectionChangedEventArgs e)//show  only the product of the same category
     {
         try
         {
             if (SelectedCategory == BO.Categories.None)//show all products
-            {
                 Refresh();
-            }
-            else//read with predicate, and show only the chossen category 
-            {
-                ProductToShow.Clear();
-                foreach (var x in bl!.Product.GetCatalog(MainWindow.cart,
-                    x => x?.Category == SelectedCategory))
-                    ProductToShow.Add(x);
-              
-            }
+            else
+                Refresh(x => x?.Category == SelectedCategory);//read with predicate, and show only the chossen category 
         }
         catch (Exception ex)
         {
@@ -67,10 +58,12 @@ public partial class Catalog : Window
     {
         try
         {
-            var tmp = (BO.ProductItem)Product_item_list_view.SelectedItem;//extract the product ID
-            int id = tmp.ID;
-            new ProductItemForUser(id).ShowDialog();
-            Refresh();
+            if(SelectedProduct != null)
+            {
+                new ProductItemForUser(SelectedProduct.ID).ShowDialog();
+                Refresh();
+            }
+
         }
         catch (Exception ex) 
         {
@@ -88,11 +81,11 @@ public partial class Catalog : Window
 
     private void CheckBox_Checked(object sender, RoutedEventArgs e)//group/sort all the product by category
     {
-        var temp = from x in bl?.Product.GetCatalog(MainWindow.cart)
-                        orderby x.Category
-                        select x;
+        var temp = from x in bl?.Product.GetCatalog(MainWindow.cart)//order list by category
+                   orderby x.Category
+                   select x;
 
-        ProductToShow.Clear();
+        ProductToShow.Clear();//update the list to show
         foreach (var x in temp)
             ProductToShow.Add(x);
     }
@@ -102,10 +95,10 @@ public partial class Catalog : Window
        Refresh();
     }
 
-    private void Refresh()//clear productItem to show and replace them with the updated products
+    private void Refresh(Func<BO.ProductItem, bool>? predicate = null)//clear productItem to show and replace them with the updated products
     {
         ProductToShow.Clear();
-        foreach (var x in bl!.Product.GetCatalog(MainWindow.cart))
+        foreach (var x in bl!.Product.GetCatalog(MainWindow.cart, predicate))
             ProductToShow.Add(x);
     }
 }

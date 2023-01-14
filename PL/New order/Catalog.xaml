@@ -19,7 +19,7 @@
             <RowDefinition/>
             <RowDefinition Height="39.003"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="Product_item_list_view" ItemsSource="{Binding ProductToShow}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="4" MouseDoubleClick="Product_item_list_MouseDoubleClick" >
+        <ListView x:Name="Product_item_list_view" ItemsSource="{Binding ProductToShow}" SelectedItem="{Binding SelectedProduct , Mode=OneWayToSource}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="4" MouseDoubleClick="Product_item_list_MouseDoubleClick" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ID}" />

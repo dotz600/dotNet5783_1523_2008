@@ -32,8 +32,7 @@ public partial class trackOrderWindow : Window
    
         try
         {
-            string tmp = IdToTrack.Text;
-            int id = int.Parse(tmp);//convert id to int
+            int id = int.Parse(IdToTrack.Text);//convert id to int
             this.Close();
             new UpdateOrderWindow(id, false).Show();
         }

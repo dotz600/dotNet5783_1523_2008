@@ -30,7 +30,6 @@ public partial class UpdateProductWindow : Window
     public Array CategoriesToShow { get { return Enum.GetValues(typeof(BO.Categories)); } } //return array with all the categories
     public UpdateProductWindow(int id)
     {
-
         ProductDetails = bl.Product.Read(id);
         InitializeComponent();
     }
@@ -39,8 +38,8 @@ public partial class UpdateProductWindow : Window
     {
         try
         {
-            BO.Product p = Update_product();
-            bl!.Product.Update(p);
+            Update_product(ProductDetails);
+            bl!.Product.Update(ProductDetails);
             this.Close();
         }
         catch (Exception ex)
@@ -51,19 +50,27 @@ public partial class UpdateProductWindow : Window
     }
     
 
-    private BO.Product Update_product()//take data from fields, and returns new product
+    private void Update_product(BO.Product p)//take data from fields, and returns new product
     {
-        BO.Product p = new();
-        string s = textBoxUpdateProductID.Text;
-        p.ID = int.Parse(s);
-        s = textBoxUpdateProductName.Text;
-        p.Name = s;
-        p.Category = (BO.Categories)CategoryComboBoxUpdate.SelectedItem;
-        s = textBoxUpdateProductPrice.Text;
+        string s = textBoxUpdateProductPrice.Text;
         p.Price = double.Parse(s);
         s = textBoxUpdateProductAmount.Text;
         p.InStock = int.Parse(s);
-        return p;
     }
 
+    private void DeleteButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            this.Close();
+            bl!.Product.Delete(ProductDetails.ID);
+            MessageBox.Show("Successfully deleted from store", "Success", MessageBoxButton.OK, MessageBoxImage.Information
+          , MessageBoxResult.Cancel);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
+            , MessageBoxResult.Cancel, MessageBoxOptions.RtlReading);
+        }
+    }
 }

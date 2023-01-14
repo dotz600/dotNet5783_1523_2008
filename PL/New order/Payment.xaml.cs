@@ -23,11 +23,9 @@ public partial class Payment : Window
 {
     readonly BlApi.IBl? bl = BlApi.Factory.Get();
 
-
     public Payment()
     {
         InitializeComponent();
-            
     }
 
     private void Button_Click(object sender, RoutedEventArgs e)
@@ -37,15 +35,13 @@ public partial class Payment : Window
             string name = textBoxName.Text, email = textBoxEmail.Text, addres = textBoxAddres.Text;
             int orderId = (int)bl?.Cart.CartConfirmation(MainWindow.cart, name, email, addres)!;//confirm cart
             //reset cart 
-            MainWindow.cart = new BO.Cart();
-            Page page = new ThankYouPage(orderId);
-            this.Content = page;
+            MainWindow.cart = new();
+            this.Content = new ThankYouPage(orderId);
         }
         catch(Exception ex) 
         {
             MessageBox.Show(ex.Message, "Exception", MessageBoxButton.OK, MessageBoxImage.Hand
           , MessageBoxResult.Cancel);
         }
-
     }
 }
