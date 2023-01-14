@@ -13,7 +13,7 @@ internal class DalOrder : IOrder
         if (t != -1)
             DataSource.s_ordersArr[t] = o1;
         else
-            throw new ObjNotFoundException("cant update order");
+            throw new ObjNotFoundException("Order not exist");
     }
     public int Create(Order o1)//add the new obj to the array, return order ID
     {
@@ -27,8 +27,8 @@ internal class DalOrder : IOrder
     }
     public void Delete(int id)//delete the obj from the array
     {
-        var res = from x in DataSource.s_ordersArr 
-                  where x?.ID == id 
+        var res = from x in DataSource.s_ordersArr
+                  where x?.ID == id
                   select x;
 
         if (!res.Any())
@@ -41,7 +41,7 @@ internal class DalOrder : IOrder
     {
 
         var res = DataSource.s_ordersArr.Find(x => x?.ID == id);
-        if(res == null)
+        if (res == null)
             throw new ObjNotFoundException("Order doesn't found");
 
         return (Order)res;
@@ -54,10 +54,10 @@ internal class DalOrder : IOrder
             return DataSource.s_ordersArr.FindAll(x => predicate(x));
     }
 
-  
-    public Order ReadIf(Func<Order?,bool> predicate)
+
+    public Order ReadIf(Func<Order?, bool> predicate)
     {
-       Order? order= DataSource.s_ordersArr.FindLast(x => predicate(x));
+        Order? order = DataSource.s_ordersArr.FindLast(x => predicate(x));
         if (order != null)
             return (Order)order;
         else

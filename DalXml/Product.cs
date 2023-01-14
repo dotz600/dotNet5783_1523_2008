@@ -28,7 +28,7 @@ public class Product : IProduct
         return obj.ID;
     }
 
-    
+
     public void Delete(int id)
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
@@ -41,7 +41,7 @@ public class Product : IProduct
         XmlTools.SaveList(productsRootElement, XmlTools.productsPath);
     }
 
-    
+
 
     public DO.Product Read(int id)
     {
@@ -56,7 +56,7 @@ public class Product : IProduct
         return BuildProductDO(checkIfExist);
     }
 
- 
+
 
     public IEnumerable<DO.Product?> ReadAll(Func<DO.Product?, bool>? predicate = null)
     {
@@ -70,9 +70,9 @@ public class Product : IProduct
         }
 
         return from x in productsRootElement?.Elements()
-               where x!=null && predicate(BuildProductDO(x))
+               where x != null && predicate(BuildProductDO(x))
                select (DO.Product?)BuildProductDO(x);
- 
+
     }
 
     public DO.Product ReadIf(Func<DO.Product?, bool> predicate)

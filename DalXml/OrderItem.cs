@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 
 /// <summary>
-/// XmlSerializer
+/// XElement
 /// </summary>
 internal class OrderItem : IOrderItem
 {

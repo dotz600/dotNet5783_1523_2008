@@ -41,7 +41,7 @@ class XmlTools
     public static void SaveList(XElement xElement, string filePath)
     {
         try { xElement.Save(filePath); }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             throw new XMLFileSaveLoadException($"fail to save xml file: {filePath}", ex);
         }

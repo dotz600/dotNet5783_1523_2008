@@ -8,10 +8,10 @@ namespace Dal;
 
 sealed internal class DalList : IDal
 {
-    private DalList() 
+    private DalList()
     {
-        Product = new DalProduct(); 
-        Order= new DalOrder();
+        Product = new DalProduct();
+        Order = new DalOrder();
         OrderItem = new DalOredrItem();
     }
     public static IDal Instance { get; } = new DalList();

@@ -35,11 +35,11 @@ internal class Program
                         break;
                     default:
                         Console.WriteLine("Try agian");
-                        X= -1;
+                        X = -1;
                         break;
                 }
             }
-            catch(NegativeIDException ex) 
+            catch (NegativeIDException ex)
             {
                 Console.WriteLine(ex);
             }
@@ -118,7 +118,7 @@ internal class Program
         switch (x)
         {
             case 1://add product
-                BO.Product p = new ();
+                BO.Product p = new();
                 InputProduct(ref p);
                 bl.Product.Create(p);
                 Console.WriteLine("Operation succeeded.");
@@ -234,7 +234,7 @@ internal class Program
                 break;
             case 2://confirm order
                 Console.WriteLine("Please enter a your -\n name, email, adress");
-                var line1 = Console.ReadLine(); 
+                var line1 = Console.ReadLine();
                 var data1 = line1?.Split(' ');/// add all the input data to array, split each elemnt by space
                 name = data1[0];
                 email = data1[1];
@@ -255,7 +255,7 @@ internal class Program
                 bl.Cart.Update(c, productId, amount);
                 Console.WriteLine(c);
                 Console.WriteLine("Items: ");
-                foreach(var ot in c.Items)
+                foreach (var ot in c.Items)
                     Console.WriteLine(ot);
                 break;
         }

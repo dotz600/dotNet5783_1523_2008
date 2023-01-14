@@ -14,14 +14,14 @@ internal static class DataSource
     internal static List<Order?> s_ordersArr;
     internal static List<OrderItem?> s_ordersItemArr;
 
-    
+
     static DataSource()//cnsrt
     {
         s_productsArr = new List<Product?>();
         s_ordersArr = new List<Order?>();
         s_ordersItemArr = new List<OrderItem?>();
-        s_Initialize(); 
-        
+        s_Initialize();
+
     }
 
     private static void AddOrder(Order o1)
@@ -41,7 +41,7 @@ internal static class DataSource
         int amount = Config.rand.Next(1, 5);
         int randomProduct = Config.rand.Next(10);
         OrderItem ot1 = new();
-        
+
         ot1.ProductID = (int)s_productsArr[randomProduct]?.ID!;  //alreday added 10 product to the list 
         ot1.OrderID = (int)s_ordersArr[i % 20]?.ID!; // allready added 20 orders to the list
         ot1.Amount = amount;//amount is random number
@@ -57,16 +57,16 @@ internal static class DataSource
     private static void s_Initialize()
     {
         //adding 10 products.
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "doughnut", Category = Categories.Bakery, InStock = 15, Price = 5 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "chicken", Category = Categories.Meat, InStock = 25, Price = 30 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "Yellow cheese", Category = Categories.Deli, InStock = 12, Price = 33 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "bean", Category = Categories.Frozen, InStock = 7, Price = 16 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "mop", Category = Categories.Cleaning, InStock = 3, Price = 22 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "cows milk", Category = Categories.Dairy, InStock = 45, Price = 4.99 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "gum", Category = Categories.Sweets, InStock = 75, Price = 0.99 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "makeup", Category = Categories.Beauty, InStock = 15, Price = 7 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "bread", Category = Categories.Bakery, InStock = 50, Price = 5.99 });
-        AddProduct( new Product { ID = Config.rand.Next(100000, 1000000), Name = "mince", Category = Categories.Meat, InStock = 0, Price = 42.5 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "doughnut", Category = Categories.Bakery, InStock = 15, Price = 5 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "chicken", Category = Categories.Meat, InStock = 25, Price = 30 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "Yellow cheese", Category = Categories.Deli, InStock = 12, Price = 33 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "bean", Category = Categories.Frozen, InStock = 7, Price = 16 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "mop", Category = Categories.Cleaning, InStock = 3, Price = 22 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "cows milk", Category = Categories.Dairy, InStock = 45, Price = 4.99 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "gum", Category = Categories.Sweets, InStock = 75, Price = 0.99 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "makeup", Category = Categories.Beauty, InStock = 15, Price = 7 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "bread", Category = Categories.Bakery, InStock = 50, Price = 5.99 });
+        AddProduct(new Product { ID = Config.rand.Next(100000, 1000000), Name = "mince", Category = Categories.Meat, InStock = 0, Price = 42.5 });
 
 
 
@@ -102,6 +102,6 @@ internal static class DataSource
             return ++s_idRunNum;
         }
         static internal Random rand = new Random(DateTime.Now.Millisecond);
-        
+
     }
 }
