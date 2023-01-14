@@ -1,7 +1,4 @@
 ﻿using BlApi;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Data;
 
 namespace BlImplementation;
 
@@ -28,7 +25,6 @@ internal class Cart : ICart
                 ot.TotalPrice += ot.Price;
                 cart.TotalPrice += ot.Price;
                 ot.Name = p.Name;
-                return cart;
             }
             else//not found in cart - will careate new one and add it to cart
             {
@@ -39,8 +35,8 @@ internal class Cart : ICart
                 ot.Name = p.Name;
                 cart.Items.Add(ot);
                 cart.TotalPrice = p.Price;
-                return cart;
             }
+            return cart;
         }
         catch (DalApi.ObjNotFoundException ex)
         {
@@ -61,54 +57,42 @@ internal class Cart : ICart
         BO.OrderItem ot = SearchInCart(cart, productId);
         if (ot.ProductID == 0)
             throw new BO.ObjectNotExistException("the product not in cart, can't update");
-        else
-        {
-            try
-            {
-                DO.Product p = Dal?.Product.Read(productId) ?? throw new NullReferenceException();
-                if (ot.Amount < amount)                         //if want to increase the amount
-                {
-                    ot.Amount = amount;
-                    cart.TotalPrice -= ot.TotalPrice;
-                    ot.TotalPrice = ot.Price * amount;
-                    cart.TotalPrice += ot.TotalPrice;
-                    return cart;
-                }
-                else if (amount == 0)                        //if want to not order at all
-                {
-                    cart.TotalPrice -= ot.TotalPrice;
-                    cart.Items?.Remove(ot);
-                    return cart;
-                }
-                else if (ot.Amount > amount)                //if want to decrease the amount
-                {
-                    ot.Amount = amount;
-                    cart.TotalPrice -= ot.TotalPrice;
-                    ot.TotalPrice = ot.Price * amount;
-                    cart.TotalPrice += ot.TotalPrice;
-                }
-                return cart;
-            }
-            catch (DalApi.ObjNotFoundException ex)
-            {
-                throw new BO.ReadObjectFailedException("cant read product from data source, product not exist", ex);
-            }
 
+        try
+        {
+            DO.Product p = Dal?.Product.Read(productId) ?? throw new NullReferenceException();
+            if (amount == 0)                        //if want to not order at all
+            {
+                cart.TotalPrice -= ot.TotalPrice;
+                cart.Items?.Remove(ot);
+            }
+            else              //if want to decrease or add the amount
+            {
+                ot.Amount = amount;
+                cart.TotalPrice -= ot.TotalPrice;
+                ot.TotalPrice = ot.Price * amount;
+                cart.TotalPrice += ot.TotalPrice;
+            }
+            return cart;
+        }
+        catch (DalApi.ObjNotFoundException ex)
+        {
+            throw new BO.ReadObjectFailedException("cant read product from data source, product not exist", ex);
         }
 
     }
 
     public int CartConfirmation(BO.Cart cart, string name, string email, string adress)
     {
-        //check all the data is good
         try
         {
+            //check all the data is good
             if (!email.Contains('@'))
                 throw new BO.EmptyNameException("email dont contain @");
             if (name.Length == 0)
                 throw new BO.EmptyNameException("coustomer name is empty");
             if (adress.Length == 0)
-                throw new BO.EmptyNameException("addres is empty");
+                throw new BO.EmptyNameException("adress is empty");
             if (cart?.Items?.Any() == false)
                 throw new BO.CreateObjectFailedException("Your Cart Is Empty! Fill Your Cart First");
             if (int.TryParse(name, out int x))
@@ -116,7 +100,7 @@ internal class Cart : ICart
             if (int.TryParse(adress, out int y))
                 throw new BO.EmptyNameException("Adress must be a string!");
 
-            if (cart?.Items != null)
+            if (cart?.Items != null)//check all the product have the amount in stock for the order
             {
                 foreach (var ot in cart.Items)
                 {
@@ -143,6 +127,7 @@ internal class Cart : ICart
             {
                 if (ot != null)
                 {
+                    //make new order item and push it to data source
                     DO.OrderItem DOot = new()
                     {
                         OrderID = orderId,
@@ -151,12 +136,10 @@ internal class Cart : ICart
                         Price = ot.Price
                     };
                     Dal?.OrderItem.Create(DOot);
-                } //make new order item and push it to data source
-                if (ot != null)
-                {
+                
+                    //update product amount in data source
                     DO.Product p = Dal?.Product.Read(ot.ProductID) ?? throw new NullReferenceException();
                     p.InStock -= ot.Amount;
-
 
                     if (p.InStock < 0)//just for safety
                         p.InStock = 0;
@@ -175,11 +158,11 @@ internal class Cart : ICart
         {
             throw new BO.ObjectNotExistException(ex.Message);
         }
-        catch(DalApi.ObjNotFoundException ex)
+        catch (DalApi.ObjNotFoundException ex)
         {
             throw new BO.ObjectNotExistException(ex.Message, ex);
         }
-        catch(DalApi.ObjExistException ex)//all the other main will catch
+        catch (DalApi.ObjExistException ex)//all the other main will catch
         {
             throw new BO.CreateObjectFailedException(ex.Message, ex);
         }

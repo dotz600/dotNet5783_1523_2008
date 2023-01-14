@@ -57,7 +57,7 @@ public partial class ProductForListWindow : Window
         new OrderWindow().Show();
 
     }
-    public void Refresh(Func<ProductForList?, bool>? predicate = null)//update the product to show on screen
+    private void Refresh(Func<ProductForList?, bool>? predicate = null)//update the product to show on screen
     {
         ProductForLists.Clear();
         foreach (var x in bl!.Product.ReadAll(predicate))

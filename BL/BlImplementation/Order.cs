@@ -21,9 +21,6 @@ internal class Order : IOrder
             int countAmountOfItems = 0;
             double sumPrice = 0;
 
-            ///maybe we need to check if all the amount in order item is exist in stock and only after that order is confirm
-            /// the problem is that, the truth is all the order we have in data base should be confirmed,  
-            
             BO.OrderStatus status = BO.OrderStatus.ConfirmedOrder;//every order in the data base allready confirm
 
             if (order?.ShipDate != null)//status update(provide or sent)
@@ -52,7 +49,6 @@ internal class Order : IOrder
     {
         if (orderId > 0)//check input
         {
-
             try
             {
                 DO.Order o = Dal?.Order.Read(orderId) ?? throw new NullReferenceException();
