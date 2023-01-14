@@ -5,12 +5,6 @@ using System.Diagnostics;
 
 sealed internal class DalXml : IDal
 {
-    private DalXml()
-    {
-        Product = new Product();
-        Order = new Order();
-        OrderItem = new OrderItem();
-    }
     public static IDal Instance { get; } = new DalXml();
 
     public IOrder Order { get; } = new Dal.Order();

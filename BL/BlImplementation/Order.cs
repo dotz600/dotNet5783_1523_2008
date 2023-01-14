@@ -21,6 +21,9 @@ internal class Order : IOrder
             int countAmountOfItems = 0;
             double sumPrice = 0;
 
+            ///maybe we need to check if all the amount in order item is exist in stock and only after that order is confirm
+            /// the problem is that, the truth is all the order we have in data base should be confirmed,  
+            
             BO.OrderStatus status = BO.OrderStatus.ConfirmedOrder;//every order in the data base allready confirm
 
             if (order?.ShipDate != null)//status update(provide or sent)
@@ -155,7 +158,7 @@ internal class Order : IOrder
         {
             throw new BO.ObjectNotExistException("BO.Order.UpdateShipping", ex);
         }
-       
+
     }
     public BO.OrderTracking TrackingOrder(int orderId)//returns current status, and list of events that were occurred in these order
     {
@@ -170,8 +173,8 @@ internal class Order : IOrder
                 orderStatus = BO.OrderStatus.Provided;
 
             BO.OrderTracking orderTrackingToReturn = new() { ID = orderId, Status = orderStatus };
-          
-            BO.OrderTracking.DateAndStatus dateAndStatus1, dateAndStatus2 , dateAndStatus3;//for the event list
+
+            BO.OrderTracking.DateAndStatus dateAndStatus1, dateAndStatus2, dateAndStatus3;//for the event list
 
             dateAndStatus1.dt = o.OrderDate;
             dateAndStatus1.os = BO.OrderStatus.ConfirmedOrder;
@@ -193,14 +196,14 @@ internal class Order : IOrder
                 dateAndStatus3.os = BO.OrderStatus.Provided;
                 orderTrackingToReturn.Events.Add(dateAndStatus3);
             }
-            
+
             return orderTrackingToReturn;
         }
         catch (DalApi.ObjNotFoundException ex)
         {
             throw new BO.ObjectNotExistException("Order does not exist, please try again!", ex);
         }
-   
+
     }
 
     private List<BO.OrderItem?> BuildItemsList(int id)//return a list of all the orderItems that related to a one order
