@@ -29,6 +29,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalXml", "DalXml\DalXml.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlFileslinitialization", "MyStartUp\XmlFileslinitialization.csproj", "{75DB58B4-4187-4A9A-80A5-70AA0729C6EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Simulator", "Simulator\Simulator.csproj", "{E0EA8E5D-3A36-4B05-841C-F3124354F45A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -147,6 +149,18 @@ Global
 		{75DB58B4-4187-4A9A-80A5-70AA0729C6EC}.Release|arm64.Build.0 = Release|Any CPU
 		{75DB58B4-4187-4A9A-80A5-70AA0729C6EC}.Release|x86.ActiveCfg = Release|Any CPU
 		{75DB58B4-4187-4A9A-80A5-70AA0729C6EC}.Release|x86.Build.0 = Release|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Debug|arm64.Build.0 = Debug|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Debug|x86.Build.0 = Debug|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Release|arm64.ActiveCfg = Release|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Release|arm64.Build.0 = Release|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Release|x86.ActiveCfg = Release|Any CPU
+		{E0EA8E5D-3A36-4B05-841C-F3124354F45A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

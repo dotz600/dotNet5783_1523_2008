@@ -35,5 +35,5 @@ public interface IOrder
     BO.Order UpdateShipping(int orderId);//update status, and returns BO.Order
     BO.OrderTracking TrackingOrder(int orderId);//returns current status, and list of events that were occurred in these order
 
-
+    int? GetOrderForHandle();
 }

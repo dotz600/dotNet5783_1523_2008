@@ -37,5 +37,6 @@ public partial class MainWindow : Window
     private void Show_New_Order_Screen_Click(object sender, RoutedEventArgs e) => new Catalog().Show();
 
     private void Show_New_Track_Screen_Click(object sender, RoutedEventArgs e) => new trackOrderWindow().Show();
-   
+
+    private void StartSimulationClick(object sender, RoutedEventArgs e) => new StartSimulatorWindow().Show();
 }

@@ -205,6 +205,29 @@ internal class Order : IOrder
         }
 
     }
+    public int? GetOrderForHandle()
+    {
+        //set a list with all 
+        var confirmedOrders = Dal?.Order.ReadAll(x => x?.DeliveryDate == null && x?.ShipDate == null);
+        if(confirmedOrders != null)
+        {
+            confirmedOrders = from x in confirmedOrders
+                              orderby x?.OrderDate
+                              select x;
+            return confirmedOrders.First()?.ID;
+        }
+        
+        var sentOrders = Dal?.Order.ReadAll(x => x?.DeliveryDate == null);//list of all order with status - sent
+        if(sentOrders != null)
+        {
+            sentOrders = from x in sentOrders
+                         orderby x?.ShipDate
+                         select x;
+            return sentOrders.First()?.ID;
+        }
+        //if reach here all the order were provided and there is no order to handle - return null
+        return null;
+    }
 
     private List<BO.OrderItem?> BuildItemsList(int id)//return a list of all the orderItems that related to a one order
     {
