@@ -10,7 +10,15 @@ namespace PL;
 /// </summary>
 public partial class StartSimulatorWindow : Window
 {
-
+    private BlApi.IBl? bl = BlApi.Factory.Get();
+    public int? IdOrderInProgress
+    {
+        get { return bl.Order.GetOrderForHandle(); }
+    }
+    public BO.Order? OrderInProgress
+    {
+        get { return bl.Order.Read((int)IdOrderInProgress); }
+    }
     private Stopwatch stopWatch;
 
     private bool isTimerRun;
@@ -20,6 +28,11 @@ public partial class StartSimulatorWindow : Window
     public StartSimulatorWindow()
     {
         InitializeComponent();
+        InitClock();
+    }
+
+    private void InitClock()
+    {
         stopWatch = new Stopwatch();
         timerworker = new BackgroundWorker();
 
@@ -33,7 +46,15 @@ public partial class StartSimulatorWindow : Window
 
         timerworker.RunWorkerAsync();
     }
-
+     
+    void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        if (!isTimerRun) // Won't allow to cancel the window!!! It is not me!!!
+        {
+            e.Cancel = true;
+            MessageBox.Show(@"DON""T CLOSE ME!!!", "STOP IT!!!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
+    }
 
     private void ClockRun(object? sender, DoWorkEventArgs? e)
     {
@@ -42,6 +63,7 @@ public partial class StartSimulatorWindow : Window
         {
             timerworker.ReportProgress(231);
             Thread.Sleep(1000);
+            updateOrder();
         }
     }
     private void ClockTxt(object? sender, ProgressChangedEventArgs? e)
@@ -50,9 +72,16 @@ public partial class StartSimulatorWindow : Window
         timerText = timerText.Substring(0, 8);
         this.timerTextBlock.Text = timerText;
     }
-
+    private void updateOrder()
+    {
+        if (OrderInProgress.ShipDate == null)
+            bl.Order.UpdateShipping(OrderInProgress.ID);
+        else if (OrderInProgress.DeliveryDate == null)
+            bl.Order.UpdateDelivery(OrderInProgress.ID);
+    }
     private void stopTimerButton_Click(object sender, RoutedEventArgs e)
     {
-        this.Close();
+        isTimerRun = false;
+       // this.Close();
     }
 }

@@ -5,27 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="StartSimulatorWindow" Height="450" Width="800">
+    
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-
-            <ColumnDefinition Width="405*"/>
-            <ColumnDefinition Width="391*"/>
-            <ColumnDefinition Width="4*"/>
-
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" >
+            </ColumnDefinition>
         </Grid.ColumnDefinitions>
 
 
-        <TextBlock x:Name="timerTextBlock"  Text="00:00:00" FontSize="96" TextAlignment="Justify" 
-                  Margin="32,0,11,330" Foreground="#FF37F10E" Grid.Column="1" TextWrapping="WrapWithOverflow" />
-
-        <StackPanel Margin="374,-77,-26,82" Grid.ColumnSpan="3">
-            <Button x:Name="stopTimerButton" Content="Stop" Width="138" Height="60" 
-                Margin="125,274,125,100" FontSize="42" Click="stopTimerButton_Click"/>
-
-
+       
+        <Button x:Name="stopTimerButton" FontFamily="David" Background="AliceBlue" Content="Stop" Width="150" Height="60" Grid.Column="1" Grid.Row="1" 
+                FontSize="42" Click="stopTimerButton_Click"/>
+        <TextBlock x:Name="timerTextBlock"  Text="00:00:00" VerticalAlignment="Center" FontSize="96" TextAlignment="Center" Foreground="#FF37F10E" Grid.Row="0" Grid.Column="1"/>
+        <StackPanel Grid.Row="0" Grid.Column="0">
+        <Label Content="Order in progress :" Width="176" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"/>
+        <Label Name="A" HorizontalAlignment="Center"  Grid.Column="1" Grid.Row="1"/>
+        <Label Name="B" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
         </StackPanel>
-
 
 
     </Grid>
