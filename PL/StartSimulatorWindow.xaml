@@ -9,16 +9,23 @@
     <Grid>
         <Grid.ColumnDefinitions>
 
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="405*"/>
+            <ColumnDefinition Width="391*"/>
+            <ColumnDefinition Width="4*"/>
 
         </Grid.ColumnDefinitions>
 
 
-       
-        <Button x:Name="stopTimerButton" Content="Stop" Width="150" Height="60" Grid.Column="1" 
-                Margin="125,157,125,217" FontSize="42" Click="stopTimerButton_Click"/>
-        <TextBlock x:Name="timerTextBlock"  Text="00:00:00" FontSize="96" TextAlignment="Center" Foreground="#FF37F10E" Margin="0,10,0,-10" Grid.Column="1"/>
+        <TextBlock x:Name="timerTextBlock"  Text="00:00:00" FontSize="96" TextAlignment="Justify" 
+                  Margin="32,0,11,330" Foreground="#FF37F10E" Grid.Column="1" TextWrapping="WrapWithOverflow" />
+
+        <StackPanel Margin="374,-77,-26,82" Grid.ColumnSpan="3">
+            <Button x:Name="stopTimerButton" Content="Stop" Width="138" Height="60" 
+                Margin="125,274,125,100" FontSize="42" Click="stopTimerButton_Click"/>
+
+
+        </StackPanel>
+
 
 
     </Grid>
