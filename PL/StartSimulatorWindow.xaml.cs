@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows;
@@ -11,14 +12,10 @@ namespace PL;
 public partial class StartSimulatorWindow : Window
 {
     private BlApi.IBl? bl = BlApi.Factory.Get();
-    public int? IdOrderInProgress
-    {
-        get { return bl.Order.GetOrderForHandle(); }
-    }
-    public BO.Order? OrderInProgress
-    {
-        get { return bl.Order.Read((int)IdOrderInProgress); }
-    }
+    public int IdOrderInProgress { get { return bl?.Order.GetOrderForHandle() ?? 
+                                    throw new BO.ObjectNotExistException("no more order to work on"); } } 
+    public BO.Order OrderInProgress { get; set; } = new();
+   
     private Stopwatch stopWatch;
 
     private bool isTimerRun;
@@ -28,14 +25,14 @@ public partial class StartSimulatorWindow : Window
     public StartSimulatorWindow()
     {
         InitializeComponent();
+        OrderInProgress = bl.Order.Read(IdOrderInProgress);
+        stopWatch = new Stopwatch();
+        timerworker = new BackgroundWorker();
         InitClock();
     }
 
     private void InitClock()
     {
-        stopWatch = new Stopwatch();
-        timerworker = new BackgroundWorker();
-
         timerworker.DoWork += ClockRun;
         timerworker.ProgressChanged += ClockTxt;
 
@@ -47,14 +44,6 @@ public partial class StartSimulatorWindow : Window
         timerworker.RunWorkerAsync();
     }
      
-    void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-    {
-        if (!isTimerRun) // Won't allow to cancel the window!!! It is not me!!!
-        {
-            e.Cancel = true;
-            MessageBox.Show(@"DON""T CLOSE ME!!!", "STOP IT!!!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }
-    }
 
     private void ClockRun(object? sender, DoWorkEventArgs? e)
     {
@@ -75,13 +64,28 @@ public partial class StartSimulatorWindow : Window
     private void updateOrder()
     {
         if (OrderInProgress.ShipDate == null)
-            bl.Order.UpdateShipping(OrderInProgress.ID);
+        {
+            bl?.Order.UpdateShipping(OrderInProgress.ID);
+            OrderInProgress = bl!.Order.Read(IdOrderInProgress);
+        }
         else if (OrderInProgress.DeliveryDate == null)
-            bl.Order.UpdateDelivery(OrderInProgress.ID);
+        {
+            bl?.Order.UpdateDelivery(OrderInProgress.ID);
+            OrderInProgress = bl!.Order.Read(IdOrderInProgress);
+        }
     }
     private void stopTimerButton_Click(object sender, RoutedEventArgs e)
     {
         isTimerRun = false;
        // this.Close();
+    }
+
+    private void Window_Closing_1(object sender, CancelEventArgs e)
+    {
+        if (!isTimerRun) // Won't allow to cancel the window!!! It is not me!!!
+        {
+            e.Cancel = true;
+            MessageBox.Show(@"DON""T CLOSE ME!!!", "STOP IT!!!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
     }
 }
