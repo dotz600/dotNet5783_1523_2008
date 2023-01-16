@@ -209,7 +209,7 @@ internal class Order : IOrder
     {
         //set a list with all 
         var confirmedOrders = Dal?.Order.ReadAll(x => x?.DeliveryDate == null && x?.ShipDate == null);
-        if(confirmedOrders != null)
+        if(confirmedOrders != null  && confirmedOrders.Any())
         {
             confirmedOrders = from x in confirmedOrders
                               orderby x?.OrderDate
@@ -218,7 +218,7 @@ internal class Order : IOrder
         }
         
         var sentOrders = Dal?.Order.ReadAll(x => x?.DeliveryDate == null);//list of all order with status - sent
-        if(sentOrders != null)
+        if(sentOrders != null && sentOrders.Any())
         {
             sentOrders = from x in sentOrders
                          orderby x?.ShipDate
