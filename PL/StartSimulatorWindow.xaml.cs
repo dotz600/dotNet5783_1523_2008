@@ -7,7 +7,7 @@ using System.Windows;
 namespace PL;
 
 /// <summary>
-/// Interaction logic for StartSimulatorWindow.xaml
+/// show the stimulation 
 /// </summary>
 public partial class StartSimulatorWindow : Window
 {
