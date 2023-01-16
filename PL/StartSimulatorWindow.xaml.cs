@@ -47,14 +47,7 @@ public partial class StartSimulatorWindow : Window
         timerworker.RunWorkerAsync();
     }
      
-    void window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-    {
-        if (!isTimerRun) // Won't allow to cancel the window!!! It is not me!!!
-        {
-            e.Cancel = true;
-            MessageBox.Show(@"DON""T CLOSE ME!!!", "STOP IT!!!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }
-    }
+  
 
     private void ClockRun(object? sender, DoWorkEventArgs? e)
     {
@@ -83,5 +76,14 @@ public partial class StartSimulatorWindow : Window
     {
         isTimerRun = false;
        // this.Close();
+    }
+
+    private void Window_Closing_1(object sender, CancelEventArgs e)
+    {
+        if (isTimerRun) // Won't allow to cancel the window!!! It is not me!!!
+        {
+            e.Cancel = true;
+            MessageBox.Show(@"DON""T CLOSE ME!!!", "STOP IT!!!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        }
     }
 }
