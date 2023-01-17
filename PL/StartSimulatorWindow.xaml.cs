@@ -63,16 +63,25 @@ public partial class StartSimulatorWindow : Window
     }
     private void updateOrder()
     {
-        if (OrderInProgress.ShipDate == null)
+        try
         {
-            bl?.Order.UpdateShipping(OrderInProgress.ID);
-            OrderInProgress = bl!.Order.Read(IdOrderInProgress);
+            if (OrderInProgress.ShipDate == null)
+            {
+                bl?.Order.UpdateShipping(OrderInProgress.ID);
+                OrderInProgress = bl!.Order.Read(IdOrderInProgress);
+            }
+            else if (OrderInProgress.DeliveryDate == null)
+            {
+                bl?.Order.UpdateDelivery(OrderInProgress.ID);
+                OrderInProgress = bl!.Order.Read(IdOrderInProgress);
+            }
         }
-        else if (OrderInProgress.DeliveryDate == null)
+        catch(Exception ex) 
         {
-            bl?.Order.UpdateDelivery(OrderInProgress.ID);
-            OrderInProgress = bl!.Order.Read(IdOrderInProgress);
+            MessageBox.Show(ex.Message, "problem", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            //this.Close();
         }
+
     }
     private void stopTimerButton_Click(object sender, RoutedEventArgs e)
     {
