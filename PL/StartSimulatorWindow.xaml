@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="StartSimulatorWindow" Height="450" Width="800">
+        Title="StartSimulatorWindow" Height="450" Width="800" Closing="Window_Closing">
     
     <Grid>
         <Grid.RowDefinitions>
@@ -14,21 +14,25 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="400*"/>
-            <ColumnDefinition Width="91*" >
-            </ColumnDefinition>
-            <ColumnDefinition Width="309*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
 
 
         <Button x:Name="stopTimerButton" FontFamily="David" Background="AliceBlue" Content="Stop" Width="150" Height="60" Grid.Column="2" Grid.Row="1" 
-                FontSize="42" Click="stopTimerButton_Click" Margin="34,79,125,78"/>
+                FontSize="42" Click="stopTimerButton_Click"/>
         <TextBlock x:Name="timerTextBlock"  Text="00:00:00" VerticalAlignment="Center" FontSize="96" TextAlignment="Center" Foreground="#FF37F10E" Grid.Column="1" Grid.ColumnSpan="2"/>
         <StackPanel Grid.Row="0" Grid.Column="0">
             <Label Content="Order in progress :" Width="176" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"/>
-            <Label Name="A" HorizontalAlignment="Center"  Grid.Column="1" Grid.Row="1"/>
-            <Label Name="B" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="2"/>
+            <Label Name="A" HorizontalAlignment="Center"/>
+            <Label Name="B" HorizontalAlignment="Center"/>
+            <Label Name="C" HorizontalAlignment="Center"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.Column="0">
+            <Label Content="Expected :" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"  VerticalAlignment="Top"/>
+            <Label Name="D" HorizontalAlignment="Center"/>
+            <Label Name="E" HorizontalAlignment="Center"/>
         </StackPanel>
 
 
