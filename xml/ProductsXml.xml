@@ -1,126 +1,126 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Product>
   <Product>
-    <ID>227415</ID>
+    <ID>735717</ID>
     <Name>Doughnut</Name>
     <Price>5</Price>
     <Category>Bakery</Category>
     <InStock>15</InStock>
   </Product>
   <Product>
-    <ID>639778</ID>
+    <ID>838865</ID>
     <Name>Chicken</Name>
     <Price>30</Price>
     <Category>Meat</Category>
     <InStock>25</InStock>
   </Product>
   <Product>
-    <ID>484508</ID>
+    <ID>722800</ID>
     <Name>Yellow cheese</Name>
     <Price>33</Price>
     <Category>Deli</Category>
     <InStock>12</InStock>
   </Product>
   <Product>
-    <ID>818547</ID>
+    <ID>224234</ID>
     <Name>Bean</Name>
     <Price>16</Price>
     <Category>Frozen</Category>
     <InStock>7</InStock>
   </Product>
   <Product>
-    <ID>724235</ID>
+    <ID>818656</ID>
     <Name>Mop</Name>
     <Price>22</Price>
     <Category>Cleaning</Category>
     <InStock>0</InStock>
   </Product>
   <Product>
-    <ID>326871</ID>
+    <ID>390357</ID>
     <Name>Cows Milk</Name>
     <Price>4.99</Price>
     <Category>Dairy</Category>
     <InStock>45</InStock>
   </Product>
   <Product>
-    <ID>895176</ID>
+    <ID>287110</ID>
     <Name>Gum</Name>
     <Price>0.99</Price>
     <Category>Sweets</Category>
     <InStock>75</InStock>
   </Product>
   <Product>
-    <ID>707644</ID>
+    <ID>610623</ID>
     <Name>Makeup</Name>
     <Price>7</Price>
     <Category>Beauty</Category>
     <InStock>15</InStock>
   </Product>
   <Product>
-    <ID>584357</ID>
+    <ID>658275</ID>
     <Name>Bread</Name>
     <Price>5.99</Price>
     <Category>Bakery</Category>
     <InStock>50</InStock>
   </Product>
   <Product>
-    <ID>279557</ID>
+    <ID>639493</ID>
     <Name>Eggs</Name>
     <Price>1.5</Price>
     <Category>Deli</Category>
     <InStock>500</InStock>
   </Product>
   <Product>
-    <ID>620787</ID>
+    <ID>485109</ID>
     <Name>Milki</Name>
     <Price>4.7</Price>
     <Category>Deli</Category>
-    <InStock>30</InStock>
+    <InStock>29</InStock>
   </Product>
   <Product>
-    <ID>955259</ID>
+    <ID>986107</ID>
     <Name>Baguette</Name>
     <Price>5.5</Price>
     <Category>Bakery</Category>
-    <InStock>30</InStock>
+    <InStock>29</InStock>
   </Product>
   <Product>
-    <ID>862150</ID>
+    <ID>864969</ID>
     <Name>Chocolate Croissant</Name>
     <Price>3</Price>
     <Category>Bakery</Category>
     <InStock>15</InStock>
   </Product>
   <Product>
-    <ID>366732</ID>
+    <ID>100028</ID>
     <Name>Garbage Bags</Name>
     <Price>10</Price>
     <Category>Cleaning</Category>
     <InStock>50</InStock>
   </Product>
   <Product>
-    <ID>425401</ID>
+    <ID>607021</ID>
     <Name>Bleach</Name>
     <Price>32.5</Price>
     <Category>Cleaning</Category>
     <InStock>15</InStock>
   </Product>
   <Product>
-    <ID>261696</ID>
+    <ID>289293</ID>
     <Name>Salmon</Name>
     <Price>105.24</Price>
     <Category>Meat</Category>
     <InStock>15</InStock>
   </Product>
   <Product>
-    <ID>608688</ID>
+    <ID>696006</ID>
     <Name>Ice Cream</Name>
     <Price>17.5</Price>
     <Category>Frozen</Category>
     <InStock>0</InStock>
   </Product>
   <Product>
-    <ID>851369</ID>
+    <ID>239407</ID>
     <Name>Disposable Cups</Name>
     <Price>7.5</Price>
     <Category>Grocery</Category>

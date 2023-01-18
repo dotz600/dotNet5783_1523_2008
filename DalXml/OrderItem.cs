@@ -2,6 +2,7 @@
 using DalApi;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 
 /// <summary>
@@ -9,6 +10,7 @@ using System.Xml.Linq;
 /// </summary>
 internal class OrderItem : IOrderItem
 {
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Create(DO.OrderItem obj)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
@@ -25,6 +27,7 @@ internal class OrderItem : IOrderItem
         return obj.OrderID;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int OrderId)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
@@ -39,6 +42,7 @@ internal class OrderItem : IOrderItem
 
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.OrderItem Read(int id)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
@@ -53,6 +57,7 @@ internal class OrderItem : IOrderItem
         throw new ObjNotFoundException("Order item doesn't found");
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<DO.OrderItem?> ReadAll(Func<DO.OrderItem?, bool>? predicate = null)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
@@ -67,6 +72,7 @@ internal class OrderItem : IOrderItem
         return res;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.OrderItem ReadIf(Func<DO.OrderItem?, bool> predicate)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
@@ -82,6 +88,7 @@ internal class OrderItem : IOrderItem
         throw new ObjNotFoundException("Order item doesn't found");
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.OrderItem ReadProductId(int productId)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
@@ -96,6 +103,7 @@ internal class OrderItem : IOrderItem
         throw new ObjNotFoundException("Order item doesn't found");
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(DO.OrderItem obj)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
@@ -117,6 +125,7 @@ internal class OrderItem : IOrderItem
     /// private help functions
     /// </summary>
     /// <returns></returns>
+    /// 
     private static XElement BuildOrderItemXElemnt(DO.OrderItem obj)//buils xml order item obj
     {
         return new XElement("OrderItem", new XElement("ProductID", obj.ProductID),
@@ -124,6 +133,7 @@ internal class OrderItem : IOrderItem
                                                            new XElement("Price", obj.Price),
                                                            new XElement("Amount", obj.Amount));
     }
+    
     private static XElement SearchOrderItemInRoot(DO.OrderItem obj)
     {
         XElement root = XmlTools.LoadListFromXMLElement(XmlTools.orderItemsPath);
@@ -133,6 +143,7 @@ internal class OrderItem : IOrderItem
                 && int.Parse(x?.Element("OrderID")?.Value!) == obj.OrderID
                 select x).FirstOrDefault()!;
     }
+
     private static DO.OrderItem? BuildOrderItemDO(XElement obj)
     {
 

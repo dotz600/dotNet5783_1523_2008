@@ -232,26 +232,26 @@ internal class Program
                 Console.WriteLine("Please enter a your -\n name, email, adress");
                 var line1 = Console.ReadLine();
                 var data1 = line1?.Split(' ');/// add all the input data to array, split each elemnt by space
-                name = data1[0];
+                name = data1![0];
                 email = data1[1];
                 adress = data1[2];
                 bl.Cart.CartConfirmation(c, name, email, adress);
                 Console.WriteLine(c);
 
-                foreach (var ot in c.Items)
+                foreach (var ot in c!.Items!)
                     Console.WriteLine(ot);
                 Console.WriteLine("Operation succeeded.");
                 break;
             case 3://update item in cart
                 Console.WriteLine("Please enter a product ID and the amount you wish to update");
                 var line = Console.ReadLine();
-                var data = line.Split(' ');/// add all the input data to array, split each elemnt by space
+                var data = line!.Split(' ');/// add all the input data to array, split each elemnt by space
                 productId = int.Parse(data[0]);
                 amount = int.Parse(data[1]);
                 bl.Cart.Update(c, productId, amount);
                 Console.WriteLine(c);
                 Console.WriteLine("Items: ");
-                foreach (var ot in c.Items)
+                foreach (var ot in c!.Items!)
                     Console.WriteLine(ot);
                 break;
         }
@@ -265,7 +265,7 @@ internal class Program
         Console.WriteLine("Please Enter Cart details: \n" +
             "CustomerName, CustomerEmail, CustomerAdress, Total Price");
         var line = Console.ReadLine();
-        var data = line.Split(' ');/// add all the input data to array, split each elemnt by space
+        var data = line!.Split(' ');/// add all the input data to array, split each elemnt by space
         c1.CustomerName = data[0];
         c1.CustomerEmail = data[1];
         c1.CustomerAddress = data[2];
@@ -277,7 +277,7 @@ internal class Program
         Console.WriteLine("Please Enter Product details:\n" +
             "ProductID, Name, Price, Category, InStock");
         var line = Console.ReadLine();
-        var data = line.Split(' ');
+        var data = line!.Split(' ');
         p.ID = int.Parse(data[0]);
         p.Name = data[1];
         p.Price = double.Parse(data[2]);

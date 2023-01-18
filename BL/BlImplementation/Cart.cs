@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using System.Runtime.CompilerServices;
 
 namespace BlImplementation;
 
@@ -7,6 +8,7 @@ internal class Cart : ICart
     private readonly DalApi.IDal? Dal = DalApi.Factory.Get();
 
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Cart Add(BO.Cart cart, int productId)
     {
         cart.Items ??= new List<BO.OrderItem?>();//if the list is null make new one
@@ -50,13 +52,14 @@ internal class Cart : ICart
 
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Cart Update(BO.Cart cart, int productId, int amount)
     {
         if (amount < 0)
             throw new BO.NegativeAmountException("Cant Order Negative Amount!");
         BO.OrderItem ot = SearchInCart(cart, productId);
         if (ot.ProductID == 0)
-            throw new BO.ObjectNotExistException("the product not in cart, can't update");
+            throw new BO.ObjectNotExistException("The product is not in cart, can't update");
 
         try
         {
@@ -82,23 +85,13 @@ internal class Cart : ICart
 
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int CartConfirmation(BO.Cart cart, string name, string email, string adress)
     {
         try
         {
             //check all the data is good
-            if (!email.Contains('@'))
-                throw new BO.EmptyNameException("email dont contain @");
-            if (name.Length == 0)
-                throw new BO.EmptyNameException("coustomer name is empty");
-            if (adress.Length == 0)
-                throw new BO.EmptyNameException("adress is empty");
-            if (cart?.Items?.Any() == false)
-                throw new BO.CreateObjectFailedException("Your Cart Is Empty! Fill Your Cart First");
-            if (int.TryParse(name, out int x))
-                throw new BO.EmptyNameException("Name must be a string!");
-            if (int.TryParse(adress, out int y))
-                throw new BO.EmptyNameException("Adress must be a string!");
+            CheckData(cart, name, email, adress);
 
             if (cart?.Items != null)//check all the product have the amount in stock for the order
             {
@@ -125,27 +118,31 @@ internal class Cart : ICart
 
             foreach (var ot in cart.Items)
             {
-                if (ot != null)
+                lock (Dal!)
                 {
-                    //make new order item and push it to data source
-                    DO.OrderItem DOot = new()
+                    if (ot != null)
                     {
-                        OrderID = orderId,
-                        ProductID = ot.ProductID,
-                        Amount = ot.Amount,
-                        Price = ot.Price
-                    };
-                    Dal?.OrderItem.Create(DOot);
-                
-                    //update product amount in data source
-                    DO.Product p = Dal?.Product.Read(ot.ProductID) ?? throw new NullReferenceException();
-                    p.InStock -= ot.Amount;
+                        //make new order item and push it to data source
+                        DO.OrderItem DOot = new()
+                        {
+                            OrderID = orderId,
+                            ProductID = ot.ProductID,
+                            Amount = ot.Amount,
+                            Price = ot.Price
+                        };
+                        Dal?.OrderItem.Create(DOot);
 
-                    if (p.InStock < 0)//just for safety
-                        p.InStock = 0;
-                    Dal?.Product.Update(p);
+                        //update product amount in data source
+                        DO.Product p = Dal?.Product.Read(ot.ProductID) ?? throw new NullReferenceException();
+                        p.InStock -= ot.Amount;
 
-                    ot.ID = orderId;
+                        if (p.InStock < 0)//just for safety
+                            p.InStock = 0;
+                        Dal?.Product.Update(p);
+
+                        ot.ID = orderId;
+                    }
+
                 }
             }
             //update cart, just for the comfterbule to debug
@@ -168,6 +165,21 @@ internal class Cart : ICart
         }
     }
 
+    private static void CheckData(BO.Cart cart, string name, string email, string adress)
+    {
+        if (!email.Contains('@'))
+            throw new BO.EmptyNameException("email dont contain @");
+        if (name.Length == 0)
+            throw new BO.EmptyNameException("coustomer name is empty");
+        if (adress.Length == 0)
+            throw new BO.EmptyNameException("adress is empty");
+        if (cart?.Items?.Any() == false)
+            throw new BO.CreateObjectFailedException("Your Cart Is Empty! Fill Your Cart First");
+        if (int.TryParse(name, out _))
+            throw new BO.EmptyNameException("Name must be a string!");
+        if (int.TryParse(adress, out _))
+            throw new BO.EmptyNameException("Adress must be a string!");
+    }
 
     private static BO.OrderItem SearchInCart(BO.Cart cart, int productId)//help function
     {

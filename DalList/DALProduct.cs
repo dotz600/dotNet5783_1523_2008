@@ -2,11 +2,13 @@
 using DO;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Dal;
 
 public class DalProduct : IProduct
 {
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Create(Product p1)
     {
         var res = from mypro in DataSource.s_productsArr
@@ -21,6 +23,7 @@ public class DalProduct : IProduct
 
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Product Read(int id)
     {
         var res = DataSource.s_productsArr.Find(x => x?.ID == id);
@@ -29,6 +32,7 @@ public class DalProduct : IProduct
         return (Product)res;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<Product?> ReadAll(Func<Product?, bool>? predicate = null)
     {
         if (predicate == null)
@@ -37,6 +41,7 @@ public class DalProduct : IProduct
             return DataSource.s_productsArr.FindAll(x => predicate(x));
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         if (DataSource.s_productsArr.Where(p => p?.ID == id) == null)
@@ -44,6 +49,8 @@ public class DalProduct : IProduct
 
         DataSource.s_productsArr.Remove(Read(id));
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(Product p1)
     {
 
@@ -54,8 +61,7 @@ public class DalProduct : IProduct
             throw new ObjNotFoundException("cant update product");
     }
 
-
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public Product ReadIf(Func<Product?, bool> predicate)
     {
         Product? product = DataSource.s_productsArr.FindLast(x => predicate(x));

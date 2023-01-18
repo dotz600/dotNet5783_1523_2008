@@ -3,6 +3,7 @@ using DalApi;
 using DO;
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 
@@ -25,6 +26,7 @@ internal class Order : IOrder
         ID = tmp.MaxBy(x => x!.Value.ID)!.Value.ID;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Create(DO.Order obj)
     {
 
@@ -43,6 +45,7 @@ internal class Order : IOrder
         return obj.ID;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         List<DO.Order?> orders = LoadListFromXMLSerializer<DO.Order?>(XmlTools.ordersPath);
@@ -57,6 +60,7 @@ internal class Order : IOrder
 
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.Order Read(int id)
     {
 
@@ -68,6 +72,7 @@ internal class Order : IOrder
         return (DO.Order)y!;
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<DO.Order?> ReadAll(Func<DO.Order?, bool>? predicate = null)
     {
         List<DO.Order?> orders = LoadListFromXMLSerializer<DO.Order?>(XmlTools.ordersPath);
@@ -84,6 +89,7 @@ internal class Order : IOrder
 
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.Order ReadIf(Func<DO.Order?, bool> predicate)
     {
         List<DO.Order?> orders = LoadListFromXMLSerializer<DO.Order?>(XmlTools.ordersPath);
@@ -98,6 +104,7 @@ internal class Order : IOrder
         throw new ObjNotFoundException("Order doesn't found");
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(DO.Order obj)
     {
         List<DO.Order?> orders = LoadListFromXMLSerializer<DO.Order?>(XmlTools.ordersPath);
@@ -113,15 +120,12 @@ internal class Order : IOrder
     }
 
     //private help functions
-
-
-
-    public static void SaveListToXMLSerializer<T>(List<T> list, string filePath)
+    private static void SaveListToXMLSerializer<T>(List<T> list, string filePath)
     {
         try
         {
-            FileStream file = new FileStream(filePath, FileMode.Create);
-            XmlSerializer x = new XmlSerializer(list.GetType());
+            FileStream file = new(filePath, FileMode.Create);
+            XmlSerializer x = new(list.GetType());
             x.Serialize(file, list);
             file.Close();
         }
@@ -130,15 +134,15 @@ internal class Order : IOrder
             throw new XMLFileSaveLoadException($"fail to create xml file: {filePath}", ex);
         }
     }
-    public static List<T> LoadListFromXMLSerializer<T>(string filePath)
+    private static List<T> LoadListFromXMLSerializer<T>(string filePath)
     {
         try
         {
             if (File.Exists(filePath))
             {
                 List<T> list;
-                XmlSerializer x = new XmlSerializer(typeof(List<T>));
-                FileStream file = new FileStream(filePath, FileMode.Open);
+                XmlSerializer x = new(typeof(List<T>));
+                FileStream file = new(filePath, FileMode.Open);
                 list = (List<T>)x.Deserialize(file);
                 file.Close();
                 return list;

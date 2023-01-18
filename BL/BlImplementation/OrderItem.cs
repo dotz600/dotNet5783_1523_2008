@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,8 @@ namespace BlImplementation;
 internal class OrderItem : IOrderItem
 {
     private readonly DalApi.IDal? Dal = DalApi.Factory.Get();
-
+    
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.OrderItem Read(int productID)//return BO OrderItem - search by product id 
     {
         DO.OrderItem item = Dal!.OrderItem.ReadProductId(productID);

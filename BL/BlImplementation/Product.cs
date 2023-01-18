@@ -1,6 +1,7 @@
 ﻿using BlApi;
 using BlImplementation;
 using BO;
+using System.Runtime.CompilerServices;
 
 namespace BlImplementation;
 
@@ -8,18 +9,11 @@ internal class Product : IProduct
 {
 
     private readonly DalApi.IDal? Dal = DalApi.Factory.Get();
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Create(BO.Product p)
     {
-        if (int.TryParse(p.Name, out _))
-            throw new BO.EmptyNameException("Name must be a string!");
-        if (p?.Name?.Length == 0)
-            throw new BO.EmptyNameException("Name cant be a empty!");
-        if (p?.InStock < 0)
-            throw new BO.NegativeAmountException("Amount in stock cant be negative!");
-        if (p?.ID < 0)
-            throw new BO.NegativeIDException("ID cant be negative!");
-        if (p?.Price < 0)
-            throw new BO.NegativePriceException("price cant be negative!");
+
         try
         {
 
@@ -41,7 +35,7 @@ internal class Product : IProduct
     }
 
 
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)//check if the product not found in any order item, if so delete it
     {
         try
@@ -84,6 +78,7 @@ internal class Product : IProduct
         }
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.Product Read(int id) //for manger screen
     {
         if (id < 0)
@@ -107,7 +102,8 @@ internal class Product : IProduct
             throw new BO.ObjectNotExistException("cant read product", ex);
         }
     }
-
+    
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public BO.ProductItem Read(int id, BO.Cart myCart) //for buyer screen
     {
         if (id < 0)
@@ -132,6 +128,8 @@ internal class Product : IProduct
         }
 
     }
+
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductForList?> ReadAll(Func<BO.ProductForList?, bool>? predicate = null)
     {
         try
@@ -159,7 +157,8 @@ internal class Product : IProduct
         }
     }
 
-
+    
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(BO.Product p)
     {
         try
@@ -183,17 +182,19 @@ internal class Product : IProduct
 
     private static void CheckNameIdPriceStock(BO.Product p)
     {
-        if (p.ID < 0)
-            throw new BO.NegativeIDException("id is negative");
-        if (p.Name == null || p.Name.Length == 0)
-            throw new BO.EmptyNameException("your name is empty");
-        if (p.Price <= 0)
-            throw new BO.NegativePriceException("price is negative");
-        if (p.InStock < 0)
-            throw new BO.NegativeAmountException("in stock is negative");
+        if (int.TryParse(p.Name, out _))
+            throw new BO.EmptyNameException("Name must be a string!");
+        if (p.Name == null || p?.Name?.Length == 0)
+            throw new BO.EmptyNameException("Name cant be a empty!");
+        if (p?.InStock < 0)
+            throw new BO.NegativeAmountException("Amount in stock cant be negative!");
+        if (p?.ID <= 0)
+            throw new BO.NegativeIDException("ID cant be negative!");
+        if (p?.Price <= 0)
+            throw new BO.NegativePriceException("Price cant be negative!");
     }
 
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<BO.ProductItem> GetCatalog(BO.Cart c, Func<BO.ProductItem, bool>? predicate = null)//return list of product item
     {
         try
@@ -224,9 +225,5 @@ internal class Product : IProduct
         {
             throw ex ?? throw new Exception("cant read product");
         }
-
-
     }
-
-
 }

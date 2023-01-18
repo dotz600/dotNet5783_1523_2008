@@ -21,7 +21,7 @@ public class OrderTracking
 
     public int ID { get; set; }
     public OrderStatus Status { get; set; }
-    public List<DateAndStatus> Events { get; set;}
+    public List<DateAndStatus> Events { get; set; } = new();
 
     
     public override string ToString() => $@"

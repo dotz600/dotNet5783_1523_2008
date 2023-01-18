@@ -32,7 +32,7 @@ public partial class Payment : Window
     {
         try
         {
-            string name = textBoxName.Text, email = textBoxEmail.Text, addres = textBoxAddres.Text;
+            string name = getNameFromTextBox.Text, email = textBoxEmail.Text, addres = textBoxAddres.Text;
             int orderId = (int)bl?.Cart.CartConfirmation(MainWindow.cart, name, email, addres)!;//confirm cart
             //reset cart 
             MainWindow.cart = new();

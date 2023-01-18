@@ -1,1 +1,192 @@
-﻿<?xml version="1.0" encoding="utf-8"?><ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><Order><ID>1001</ID><CustomerName>Balthasar Cohen</CustomerName><CustomerEmail>Balthasar@gmail.com</CustomerEmail><CustomerAdress>Robin Close</CustomerAdress><OrderDate>2023-01-14T03:21:12.3957988+02:00</OrderDate><ShipDate>2023-01-16T16:56:44.521366+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1002</ID><CustomerName>Irving Anwar</CustomerName><CustomerEmail>Irving@gmail.com</CustomerEmail><CustomerAdress>Partridge Close</CustomerAdress><OrderDate>2023-01-12T01:33:01.3473731+02:00</OrderDate><ShipDate>2023-01-16T16:56:24.5759467+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1003</ID><CustomerName>Feivel Karim</CustomerName><CustomerEmail>Feivel@gmail.com</CustomerEmail><CustomerAdress>Queens Road</CustomerAdress><OrderDate>2023-01-08T07:09:36.3958658+02:00</OrderDate><ShipDate>2023-01-13T06:00:10.705903+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1004</ID><CustomerName>Judah Rashid</CustomerName><CustomerEmail>Judah@gmail.com</CustomerEmail><CustomerAdress>Eastern Avenue</CustomerAdress><OrderDate>2023-01-14T02:09:40.1908719+02:00</OrderDate><ShipDate>2023-01-16T16:56:43.4984552+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1005</ID><CustomerName>Ansel Adam</CustomerName><CustomerEmail>Ansel@gmail.com</CustomerEmail><CustomerAdress>Castle Lane</CustomerAdress><OrderDate>2023-01-05T12:31:21.4071623+02:00</OrderDate><ShipDate>2023-01-10T03:17:49.933699+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1006</ID><CustomerName>Quang Daniel</CustomerName><CustomerEmail>Quang@gmail.com</CustomerEmail><CustomerAdress>Station Close</CustomerAdress><OrderDate>2023-01-05T19:28:35.2549913+02:00</OrderDate><ShipDate>2023-01-09T10:47:20.8915874+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1007</ID><CustomerName>Hershel Abraham</CustomerName><CustomerEmail>Hershel@gmail.com</CustomerEmail><CustomerAdress>The Street</CustomerAdress><OrderDate>2023-01-11T18:19:40.4897695+02:00</OrderDate><ShipDate>2023-01-12T07:44:47.5527601+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1008</ID><CustomerName>Avrum Eden</CustomerName><CustomerEmail>Avrum@gmail.com</CustomerEmail><CustomerAdress>Teal Close</CustomerAdress><OrderDate>2023-01-11T23:35:15.9862973+02:00</OrderDate><ShipDate>2023-01-16T16:56:23.5388026+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1009</ID><CustomerName>Gaspar Moran</CustomerName><CustomerEmail>Gaspar@gmail.com</CustomerEmail><CustomerAdress>Lancaster Avenue</CustomerAdress><OrderDate>2023-01-05T04:35:58.7661478+02:00</OrderDate><ShipDate>2023-01-12T23:37:21.515379+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1010</ID><CustomerName>Ephraim Noach</CustomerName><CustomerEmail>Ephraim@gmail.com</CustomerEmail><CustomerAdress>Byron Close</CustomerAdress><OrderDate>2023-01-09T11:52:31.4690363+02:00</OrderDate><ShipDate>2023-01-16T12:49:20.60854+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1011</ID><CustomerName>Herschel Simon</CustomerName><CustomerEmail>Herschel@gmail.com</CustomerEmail><CustomerAdress>Market Place</CustomerAdress><OrderDate>2023-01-06T15:08:48.601995+02:00</OrderDate><ShipDate>2023-01-10T01:03:14.8811428+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1012</ID><CustomerName>Isaac Khan</CustomerName><CustomerEmail>Isaac@gmail.com</CustomerEmail><CustomerAdress>Chestnut Grove</CustomerAdress><OrderDate>2023-01-13T04:29:21.669664+02:00</OrderDate><ShipDate>2023-01-16T16:56:42.482805+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1013</ID><CustomerName>Hyman Reynolds</CustomerName><CustomerEmail>Hyman@gmail.com</CustomerEmail><CustomerAdress>Lodge Close</CustomerAdress><OrderDate>2023-01-12T20:52:26.8729039+02:00</OrderDate><ShipDate>2023-01-16T16:56:25.5987687+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1014</ID><CustomerName>Mendel Reed</CustomerName><CustomerEmail>Mendel@gmail.com</CustomerEmail><CustomerAdress>Old Lane</CustomerAdress><OrderDate>2023-01-14T07:34:36.8642585+02:00</OrderDate><ShipDate>2023-01-16T16:56:45.5428062+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1015</ID><CustomerName>Moss Osborne</CustomerName><CustomerEmail>Moss@gmail.com</CustomerEmail><CustomerAdress>Thornhill Road</CustomerAdress><OrderDate>2023-01-05T11:21:54.8834625+02:00</OrderDate><ShipDate>2023-01-06T09:05:23.7926074+02:00</ShipDate><DeliveryDate>2023-01-09T06:31:43.2986054+02:00</DeliveryDate></Order><Order><ID>1016</ID><CustomerName>Shraga Aguilar</CustomerName><CustomerEmail>Shraga@gmail.com</CustomerEmail><CustomerAdress>Blind Lane</CustomerAdress><OrderDate>2023-01-09T18:24:09.4069457+02:00</OrderDate><ShipDate>2023-01-14T22:28:20.3755911+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1017</ID><CustomerName>Nosson Miller</CustomerName><CustomerEmail>Nosson@gmail.com</CustomerEmail><CustomerAdress>Grove Road</CustomerAdress><OrderDate>2023-01-06T19:19:36.1975535+02:00</OrderDate><ShipDate>2023-01-09T20:02:52.0910088+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1018</ID><CustomerName>Lazer Arnold</CustomerName><CustomerEmail>Lazer@gmail.com</CustomerEmail><CustomerAdress>Court Road</CustomerAdress><OrderDate>2023-01-05T07:29:46.4174229+02:00</OrderDate><ShipDate>2023-01-05T09:03:56.0961866+02:00</ShipDate><DeliveryDate>2023-01-07T13:15:33.3384531+02:00</DeliveryDate></Order><Order><ID>1019</ID><CustomerName>Jacob Hutchinson</CustomerName><CustomerEmail>Jacob@gmail.com</CustomerEmail><CustomerAdress>York Road</CustomerAdress><OrderDate>2023-01-06T03:45:18.9941329+02:00</OrderDate><ShipDate>2023-01-11T05:33:21.89355+02:00</ShipDate><DeliveryDate xsi:nil="true" /></Order><Order><ID>1020</ID><CustomerName>Aaron Morton</CustomerName><CustomerEmail>Aaron@gmail.com</CustomerEmail><CustomerAdress>Heron Close</CustomerAdress><OrderDate>2023-01-05T14:47:13.8990411+02:00</OrderDate><ShipDate>2023-01-09T13:02:44.0341272+02:00</ShipDate><DeliveryDate>2023-01-10T19:37:48.9733338+02:00</DeliveryDate></Order></ArrayOfOrder>
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Order>
+    <ID>1001</ID>
+    <CustomerName>Balthasar Cohen</CustomerName>
+    <CustomerEmail>Balthasar@gmail.com</CustomerEmail>
+    <CustomerAdress>Robin Close</CustomerAdress>
+    <OrderDate>2023-01-13T04:11:17.8465473+02:00</OrderDate>
+    <ShipDate>2023-01-17T04:51:55.2258594+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1002</ID>
+    <CustomerName>Irving Anwar</CustomerName>
+    <CustomerEmail>Irving@gmail.com</CustomerEmail>
+    <CustomerAdress>Partridge Close</CustomerAdress>
+    <OrderDate>2023-01-18T09:33:35.0824979+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1003</ID>
+    <CustomerName>Feivel Karim</CustomerName>
+    <CustomerEmail>Feivel@gmail.com</CustomerEmail>
+    <CustomerAdress>Queens Road</CustomerAdress>
+    <OrderDate>2023-01-11T18:23:20.3120173+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1004</ID>
+    <CustomerName>Judah Rashid</CustomerName>
+    <CustomerEmail>Judah@gmail.com</CustomerEmail>
+    <CustomerAdress>Eastern Avenue</CustomerAdress>
+    <OrderDate>2023-01-15T22:40:47.3156697+02:00</OrderDate>
+    <ShipDate>2023-01-16T23:17:31.8761045+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1005</ID>
+    <CustomerName>Ansel Adam</CustomerName>
+    <CustomerEmail>Ansel@gmail.com</CustomerEmail>
+    <CustomerAdress>Castle Lane</CustomerAdress>
+    <OrderDate>2023-01-18T20:10:13.0675935+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1006</ID>
+    <CustomerName>Quang Daniel</CustomerName>
+    <CustomerEmail>Quang@gmail.com</CustomerEmail>
+    <CustomerAdress>Station Close</CustomerAdress>
+    <OrderDate>2023-01-09T12:24:07.1032817+02:00</OrderDate>
+    <ShipDate>2023-01-15T21:20:58.5302549+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1007</ID>
+    <CustomerName>Hershel Abraham</CustomerName>
+    <CustomerEmail>Hershel@gmail.com</CustomerEmail>
+    <CustomerAdress>The Street</CustomerAdress>
+    <OrderDate>2023-01-18T19:56:39.967276+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1008</ID>
+    <CustomerName>Avrum Eden</CustomerName>
+    <CustomerEmail>Avrum@gmail.com</CustomerEmail>
+    <CustomerAdress>Teal Close</CustomerAdress>
+    <OrderDate>2023-01-18T14:45:52.8961492+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1009</ID>
+    <CustomerName>Gaspar Moran</CustomerName>
+    <CustomerEmail>Gaspar@gmail.com</CustomerEmail>
+    <CustomerAdress>Lancaster Avenue</CustomerAdress>
+    <OrderDate>2023-01-18T19:35:41.9961606+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1010</ID>
+    <CustomerName>Ephraim Noach</CustomerName>
+    <CustomerEmail>Ephraim@gmail.com</CustomerEmail>
+    <CustomerAdress>Byron Close</CustomerAdress>
+    <OrderDate>2023-01-13T10:58:38.718713+02:00</OrderDate>
+    <ShipDate>2023-01-16T15:59:53.2603794+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1011</ID>
+    <CustomerName>Herschel Simon</CustomerName>
+    <CustomerEmail>Herschel@gmail.com</CustomerEmail>
+    <CustomerAdress>Market Place</CustomerAdress>
+    <OrderDate>2023-01-12T09:15:01.8661981+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1012</ID>
+    <CustomerName>Isaac Khan</CustomerName>
+    <CustomerEmail>Isaac@gmail.com</CustomerEmail>
+    <CustomerAdress>Chestnut Grove</CustomerAdress>
+    <OrderDate>2023-01-18T08:33:23.2022083+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1013</ID>
+    <CustomerName>Hyman Reynolds</CustomerName>
+    <CustomerEmail>Hyman@gmail.com</CustomerEmail>
+    <CustomerAdress>Lodge Close</CustomerAdress>
+    <OrderDate>2023-01-12T05:21:34.1623675+02:00</OrderDate>
+    <ShipDate>2023-01-18T03:56:49.3355856+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1014</ID>
+    <CustomerName>Mendel Reed</CustomerName>
+    <CustomerEmail>Mendel@gmail.com</CustomerEmail>
+    <CustomerAdress>Old Lane</CustomerAdress>
+    <OrderDate>2023-01-10T05:14:55.037921+02:00</OrderDate>
+    <ShipDate>2023-01-14T17:24:13.7299878+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1015</ID>
+    <CustomerName>Moss Osborne</CustomerName>
+    <CustomerEmail>Moss@gmail.com</CustomerEmail>
+    <CustomerAdress>Thornhill Road</CustomerAdress>
+    <OrderDate>2023-01-15T16:40:45.4722255+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1016</ID>
+    <CustomerName>Shraga Aguilar</CustomerName>
+    <CustomerEmail>Shraga@gmail.com</CustomerEmail>
+    <CustomerAdress>Blind Lane</CustomerAdress>
+    <OrderDate>2023-01-15T16:53:34.2278447+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1017</ID>
+    <CustomerName>Nosson Miller</CustomerName>
+    <CustomerEmail>Nosson@gmail.com</CustomerEmail>
+    <CustomerAdress>Grove Road</CustomerAdress>
+    <OrderDate>2023-01-17T21:12:41.2013544+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1018</ID>
+    <CustomerName>Lazer Arnold</CustomerName>
+    <CustomerEmail>Lazer@gmail.com</CustomerEmail>
+    <CustomerAdress>Court Road</CustomerAdress>
+    <OrderDate>2023-01-12T12:08:53.1051624+02:00</OrderDate>
+    <ShipDate>2023-01-13T15:19:01.2564925+02:00</ShipDate>
+    <DeliveryDate>2023-01-14T08:25:29.4648065+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>1019</ID>
+    <CustomerName>Jacob Hutchinson</CustomerName>
+    <CustomerEmail>Jacob@gmail.com</CustomerEmail>
+    <CustomerAdress>York Road</CustomerAdress>
+    <OrderDate>2023-01-14T09:41:20.9077094+02:00</OrderDate>
+    <ShipDate>2023-01-16T19:56:20.864278+02:00</ShipDate>
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+  <Order>
+    <ID>1020</ID>
+    <CustomerName>Aaron Morton</CustomerName>
+    <CustomerEmail>Aaron@gmail.com</CustomerEmail>
+    <CustomerAdress>Heron Close</CustomerAdress>
+    <OrderDate>2023-01-14T02:15:55.9974699+02:00</OrderDate>
+    <ShipDate>2023-01-14T19:09:09.573264+02:00</ShipDate>
+    <DeliveryDate>2023-01-16T19:04:01.162898+02:00</DeliveryDate>
+  </Order>
+  <Order>
+    <ID>1021</ID>
+    <CustomerName>david ohev tzion</CustomerName>
+    <CustomerEmail>dotz@gmail.com</CustomerEmail>
+    <CustomerAdress>carmel 218</CustomerAdress>
+    <OrderDate>2023-01-19T00:46:08.9801373+02:00</OrderDate>
+    <ShipDate xsi:nil="true" />
+    <DeliveryDate xsi:nil="true" />
+  </Order>
+</ArrayOfOrder>

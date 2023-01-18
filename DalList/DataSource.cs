@@ -28,10 +28,23 @@ internal static class DataSource
     {
         //update the dates
         o1.OrderDate = DateTime.Now - new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//time now - random time
-        o1.ShipDate = o1.OrderDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
-        if (o1.ShipDate < DateTime.Now)//if true - the order has been sent and need to update delivery date
-            o1.DeliveryDate = o1.ShipDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));
 
+        DateTime? tmp = o1.OrderDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//make random temp time
+        if (tmp > DateTime.Now)//if the random time is bigger than now can add the order and return
+        {
+            s_ordersArr.Add(o1);
+            return;
+        }//else
+        o1.ShipDate = tmp;
+        tmp = o1.ShipDate + new TimeSpan(Config.rand.NextInt64(10L * 1000L * 1000L * 3600L * 24L * 10L));//ship date + random time
+
+        if (tmp > DateTime.Now)//if true - the order has been sent but dosnt arrive yet. manger need to update delivery date
+        {
+            s_ordersArr.Add(o1);
+            return;
+        }//else update delivery date
+        o1.DeliveryDate = tmp;
+        
         s_ordersArr.Add(o1);
     }
 
@@ -45,7 +58,7 @@ internal static class DataSource
         ot1.ProductID = (int)s_productsArr[randomProduct]?.ID!;  //alreday added 10 product to the list 
         ot1.OrderID = (int)s_ordersArr[i % 20]?.ID!; // allready added 20 orders to the list
         ot1.Amount = amount;//amount is random number
-        ot1.Price = (int)s_productsArr[randomProduct]?.Price! * amount;
+        ot1.Price = (double)s_productsArr[randomProduct]?.Price! * amount;
         s_ordersItemArr.Add(ot1);
     }
 

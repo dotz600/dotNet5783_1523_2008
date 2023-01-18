@@ -4,6 +4,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
 using System.Xml.Linq;
 namespace Dal;
 /// <summary>
@@ -11,6 +12,7 @@ namespace Dal;
 /// </summary>
 public class Product : IProduct
 {
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public int Create(DO.Product obj)
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
@@ -28,7 +30,7 @@ public class Product : IProduct
         return obj.ID;
     }
 
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Delete(int id)
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
@@ -43,6 +45,7 @@ public class Product : IProduct
 
 
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.Product Read(int id)
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
@@ -57,7 +60,7 @@ public class Product : IProduct
     }
 
 
-
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public IEnumerable<DO.Product?> ReadAll(Func<DO.Product?, bool>? predicate = null)
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
@@ -75,6 +78,7 @@ public class Product : IProduct
 
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public DO.Product ReadIf(Func<DO.Product?, bool> predicate)
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
@@ -87,6 +91,7 @@ public class Product : IProduct
         return p.ElementAt(0);
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     public void Update(DO.Product obj)
     {
         XElement productsRootElement = XmlTools.LoadListFromXMLElement(XmlTools.productsPath);
@@ -106,6 +111,7 @@ public class Product : IProduct
             throw new ObjNotFoundException("Product not found");
     }
 
+    [MethodImpl(MethodImplOptions.Synchronized)]
     private static DO.Product BuildProductDO(XElement newProduct)
     {
         return new DO.Product()

@@ -21,7 +21,7 @@
         <Label Content="Payment Details" Width="172" FontWeight="Bold" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Height="37" Margin="0,34,0,0"/>
 
         <Label x:Name="Name" Content="Name" HorizontalAlignment="Center" Margin="0,121,0,0" Grid.RowSpan="2" Width="172"/>
-        <TextBox x:Name="textBoxName" Text="" Margin="120,121,75,16" Grid.RowSpan="2"/>
+        <TextBox x:Name="getNameFromTextBox" Margin="120,121,75,16" Grid.RowSpan="2"/>
 
         <Label x:Name="Email" Content="Email" HorizontalAlignment="Left" Grid.Row="1" Margin="64,45,0,0" Width="45" Grid.RowSpan="2"/>
         <TextBox x:Name="textBoxEmail" Text="" Margin="120,4,75,10" Grid.RowSpan="1" Grid.Row="2"/>
