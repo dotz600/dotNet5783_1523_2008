@@ -61,7 +61,6 @@ public partial class StartSimulatorWindow : Window
 
         backroundWorker.DoWork += Work;
         backroundWorker.ProgressChanged += UpdateScreen;
-       // backroundWorker.RunWorkerCompleted += Timerworker_RunWorkerCompleted;
         backroundWorker.RunWorkerCompleted += closeHandler;
 
         Simulator.Simulator.ScreenUpdate += Simulator_ScreenUpdate;//regester update screen and stop function to Simulator class event
@@ -148,6 +147,9 @@ public partial class StartSimulatorWindow : Window
         isTimerRun = false;
         backroundWorker.DoWork -= Work;
         backroundWorker.ProgressChanged -= UpdateScreen;
+        backroundWorker.RunWorkerCompleted -= closeHandler;
+        Simulator.Simulator.ScreenUpdate -= Simulator_ScreenUpdate;//regester update screen and stop function to Simulator class event
+        Simulator.Simulator.StopSimu -= Simulator_StopSimu;
 
         MessageBox.Show(@"Hope you enjoyed!", "Message", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         Close();
