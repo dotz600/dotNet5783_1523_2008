@@ -34,6 +34,9 @@ public static class Simulator
                 if (id != null)
                 {
                     BO.Order order = bl!.Order.Read((int)id);
+                    int time = rand.Next(3, 7);
+                    ScreenUpdate!(((int)id), time*1000, order);
+                    Thread.Sleep(1000 * time);
                     if (order.ShipDate == null)
                     {
                         bl?.Order.UpdateShipping((int)id);
@@ -43,9 +46,6 @@ public static class Simulator
                         bl?.Order.UpdateDelivery((int)id);
                     }
 
-                    int time = rand.Next(3, 7);
-                    ScreenUpdate!(((int)id), time*1000, order);
-                    Thread.Sleep(1000 * time);
                 }
                 else//return null - no more order to work on, shout down simulator
                     StopSimu!();
