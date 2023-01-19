@@ -225,7 +225,7 @@ internal class Order : IOrder
     [MethodImpl(MethodImplOptions.Synchronized)]
     public int? GetOrderForHandle()
     {
-        //set a list with all 
+        //set a list with all confrimed status 
         var confirmedOrders = Dal?.Order.ReadAll(x => x?.DeliveryDate == null && x?.ShipDate == null);
         if(confirmedOrders != null  && confirmedOrders.Any())
         {
