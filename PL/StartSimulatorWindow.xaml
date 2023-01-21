@@ -21,11 +21,12 @@
 
 
         <Button x:Name="stopTimerButton" FontFamily="David" Background="AliceBlue" Content="Stop" Width="150" Height="60" Grid.Column="2" Grid.Row="1" 
-                FontSize="42" Click="stopTimerButton_Click"/>
+                FontSize="42" Click="StopTimerButton_Click"/>
         <TextBlock x:Name="timerTextBlock"  Text="{Binding ClockText}" VerticalAlignment="Center" FontSize="96" TextAlignment="Center" Foreground="#FF37F10E" Grid.Column="1" Grid.ColumnSpan="2"/>
         <StackPanel Grid.Row="0" Grid.Column="0">
             <Label Content="Order in progress :" Width="176" FontWeight="Bold" FontSize="18" HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="0" Grid.Column="0"/>
             <Label Name="A" Content="{Binding CurrentOrderHandle}" HorizontalAlignment="Center"/>
+            <ProgressBar Height="52" Width="238" Margin="0, 70, 0, 0" Minimum="0" Maximum="100" Value="{Binding PrecentegeUpdate}"/>
 
         </StackPanel>
         <StackPanel Grid.Row="1" Grid.Column="0">

@@ -17,14 +17,14 @@ namespace PL;
 /// </summary>
 public partial class StartSimulatorWindow : Window
 {
-    private BlApi.IBl? bl = BlApi.Factory.Get();
-
-    private Stopwatch stopWatch = new();
+    private readonly Stopwatch stopWatch = new();
 
     private volatile bool isTimerRun;
+    
+    readonly BackgroundWorker backroundWorker = new();
 
-    BackgroundWorker backroundWorker = new();
-
+    private int startTime;//hold the working start time of each order - for progresBar
+    private int totalWorkTime ;//hold the total work secound on each order - for progresBar
     public string ExpectedOrderDetails//show on the screen expected order status & time to end
     {
         get { return (string)GetValue(ExpectedOrderDetailsProperty); }
@@ -54,6 +54,19 @@ public partial class StartSimulatorWindow : Window
         DependencyProperty.Register("ClockText", typeof(string), typeof(StartSimulatorWindow), new PropertyMetadata(null));
 
 
+
+    public double PrecentegeUpdate //save the cuurent precentege of the work on order until finshed
+    {
+        get { return (double)GetValue(PrecentegeUpdateProperty); }
+        set { SetValue(PrecentegeUpdateProperty, value); }
+    }
+
+    // Using a DependencyProperty as the backing store for PrecentegeUpdate.  This enables animation, styling, binding, etc...
+    public static readonly DependencyProperty PrecentegeUpdateProperty =
+        DependencyProperty.Register("PrecentegeUpdate", typeof(double), typeof(StartSimulatorWindow), new PropertyMetadata(null));
+
+
+
     public StartSimulatorWindow()
     {
         InitializeComponent();
@@ -61,7 +74,7 @@ public partial class StartSimulatorWindow : Window
 
         backroundWorker.DoWork += Work;
         backroundWorker.ProgressChanged += UpdateScreen;
-        backroundWorker.RunWorkerCompleted += closeHandler;
+        backroundWorker.RunWorkerCompleted += CloseHandler;
 
         Simulator.Simulator.ScreenUpdate += Simulator_ScreenUpdate;//regester update screen and stop function to Simulator class event
         Simulator.Simulator.StopSimu += Simulator_StopSimu;
@@ -83,7 +96,7 @@ public partial class StartSimulatorWindow : Window
 
     private void Simulator_ScreenUpdate(int x, int time, BO.Order order)//handel the event the wake in Simulator class
     {
-        Tuple<BO.Order,int> t = new Tuple<BO.Order, int>(order, time);//Tuple order and random time, then send it to ReportProgress 
+        Tuple<BO.Order,int> t = new(order, time);//Tuple order and random time, then send it to ReportProgress 
         backroundWorker.ReportProgress(x,t);
     }
 
@@ -112,8 +125,12 @@ public partial class StartSimulatorWindow : Window
             
             //extract start time and end time
             string timerText = stopWatch.Elapsed.ToString();
-            timerText = timerText.Substring(0, 8);
-            string endTime = (stopWatch.Elapsed + TimeSpan.FromSeconds(args.Item2/1000)).ToString().Substring(0,8);
+            timerText = timerText[..8];
+            string endTime = (stopWatch.Elapsed + TimeSpan.FromSeconds(args.Item2/1000)).ToString()[..8];
+            
+            //save the start time and the secound that need for the work to be done - for progres bar update
+            startTime = (int)stopWatch.Elapsed.TotalSeconds;
+            totalWorkTime = (args.Item2 / 1000);
 
             //update expected time & status of order after work will done
             ExpectedOrderDetails = "Started at : " + timerText.ToString() +
@@ -123,12 +140,17 @@ public partial class StartSimulatorWindow : Window
         else if (e?.ProgressPercentage == 1)//clock update
         {
             string timerText = stopWatch.Elapsed.ToString();
-            ClockText = timerText.Substring(0, 8);
+            ClockText = timerText[..8];
+            //update the progrece bar
+            if (totalWorkTime != 0)
+                PrecentegeUpdate = ((stopWatch.Elapsed.TotalSeconds - startTime) / totalWorkTime) * 100;//duration time span since started / random expected working time
+            else
+                PrecentegeUpdate = 0;//cant div by 0
         }
 
     }
 
-    private void stopTimerButton_Click(object sender, RoutedEventArgs e)
+    private void StopTimerButton_Click(object sender, RoutedEventArgs e)
     {
         backroundWorker.CancelAsync();
     }
@@ -141,18 +163,15 @@ public partial class StartSimulatorWindow : Window
             MessageBox.Show(@"DON""T CLOSE ME!!!", "STOP IT!!!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
     }
-    private void closeHandler(object? sender, RunWorkerCompletedEventArgs? e)//close the window with soft thread cancel
+    private void CloseHandler(object? sender, RunWorkerCompletedEventArgs? e)//close the window with soft thread cancel
     {
         Simulator.Simulator.DeAcitavet();
         isTimerRun = false;
         backroundWorker.DoWork -= Work;
         backroundWorker.ProgressChanged -= UpdateScreen;
-        backroundWorker.RunWorkerCompleted -= closeHandler;
-        Simulator.Simulator.ScreenUpdate -= Simulator_ScreenUpdate;//regester update screen and stop function to Simulator class event
+        backroundWorker.RunWorkerCompleted -= CloseHandler;
+        Simulator.Simulator.ScreenUpdate -= Simulator_ScreenUpdate;
         Simulator.Simulator.StopSimu -= Simulator_StopSimu;
-
-        MessageBox.Show(@"Hope you enjoyed!", "Message", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        Close();
     }
 
     

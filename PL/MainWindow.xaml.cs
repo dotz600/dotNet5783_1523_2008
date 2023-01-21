@@ -25,6 +25,7 @@ namespace PL;
 /// admin - mange products and orders
 /// order - can add and remove product from cart- and crate new order
 /// track - costomer can track order by order id - only watch order details
+/// simulator - can run simultor mode to see the acutal store daly work
 /// </summary>
 public partial class MainWindow : Window
 {

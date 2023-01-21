@@ -12,6 +12,7 @@ namespace Simulator;
 public static class Simulator
 {
     private static readonly BlApi.IBl? bl = BlApi.Factory.Get();
+    
     private static readonly Random rand = new(DateTime.Now.Millisecond);
 
     private static volatile bool isActive = false;
@@ -34,7 +35,7 @@ public static class Simulator
                 if (id != null)
                 {
                     BO.Order order = bl!.Order.Read((int)id);
-                    int time = rand.Next(3, 7);
+                    int time = rand.Next(3, 10);
                     ScreenUpdate!(((int)id), time*1000, order);
                     Thread.Sleep(1000 * time);
                     if (order.ShipDate == null)
