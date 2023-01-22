@@ -20,13 +20,17 @@ public partial class OrderWindow : Window
     public BO.OrderStatus SelectedStatus { get; set; } = BO.OrderStatus.None;
 
     public BO.OrderForList SelectedOrder { get; set; } = new();
+
     public OrderWindow()
     {
         Refresh();//fill orderForList collction to show on screen
         InitializeComponent();
+        PL.StartSimulatorWindow.updateOrderList += StartSimulatorWindow_updateList;//regester to the event in simulator window
     }
 
-    private void OrderStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    private void StartSimulatorWindow_updateList() => OrderStatusSelector_SelectionChanged(null, null);//refresh th list- but first check if filter by category
+
+    private void OrderStatusSelector_SelectionChanged(object? sender, SelectionChangedEventArgs? e)
     //filter Orders by status, if status = None, will show all orders
     {
         if (SelectedStatus == BO.OrderStatus.None)
@@ -48,6 +52,7 @@ public partial class OrderWindow : Window
     private void Product_page_Click(object sender, RoutedEventArgs e)//go to product page
     {
         this.Close();
+        PL.StartSimulatorWindow.updateOrderList -= StartSimulatorWindow_updateList;
         new ProductForListWindow().Show();
     }
 

@@ -27,6 +27,11 @@ public partial class StartSimulatorWindow : Window
 
     private int startTime;//hold the working start time of each order - for progresBar
     private int totalWorkTime ;//hold the total work secound on each order - for progresBar
+
+    //event for update order list in order window
+    internal delegate void ChangesOrders();
+    internal static event ChangesOrders? updateOrderList;
+
     public string ExpectedOrderDetails//show on the screen expected order status & time to end
     {
         get { return (string)GetValue(ExpectedOrderDetailsProperty); }
@@ -68,7 +73,6 @@ public partial class StartSimulatorWindow : Window
         DependencyProperty.Register("PrecentegeUpdate", typeof(double), typeof(StartSimulatorWindow), new PropertyMetadata(null));
 
 
-
     public StartSimulatorWindow()
     {
         InitializeComponent();
@@ -80,7 +84,7 @@ public partial class StartSimulatorWindow : Window
 
         Simulator.Simulator.ScreenUpdate += Simulator_ScreenUpdate;//regester update screen and stop function to Simulator class event
         Simulator.Simulator.Wating += WaitForOrders;
-        
+
         backroundWorker.WorkerReportsProgress = true;
         backroundWorker.WorkerSupportsCancellation = true;
 
@@ -88,6 +92,7 @@ public partial class StartSimulatorWindow : Window
         isTimerRun = true;
         backroundWorker.RunWorkerAsync();
     }
+
 
     private void WaitForOrders()//shot down - event rise from simulator, becouse there is no more order to handel
     {
@@ -139,6 +144,8 @@ public partial class StartSimulatorWindow : Window
             ExpectedOrderDetails = "Started at : " + timerText.ToString() +
                 "\nExpected processing end time : " + endTime +
                 "\nWill be " + (args.Item1.Status == BO.OrderStatus.Sent ? "Provide." : "Sent.");
+
+            updateOrderList?.Invoke();//UPDATE THE LIST IN ORDER WINDOW - RISE THE EVENT
         }
         else if (e?.ProgressPercentage == 1)//clock update and precentege progres bar
         {
