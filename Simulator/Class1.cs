@@ -20,8 +20,8 @@ public static class Simulator
     public delegate void updateDel(int x, int time, BO.Order o);
     public static event updateDel? ScreenUpdate;
     
-    public delegate void stop();
-    public static event stop? StopSimu;
+    public delegate void noMoreOrders();
+    public static event noMoreOrders? Wating;
 
     public static void Activate()
     {
@@ -36,7 +36,7 @@ public static class Simulator
                 {
                     BO.Order order = bl!.Order.Read((int)id);
                     int time = rand.Next(3, 10);
-                    ScreenUpdate!(((int)id), time*1000, order);
+                    ScreenUpdate!(((int)id), time * 1000, order);
                     Thread.Sleep(1000 * time);
                     if (order.ShipDate == null)
                     {
@@ -46,10 +46,12 @@ public static class Simulator
                     {
                         bl?.Order.UpdateDelivery((int)id);
                     }
-
                 }
                 else//return null - no more order to work on, shout down simulator
-                    StopSimu!();
+                {
+                    Wating!();
+                    Thread.Sleep(1000);
+                }
 
             }
         }).Start();

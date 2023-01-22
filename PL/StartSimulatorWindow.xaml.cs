@@ -7,6 +7,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows;
+using System.Windows.Data;
 
 namespace PL;
 
@@ -20,6 +21,7 @@ public partial class StartSimulatorWindow : Window
     private readonly Stopwatch stopWatch = new();
 
     private volatile bool isTimerRun;
+    private volatile bool isWating = false;
     
     readonly BackgroundWorker backroundWorker = new();
 
@@ -77,7 +79,7 @@ public partial class StartSimulatorWindow : Window
         backroundWorker.RunWorkerCompleted += CloseHandler;
 
         Simulator.Simulator.ScreenUpdate += Simulator_ScreenUpdate;//regester update screen and stop function to Simulator class event
-        Simulator.Simulator.StopSimu += Simulator_StopSimu;
+        Simulator.Simulator.Wating += WaitForOrders;
         
         backroundWorker.WorkerReportsProgress = true;
         backroundWorker.WorkerSupportsCancellation = true;
@@ -87,16 +89,17 @@ public partial class StartSimulatorWindow : Window
         backroundWorker.RunWorkerAsync();
     }
 
-    private void Simulator_StopSimu()//shot down - event rise from simulator, becouse there is no more order to handel
+    private void WaitForOrders()//shot down - event rise from simulator, becouse there is no more order to handel
     {
-        backroundWorker.CancelAsync();
-        MessageBox.Show(@"No more orders to work on! Have a nice day", "Message", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+        isWating = true;
+        backroundWorker.ReportProgress(2);
     }
 
 
     private void Simulator_ScreenUpdate(int x, int time, BO.Order order)//handel the event the wake in Simulator class
     {
         Tuple<BO.Order,int> t = new(order, time);//Tuple order and random time, then send it to ReportProgress 
+        isWating = false;
         backroundWorker.ReportProgress(x,t);
     }
 
@@ -106,7 +109,7 @@ public partial class StartSimulatorWindow : Window
         while (!backroundWorker.CancellationPending)//handle clock
         {
             backroundWorker.ReportProgress(1);
-            Thread.Sleep(1000);
+            Thread.Sleep(1);
         }
     }
 
@@ -137,17 +140,29 @@ public partial class StartSimulatorWindow : Window
                 "\nExpected processing end time : " + endTime +
                 "\nWill be " + (args.Item1.Status == BO.OrderStatus.Sent ? "Provide." : "Sent.");
         }
-        else if (e?.ProgressPercentage == 1)//clock update
+        else if (e?.ProgressPercentage == 1)//clock update and precentege progres bar
         {
             string timerText = stopWatch.Elapsed.ToString();
             ClockText = timerText[..8];
             //update the progrece bar
-            if (totalWorkTime != 0)
-                PrecentegeUpdate = ((stopWatch.Elapsed.TotalSeconds - startTime) / totalWorkTime) * 100;//duration time span since started / random expected working time
+            if (!isWating)//we dont wait for order to come and the simulator working!
+            {
+                if (totalWorkTime != 0)
+                    PrecentegeUpdate = ((stopWatch.Elapsed.TotalSeconds - startTime) / totalWorkTime) * 100;//duration time span since started / random expected working time
+                else
+                    PrecentegeUpdate = 0;//cant div by 0
+            }
             else
-                PrecentegeUpdate = 0;//cant div by 0
+            {
+                PrecentegeUpdate = 0;
+            }
         }
-
+        else if(e?.ProgressPercentage == 2)//wait for order to show up
+        {
+            CurrentOrderHandle = "No more orders to work on...";
+            ExpectedOrderDetails = "Wating for the next order";
+            PrecentegeUpdate = 0;
+        }
     }
 
     private void StopTimerButton_Click(object sender, RoutedEventArgs e)
@@ -171,8 +186,6 @@ public partial class StartSimulatorWindow : Window
         backroundWorker.ProgressChanged -= UpdateScreen;
         backroundWorker.RunWorkerCompleted -= CloseHandler;
         Simulator.Simulator.ScreenUpdate -= Simulator_ScreenUpdate;
-        Simulator.Simulator.StopSimu -= Simulator_StopSimu;
+        Simulator.Simulator.Wating -= WaitForOrders;
     }
-
-    
 }
