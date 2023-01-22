@@ -5,5 +5,5 @@ Bonus list:
 * Delete Product from store by admin only
 * Binding in PL
 * Style
-* progresBar in simulator
-
+* ProgresBar in simulator
+* Update order list in OrderWindow automatic - by the changes that simulator make
