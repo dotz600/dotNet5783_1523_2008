@@ -22,10 +22,10 @@
         <ListView x:Name="Product_item_list_view" ItemsSource="{Binding ProductToShow}" SelectedItem="{Binding SelectedProduct , Mode=OneWayToSource}" d:ItemsSource="{d:SampleData ItemCount=5}" Grid.ColumnSpan="4" MouseDoubleClick="Product_item_list_MouseDoubleClick" >
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header = "ID" DisplayMemberBinding="{Binding Path = ID}" />
-                    <GridViewColumn Header= "Name" DisplayMemberBinding="{Binding Path = Name}"/>
+                    <GridViewColumn Header = "ID"  DisplayMemberBinding="{Binding Path = ID}" />
+                    <GridViewColumn Header= "Name" Width="100" DisplayMemberBinding="{Binding Path = Name}"/>
                     <GridViewColumn Header= "Price" DisplayMemberBinding="{Binding Path = Price}"/>
-                    <GridViewColumn Header= "In cart" DisplayMemberBinding="{Binding Path = AmountInCart}"/>
+                    <GridViewColumn Header= "In cart"  DisplayMemberBinding="{Binding Path = AmountInCart}"/>
                     <GridViewColumn Header= "Category"  DisplayMemberBinding="{Binding Path = Category}"/>
                     <GridViewColumn Header= "In Stock" DisplayMemberBinding="{Binding Path = InStock}"/>
 
