@@ -8,7 +8,7 @@ It encompasses a wide spectrum of functionalities, catering to both customers an
 
 - **Software Solution**: Developed a software solution for a shopping store using C# and WPF, providing a robust and user-friendly interface.
 
-- **Design Patterns**: Applied design patterns to enhance code organization and maintainability, ensuring a structured and modular codebase.
+- **Design Patterns**: Applied design patterns such as singleton and factory, to enhance code organization and maintainability, ensuring a structured and modular codebase.
 
 - **LINQ**: Leveraged LINQ for efficient data querying and manipulation, simplifying complex operations and data retrieval.
 
