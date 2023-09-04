@@ -47,8 +47,12 @@ public partial class ProductForListWindow : Window
     private void ListViewProductForList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     //double click on product takes to update win
     {
-        new UpdateProductWindow(SelectedProduct.ID).ShowDialog();
-        Refresh();
+        if(SelectedProduct != null)
+        {
+            new UpdateProductWindow(SelectedProduct.ID).ShowDialog();
+            Refresh();
+        }
+
     }
 
     private void Order_page_Click(object sender, RoutedEventArgs e)
