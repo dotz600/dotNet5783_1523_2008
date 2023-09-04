@@ -49,20 +49,26 @@ All you need to get started is Visual Studio on your computer. Follow these step
 Enjoy the flexibility and convenience of this shopping store application. Dive into different modes, test various features, and optimize your shopping experience.
 
 ## Visual Examples
-![Main window.](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%202023-09-05%20021750.png)
+Main window.
+![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%202023-09-05%20021750.png)
 
-![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/adminWin.png)
 Admin main window. can check all the products/orders in the store, and add new products.
-![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/addProduct.png)
+![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/adminWin.png)
+
 Admin add product window.
-![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/orderWin.png)
+![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/addProduct.png)
+
 Admin orders window - can watch all orders and their status.  
-![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/cartWin.png)
+![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/orderWin.png)
+
 Buyer cart view.
-![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/thankYouPage.png)
+![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/cartWin.png)
+
 Buyer "thank you" page for your order.
-![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/simulator.png)
+![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/thankYouPage.png)
+
 Simulator mode. get insight into the inner workings of the store, from receiving new orders to the shipping process.
+![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/simulator.png)
 
 
 
