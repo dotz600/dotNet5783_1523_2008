@@ -65,11 +65,12 @@ Buyer cart view.
 ![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/cartWin.png)
 
 Buyer "thank you" page for your order.
+
 ![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/thankYouPage.png)
 
-Simulator mode. get insight into the inner workings of the store, from receiving new orders to the shipping process.
-![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/simulator.png)
 
+![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/simulator.png)
+Simulator mode. get insight into the inner workings of the store, from receiving new orders to the shipping process.
 
 
 
