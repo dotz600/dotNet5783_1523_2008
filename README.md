@@ -49,8 +49,8 @@ All you need to get started is Visual Studio on your computer. Follow these step
 Enjoy the flexibility and convenience of this shopping store application. Dive into different modes, test various features, and optimize your shopping experience.
 
 ## Visual Examples
-![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%202023-09-05%20021750.png)
-Main window.
+![Main window.](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/%D7%A6%D7%99%D7%9C%D7%95%D7%9D%20%D7%9E%D7%A1%D7%9A%202023-09-05%20021750.png)
+
 ![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/adminWin.png)
 Admin main window. can check all the products/orders in the store, and add new products.
 ![alt text](https://github.com/dotz600/dotNet5783_1523_2008/blob/main/MyStartUp/photo/addProduct.png)
